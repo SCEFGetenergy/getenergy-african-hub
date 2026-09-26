@@ -478,6 +478,9 @@ footer a:hover{text-decoration:underline}
 footer .flogo{background:#fff;display:inline-block;padding:8px 12px;border-radius:8px}
 footer .flogo img{height:28px}
 footer .legal{margin-top:34px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer .corp{margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14)}
+footer .corp h4{margin-bottom:8px}
+footer .corp ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:6px 30px}
 @media (max-width:860px){footer .cols{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){footer .cols{grid-template-columns:1fr}}
 
