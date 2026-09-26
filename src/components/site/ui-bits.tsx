@@ -1,9 +1,73 @@
 import type { ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { BRAND, JOURNEY, TRANSITION_MODEL } from "@/lib/site";
+import { BRAND, JOURNEY, SERVICES, TRANSITION_MODEL } from "@/lib/site";
+
+const COMPANY_LABELS: Record<string, string> = {
+  "/company/about": "About",
+  "/company/green-energy": "Green energy",
+  "/company/industries": "Industries",
+  "/company/technology": "Technology",
+  "/company/partners": "Partners & funders",
+  "/company/faq": "FAQ",
+  "/company/careers": "Careers",
+  "/company/contact": "Contact",
+  "/company/solutions": "Solutions",
+};
+
+export function Breadcrumbs({ invert }: { invert?: boolean | undefined }) {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  if (!pathname.startsWith("/company")) return null;
+
+  const crumbs: { label: string; to?: string }[] = [{ label: "Home", to: "/" }];
+  if (pathname.startsWith("/company/solutions/")) {
+    crumbs.push({ label: "Solutions", to: "/company/solutions" });
+    const slug = pathname.split("/").pop() ?? "";
+    const service = SERVICES.find((s) => s.slug === slug);
+    crumbs.push({ label: service?.title ?? slug });
+  } else {
+    crumbs.push({ label: COMPANY_LABELS[pathname] ?? "Company" });
+  }
+
+  return (
+    <nav aria-label="Breadcrumb" className="mb-6">
+      <ol className="flex flex-wrap items-center gap-1.5 text-xs font-medium">
+        {crumbs.map((crumb, i) => {
+          const last = i === crumbs.length - 1;
+          return (
+            <li key={i} className="flex items-center gap-1.5">
+              {i > 0 ? (
+                <ChevronRight
+                  className={cn("size-3.5", invert ? "text-primary-foreground/50" : "text-muted-foreground")}
+                />
+              ) : null}
+              {crumb.to && !last ? (
+                <Link
+                  to={crumb.to}
+                  className={cn(
+                    "underline-offset-4 hover:underline",
+                    invert ? "text-primary-foreground/70 hover:text-primary-foreground" : "text-muted-foreground hover:text-foreground",
+                  )}
+                >
+                  {crumb.label}
+                </Link>
+              ) : (
+                <span
+                  aria-current={last ? "page" : undefined}
+                  className={invert ? "text-brand-green-soft" : "text-foreground"}
+                >
+                  {crumb.label}
+                </span>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  );
+}
 
 export function Section({
   children,
