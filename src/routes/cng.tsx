@@ -1,23 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ServicePage } from "@/components/site/ServicePage";
-import { getService } from "@/lib/site";
 
-const SLUG = "cng";
-
+// Page content is rendered by the site shell in __root (src/legacy); this route supplies its URL and metadata.
 export const Route = createFileRoute("/cng")({
-  head: () => {
-    const service = getService(SLUG);
-    const title = `${service.title} | GetEnergy`;
-    return {
-      meta: [
-        { title },
-        { name: "description", content: service.summary },
-        { property: "og:title", content: title },
-        { property: "og:description", content: service.summary },
-        { property: "og:type", content: "website" },
-        { name: "twitter:card", content: "summary_large_image" },
-      ],
-    };
-  },
-  component: () => <ServicePage slug={SLUG} />,
+  head: () => ({
+    meta: [
+      { title: "CNG Conversion & GetEnergy Conversion Centres | Lagos, Ibadan, Ilorin" },
+      { name: "description", content: "Switch your car, tricycle, bus or truck to compressed natural gas at a GetEnergy Conversion Centre. CNG costs less than petrol or diesel, burns cleaner, and y" },
+      { property: "og:title", content: "CNG Conversion & GetEnergy Conversion Centres | Lagos, Ibadan, Ilorin" },
+      { property: "og:description", content: "Switch your car, tricycle, bus or truck to compressed natural gas at a GetEnergy Conversion Centre. CNG costs less than petrol or diesel, burns cleaner, and y" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: () => null,
 });
