@@ -134,9 +134,8 @@ export function LegacySite({ children }: { children: ReactNode }) {
       <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: headPart }} />
       <main id="main">
         <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: initialPages }} />
-        {isApp && children}
+        {isApp && <div className="corporate-content">{children}</div>}
       </main>
-      <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: footPart }} />
       <nav className="corporate-links" aria-label="More about GetEnergy">
         <div className="wrap">
           <span>Explore more about GetEnergy</span>
@@ -153,6 +152,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
           </div>
         </div>
       </nav>
+      <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: footPart }} />
     </>
   );
 }
