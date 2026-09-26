@@ -21,7 +21,7 @@ export function Breadcrumbs({ invert }: { invert?: boolean | undefined }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   if (!pathname.startsWith("/company")) return null;
 
-  const crumbs: { label: string; to?: string }[] = [{ label: "Home", to: "/" }];
+  const crumbs: { label: string; to?: "/" | "/company/solutions" }[] = [{ label: "Home", to: "/" }];
   if (pathname.startsWith("/company/solutions/")) {
     crumbs.push({ label: "Solutions", to: "/company/solutions" });
     const slug = pathname.split("/").pop() ?? "";
