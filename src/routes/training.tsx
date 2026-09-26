@@ -1,23 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ServicePage } from "@/components/site/ServicePage";
-import { getService } from "@/lib/site";
 
-const SLUG = "training";
-
+// Page content is rendered by the site shell in __root (src/legacy); this route supplies its URL and metadata.
 export const Route = createFileRoute("/training")({
-  head: () => {
-    const service = getService(SLUG);
-    const title = `${service.title} | GetEnergy`;
-    return {
-      meta: [
-        { title },
-        { name: "description", content: service.summary },
-        { property: "og:title", content: title },
-        { property: "og:description", content: service.summary },
-        { property: "og:type", content: "website" },
-        { name: "twitter:card", content: "summary_large_image" },
-      ],
-    };
-  },
-  component: () => <ServicePage slug={SLUG} />,
+  head: () => ({
+    meta: [
+      { title: "Training & Certification | GetEnergy" },
+      { name: "description", content: "Practical training, recognised certification and real opportunities for individuals, businesses and institutions building careers in the green economy." },
+      { property: "og:title", content: "Training & Certification | GetEnergy" },
+      { property: "og:description", content: "Practical training, recognised certification and real opportunities for individuals, businesses and institutions building careers in the green economy." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: () => null,
 });
