@@ -101,9 +101,9 @@ export function RequestForm({
         p_service_name: serviceName,
         p_contact_name: (values["contact_name"] ?? "").trim(),
         p_contact_email: (values["contact_email"] ?? "").trim(),
-        p_contact_phone: (values["contact_phone"] ?? "").trim() || null,
-        p_company_name: (values["company_name"] ?? "").trim() || null,
-        p_location: (values["location"] ?? "").trim() || null,
+        p_contact_phone: (values["contact_phone"] ?? "").trim() || undefined,
+        p_company_name: (values["company_name"] ?? "").trim() || undefined,
+        p_location: (values["location"] ?? "").trim() || undefined,
         p_details: details,
       });
 
