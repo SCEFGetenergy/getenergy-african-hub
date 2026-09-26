@@ -39,6 +39,7 @@ import { Route as CompanyGreenEnergyRouteImport } from './routes/company/green-e
 import { Route as CompanyIndustriesRouteImport } from './routes/company/industries'
 import { Route as CompanyPartnersRouteImport } from './routes/company/partners'
 import { Route as CompanyTechnologyRouteImport } from './routes/company/technology'
+import { Route as CompanySolutionsIndexRouteImport } from './routes/company/solutions/index'
 import { Route as CompanySolutionsCngRouteImport } from './routes/company/solutions/cng'
 import { Route as CompanySolutionsCngConversionRouteImport } from './routes/company/solutions/cng-conversion'
 import { Route as CompanySolutionsDieselRouteImport } from './routes/company/solutions/diesel'
@@ -200,6 +201,11 @@ const CompanyTechnologyRoute = CompanyTechnologyRouteImport.update({
   path: '/company/technology',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompanySolutionsIndexRoute = CompanySolutionsIndexRouteImport.update({
+  id: '/company/solutions/',
+  path: '/company/solutions/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CompanySolutionsCngRoute = CompanySolutionsCngRouteImport.update({
   id: '/company/solutions/cng',
   path: '/company/solutions/cng',
@@ -305,6 +311,7 @@ export interface FileRoutesByFullPath {
   '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
   '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
   '/company/solutions/training': typeof CompanySolutionsTrainingRoute
+  '/company/solutions/': typeof CompanySolutionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -347,6 +354,7 @@ export interface FileRoutesByTo {
   '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
   '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
   '/company/solutions/training': typeof CompanySolutionsTrainingRoute
+  '/company/solutions': typeof CompanySolutionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -391,6 +399,7 @@ export interface FileRoutesById {
   '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
   '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
   '/company/solutions/training': typeof CompanySolutionsTrainingRoute
+  '/company/solutions/': typeof CompanySolutionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -435,6 +444,7 @@ export interface FileRouteTypes {
     | '/company/solutions/renewables'
     | '/company/solutions/smart-metering'
     | '/company/solutions/training'
+    | '/company/solutions/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -477,6 +487,7 @@ export interface FileRouteTypes {
     | '/company/solutions/renewables'
     | '/company/solutions/smart-metering'
     | '/company/solutions/training'
+    | '/company/solutions'
   id:
     | '__root__'
     | '/'
@@ -520,6 +531,7 @@ export interface FileRouteTypes {
     | '/company/solutions/renewables'
     | '/company/solutions/smart-metering'
     | '/company/solutions/training'
+    | '/company/solutions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -563,6 +575,7 @@ export interface RootRouteChildren {
   CompanySolutionsRenewablesRoute: typeof CompanySolutionsRenewablesRoute
   CompanySolutionsSmartMeteringRoute: typeof CompanySolutionsSmartMeteringRoute
   CompanySolutionsTrainingRoute: typeof CompanySolutionsTrainingRoute
+  CompanySolutionsIndexRoute: typeof CompanySolutionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -777,6 +790,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompanyTechnologyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/company/solutions/': {
+      id: '/company/solutions/'
+      path: '/company/solutions'
+      fullPath: '/company/solutions/'
+      preLoaderRoute: typeof CompanySolutionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/company/solutions/cng': {
       id: '/company/solutions/cng'
       path: '/company/solutions/cng'
@@ -909,6 +929,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompanySolutionsRenewablesRoute: CompanySolutionsRenewablesRoute,
   CompanySolutionsSmartMeteringRoute: CompanySolutionsSmartMeteringRoute,
   CompanySolutionsTrainingRoute: CompanySolutionsTrainingRoute,
+  CompanySolutionsIndexRoute: CompanySolutionsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
