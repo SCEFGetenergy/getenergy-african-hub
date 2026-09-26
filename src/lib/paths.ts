@@ -4,5 +4,5 @@
  * inferred. This helper keeps the single assertion in one place.
  */
 export function routePath(slug: string) {
-  return `/${slug}` as "/diesel";
+  return `/company/solutions/${slug}` as "/company/solutions/diesel";
 }

@@ -17,4 +17,5 @@
 - Route links built from data slugs use `routePath()` in `src/lib/paths.ts`, the single place asserting data strings into the router's typed path union.
 
 - Site markup, styles and behaviour come verbatim from the client's supplied HTML, stored in `src/legacy/` (body.html, legacy.css, legacy.ts) and rendered by `LegacySite` in __root; route files only supply URL + head metadata. Why: the client requires the site to match their file exactly.
+- Additional earlier corporate pages live under `/company/*` and render React children through `LegacySite` while the supplied HTML pages retain their existing paths and appearance. Why: preserve the supplied design and add the prior content without replacing it.
 - Legacy forms submit through `submit_service_request` and Supabase auth inside `LegacySite`'s submit handler.

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { useNavigate, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import bodyHtml from "./body.html?raw";
 import { initLegacy } from "./legacy";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,7 +8,7 @@ const [headPart = "", rest = ""] = bodyHtml.split('<main id="main">');
 const [pagesPart = "", footPart = ""] = rest.split("</main>");
 
 // Paths rendered by React routes rather than the static page markup.
-const APP_PAGES = ["/account"];
+const APP_PAGES = ["/account", "/company"];
 
 function pageName(pathname: string): string | null {
   if (APP_PAGES.some((p) => pathname.startsWith(p))) return null;
@@ -137,6 +137,22 @@ export function LegacySite({ children }: { children: ReactNode }) {
         {isApp && children}
       </main>
       <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: footPart }} />
+      <nav className="corporate-links" aria-label="More about GetEnergy">
+        <div className="wrap">
+          <span>Explore more about GetEnergy</span>
+          <div>
+            <Link to="/company/about">Our story</Link>
+            <Link to="/company/green-energy">Energy transition</Link>
+            <Link to="/company/industries">Industries</Link>
+            <Link to="/company/technology">Technology</Link>
+            <Link to="/company/partners">Partners & funders</Link>
+            <Link to="/company/solutions/electricity">Detailed solutions</Link>
+            <Link to="/company/faq">More questions</Link>
+            <Link to="/company/careers">More careers</Link>
+            <Link to="/company/contact">More contact options</Link>
+          </div>
+        </div>
+      </nav>
     </>
   );
 }
