@@ -18,8 +18,9 @@ export const Route = createFileRoute("/faq")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: Faq;
+  component: Faq,
 });
+
 
 function Faq() {
   return (
