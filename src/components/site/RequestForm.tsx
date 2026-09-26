@@ -107,7 +107,7 @@ export function RequestForm({
       const { data, error } = await supabase.rpc("submit_service_request", {
         p_request_type: requestType,
         p_service_name: serviceName,
-        p_contact_name: (values["contact_name"] ?? "").trim(),
+        p_contact_name: (values["contact_name"] ?? values["contact_email"] ?? "").trim(),
         p_contact_email: (values["contact_email"] ?? "").trim(),
         p_details: details,
         ...optional,

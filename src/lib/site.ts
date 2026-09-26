@@ -279,7 +279,8 @@ export const SERVICES: Service[] = [
       { name: "payment_type", label: "Request type", type: "select", required: true, options: ["Prepaid token", "Postpaid bill payment"] },
       { name: "meter_number", label: "Meter or account number", type: "text", required: true },
       { name: "amount", label: "Amount (₦)", type: "number", required: true },
-      ...CONTACT_FIELDS,
+      { name: "contact_email", label: "Email address", type: "email", required: true },
+      { name: "contact_phone", label: "Phone number", type: "tel", required: true },
     ],
   },
   {
