@@ -1,0 +1,2 @@
+REVOKE EXECUTE ON FUNCTION public.generate_request_reference() FROM anon, authenticated;
+COMMENT ON FUNCTION public.submit_service_request(text, text, text, text, text, text, text, jsonb) IS 'Public lead capture: validated, insert-only, attaches auth.uid() when signed in. Intentionally executable by anon so anonymous visitors get a reference without read access to service_requests.';

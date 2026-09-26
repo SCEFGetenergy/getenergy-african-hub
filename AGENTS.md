@@ -8,3 +8,10 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- All site content (services, sectors, journey, FAQs, jobs, form field definitions) lives in `src/lib/site.ts`; pages read from it so copy changes happen in one file.
+- Service pages are thin route files rendering `src/components/site/ServicePage.tsx` from the `SERVICES` data — add a service by adding data plus a one-line route file.
+- Lead capture goes through the `submit_service_request` database function (security definer), not a direct table insert: anonymous visitors must receive a reference without being able to read the requests table.
+- Route links built from data slugs use `routePath()` in `src/lib/paths.ts`, the single place asserting data strings into the router's typed path union.

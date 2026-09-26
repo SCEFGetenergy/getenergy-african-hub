@@ -104,6 +104,19 @@ export type Database = {
     }
     Functions: {
       generate_request_reference: { Args: never; Returns: string }
+      submit_service_request: {
+        Args: {
+          p_company_name?: string
+          p_contact_email: string
+          p_contact_name: string
+          p_contact_phone?: string
+          p_details?: Json
+          p_location?: string
+          p_request_type: string
+          p_service_name: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
