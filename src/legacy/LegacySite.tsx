@@ -145,7 +145,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
             <Link to="/company/industries">Industries</Link>
             <Link to="/company/technology">Technology</Link>
             <Link to="/company/partners">Partners & funders</Link>
-            <Link to="/company/solutions/electricity">Detailed solutions</Link>
+            <Link to="/company/solutions">Detailed solutions</Link>
             <Link to="/company/faq">More questions</Link>
             <Link to="/company/careers">More careers</Link>
             <Link to="/company/contact">More contact options</Link>
