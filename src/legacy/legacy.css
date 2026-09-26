@@ -483,10 +483,7 @@ footer .legal{margin-top:34px;padding-top:18px;border-top:1px solid rgba(255,255
 
 /* Additional corporate pages and their compact directory; original page markup remains unchanged. */
 .corporate-content{font-family:var(--body)}
-.corporate-content h1,.corporate-content h2,.corporate-content h3,.corporate-content h4{font-family:var(--body);line-height:1.25}
-.corporate-content h1{font-size:inherit}
-.corporate-content h2{font-size:inherit}
-.corporate-content h3{font-size:inherit}
+.corporate-content :is(h1,h2,h3,h4){font-family:var(--body);line-height:1.25}
 .corporate-content p{margin:0}
 .corporate-content button{font-family:var(--body)}
 .corporate-links{border-top:1px solid var(--line);background:var(--panel);padding:22px 0}
