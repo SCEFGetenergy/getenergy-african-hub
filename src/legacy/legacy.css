@@ -480,3 +480,18 @@ footer .flogo img{height:28px}
 footer .legal{margin-top:34px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media (max-width:860px){footer .cols{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){footer .cols{grid-template-columns:1fr}}
+
+/* Additional corporate pages and their compact directory; original page markup remains unchanged. */
+.corporate-content{font-family:var(--body)}
+.corporate-content :is(h1,h2,h3,h4){font-family:var(--body);line-height:1.25}
+.corporate-content :is(h1,h2).text-primary-foreground{color:var(--primary-foreground)}
+.corporate-content .hero-surface{color:var(--primary-foreground)}
+.corporate-content .hero-surface :is(h1,h2,h3,p){color:inherit}
+.corporate-content .hero-surface .text-brand-green-soft{color:var(--brand-green-soft)}
+.corporate-content button{font-family:var(--body)}
+.corporate-links{border-top:1px solid var(--line);background:var(--panel);padding:22px 0}
+.corporate-links .wrap{display:flex;align-items:flex-start;justify-content:space-between;gap:16px 36px;flex-wrap:wrap}
+.corporate-links span{font:700 1.2rem var(--display);color:var(--ink)}
+.corporate-links .wrap>div{display:flex;align-items:center;gap:9px 20px;flex-wrap:wrap;max-width:950px}
+.corporate-links a{font-size:.86rem;font-weight:600;color:var(--blue);text-decoration:none}
+.corporate-links a:hover,.corporate-links a:focus-visible{text-decoration:underline}

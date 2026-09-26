@@ -8,9 +8,9 @@ export const BRAND = {
     "To provide reliable energy today while building practical pathways toward cleaner, smarter and more sustainable energy solutions for tomorrow.",
   vision:
     "To build an integrated African energy-services ecosystem connecting reliable power, cleaner mobility, renewable energy, smart infrastructure, digital commerce and skilled people.",
-  email: "info@getenergy.africa",
-  phone: "+234 (0) 700 000 0000",
-  address: "Lagos, Nigeria",
+  email: "sales@getenergy.ng",
+  phone: "+234 805 667 7770",
+  address: "19 Godwin Okigbo Street, Masha Kilo, Surulere, Lagos",
   eeaUrl: "https://eea.africa",
   disclaimer:
     "Historical engagement references describe past commercial activity only. They do not imply a current partnership, endorsement or ongoing contract with any organisation named.",
@@ -279,7 +279,8 @@ export const SERVICES: Service[] = [
       { name: "payment_type", label: "Request type", type: "select", required: true, options: ["Prepaid token", "Postpaid bill payment"] },
       { name: "meter_number", label: "Meter or account number", type: "text", required: true },
       { name: "amount", label: "Amount (₦)", type: "number", required: true },
-      ...CONTACT_FIELDS,
+      { name: "contact_email", label: "Email address", type: "email", required: true },
+      { name: "contact_phone", label: "Phone number", type: "tel", required: true },
     ],
   },
   {
