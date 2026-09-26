@@ -23,10 +23,10 @@ type Props = {
   requestType: string;
   serviceName: string;
   title: string;
-  description?: string;
-  note?: string;
+  description?: string | undefined;
+  note?: string | undefined;
   fields: FormField[];
-  submitLabel?: string;
+  submitLabel?: string | undefined;
 };
 
 function labelOf(fields: FormField[], name: string) {

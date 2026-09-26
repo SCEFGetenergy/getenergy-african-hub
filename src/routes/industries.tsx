@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SECTORS } from "@/lib/site";
+import { routePath } from "@/lib/paths";
 import { CtaBand, Disclaimer, PageHero, Section, SectionHeading } from "@/components/site/ui-bits";
 
 export const Route = createFileRoute("/industries")({
@@ -63,7 +64,7 @@ function Industries() {
                 {sector.solution}
               </p>
               <Link
-                to={`/${sector.slug}`}
+                to={routePath(sector.slug)}
                 className="mt-4 inline-flex items-center text-sm font-semibold text-brand-green hover:underline"
               >
                 Request this solution

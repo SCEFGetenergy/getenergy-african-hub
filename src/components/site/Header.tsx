@@ -20,7 +20,7 @@ const NAV = [
 ] as const;
 
 const SECONDARY = [
-  { label: "All solutions", to: "/#solutions" },
+  { label: "All solutions", to: "/" },
   { label: "Technology", to: "/technology" },
   { label: "Industries", to: "/industries" },
   { label: "Careers", to: "/careers" },

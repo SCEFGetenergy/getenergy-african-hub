@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { routePath } from "@/lib/paths";
 import { Mail, MapPin, Phone, Zap } from "lucide-react";
 import { BRAND, SERVICES } from "@/lib/site";
 
@@ -37,7 +38,7 @@ export function Footer() {
               {SERVICES.map((service) => (
                 <li key={service.slug}>
                   <Link
-                    to={`/${service.slug}`}
+                    to={routePath(service.slug)}
                     className="text-sm text-primary-foreground/75 transition-colors hover:text-brand-green-soft"
                   >
                     {service.title}

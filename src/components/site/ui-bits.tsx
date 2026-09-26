@@ -12,9 +12,9 @@ export function Section({
   id,
 }: {
   children: ReactNode;
-  className?: string;
-  tone?: "default" | "surface" | "brand" | "green";
-  id?: string;
+  className?: string | undefined;
+  tone?: "default" | "surface" | "brand" | "green" | undefined;
+  id?: string | undefined;
 }) {
   const tones = {
     default: "bg-background",
@@ -30,7 +30,7 @@ export function Section({
   );
 }
 
-export function Eyebrow({ children, invert }: { children: ReactNode; invert?: boolean }) {
+export function Eyebrow({ children, invert }: { children: ReactNode; invert?: boolean | undefined }) {
   return (
     <p
       className={cn(
@@ -50,11 +50,11 @@ export function SectionHeading({
   invert,
   align = "left",
 }: {
-  eyebrow?: string;
+  eyebrow?: string | undefined;
   title: string;
-  body?: string;
-  invert?: boolean;
-  align?: "left" | "center";
+  body?: string | undefined;
+  invert?: boolean | undefined;
+  align?: "left" | "center" | undefined;
 }) {
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
@@ -79,7 +79,7 @@ const statusStyles: Record<string, string> = {
   Planned: "bg-muted text-muted-foreground",
 };
 
-export function StatusBadge({ status, className }: { status: string; className?: string }) {
+export function StatusBadge({ status, className }: { status: string; className?: string | undefined }) {
   return (
     <span
       className={cn(
@@ -93,7 +93,7 @@ export function StatusBadge({ status, className }: { status: string; className?:
   );
 }
 
-export function TransitionModel({ invert }: { invert?: boolean }) {
+export function TransitionModel({ invert }: { invert?: boolean | undefined }) {
   return (
     <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
       {TRANSITION_MODEL.map((step, i) => (
@@ -142,7 +142,7 @@ export function JourneyTimeline() {
   );
 }
 
-export function Disclaimer({ className }: { className?: string }) {
+export function Disclaimer({ className }: { className?: string | undefined }) {
   return (
     <p className={cn("mt-8 rounded-lg border border-border bg-surface p-4 text-xs leading-relaxed text-muted-foreground", className)}>
       <strong className="font-semibold text-foreground">Disclaimer: </strong>
@@ -182,10 +182,10 @@ export function PageHero({
   body,
   children,
 }: {
-  eyebrow?: string;
+  eyebrow?: string | undefined;
   title: string;
-  body?: string;
-  children?: ReactNode;
+  body?: string | undefined;
+  children?: ReactNode | undefined;
 }) {
   return (
     <section className="hero-surface px-4 py-14 sm:px-6 md:py-20">

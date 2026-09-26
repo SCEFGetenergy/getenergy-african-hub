@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Fuel, Leaf, Zap } from "lucide-react";
 import heroImage from "@/assets/hero-africa-bulb.jpg";
 import { BRAND, JOURNEY, SECTORS, SERVICES } from "@/lib/site";
+import { routePath } from "@/lib/paths";
 import { SERVICE_ICONS } from "@/components/site/icons";
 import {
   CtaBand,
@@ -125,7 +126,7 @@ function Home() {
             return (
               <Link
                 key={service.slug}
-                to={`/${service.slug}`}
+                to={routePath(service.slug)}
                 className="group flex flex-col rounded-xl border border-border bg-card p-6 card-elevated card-lift"
               >
                 <div className="flex items-start justify-between gap-3">
@@ -192,7 +193,7 @@ function Home() {
           {SECTORS.map((sector) => (
             <Link
               key={sector.name}
-              to={`/${sector.slug}`}
+              to={routePath(sector.slug)}
               className="rounded-xl border border-border bg-card p-5 card-elevated card-lift"
             >
               <div className="flex items-center gap-2">
