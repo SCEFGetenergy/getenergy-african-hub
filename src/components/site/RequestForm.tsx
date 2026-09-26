@@ -89,7 +89,6 @@ export function RequestForm({
     }
     setSubmitting(true);
     try {
-      const { data: userData } = await supabase.auth.getUser();
       const details: Record<string, string> = {};
       for (const field of fields) {
         if (COLUMN_FIELDS.has(field.name)) continue;
@@ -97,25 +96,21 @@ export function RequestForm({
         if (raw) details[field.label] = raw;
       }
 
-      const { data, error } = await supabase
-        .from("service_requests")
-        .insert({
-          user_id: userData.user?.id ?? null,
-          request_type: requestType,
-          service_name: serviceName,
-          contact_name: (values["contact_name"] ?? "").trim(),
-          contact_email: (values["contact_email"] ?? "").trim(),
-          contact_phone: (values["contact_phone"] ?? "").trim() || null,
-          company_name: (values["company_name"] ?? "").trim() || null,
-          location: (values["location"] ?? "").trim() || null,
-          details,
-        })
-        .select("reference")
-        .single();
+      const { data, error } = await supabase.rpc("submit_service_request", {
+        p_request_type: requestType,
+        p_service_name: serviceName,
+        p_contact_name: (values["contact_name"] ?? "").trim(),
+        p_contact_email: (values["contact_email"] ?? "").trim(),
+        p_contact_phone: (values["contact_phone"] ?? "").trim() || null,
+        p_company_name: (values["company_name"] ?? "").trim() || null,
+        p_location: (values["location"] ?? "").trim() || null,
+        p_details: details,
+      });
 
       if (error) throw error;
-      setReference(data.reference);
-      toast.success(`Request submitted — reference ${data.reference}`);
+      setReference(data as string);
+      toast.success(`Request submitted — reference ${data as string}`);
+
     } catch (error) {
       console.error(error);
       toast.error("We could not submit your request. Please try again.");
