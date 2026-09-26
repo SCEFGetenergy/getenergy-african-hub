@@ -161,7 +161,7 @@ export function initLegacy(api){
     eea:{title:"Your pilot registration is ready",to:"sales",subject:"EEA pilot registration",note:"Send it to complete your registration for the Lagos pilot."},
     contact:{title:"Your message is ready to send",to:"support",subject:"Website enquiry",note:"Send it by email and we will reply within one business day."},
     careers:{title:"Your application is ready to send",to:"careers",subject:"Job application",note:"Send it by email to complete your application."},
-    register:{title:"Accounts open soon",to:"support",subject:"Account waitlist",note:"Customer accounts open when our platform goes live. Send your details and we will notify you first. Your password is not included."},
+    register:{title:"Check your email to finish",nosend:true,note:"We sent a confirmation link to your email. Click it to activate your account, then log in to track your requests."},
     whatsapp:{title:"Your WhatsApp subscription is ready",to:"sales",subject:"Energy Desk WhatsApp subscription",note:"Send it to our team to confirm your subscription. Once the Energy Desk goes live, the daily brief arrives on WhatsApp automatically."},
     login:{title:"Accounts are not open yet",nosend:true,note:"Online accounts open when our platform goes live. You can still buy tokens, pay bills and request quotes without an account."}
   };
