@@ -31,6 +31,25 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as TechnologyRouteImport } from './routes/technology'
 import { Route as TrainingRouteImport } from './routes/training'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
+import { Route as CompanyAboutRouteImport } from './routes/company/about'
+import { Route as CompanyCareersRouteImport } from './routes/company/careers'
+import { Route as CompanyContactRouteImport } from './routes/company/contact'
+import { Route as CompanyFaqRouteImport } from './routes/company/faq'
+import { Route as CompanyGreenEnergyRouteImport } from './routes/company/green-energy'
+import { Route as CompanyIndustriesRouteImport } from './routes/company/industries'
+import { Route as CompanyPartnersRouteImport } from './routes/company/partners'
+import { Route as CompanyTechnologyRouteImport } from './routes/company/technology'
+import { Route as CompanySolutionsCngRouteImport } from './routes/company/solutions/cng'
+import { Route as CompanySolutionsCngConversionRouteImport } from './routes/company/solutions/cng-conversion'
+import { Route as CompanySolutionsDieselRouteImport } from './routes/company/solutions/diesel'
+import { Route as CompanySolutionsEeaRouteImport } from './routes/company/solutions/eea'
+import { Route as CompanySolutionsElectricityRouteImport } from './routes/company/solutions/electricity'
+import { Route as CompanySolutionsEvChargingRouteImport } from './routes/company/solutions/ev-charging'
+import { Route as CompanySolutionsEvMobilityRouteImport } from './routes/company/solutions/ev-mobility'
+import { Route as CompanySolutionsPowerAsAServiceRouteImport } from './routes/company/solutions/power-as-a-service'
+import { Route as CompanySolutionsRenewablesRouteImport } from './routes/company/solutions/renewables'
+import { Route as CompanySolutionsSmartMeteringRouteImport } from './routes/company/solutions/smart-metering'
+import { Route as CompanySolutionsTrainingRouteImport } from './routes/company/solutions/training'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -141,6 +160,109 @@ const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
   path: '/account',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const CompanyAboutRoute = CompanyAboutRouteImport.update({
+  id: '/company/about',
+  path: '/company/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyCareersRoute = CompanyCareersRouteImport.update({
+  id: '/company/careers',
+  path: '/company/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyContactRoute = CompanyContactRouteImport.update({
+  id: '/company/contact',
+  path: '/company/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyFaqRoute = CompanyFaqRouteImport.update({
+  id: '/company/faq',
+  path: '/company/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyGreenEnergyRoute = CompanyGreenEnergyRouteImport.update({
+  id: '/company/green-energy',
+  path: '/company/green-energy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyIndustriesRoute = CompanyIndustriesRouteImport.update({
+  id: '/company/industries',
+  path: '/company/industries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyPartnersRoute = CompanyPartnersRouteImport.update({
+  id: '/company/partners',
+  path: '/company/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyTechnologyRoute = CompanyTechnologyRouteImport.update({
+  id: '/company/technology',
+  path: '/company/technology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanySolutionsCngRoute = CompanySolutionsCngRouteImport.update({
+  id: '/company/solutions/cng',
+  path: '/company/solutions/cng',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanySolutionsCngConversionRoute =
+  CompanySolutionsCngConversionRouteImport.update({
+    id: '/company/solutions/cng-conversion',
+    path: '/company/solutions/cng-conversion',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CompanySolutionsDieselRoute = CompanySolutionsDieselRouteImport.update({
+  id: '/company/solutions/diesel',
+  path: '/company/solutions/diesel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanySolutionsEeaRoute = CompanySolutionsEeaRouteImport.update({
+  id: '/company/solutions/eea',
+  path: '/company/solutions/eea',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanySolutionsElectricityRoute =
+  CompanySolutionsElectricityRouteImport.update({
+    id: '/company/solutions/electricity',
+    path: '/company/solutions/electricity',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CompanySolutionsEvChargingRoute =
+  CompanySolutionsEvChargingRouteImport.update({
+    id: '/company/solutions/ev-charging',
+    path: '/company/solutions/ev-charging',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CompanySolutionsEvMobilityRoute =
+  CompanySolutionsEvMobilityRouteImport.update({
+    id: '/company/solutions/ev-mobility',
+    path: '/company/solutions/ev-mobility',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CompanySolutionsPowerAsAServiceRoute =
+  CompanySolutionsPowerAsAServiceRouteImport.update({
+    id: '/company/solutions/power-as-a-service',
+    path: '/company/solutions/power-as-a-service',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CompanySolutionsRenewablesRoute =
+  CompanySolutionsRenewablesRouteImport.update({
+    id: '/company/solutions/renewables',
+    path: '/company/solutions/renewables',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CompanySolutionsSmartMeteringRoute =
+  CompanySolutionsSmartMeteringRouteImport.update({
+    id: '/company/solutions/smart-metering',
+    path: '/company/solutions/smart-metering',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CompanySolutionsTrainingRoute =
+  CompanySolutionsTrainingRouteImport.update({
+    id: '/company/solutions/training',
+    path: '/company/solutions/training',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -164,6 +286,25 @@ export interface FileRoutesByFullPath {
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
+  '/company/about': typeof CompanyAboutRoute
+  '/company/careers': typeof CompanyCareersRoute
+  '/company/contact': typeof CompanyContactRoute
+  '/company/faq': typeof CompanyFaqRoute
+  '/company/green-energy': typeof CompanyGreenEnergyRoute
+  '/company/industries': typeof CompanyIndustriesRoute
+  '/company/partners': typeof CompanyPartnersRoute
+  '/company/technology': typeof CompanyTechnologyRoute
+  '/company/solutions/cng': typeof CompanySolutionsCngRoute
+  '/company/solutions/cng-conversion': typeof CompanySolutionsCngConversionRoute
+  '/company/solutions/diesel': typeof CompanySolutionsDieselRoute
+  '/company/solutions/eea': typeof CompanySolutionsEeaRoute
+  '/company/solutions/electricity': typeof CompanySolutionsElectricityRoute
+  '/company/solutions/ev-charging': typeof CompanySolutionsEvChargingRoute
+  '/company/solutions/ev-mobility': typeof CompanySolutionsEvMobilityRoute
+  '/company/solutions/power-as-a-service': typeof CompanySolutionsPowerAsAServiceRoute
+  '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
+  '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
+  '/company/solutions/training': typeof CompanySolutionsTrainingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -187,6 +328,25 @@ export interface FileRoutesByTo {
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
+  '/company/about': typeof CompanyAboutRoute
+  '/company/careers': typeof CompanyCareersRoute
+  '/company/contact': typeof CompanyContactRoute
+  '/company/faq': typeof CompanyFaqRoute
+  '/company/green-energy': typeof CompanyGreenEnergyRoute
+  '/company/industries': typeof CompanyIndustriesRoute
+  '/company/partners': typeof CompanyPartnersRoute
+  '/company/technology': typeof CompanyTechnologyRoute
+  '/company/solutions/cng': typeof CompanySolutionsCngRoute
+  '/company/solutions/cng-conversion': typeof CompanySolutionsCngConversionRoute
+  '/company/solutions/diesel': typeof CompanySolutionsDieselRoute
+  '/company/solutions/eea': typeof CompanySolutionsEeaRoute
+  '/company/solutions/electricity': typeof CompanySolutionsElectricityRoute
+  '/company/solutions/ev-charging': typeof CompanySolutionsEvChargingRoute
+  '/company/solutions/ev-mobility': typeof CompanySolutionsEvMobilityRoute
+  '/company/solutions/power-as-a-service': typeof CompanySolutionsPowerAsAServiceRoute
+  '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
+  '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
+  '/company/solutions/training': typeof CompanySolutionsTrainingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -212,6 +372,25 @@ export interface FileRoutesById {
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
+  '/company/about': typeof CompanyAboutRoute
+  '/company/careers': typeof CompanyCareersRoute
+  '/company/contact': typeof CompanyContactRoute
+  '/company/faq': typeof CompanyFaqRoute
+  '/company/green-energy': typeof CompanyGreenEnergyRoute
+  '/company/industries': typeof CompanyIndustriesRoute
+  '/company/partners': typeof CompanyPartnersRoute
+  '/company/technology': typeof CompanyTechnologyRoute
+  '/company/solutions/cng': typeof CompanySolutionsCngRoute
+  '/company/solutions/cng-conversion': typeof CompanySolutionsCngConversionRoute
+  '/company/solutions/diesel': typeof CompanySolutionsDieselRoute
+  '/company/solutions/eea': typeof CompanySolutionsEeaRoute
+  '/company/solutions/electricity': typeof CompanySolutionsElectricityRoute
+  '/company/solutions/ev-charging': typeof CompanySolutionsEvChargingRoute
+  '/company/solutions/ev-mobility': typeof CompanySolutionsEvMobilityRoute
+  '/company/solutions/power-as-a-service': typeof CompanySolutionsPowerAsAServiceRoute
+  '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
+  '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
+  '/company/solutions/training': typeof CompanySolutionsTrainingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -237,6 +416,25 @@ export interface FileRouteTypes {
     | '/technology'
     | '/training'
     | '/account'
+    | '/company/about'
+    | '/company/careers'
+    | '/company/contact'
+    | '/company/faq'
+    | '/company/green-energy'
+    | '/company/industries'
+    | '/company/partners'
+    | '/company/technology'
+    | '/company/solutions/cng'
+    | '/company/solutions/cng-conversion'
+    | '/company/solutions/diesel'
+    | '/company/solutions/eea'
+    | '/company/solutions/electricity'
+    | '/company/solutions/ev-charging'
+    | '/company/solutions/ev-mobility'
+    | '/company/solutions/power-as-a-service'
+    | '/company/solutions/renewables'
+    | '/company/solutions/smart-metering'
+    | '/company/solutions/training'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -260,6 +458,25 @@ export interface FileRouteTypes {
     | '/technology'
     | '/training'
     | '/account'
+    | '/company/about'
+    | '/company/careers'
+    | '/company/contact'
+    | '/company/faq'
+    | '/company/green-energy'
+    | '/company/industries'
+    | '/company/partners'
+    | '/company/technology'
+    | '/company/solutions/cng'
+    | '/company/solutions/cng-conversion'
+    | '/company/solutions/diesel'
+    | '/company/solutions/eea'
+    | '/company/solutions/electricity'
+    | '/company/solutions/ev-charging'
+    | '/company/solutions/ev-mobility'
+    | '/company/solutions/power-as-a-service'
+    | '/company/solutions/renewables'
+    | '/company/solutions/smart-metering'
+    | '/company/solutions/training'
   id:
     | '__root__'
     | '/'
@@ -284,6 +501,25 @@ export interface FileRouteTypes {
     | '/technology'
     | '/training'
     | '/_authenticated/account'
+    | '/company/about'
+    | '/company/careers'
+    | '/company/contact'
+    | '/company/faq'
+    | '/company/green-energy'
+    | '/company/industries'
+    | '/company/partners'
+    | '/company/technology'
+    | '/company/solutions/cng'
+    | '/company/solutions/cng-conversion'
+    | '/company/solutions/diesel'
+    | '/company/solutions/eea'
+    | '/company/solutions/electricity'
+    | '/company/solutions/ev-charging'
+    | '/company/solutions/ev-mobility'
+    | '/company/solutions/power-as-a-service'
+    | '/company/solutions/renewables'
+    | '/company/solutions/smart-metering'
+    | '/company/solutions/training'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -308,6 +544,25 @@ export interface RootRouteChildren {
   RegisterRoute: typeof RegisterRoute
   TechnologyRoute: typeof TechnologyRoute
   TrainingRoute: typeof TrainingRoute
+  CompanyAboutRoute: typeof CompanyAboutRoute
+  CompanyCareersRoute: typeof CompanyCareersRoute
+  CompanyContactRoute: typeof CompanyContactRoute
+  CompanyFaqRoute: typeof CompanyFaqRoute
+  CompanyGreenEnergyRoute: typeof CompanyGreenEnergyRoute
+  CompanyIndustriesRoute: typeof CompanyIndustriesRoute
+  CompanyPartnersRoute: typeof CompanyPartnersRoute
+  CompanyTechnologyRoute: typeof CompanyTechnologyRoute
+  CompanySolutionsCngRoute: typeof CompanySolutionsCngRoute
+  CompanySolutionsCngConversionRoute: typeof CompanySolutionsCngConversionRoute
+  CompanySolutionsDieselRoute: typeof CompanySolutionsDieselRoute
+  CompanySolutionsEeaRoute: typeof CompanySolutionsEeaRoute
+  CompanySolutionsElectricityRoute: typeof CompanySolutionsElectricityRoute
+  CompanySolutionsEvChargingRoute: typeof CompanySolutionsEvChargingRoute
+  CompanySolutionsEvMobilityRoute: typeof CompanySolutionsEvMobilityRoute
+  CompanySolutionsPowerAsAServiceRoute: typeof CompanySolutionsPowerAsAServiceRoute
+  CompanySolutionsRenewablesRoute: typeof CompanySolutionsRenewablesRoute
+  CompanySolutionsSmartMeteringRoute: typeof CompanySolutionsSmartMeteringRoute
+  CompanySolutionsTrainingRoute: typeof CompanySolutionsTrainingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -466,6 +721,139 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAccountRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/company/about': {
+      id: '/company/about'
+      path: '/company/about'
+      fullPath: '/company/about'
+      preLoaderRoute: typeof CompanyAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/careers': {
+      id: '/company/careers'
+      path: '/company/careers'
+      fullPath: '/company/careers'
+      preLoaderRoute: typeof CompanyCareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/contact': {
+      id: '/company/contact'
+      path: '/company/contact'
+      fullPath: '/company/contact'
+      preLoaderRoute: typeof CompanyContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/faq': {
+      id: '/company/faq'
+      path: '/company/faq'
+      fullPath: '/company/faq'
+      preLoaderRoute: typeof CompanyFaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/green-energy': {
+      id: '/company/green-energy'
+      path: '/company/green-energy'
+      fullPath: '/company/green-energy'
+      preLoaderRoute: typeof CompanyGreenEnergyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/industries': {
+      id: '/company/industries'
+      path: '/company/industries'
+      fullPath: '/company/industries'
+      preLoaderRoute: typeof CompanyIndustriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/partners': {
+      id: '/company/partners'
+      path: '/company/partners'
+      fullPath: '/company/partners'
+      preLoaderRoute: typeof CompanyPartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/technology': {
+      id: '/company/technology'
+      path: '/company/technology'
+      fullPath: '/company/technology'
+      preLoaderRoute: typeof CompanyTechnologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/solutions/cng': {
+      id: '/company/solutions/cng'
+      path: '/company/solutions/cng'
+      fullPath: '/company/solutions/cng'
+      preLoaderRoute: typeof CompanySolutionsCngRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/solutions/cng-conversion': {
+      id: '/company/solutions/cng-conversion'
+      path: '/company/solutions/cng-conversion'
+      fullPath: '/company/solutions/cng-conversion'
+      preLoaderRoute: typeof CompanySolutionsCngConversionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/solutions/diesel': {
+      id: '/company/solutions/diesel'
+      path: '/company/solutions/diesel'
+      fullPath: '/company/solutions/diesel'
+      preLoaderRoute: typeof CompanySolutionsDieselRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/solutions/eea': {
+      id: '/company/solutions/eea'
+      path: '/company/solutions/eea'
+      fullPath: '/company/solutions/eea'
+      preLoaderRoute: typeof CompanySolutionsEeaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/solutions/electricity': {
+      id: '/company/solutions/electricity'
+      path: '/company/solutions/electricity'
+      fullPath: '/company/solutions/electricity'
+      preLoaderRoute: typeof CompanySolutionsElectricityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/solutions/ev-charging': {
+      id: '/company/solutions/ev-charging'
+      path: '/company/solutions/ev-charging'
+      fullPath: '/company/solutions/ev-charging'
+      preLoaderRoute: typeof CompanySolutionsEvChargingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/solutions/ev-mobility': {
+      id: '/company/solutions/ev-mobility'
+      path: '/company/solutions/ev-mobility'
+      fullPath: '/company/solutions/ev-mobility'
+      preLoaderRoute: typeof CompanySolutionsEvMobilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/solutions/power-as-a-service': {
+      id: '/company/solutions/power-as-a-service'
+      path: '/company/solutions/power-as-a-service'
+      fullPath: '/company/solutions/power-as-a-service'
+      preLoaderRoute: typeof CompanySolutionsPowerAsAServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/solutions/renewables': {
+      id: '/company/solutions/renewables'
+      path: '/company/solutions/renewables'
+      fullPath: '/company/solutions/renewables'
+      preLoaderRoute: typeof CompanySolutionsRenewablesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/solutions/smart-metering': {
+      id: '/company/solutions/smart-metering'
+      path: '/company/solutions/smart-metering'
+      fullPath: '/company/solutions/smart-metering'
+      preLoaderRoute: typeof CompanySolutionsSmartMeteringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/solutions/training': {
+      id: '/company/solutions/training'
+      path: '/company/solutions/training'
+      fullPath: '/company/solutions/training'
+      preLoaderRoute: typeof CompanySolutionsTrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -502,6 +890,25 @@ const rootRouteChildren: RootRouteChildren = {
   RegisterRoute: RegisterRoute,
   TechnologyRoute: TechnologyRoute,
   TrainingRoute: TrainingRoute,
+  CompanyAboutRoute: CompanyAboutRoute,
+  CompanyCareersRoute: CompanyCareersRoute,
+  CompanyContactRoute: CompanyContactRoute,
+  CompanyFaqRoute: CompanyFaqRoute,
+  CompanyGreenEnergyRoute: CompanyGreenEnergyRoute,
+  CompanyIndustriesRoute: CompanyIndustriesRoute,
+  CompanyPartnersRoute: CompanyPartnersRoute,
+  CompanyTechnologyRoute: CompanyTechnologyRoute,
+  CompanySolutionsCngRoute: CompanySolutionsCngRoute,
+  CompanySolutionsCngConversionRoute: CompanySolutionsCngConversionRoute,
+  CompanySolutionsDieselRoute: CompanySolutionsDieselRoute,
+  CompanySolutionsEeaRoute: CompanySolutionsEeaRoute,
+  CompanySolutionsElectricityRoute: CompanySolutionsElectricityRoute,
+  CompanySolutionsEvChargingRoute: CompanySolutionsEvChargingRoute,
+  CompanySolutionsEvMobilityRoute: CompanySolutionsEvMobilityRoute,
+  CompanySolutionsPowerAsAServiceRoute: CompanySolutionsPowerAsAServiceRoute,
+  CompanySolutionsRenewablesRoute: CompanySolutionsRenewablesRoute,
+  CompanySolutionsSmartMeteringRoute: CompanySolutionsSmartMeteringRoute,
+  CompanySolutionsTrainingRoute: CompanySolutionsTrainingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
