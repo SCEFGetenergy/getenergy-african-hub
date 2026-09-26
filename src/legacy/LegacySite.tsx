@@ -4,8 +4,8 @@ import bodyHtml from "./body.html?raw";
 import { initLegacy } from "./legacy";
 import { supabase } from "@/integrations/supabase/client";
 
-const [headPart, rest] = bodyHtml.split('<main id="main">');
-const [pagesPart, footPart] = rest.split("</main>");
+const [headPart = "", rest = ""] = bodyHtml.split('<main id="main">');
+const [pagesPart = "", footPart = ""] = rest.split("</main>");
 
 // Paths rendered by React routes rather than the static page markup.
 const APP_PAGES = ["/account"];
@@ -86,7 +86,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
             p_contact_name: nameEl?.value.trim() || email,
             p_contact_email: email,
             p_contact_phone: val(form, 'input[type="tel"]'),
-            p_company_name: orgEl?.value.trim() || undefined,
+            ...(orgEl?.value.trim() ? { p_company_name: orgEl.value.trim() } : {}),
             p_details: { lines },
           });
           if (error) return { error: "Please try again in a moment, or use the email option below." };
