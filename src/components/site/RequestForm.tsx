@@ -96,16 +96,23 @@ export function RequestForm({
         if (raw) details[field.label] = raw;
       }
 
+      const optional: Record<string, string> = {};
+      const phone = (values["contact_phone"] ?? "").trim();
+      const company = (values["company_name"] ?? "").trim();
+      const location = (values["location"] ?? "").trim();
+      if (phone) optional["p_contact_phone"] = phone;
+      if (company) optional["p_company_name"] = company;
+      if (location) optional["p_location"] = location;
+
       const { data, error } = await supabase.rpc("submit_service_request", {
         p_request_type: requestType,
         p_service_name: serviceName,
         p_contact_name: (values["contact_name"] ?? "").trim(),
         p_contact_email: (values["contact_email"] ?? "").trim(),
-        p_contact_phone: (values["contact_phone"] ?? "").trim() || undefined,
-        p_company_name: (values["company_name"] ?? "").trim() || undefined,
-        p_location: (values["location"] ?? "").trim() || undefined,
         p_details: details,
+        ...optional,
       });
+
 
       if (error) throw error;
       setReference(data as string);
