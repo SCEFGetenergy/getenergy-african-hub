@@ -250,6 +250,17 @@ h2 .g{color:var(--green)}
 .quick span{font-weight:400;color:var(--muted);font-size:.86rem;line-height:1.35}
 @media (max-width:1100px){.quick{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:520px){.quick{grid-template-columns:repeat(2,1fr)}}
+.service-directory{padding:44px 0 48px;background:var(--panel);border-bottom:1px solid var(--line)}
+.service-directory-head{display:flex;justify-content:space-between;align-items:end;gap:12px 28px;flex-wrap:wrap;margin-bottom:22px}
+.service-directory-head h2{font-size:2.25rem}
+.service-directory-head>a{color:var(--blue);font-weight:700;text-decoration:none}
+.service-directory-head>a:hover,.service-directory-head>a:focus-visible{text-decoration:underline}
+.service-directory-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:24px}
+.service-directory-links a{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;padding:13px 0;border-bottom:1px solid var(--line);color:var(--ink);font-weight:600;text-decoration:none;line-height:1.3}
+.service-directory-links a::after{content:"↗";color:var(--green);flex:none;font-size:1.15rem}
+.service-directory-links a:hover,.service-directory-links a:focus-visible{color:var(--blue)}
+@media (max-width:900px){.service-directory-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.service-directory{padding:34px 0 38px}.service-directory-links{grid-template-columns:1fr}.service-directory-head h2{font-size:2rem}}
 .sol.six{grid-template-columns:repeat(6,1fr);margin-top:18px}
 @media (max-width:1100px){.sol.six{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:720px){.sol.six{grid-template-columns:repeat(2,1fr)}}
