@@ -8,13 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const COLUMN_FIELDS = new Set(["contact_name", "contact_email", "contact_phone", "company_name", "location"]);
@@ -205,18 +198,15 @@ export function RequestForm({
                 </Label>
 
                 {field.type === "select" ? (
-                  <Select value={values[field.name] ?? ""} onValueChange={(v) => set(field.name, v)}>
-                    <SelectTrigger id={id}>
-                      <SelectValue placeholder="Select an option" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {(field.options ?? []).map((option) => (
-                        <SelectItem key={option} value={option}>
-                          {option}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <select
+                    id={id}
+                    value={values[field.name] ?? ""}
+                    onChange={(e) => set(field.name, e.target.value)}
+                    className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm focus:outline-none focus:ring-1 focus:ring-ring"
+                  >
+                    <option value="">Select an option</option>
+                    {(field.options ?? []).map((option) => <option key={option} value={option}>{option}</option>)}
+                  </select>
                 ) : field.type === "textarea" ? (
                   <Textarea
                     id={id}
