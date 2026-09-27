@@ -5,9 +5,9 @@ export const Route = createFileRoute("/industries")({
   head: () => ({
     meta: [
       { title: "Industries We Serve | GetEnergy" },
-      { name: "description", content: "Practical energy solutions matched to the operational realities of each sector." },
+      { name: "description", content: "Explore twelve sectors GetEnergy serves, from construction and healthcare to manufacturing, fleets and public services, with historical work clearly identified." },
       { property: "og:title", content: "Industries We Serve | GetEnergy" },
-      { property: "og:description", content: "Practical energy solutions matched to the operational realities of each sector." },
+      { property: "og:description", content: "Explore twelve sectors GetEnergy serves, from construction and healthcare to manufacturing, fleets and public services, with historical work clearly identified." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
