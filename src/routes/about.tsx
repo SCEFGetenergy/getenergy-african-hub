@@ -5,9 +5,9 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About GetEnergy | Energy for Today. Cleaner Opportunities for Tomorrow." },
-      { name: "description", content: "From 2023 through August 2026, diesel supply and community electricity vending built our practical experience with these sectors." },
+      { name: "description", content: "Built on commercial fuel supply and electricity access since 2023, GetEnergy is engineering a practical transition toward cleaner mobility, smarter power and green energy." },
       { property: "og:title", content: "About GetEnergy | Energy for Today. Cleaner Opportunities for Tomorrow." },
-      { property: "og:description", content: "From 2023 through August 2026, diesel supply and community electricity vending built our practical experience with these sectors." },
+      { property: "og:description", content: "Built on commercial fuel supply and electricity access since 2023, GetEnergy is engineering a practical transition toward cleaner mobility, smarter power and green energy." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
