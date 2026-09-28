@@ -25,7 +25,7 @@ html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 img{max-width:100%;display:block}
-a{color:inherit}
+@layer base{a{color:inherit}}
 :focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:4px}
 .wrap{width:min(1240px,100% - 40px);margin-inline:auto}
 h1,h2,h3,h4{font-family:var(--display);line-height:1.04;margin:0;color:var(--ink)}
@@ -53,7 +53,7 @@ nav.main a[aria-current="page"]{color:var(--blue);box-shadow:inset 0 -3px 0 var(
 .bar-actions .login{font-weight:600;text-decoration:none;font-size:.96rem}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 1rem/1 var(--body);padding:14px 22px;border-radius:8px;border:2px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap}
 .btn.primary{background:var(--blue);color:#fff}
-.btn.green{background:var(--green);color:#fff}
+.btn.green{background:var(--btn-green);color:#fff}
 .btn.outline-w{border-color:rgba(255,255,255,.6);color:#fff;background:transparent}
 .btn.outline-w:hover{background:rgba(255,255,255,.08)}
 .btn.primary:hover{filter:brightness(1.08)}
@@ -62,7 +62,7 @@ nav.main a[aria-current="page"]{color:var(--blue);box-shadow:inset 0 -3px 0 var(
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.navy{background:#1F4A8F}}
 .btn.ghost{border-color:var(--line);color:var(--ink);background:transparent}
 .btn.ghost:hover{border-color:var(--navy)}
-.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn[disabled],.btn[aria-disabled="true"]{background:#E4E8EF;color:#3A4658;border-color:#C3CBD8;cursor:not-allowed;filter:none}
 .menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:9px 12px;font:600 .95rem var(--body);color:var(--ink);cursor:pointer}
 .m-only{display:none}
 @media (max-width:1300px){
@@ -149,7 +149,7 @@ section.alt{background:var(--panel)}
 @media (max-width:560px){.sectors{grid-template-columns:repeat(2,1fr)}}
 .stats{padding:44px 0}
 .statgrid{display:grid;grid-template-columns:repeat(4,1fr) 1.3fr;gap:24px;align-items:start}
-.cta .btn.primary{background:var(--green)}
+.cta .btn.primary{background:var(--btn-green)}
 .statgrid b{display:block;font:800 3rem/1 var(--display);color:#fff}
 .statgrid span{color:#C6D6EE;font-size:.93rem}
 .statline{font:800 1.8rem/1.1 var(--display);color:var(--lime)}
@@ -518,3 +518,25 @@ footer .corp ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,
 .service-detail-band h2{font-size:clamp(1.8rem,3vw,2.4rem)}
 .service-detail-band .lede{margin-top:10px;max-width:76ch}
 .service-detail-band .muted{margin-top:12px;font-size:.92rem}
+
+/* CTA accessibility: contrast, states and touch targets */
+:root{--green-ink:#157A38;--btn-green:#157A38}
+:root[data-theme="dark"]{--green-ink:#5FD34F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--green-ink:#5FD34F}}
+.btn{min-height:48px;line-height:1.2;white-space:normal;text-align:center;transition:filter .15s,background-color .15s,border-color .15s}
+.btn:not([disabled]):not([aria-disabled="true"]):hover{filter:brightness(1.12)}
+.btn:not([disabled]):not([aria-disabled="true"]):active{filter:brightness(.92)}
+.btn.ghost:hover,.btn.outline-w:hover,.btn.light:hover{filter:none}
+.btn:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+.btn.light:focus-visible,.band .btn:focus-visible,footer a:focus-visible{outline-color:#fff}
+.ctabtns{gap:12px}
+.menu-toggle{min-height:44px;min-width:44px}
+@media (max-width:900px){
+  footer li a,.corporate-links a,.service-directory-links a,.chipcard,[role="tab"],.skip:focus{min-height:44px;display:inline-flex;align-items:center}
+  footer a[href^="tel:"],footer a[href^="mailto:"]{min-height:44px;display:inline-flex;align-items:center}
+  .corporate-links div{gap:4px 16px}
+}
+.corporate-content a.inline-flex,.corporate-content button:not([role="combobox"]){min-height:44px}
+.corporate-content nav[aria-label="Breadcrumb"] a{display:inline-flex;align-items:center;min-height:44px}
+.form-foot a,.service-directory-head>a{display:inline-flex;align-items:center;min-height:44px}
+.contact-list a,.crumbs a{display:inline-flex;align-items:center;min-height:44px}
