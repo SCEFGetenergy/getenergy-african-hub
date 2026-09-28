@@ -444,16 +444,17 @@ export const SERVICES: Service[] = [
     title: "EV Charging & Battery Solutions",
     icon: "BatteryCharging",
     status: "Building",
-    summary: "AC and DC charging, depot charging and battery-swap solutions.",
+    summary: "AC and DC charging, solar charging, depot charging and battery-swap solutions.",
     intro:
-      "Charging is the constraint on African EV adoption, so we treat it as infrastructure: sized to the site's load, backed by storage where the grid is weak, and monitored.",
+      "Charging is the constraint on African EV adoption, so we treat it as infrastructure: sized to the site's load, backed by solar or storage where the grid is weak, and monitored. Deployment follows requirement review, site planning, charger selection, an installation schedule, live operations and ongoing support with reporting.",
     offerings: [
       "AC charging for homes, offices and estates",
+      "Commercial AC charging for workplaces and public locations",
       "DC fast charging for public and fleet sites",
-      "Depot charging design and phased rollout",
-      "Battery swap solutions for two- and three-wheelers",
-      "Storage-backed charging for weak-grid locations",
-      "Monitoring, access control and billing in development",
+      "Depot charging design and phased multi-site rollout",
+      "Battery swap for commercial fleets and high-usage operators",
+      "Solar EV charging and storage-backed charging for weak-grid sites",
+      "Certified installation, maintenance, remote monitoring and support",
     ],
     formTitle: "Request charging or battery solutions",
     fields: [
