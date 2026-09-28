@@ -86,7 +86,7 @@ export function initLegacy(api){
     document.getElementById("desk-updated").textContent=D.updated||"";
     var nf=(document.querySelector("input[name=nf]:checked")||{}).value||"all";
     document.getElementById("desk-news").innerHTML=D.news.filter(function(n){return nf==="all"||n.region===nf}).map(function(n){
-      return '<li><span class="tag">'+esc(n.region)+'</span><a href="'+esc(n.url)+'" target="_blank" rel="noopener">'+esc(n.title)+'</a><span class="src">'+esc(n.source)+'</span></li>'}).join("")||'<li>No stories in this category yet.</li>';
+      return '<li><span class="tag">'+esc(n.region)+'</span><a href="'+esc(n.url)+'" target="_blank" rel="noopener noreferrer">'+esc(n.title)+'</a><span class="src">'+esc(n.source)+'</span></li>'}).join("")||'<li>No stories in this category yet.</li>';
     document.getElementById("desk-brief").innerHTML=D.brief.map(function(b){return "<li>"+esc(b)+"</li>"}).join("");
     document.querySelector("#desk-white tbody").innerHTML=D.white.map(function(r){return "<tr><td>"+esc(r.p)+"</td><td>"+esc(r.depot)+"</td><td>"+esc(r.lagos)+"</td><td>"+esc(r.abuja)+"</td><td>"+chg(r.ch)+"</td></tr>"}).join("");
     document.querySelector("#desk-eea tbody").innerHTML=D.eea.map(function(r){return "<tr><td>"+esc(r.p)+"</td><td>"+esc(r.price)+"</td><td>"+esc(r.n)+"</td><td>"+chg(r.ch)+"</td></tr>"}).join("");
