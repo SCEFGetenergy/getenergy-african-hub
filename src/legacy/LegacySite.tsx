@@ -124,7 +124,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    console.log("LEGACY show", pathname, !!api.current);
+    (window as any).__api = api.current;
     api.current?.show(pageName(pathname));
     if (!window.location.hash) window.scrollTo(0, 0);
   }, [pathname]);
