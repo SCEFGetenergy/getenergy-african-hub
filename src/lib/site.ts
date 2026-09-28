@@ -289,16 +289,16 @@ export const SERVICES: Service[] = [
     title: "Diesel Supply Services",
     icon: "Fuel",
     status: "Operating",
-    summary: "Bulk and multi-location AGO supply planning for sites, fleets and facilities.",
+    summary: "Structured supply, timely delivery and operational continuity for sites, fleets and facilities.",
     intro:
-      "Diesel supply has been our core commercial business since 2023, serving construction, retail, healthcare and oil exploration customers across Nigeria. We handle sourcing, scheduling, metered delivery and documentation.",
+      "Diesel supply has been our core commercial business since 2023, serving construction, retail, healthcare and oil exploration customers across Nigeria. Project-sector supply runs at 100,000+ litres monthly, with a minimum of 20,000 litres monthly for retail and commercial accounts. We handle sourcing, scheduling, metered delivery and documentation.",
     offerings: [
       "Bulk AGO supply by volume and schedule",
-      "Site, estate and fleet delivery",
-      "Metered delivery with documentation",
-      "Multi-location supply coordination",
-      "Project-sector and corporate supply coordination",
-      "Consumption reporting for facility teams",
+      "Scheduled delivery windows for continuous operations",
+      "Multi-location supply across branches and states",
+      "Project supply aligned to construction timelines",
+      "Corporate account management with a single contact",
+      "24/7 operational support and consumption reporting",
     ],
     formTitle: "Request a diesel supply quote",
     fields: [
