@@ -25,7 +25,7 @@ html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 img{max-width:100%;display:block}
-a{color:inherit}
+@layer base{a{color:inherit}}
 :focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:4px}
 .wrap{width:min(1240px,100% - 40px);margin-inline:auto}
 h1,h2,h3,h4{font-family:var(--display);line-height:1.04;margin:0;color:var(--ink)}
@@ -539,3 +539,4 @@ footer .corp ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,
 .corporate-content a.inline-flex,.corporate-content button:not([role="combobox"]){min-height:44px}
 .corporate-content nav[aria-label="Breadcrumb"] a{display:inline-flex;align-items:center;min-height:44px}
 .form-foot a,.service-directory-head>a{display:inline-flex;align-items:center;min-height:44px}
+.contact-list a,.crumbs a{display:inline-flex;align-items:center;min-height:44px}
