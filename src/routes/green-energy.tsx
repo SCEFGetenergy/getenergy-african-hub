@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// Page content is rendered by the site shell in __root (src/legacy); this route supplies its URL and metadata.
+// The shared site shell renders this page; this route supplies its URL and metadata.
 export const Route = createFileRoute("/green-energy")({
   head: () => ({
     meta: [
-      { title: "Green Energy | Practical Pathways to Cleaner Energy | GetEnergy" },
-      { name: "description", content: "GetEnergy does not assume every customer can move immediately to one technology. Our model meets customers where they are and moves them forward." },
-      { property: "og:title", content: "Green Energy | Practical Pathways to Cleaner Energy | GetEnergy" },
-      { property: "og:description", content: "GetEnergy does not assume every customer can move immediately to one technology. Our model meets customers where they are and moves them forward." },
+      { title: "Energy Transition | Cleaner Energy Solutions | GetEnergy" },
+      { name: "description", content: "Practical pathways to cleaner energy: a five-stage transition model from reliable supply to renewable and low-carbon energy." },
+      { property: "og:title", content: "Energy Transition | Cleaner Energy Solutions | GetEnergy" },
+      { property: "og:description", content: "Practical pathways to cleaner energy: a five-stage transition model from reliable supply to renewable and low-carbon energy." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
