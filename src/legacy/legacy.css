@@ -670,3 +670,4 @@ header.site .bar-actions .btn.primary{background:var(--btn-green,#157A38);border
 .mk-platforms .btn{margin-top:auto}
 @media(max-width:1000px){.mk-areas,.mk-xp{grid-template-columns:repeat(2,1fr)}.mk-ops-grid,.mk-impact-grid{grid-template-columns:1fr 1fr}.mk-ops-grid>div:first-child,.mk-impact-grid h2{grid-column:1/-1}.mk-sectors{grid-template-columns:repeat(3,1fr)}.mk-steps{grid-template-columns:repeat(2,1fr)}.mk-platforms{grid-template-columns:1fr}}
 @media(max-width:560px){.mk-areas,.mk-xp,.mk-impact-grid,.mk-steps{grid-template-columns:1fr}.mk-sectors{grid-template-columns:repeat(2,1fr)}.mk-arrows{display:none}.mk-head{display:block}}
+@media(max-width:1000px){.mk-ops-grid>.mk-xp{grid-column:1/-1}}
