@@ -111,6 +111,7 @@ export function initLegacy(api){
   var pages=[].slice.call(document.querySelectorAll("[data-page]")),links=[].slice.call(document.querySelectorAll("nav.main a"));
   var aliases={"about-us":"about","invest":"home","paas":"power-as-a-service","eea":"energy-ecommerce","diesel":"get-fuel","cng-ev":"cng","cng-conversion":"cng"};
   function show(name){
+    pages=[].slice.call(document.querySelectorAll("[data-page]"));links=[].slice.call(document.querySelectorAll("nav.main a"));
     name=aliases[name]||name;
     var pg=pages.filter(function(p){return p.dataset.page===name})[0]||(name===null?null:pages.filter(function(p){return p.dataset.page==="notfound"})[0]);
     pages.forEach(function(p){p.classList.toggle("on",p===pg)});
