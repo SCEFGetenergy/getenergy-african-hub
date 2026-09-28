@@ -525,8 +525,8 @@ export const SERVICES: Service[] = [
       "Shared technology with GetEnergy services",
       "Launching progressively — no transactions yet",
     ],
-    formTitle: "Register for the EEA marketplace pilot",
-    formNote: "EEA is in pilot registration. No transactions or payments are processed yet. Visit eea54.africa for updates.",
+    formTitle: "Register for the EEA54 marketplace pilot",
+    formNote: "EEA54 is in pilot registration. No transactions or payments are processed yet. Visit eea54.africa for updates.",
     fields: [
       { name: "company_name", label: "Company / business name", type: "text" },
       ...CONTACT_FIELDS,
