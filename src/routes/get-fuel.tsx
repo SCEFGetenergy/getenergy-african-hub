@@ -5,9 +5,9 @@ export const Route = createFileRoute("/get-fuel")({
   head: () => ({
     meta: [
       { title: "Diesel Supply | GetEnergy" },
-      { name: "description", content: "Structured supply, timely delivery and one point of contact for every site. We plan deliveries around your consumption so your generators, plant and fleet nev" },
+      { name: "description", content: "GetEnergy diesel supply and energy solutions: bulk and multi-location supply planning for construction, retail, healthcare and facilities in Nigeria." },
       { property: "og:title", content: "Diesel Supply | GetEnergy" },
-      { property: "og:description", content: "Structured supply, timely delivery and one point of contact for every site. We plan deliveries around your consumption so your generators, plant and fleet nev" },
+      { property: "og:description", content: "Reliable diesel supply, coordinated delivery and business continuity for Nigerian organisations." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

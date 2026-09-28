@@ -289,7 +289,7 @@ export const SERVICES: Service[] = [
     title: "Diesel Supply Services",
     icon: "Fuel",
     status: "Operating",
-    summary: "Bulk AGO supply with scheduled delivery for sites, fleets and facilities.",
+    summary: "Bulk and multi-location AGO supply planning for sites, fleets and facilities.",
     intro:
       "Diesel supply has been our core commercial business since 2023, serving construction, retail, healthcare and oil exploration customers across Nigeria. We handle sourcing, scheduling, metered delivery and documentation.",
     offerings: [
@@ -297,7 +297,7 @@ export const SERVICES: Service[] = [
       "Site, estate and fleet delivery",
       "Metered delivery with documentation",
       "Multi-location supply coordination",
-      "Emergency and top-up delivery requests",
+      "Project-sector and corporate supply coordination",
       "Consumption reporting for facility teams",
     ],
     formTitle: "Request a diesel supply quote",
@@ -341,14 +341,14 @@ export const SERVICES: Service[] = [
     title: "CNG Services",
     icon: "Flame",
     status: "Building",
-    summary: "CNG sourcing, logistics, refuelling and station development.",
+    summary: "Developing CNG sourcing, logistics, refuelling and station capability.",
     intro:
       "Compressed natural gas is the most available cleaner fuel step for Nigerian fleets and industry today. We are building CNG sourcing, logistics, refuelling access and station development capability with partners and OEMs.",
     offerings: [
       "CNG sourcing and offtake coordination",
       "Virtual pipeline and logistics planning",
       "Refuelling access for fleets",
-      "CNG station development support",
+      "Proposed CNG station development support",
       "Industrial gas substitution assessments",
       "Fuel-cost comparison against diesel",
     ],
@@ -373,13 +373,13 @@ export const SERVICES: Service[] = [
     title: "CNG Conversion Centres",
     icon: "Wrench",
     status: "Building",
-    summary: "Vehicle conversion to bi-fuel CNG for cars, buses and commercial fleets.",
+    summary: "Developing bi-fuel CNG conversion for cars, buses and commercial fleets.",
     intro:
-      "Our conversion programme is being built to move existing vehicles to CNG safely, with certified kits, trained technicians and post-conversion support. Fleet operators get a per-vehicle plan and downtime schedule.",
+      "Our conversion programme is being built to assess existing vehicles for CNG suitability, approved kits, qualified installation and post-conversion support. Proposed centres are not yet open; enquiries are not confirmed bookings.",
     offerings: [
       "Bi-fuel CNG conversion for petrol vehicles",
       "Fleet conversion scheduling and phasing",
-      "Certified kits and trained technicians",
+      "Approved kits and qualified technicians in the proposed delivery model",
       "Post-conversion inspection and support",
       "Payback and running-cost analysis",
       "Driver orientation and safety briefing",
@@ -411,16 +411,16 @@ export const SERVICES: Service[] = [
     title: "EV & Hybrid Mobility",
     icon: "Car",
     status: "Building",
-    summary: "Electric and hybrid cars, buses, tricycles and fleet electrification.",
+    summary: "Developing electric and hybrid mobility for fleets, communities and institutions.",
     intro:
-      "We are building an EV and hybrid mobility offering suited to African duty cycles and grid realities — starting with fleets where charging can be controlled at a depot and savings are measurable.",
+      "We are building an integrated EV and hybrid mobility offering suited to African duty cycles and grid realities. For multi-location organisations, the proposed model coordinates vehicle sourcing, charging infrastructure, fleet planning, installation and after-sales support through one relationship.",
     offerings: [
       "Electric and hybrid cars, buses and tricycles",
       "Commercial vehicle electrification",
       "Fleet electrification roadmaps",
       "Total-cost-of-ownership modelling",
       "Charging and depot readiness assessment",
-      "Driver and maintenance training",
+      "Installation, driver training and after-sales support in development",
     ],
     formTitle: "Request an EV or hybrid mobility consultation",
     fields: [
@@ -453,7 +453,7 @@ export const SERVICES: Service[] = [
       "Depot charging design and phased rollout",
       "Battery swap solutions for two- and three-wheelers",
       "Storage-backed charging for weak-grid locations",
-      "Monitoring, access control and billing",
+      "Monitoring, access control and billing in development",
     ],
     formTitle: "Request charging or battery solutions",
     fields: [
