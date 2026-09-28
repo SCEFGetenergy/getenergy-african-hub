@@ -122,7 +122,10 @@ export function initLegacy(api){
   }
   var t=document.querySelector(".menu-toggle"),n=document.getElementById("nav");
   t.addEventListener("click",function(){var o=n.classList.toggle("open");t.setAttribute("aria-expanded",o)});
-  n.addEventListener("click",function(e){if(e.target.tagName==="A"){n.classList.remove("open");t.setAttribute("aria-expanded","false")}});
+  var solutions=n.querySelector(".solutions-nav details");
+  n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");t.setAttribute("aria-expanded","false");solutions.open=false}});
+  document.addEventListener("click",function(e){if(!solutions.contains(e.target))solutions.open=false});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"){solutions.open=false;n.classList.remove("open");t.setAttribute("aria-expanded","false")}});
 
   [].forEach.call(document.querySelectorAll("[role=tablist]"),function(list){
     var tabs=[].slice.call(list.querySelectorAll("[role=tab]"));
