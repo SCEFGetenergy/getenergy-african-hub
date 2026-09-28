@@ -7,3 +7,5 @@
 - [x] Update desktop/mobile navigation and restore Energy Desk signup outside homepage
 - [x] Verify homepage links, dropdown, and browser errors at desktop and mobile sizes
 - [x] Homepage v3: photo hero, four pillars, experience with status labels, transition journey, EEA and GFA Wzip teasers
+- [x] Clean Energy page rebuilt to the approved design (transition model, delivery steps, solutions, pathways, ecosystem)
+- [x] Photo headers with four-point strips on 16 service and company pages; new Solar & Power and Smart Metering pages
