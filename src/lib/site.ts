@@ -136,7 +136,7 @@ export const FAQS = [
   },
   {
     q: "Which services are operating, and which are being built?",
-    a: "Operating: diesel supply and electricity vending. Doing now: business process engineering and digital transformation. Building: CNG services and conversion, EV and hybrid mobility, charging and battery solutions, smart metering at scale, and the Energy E-Commerce Africa marketplace. Planned: wider renewables, BESS and distributed power portfolios.",
+    a: "Operating: diesel supply and electricity vending. Doing now: business process engineering and digital transformation. Building: CNG services and conversion, EV and hybrid mobility, charging and battery solutions, smart metering at scale, and the Energy E-Commerce Africa (EEA54) marketplace. Planned: wider renewables, BESS and distributed power portfolios.",
   },
   {
     q: "Did GetEnergy manufacture electricity meters?",
@@ -159,8 +159,8 @@ export const FAQS = [
     a: "GET Energy Trading Services Ltd is a subsidiary of Pancokrato Integrated Services (PKIS).",
   },
   {
-    q: "What is Energy E-Commerce Africa (EEA)?",
-    a: "EEA is our digital marketplace concept connecting customers with suppliers, OEMs and energy professionals. It is currently in pilot registration at eea54.africa.",
+    q: "What is Energy E-Commerce Africa (EEA54)?",
+    a: "EEA54 is our digital marketplace concept connecting customers with suppliers, OEMs and energy professionals across Africa's 54 countries. It is currently in pilot registration at eea54.africa.",
   },
 ];
 
@@ -510,13 +510,13 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "eea",
-    nav: "EEA",
-    title: "Energy E-Commerce Africa (EEA)",
+    nav: "EEA54",
+    title: "Energy E-Commerce Africa (EEA54)",
     icon: "ShoppingCart",
     status: "Building",
     summary: "A marketplace connecting customers, suppliers, OEMs and energy professionals.",
     intro:
-      "Energy E-Commerce Africa is our digital marketplace, currently in pilot registration. It is designed to connect energy buyers with vetted suppliers, OEMs and professionals on shared technology.",
+      "Energy E-Commerce Africa (EEA54) is our digital marketplace, currently in pilot registration. It is designed to connect energy buyers with vetted suppliers, OEMs and professionals across Africa's 54 countries, on shared technology.",
     offerings: [
       "Pilot registration for buyers and suppliers",
       "Product and equipment listings",
