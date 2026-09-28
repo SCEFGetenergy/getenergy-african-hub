@@ -100,11 +100,13 @@ export function initLegacy(api){
       "Preview: news items are real recent stories linked to their sources. Prices, markets and stocks appear when the Energy Desk backend and its data feeds are switched on.";
   }
   var DESK=SAMPLE;
-  [].forEach.call(document.querySelectorAll("input[name=nf]"),function(r){r.addEventListener("change",function(){renderDesk(DESK)})});
-  renderDesk(DESK);
-  if(CONFIG.boardEndpoint){
-    fetch(CONFIG.boardEndpoint).then(function(r){return r.json()}).then(function(d){DESK=d;renderDesk(d)}).catch(function(){/* keep last good data */});
-    setInterval(function(){fetch(CONFIG.boardEndpoint).then(function(r){return r.json()}).then(function(d){DESK=d;renderDesk(d)}).catch(function(){})},15*60*1000);
+  if(document.getElementById("desk-mode")){
+    [].forEach.call(document.querySelectorAll("input[name=nf]"),function(r){r.addEventListener("change",function(){renderDesk(DESK)})});
+    renderDesk(DESK);
+    if(CONFIG.boardEndpoint){
+      fetch(CONFIG.boardEndpoint).then(function(r){return r.json()}).then(function(d){DESK=d;renderDesk(d)}).catch(function(){/* keep last good data */});
+      setInterval(function(){fetch(CONFIG.boardEndpoint).then(function(r){return r.json()}).then(function(d){DESK=d;renderDesk(d)}).catch(function(){})},15*60*1000);
+    }
   }
 
   // router (driven by the app router)
