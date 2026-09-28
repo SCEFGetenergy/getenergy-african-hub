@@ -1,5 +1,5 @@
 # GetEnergy narrative update
 
-- [ ] Align public About, Green Energy, Partners, Technology, and Industries pages with the supplied narrative and development statuses.
-- [ ] Align homepage wording, main navigation, footer Company links, and relevant page descriptions.
-- [ ] Verify page visibility, links, and mobile presentation without affecting existing forms or service pages.
+- [ ] Update diesel, CNG, and EV pages from the supplied brochures without presenting proposed capabilities as completed operations.
+- [ ] Align the corresponding detailed corporate service pages and page descriptions.
+- [ ] Verify the updated pages and links on desktop and mobile; preserve the existing forms.
