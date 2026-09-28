@@ -124,10 +124,14 @@ export function LegacySite({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    (window as any).__api = api.current;
-    api.current?.show(pageName(pathname));
     if (!window.location.hash) window.scrollTo(0, 0);
   }, [pathname]);
+
+  // Re-apply the visible page after every commit: React may re-apply the static
+  // page markup on re-render, which would otherwise reset it to the first page loaded.
+  useEffect(() => {
+    api.current?.show(pageName(pathname));
+  });
 
   const isApp = pageName(pathname) === null;
   return (
