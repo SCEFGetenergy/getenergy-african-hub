@@ -91,7 +91,7 @@ function Technology() {
         <p className="mt-6 text-sm text-muted-foreground">
           The marketplace pilot is registering participants at{" "}
           <a href={BRAND.eeaUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-green underline">
-            eea.africa
+            eea54.africa
           </a>
           .
         </p>

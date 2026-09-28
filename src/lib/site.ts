@@ -11,7 +11,7 @@ export const BRAND = {
   email: "sales@getenergy.ng",
   phone: "+234 805 667 7770",
   address: "19 Godwin Okigbo Street, Masha Kilo, Surulere, Lagos",
-  eeaUrl: "https://eea.africa",
+  eeaUrl: "https://eea54.africa",
   disclaimer:
     "Historical engagement references describe past commercial activity only. They do not imply a current partnership, endorsement or ongoing contract with any organisation named.",
 };
@@ -160,7 +160,7 @@ export const FAQS = [
   },
   {
     q: "What is Energy E-Commerce Africa (EEA)?",
-    a: "EEA is our digital marketplace concept connecting customers with suppliers, OEMs and energy professionals. It is currently in pilot registration at eea.africa.",
+    a: "EEA is our digital marketplace concept connecting customers with suppliers, OEMs and energy professionals. It is currently in pilot registration at eea54.africa.",
   },
 ];
 
@@ -526,7 +526,7 @@ export const SERVICES: Service[] = [
       "Launching progressively — no transactions yet",
     ],
     formTitle: "Register for the EEA marketplace pilot",
-    formNote: "EEA is in pilot registration. No transactions or payments are processed yet. Visit eea.africa for updates.",
+    formNote: "EEA is in pilot registration. No transactions or payments are processed yet. Visit eea54.africa for updates.",
     fields: [
       { name: "company_name", label: "Company / business name", type: "text" },
       ...CONTACT_FIELDS,
