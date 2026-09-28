@@ -27,6 +27,7 @@ import { Route as OurServicesRouteImport } from './routes/our-services'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PayBillsRouteImport } from './routes/pay-bills'
 import { Route as PowerAsAServiceRouteImport } from './routes/power-as-a-service'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as TechnologyRouteImport } from './routes/technology'
 import { Route as TrainingRouteImport } from './routes/training'
@@ -139,6 +140,11 @@ const PayBillsRoute = PayBillsRouteImport.update({
 const PowerAsAServiceRoute = PowerAsAServiceRouteImport.update({
   id: '/power-as-a-service',
   path: '/power-as-a-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegisterRoute = RegisterRouteImport.update({
@@ -288,6 +294,7 @@ export interface FileRoutesByFullPath {
   '/partners': typeof PartnersRoute
   '/pay-bills': typeof PayBillsRoute
   '/power-as-a-service': typeof PowerAsAServiceRoute
+  '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
@@ -331,6 +338,7 @@ export interface FileRoutesByTo {
   '/partners': typeof PartnersRoute
   '/pay-bills': typeof PayBillsRoute
   '/power-as-a-service': typeof PowerAsAServiceRoute
+  '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
@@ -376,6 +384,7 @@ export interface FileRoutesById {
   '/partners': typeof PartnersRoute
   '/pay-bills': typeof PayBillsRoute
   '/power-as-a-service': typeof PowerAsAServiceRoute
+  '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
@@ -421,6 +430,7 @@ export interface FileRouteTypes {
     | '/partners'
     | '/pay-bills'
     | '/power-as-a-service'
+    | '/projects'
     | '/register'
     | '/technology'
     | '/training'
@@ -464,6 +474,7 @@ export interface FileRouteTypes {
     | '/partners'
     | '/pay-bills'
     | '/power-as-a-service'
+    | '/projects'
     | '/register'
     | '/technology'
     | '/training'
@@ -508,6 +519,7 @@ export interface FileRouteTypes {
     | '/partners'
     | '/pay-bills'
     | '/power-as-a-service'
+    | '/projects'
     | '/register'
     | '/technology'
     | '/training'
@@ -553,6 +565,7 @@ export interface RootRouteChildren {
   PartnersRoute: typeof PartnersRoute
   PayBillsRoute: typeof PayBillsRoute
   PowerAsAServiceRoute: typeof PowerAsAServiceRoute
+  ProjectsRoute: typeof ProjectsRoute
   RegisterRoute: typeof RegisterRoute
   TechnologyRoute: typeof TechnologyRoute
   TrainingRoute: typeof TrainingRoute
@@ -704,6 +717,13 @@ declare module '@tanstack/react-router' {
       path: '/power-as-a-service'
       fullPath: '/power-as-a-service'
       preLoaderRoute: typeof PowerAsAServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register': {
@@ -907,6 +927,7 @@ const rootRouteChildren: RootRouteChildren = {
   PartnersRoute: PartnersRoute,
   PayBillsRoute: PayBillsRoute,
   PowerAsAServiceRoute: PowerAsAServiceRoute,
+  ProjectsRoute: ProjectsRoute,
   RegisterRoute: RegisterRoute,
   TechnologyRoute: TechnologyRoute,
   TrainingRoute: TrainingRoute,
