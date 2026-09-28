@@ -1,5 +1,5 @@
-# GetEnergy narrative update
+# Roadmap
 
-- [ ] Update diesel, CNG, and EV pages from the supplied brochures without presenting proposed capabilities as completed operations.
-- [ ] Align the corresponding detailed corporate service pages and page descriptions.
-- [ ] Verify the updated pages and links on desktop and mobile; preserve the existing forms.
+- [x] Update the diesel, CNG and EV pages from the brochures without presenting proposed capabilities as completed
+- [x] Align the matching detailed service pages and page descriptions
+- [x] Check the pages and links on desktop and mobile, keeping every form working
