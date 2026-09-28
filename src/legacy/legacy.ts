@@ -171,6 +171,7 @@ export function initLegacy(api){
     whatsapp:{title:"Your WhatsApp subscription is ready",to:"sales",subject:"Energy Desk WhatsApp subscription",note:"Send it to our team to confirm your subscription. Once the Energy Desk goes live, the daily brief arrives on WhatsApp automatically."},
     login:{title:"Accounts are not open yet",nosend:true,note:"Online accounts open when our platform goes live. You can still buy tokens, pay bills and request quotes without an account."}
   };
+  (function(){var vids=[].slice.call(document.querySelectorAll("video[data-autoplay]"));if(!vids.length||!("IntersectionObserver" in window))return;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting&&e.intersectionRatio>=.6){if(window.innerWidth<=640)vids.forEach(function(o){if(o!==v)o.pause()});v.muted=true;v.play().catch(function(){})}else v.pause()})},{threshold:[0,.6]});vids.forEach(function(v){io.observe(v)})})();
   function showResult(form,kind,lines,reference,error){
     var k=KINDS[kind];var box=document.createElement("div");box.className="result";box.setAttribute("role","status");box.tabIndex=-1;
     var body=lines.join("\n"),subj=k.subject+(lines[0]?" - "+lines[0].split(": ").slice(1).join(": "):"");
