@@ -29,6 +29,8 @@ import { Route as PayBillsRouteImport } from './routes/pay-bills'
 import { Route as PowerAsAServiceRouteImport } from './routes/power-as-a-service'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as SmartMeteringRouteImport } from './routes/smart-metering'
+import { Route as SolarPowerRouteImport } from './routes/solar-power'
 import { Route as TechnologyRouteImport } from './routes/technology'
 import { Route as TrainingRouteImport } from './routes/training'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
@@ -150,6 +152,16 @@ const ProjectsRoute = ProjectsRouteImport.update({
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SmartMeteringRoute = SmartMeteringRouteImport.update({
+  id: '/smart-metering',
+  path: '/smart-metering',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolarPowerRoute = SolarPowerRouteImport.update({
+  id: '/solar-power',
+  path: '/solar-power',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TechnologyRoute = TechnologyRouteImport.update({
@@ -296,6 +308,8 @@ export interface FileRoutesByFullPath {
   '/power-as-a-service': typeof PowerAsAServiceRoute
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
+  '/smart-metering': typeof SmartMeteringRoute
+  '/solar-power': typeof SolarPowerRoute
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
@@ -340,6 +354,8 @@ export interface FileRoutesByTo {
   '/power-as-a-service': typeof PowerAsAServiceRoute
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
+  '/smart-metering': typeof SmartMeteringRoute
+  '/solar-power': typeof SolarPowerRoute
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
@@ -386,6 +402,8 @@ export interface FileRoutesById {
   '/power-as-a-service': typeof PowerAsAServiceRoute
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
+  '/smart-metering': typeof SmartMeteringRoute
+  '/solar-power': typeof SolarPowerRoute
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
@@ -432,6 +450,8 @@ export interface FileRouteTypes {
     | '/power-as-a-service'
     | '/projects'
     | '/register'
+    | '/smart-metering'
+    | '/solar-power'
     | '/technology'
     | '/training'
     | '/account'
@@ -476,6 +496,8 @@ export interface FileRouteTypes {
     | '/power-as-a-service'
     | '/projects'
     | '/register'
+    | '/smart-metering'
+    | '/solar-power'
     | '/technology'
     | '/training'
     | '/account'
@@ -521,6 +543,8 @@ export interface FileRouteTypes {
     | '/power-as-a-service'
     | '/projects'
     | '/register'
+    | '/smart-metering'
+    | '/solar-power'
     | '/technology'
     | '/training'
     | '/_authenticated/account'
@@ -567,6 +591,8 @@ export interface RootRouteChildren {
   PowerAsAServiceRoute: typeof PowerAsAServiceRoute
   ProjectsRoute: typeof ProjectsRoute
   RegisterRoute: typeof RegisterRoute
+  SmartMeteringRoute: typeof SmartMeteringRoute
+  SolarPowerRoute: typeof SolarPowerRoute
   TechnologyRoute: typeof TechnologyRoute
   TrainingRoute: typeof TrainingRoute
   CompanyAboutRoute: typeof CompanyAboutRoute
@@ -731,6 +757,20 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/smart-metering': {
+      id: '/smart-metering'
+      path: '/smart-metering'
+      fullPath: '/smart-metering'
+      preLoaderRoute: typeof SmartMeteringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solar-power': {
+      id: '/solar-power'
+      path: '/solar-power'
+      fullPath: '/solar-power'
+      preLoaderRoute: typeof SolarPowerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/technology': {
@@ -929,6 +969,8 @@ const rootRouteChildren: RootRouteChildren = {
   PowerAsAServiceRoute: PowerAsAServiceRoute,
   ProjectsRoute: ProjectsRoute,
   RegisterRoute: RegisterRoute,
+  SmartMeteringRoute: SmartMeteringRoute,
+  SolarPowerRoute: SolarPowerRoute,
   TechnologyRoute: TechnologyRoute,
   TrainingRoute: TrainingRoute,
   CompanyAboutRoute: CompanyAboutRoute,
