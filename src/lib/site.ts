@@ -413,13 +413,13 @@ export const SERVICES: Service[] = [
     status: "Building",
     summary: "Developing electric and hybrid mobility for fleets, communities and institutions.",
     intro:
-      "We are building an integrated EV and hybrid mobility offering suited to African duty cycles and grid realities. For multi-location organisations, the proposed model coordinates vehicle sourcing, charging infrastructure, fleet planning, installation and after-sales support through one relationship.",
+      "We are building an integrated EV and hybrid mobility offering suited to African duty cycles and grid realities. For multi-location organisations, the proposed model keeps policy, budgeting and procurement central while each site gets charging and fleet support planned around its own readiness — consistent standards, usage visibility, one point of contact and consolidated reporting.",
     offerings: [
       "Electric and hybrid cars, buses and tricycles",
-      "Commercial vehicle electrification",
-      "Fleet electrification roadmaps",
-      "Total-cost-of-ownership modelling",
+      "Commercial vehicle and fleet electrification roadmaps",
+      "Total-cost-of-ownership and route modelling",
       "Charging and depot readiness assessment",
+      "Financing and leasing routes explored with partners",
       "Installation, driver training and after-sales support in development",
     ],
     formTitle: "Request an EV or hybrid mobility consultation",
