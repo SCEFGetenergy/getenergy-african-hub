@@ -341,16 +341,16 @@ export const SERVICES: Service[] = [
     title: "CNG Services",
     icon: "Flame",
     status: "Building",
-    summary: "Developing CNG sourcing, logistics, refuelling and station capability.",
+    summary: "Conversion, refuelling, logistics, equipment supply and CNG power — in development.",
     intro:
-      "Compressed natural gas is the most available cleaner fuel step for Nigerian fleets and industry today. We are building CNG sourcing, logistics, refuelling access and station development capability with partners and OEMs.",
+      "Compressed natural gas is the most available cleaner fuel step for Nigerian fleets and industry today. We are building CNG conversion, sourcing, refuelling, logistics, equipment supply and gas-to-power capability with partners and OEMs. Lower fuel cost, cleaner emissions and reliable domestic supply are the reasons customers ask us about it.",
     offerings: [
       "CNG sourcing and offtake coordination",
-      "Virtual pipeline and logistics planning",
-      "Refuelling access for fleets",
-      "Proposed CNG station development support",
-      "Industrial gas substitution assessments",
-      "Fuel-cost comparison against diesel",
+      "Refuelling infrastructure planning, including mother-and-daughter stations",
+      "CNG logistics and distribution for fleets and industry",
+      "Conversion kits, cylinders and workshop equipment supply",
+      "CNG power through gas generators and microgrids",
+      "Fuel-cost comparison against diesel and petrol",
     ],
     formTitle: "Request CNG services",
     fields: [
