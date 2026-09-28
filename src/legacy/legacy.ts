@@ -204,3 +204,5 @@ export function initLegacy(api){
   });
   return {show:show};
 }
+
+if(typeof document!=="undefined")document.addEventListener("click",function(e){var b=e.target&&e.target.closest&&e.target.closest("[data-scroll]");if(!b)return;var r=document.getElementById("sol-rail");if(r)r.scrollBy({left:+b.dataset.scroll*r.clientWidth*0.8,behavior:"smooth"})});
