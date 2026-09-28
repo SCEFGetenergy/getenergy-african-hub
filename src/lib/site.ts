@@ -373,12 +373,12 @@ export const SERVICES: Service[] = [
     title: "CNG Conversion Centres",
     icon: "Wrench",
     status: "Building",
-    summary: "Developing bi-fuel CNG conversion for cars, buses and commercial fleets.",
+    summary: "Developing bi-fuel CNG conversion for cars, buses, tricycles and commercial fleets.",
     intro:
-      "Our conversion programme is being built to assess existing vehicles for CNG suitability, approved kits, qualified installation and post-conversion support. Proposed centres are not yet open; enquiries are not confirmed bookings.",
+      "Our conversion programme is being built to assess existing vehicles for CNG suitability, approved kits, qualified installation and post-conversion support. Proposed service areas are Lagos (Onipanu), Ibadan (Bodija) and Ilorin (Stadium Road). Centres are not yet open; enquiries are registrations of interest, not confirmed bookings.",
     offerings: [
-      "Bi-fuel CNG conversion for petrol vehicles",
-      "Fleet conversion scheduling and phasing",
+      "Bi-fuel CNG conversion for petrol cars, buses and tricycles",
+      "Truck and corporate fleet conversion scheduling and phasing",
       "Approved kits and qualified technicians in the proposed delivery model",
       "Post-conversion inspection and support",
       "Payback and running-cost analysis",
