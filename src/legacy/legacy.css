@@ -514,3 +514,7 @@ footer .corp ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,
 .narrative-grid>div{border:1px solid var(--line);border-radius:8px;padding:16px}
 .narrative-grid.sector-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 .sector-grid b{display:block;color:var(--blue)}
+.service-detail-band{border-top:3px solid var(--green);border-bottom:1px solid var(--line);padding:24px 0;margin-top:42px}
+.service-detail-band h2{font-size:clamp(1.8rem,3vw,2.4rem)}
+.service-detail-band .lede{margin-top:10px;max-width:76ch}
+.service-detail-band .muted{margin-top:12px;font-size:.92rem}

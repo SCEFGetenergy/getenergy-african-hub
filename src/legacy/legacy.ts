@@ -152,9 +152,9 @@ export function initLegacy(api){
   var KINDS={
     electricity:{title:"Review your token purchase",to:"support",subject:"Electricity token request",pay:true,note:"Online token payment is launching soon. Send this request to our team and we will contact you to complete your purchase."},
     bills:{title:"Review your bill payment",to:"support",subject:"Bill payment request",pay:true,note:"Online bill payment is launching soon. Send this request to our team and we will contact you to complete it."},
-    fuel:{title:"Your fuel quote request is ready",to:"sales",subject:"Fuel quote request",note:"Send it to our sales team. We reply with a quote at the current depot price."},
-    cngbook:{title:"Your conversion booking is ready",to:"sales",subject:"CNG conversion booking",note:"Send it to our team. We will confirm your inspection date as soon as your centre opens, and send a quote after inspection."},
-    ev:{title:"Your EV proposal request is ready",to:"sales",subject:"EV proposal request",note:"Send it to our team and we will prepare a tailored proposal."},
+    fuel:{title:"Your fuel quote request is ready",to:"sales",subject:"Fuel quote request",note:"Your request has been recorded. Our team will review your volume and location before quoting; you can also send a copy by email."},
+    cngbook:{title:"Your CNG assessment request is ready",to:"sales",subject:"CNG assessment enquiry",note:"Your interest has been recorded, not booked. The proposed centres are not open yet. We will contact you about availability and next steps; you can also send a copy by email."},
+    ev:{title:"Your EV proposal request is ready",to:"sales",subject:"EV proposal request",note:"Your request has been recorded. Our EV offering is in development; we will assess your requirements and contact you about feasible next steps. You can also send a copy by email."},
     paas:{title:"Your Power as a Service request is ready",to:"sales",subject:"Power as a Service request",note:"Send it to our team and we will prepare a proposal for your site."},
     training:{title:"Your training registration is ready",to:"training",subject:"Training interest",note:"Send it to our team and we will contact you about the next programme."},
     community:{title:"Your community registration is ready",to:"sales",subject:"Community electricity vending",note:"Send it to our team and we will contact your representative."},
