@@ -673,7 +673,7 @@ header.site .bar-actions .btn.primary{background:var(--btn-green,#157A38);border
 @media(max-width:1000px){.mk-ops-grid>.mk-xp{grid-column:1/-1}}
 
 /* Page photo heroes (inner pages) */
-.phero{background:linear-gradient(180deg,var(--bg-soft,#F3F6FA),var(--bg));border-bottom:1px solid var(--line)}
+.phero{background:linear-gradient(180deg,var(--panel),var(--bg));border-bottom:1px solid var(--line)}
 .phero-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:stretch;min-height:420px}
 .phero-txt{padding:48px 32px 40px 24px;display:flex;flex-direction:column;justify-content:center;gap:10px}
 .phero h1{font-size:clamp(2rem,4.2vw,3.2rem);line-height:1.05;text-transform:none;color:var(--ink);margin:0}
