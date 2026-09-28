@@ -4,10 +4,10 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/energy-ecommerce")({
   head: () => ({
     meta: [
-      { title: "Energy E-Commerce Africa (EEA) | GetEnergy" },
-      { name: "description", content: "Africa's energy marketplace, all in one place. Buy, sell, connect, learn, finance and grow. Products, services, professionals, projects and opportunities, bui" },
-      { property: "og:title", content: "Energy E-Commerce Africa (EEA) | GetEnergy" },
-      { property: "og:description", content: "Africa's energy marketplace, all in one place. Buy, sell, connect, learn, finance and grow. Products, services, professionals, projects and opportunities, bui" },
+      { title: "Energy E-Commerce Africa (EEA54) | GetEnergy" },
+      { name: "description", content: "Africa's energy marketplace across the 54 African countries. Buy, sell, connect, learn, finance and grow — products, services, professionals, projects and opportunities." },
+      { property: "og:title", content: "Energy E-Commerce Africa (EEA54) | GetEnergy" },
+      { property: "og:description", content: "Africa's energy marketplace across the 54 African countries. Buy, sell, connect, learn, finance and grow — products, services, professionals, projects and opportunities." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

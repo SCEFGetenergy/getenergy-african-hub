@@ -10,7 +10,7 @@ export const Route = createFileRoute("/company/faq")({
       {
         name: "description",
         content:
-          "Answers about GetEnergy's operating history, service status, electricity token requests, payment availability, EEA marketplace and what happens after you submit a request.",
+          "Answers about GetEnergy's operating history, service status, electricity token requests, payment availability, the EEA54 marketplace and what happens after you submit a request.",
       },
       { property: "og:title", content: "Frequently Asked Questions | GetEnergy" },
       { property: "og:description", content: "What we do today, what we are building, and how requests work." },
