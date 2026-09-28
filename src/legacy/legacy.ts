@@ -164,7 +164,7 @@ export function initLegacy(api){
     paas:{title:"Your Power as a Service request is ready",to:"sales",subject:"Power as a Service request",note:"Send it to our team and we will prepare a proposal for your site."},
     training:{title:"Your training registration is ready",to:"training",subject:"Training interest",note:"Send it to our team and we will contact you about the next programme."},
     community:{title:"Your community registration is ready",to:"sales",subject:"Community electricity vending",note:"Send it to our team and we will contact your representative."},
-    eea:{title:"Your pilot registration is ready",to:"sales",subject:"EEA pilot registration",note:"Send it to complete your registration for the Lagos pilot."},
+    eea:{title:"Your pilot registration is ready",to:"sales",subject:"EEA54 pilot registration",note:"Send it to complete your registration for the Lagos pilot."},
     contact:{title:"Your message is ready to send",to:"support",subject:"Website enquiry",note:"Send it by email and we will reply within one business day."},
     careers:{title:"Your application is ready to send",to:"careers",subject:"Job application",note:"Send it by email to complete your application."},
     register:{title:"Check your email to finish",nosend:true,note:"We sent a confirmation link to your email. Click it to activate your account, then log in to track your requests."},
@@ -193,7 +193,7 @@ export function initLegacy(api){
       var bad=[].slice.call(form.querySelectorAll("[required]")).filter(function(el){return !el.closest("[hidden]")}).filter(function(el){return !check(el)});
       if(bad.length){bad[0].focus();return}
       var kind=form.dataset.kind,lines=collect(form);
-      if(kind==="eea")lines.unshift("EEA pilot registration");
+      if(kind==="eea")lines.unshift("EEA54 pilot registration");
       var btn=form.querySelector("[type=submit]");if(btn){btn.disabled=true}
       api.submit(form,kind,lines).then(function(res){
         if(btn)btn.disabled=false;

@@ -5,9 +5,9 @@ export const Route = createFileRoute("/technology")({
   head: () => ({
     meta: [
       { title: "Technology | GetEnergy" },
-      { name: "description", content: "The systems connecting customers, energy assets, suppliers and payments across GetEnergy and Energy E-Commerce Africa." },
+      { name: "description", content: "The systems connecting customers, energy assets, suppliers and payments across GetEnergy and Energy E-Commerce Africa (EEA54)." },
       { property: "og:title", content: "Technology | GetEnergy" },
-      { property: "og:description", content: "The systems connecting customers, energy assets, suppliers and payments across GetEnergy and Energy E-Commerce Africa." },
+      { property: "og:description", content: "The systems connecting customers, energy assets, suppliers and payments across GetEnergy and Energy E-Commerce Africa (EEA54)." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

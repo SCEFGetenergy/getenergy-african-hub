@@ -49,7 +49,7 @@ const MATRIX = [
       "CNG sourcing, logistics and conversion centre capability",
       "EV and hybrid mobility offering plus charging and battery solutions",
       "Smart metering and vending at wider scale",
-      "Energy E-Commerce Africa (EEA) marketplace — pilot registration",
+      "Energy E-Commerce Africa (EEA54) marketplace — pilot registration",
       "Training and certification programmes for green skills",
     ],
   },

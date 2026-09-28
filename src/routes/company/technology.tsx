@@ -37,7 +37,7 @@ const LAYERS = [
     body: "One account, request and tracking layer: lead capture, request references, status, metering and vending data, and reporting.",
   },
   {
-    name: "Energy E-Commerce Africa (EEA)",
+    name: "Energy E-Commerce Africa (EEA54)",
     body: "The marketplace layer for listings, sourcing and digital commerce — currently in pilot registration.",
   },
   {
@@ -60,7 +60,7 @@ function Technology() {
 
         <div className="mt-10 overflow-x-auto">
           <pre className="min-w-[640px] rounded-xl border border-border bg-surface p-6 font-mono text-xs leading-relaxed text-foreground">
-{`   Customers                GetEnergy               Shared Technology              EEA                 Suppliers / OEMs
+{`   Customers                GetEnergy               Shared Technology              EEA54               Suppliers / OEMs
  (homes, estates,   <-->  (service delivery,  <-->  (accounts, requests,  <-->  (marketplace,  <-->  (fuel, equipment,
   business, fleets)        assessment, ops)          status, metering)          listings, pilot)      professionals)
         |                        |                         |                         |                      |
@@ -91,7 +91,7 @@ function Technology() {
         <p className="mt-6 text-sm text-muted-foreground">
           The marketplace pilot is registering participants at{" "}
           <a href={BRAND.eeaUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-green underline">
-            eea.africa
+            eea54.africa
           </a>
           .
         </p>
