@@ -6,3 +6,4 @@
 - [x] Refactor homepage into six focused sections and add historical projects page
 - [x] Update desktop/mobile navigation and restore Energy Desk signup outside homepage
 - [x] Verify homepage links, dropdown, and browser errors at desktop and mobile sizes
+- [x] Homepage v3: photo hero, four pillars, experience with status labels, transition journey, EEA and GFA Wzip teasers

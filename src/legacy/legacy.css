@@ -634,3 +634,5 @@ footer .corp ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,
 .home-final>.wrap>p{color:#C6D6EE;margin-top:10px}
 @media (max-width:1000px){.pillars-grid{grid-template-columns:1fr 1fr}.pillars article:nth-child(3){border-left:0}.approach-grid{grid-template-columns:1fr}.xp-grid{grid-template-columns:1fr 1fr}.journey5{grid-template-columns:1fr 1fr}}
 @media (max-width:760px){.hx{display:block;min-height:0}.hx::before{display:none}.hx-img img{position:static;height:240px}.hx-body{padding:32px 0}.hx-img{display:block;order:2}.pillars-grid,.xp-grid,.journey5{grid-template-columns:1fr}.pillars article+article{border-left:0;border-top:1px solid var(--line)}}
+[data-page="home"] h1,[data-page="home"] h2,[data-page="home"] h3{text-transform:none}
+header.site .bar-actions .btn.primary{background:var(--btn-green,#157A38);border-color:var(--btn-green,#157A38);color:#fff}
