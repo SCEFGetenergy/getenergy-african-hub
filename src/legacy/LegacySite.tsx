@@ -130,6 +130,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
   // Re-apply the visible page after every commit: React may re-apply the static
   // page markup on re-render, which would otherwise reset it to the first page loaded.
   useEffect(() => {
+    console.log("MO effect", pathname, !!api.current);
     api.current?.show(pageName(pathname));
   });
 
