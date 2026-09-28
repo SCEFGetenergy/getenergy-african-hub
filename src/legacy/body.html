@@ -53,196 +53,35 @@
     </div>
   </section>
 
-  <nav class="quick wrap" aria-label="Quick links to services">
-    <a href="/get-electricity"><i>⚡</i><b>Buy electricity token</b><span>Prepaid power for homes and businesses</span></a>
-    <a href="/pay-bills"><i>🧾</i><b>Pay bills</b><span>Airtime, data, TV and more</span></a>
-    <a href="/get-fuel"><i>🚚</i><b>Request diesel supply</b><span>Bulk and scheduled delivery</span></a>
-    <a href="#cng-beyond"><i>⛽</i><b>CNG services</b><span>Refuelling, supply and logistics</span></a>
-    <a href="/cng"><i>🔧</i><b>CNG conversion centre</b><span>Convert your vehicle in Lagos, Ibadan or Ilorin</span></a>
-    <a href="/ev"><i>🔌</i><b>EV and mobility</b><span>EV cars, buses, tricycles and charging</span></a>
-    <a href="/green-energy"><i>🌿</i><b>Green energy transition</b><span>Our practical pathway to cleaner energy</span></a>
-    <a href="/power-as-a-service"><i>🔋</i><b>Power as a Service</b><span>Reliable, flexible power solutions</span></a>
-    <a href="/energy-ecommerce"><i>🛒</i><b>Energy E-Commerce Africa</b><span>Marketplace, suppliers and tenders</span></a>
-    <a href="/training"><i>🎓</i><b>Training and certification</b><span>Green economy skills</span></a>
-    <a href="#energy-desk"><i>📰</i><b>Energy Desk</b><span>Today's news and prices</span></a>
-  </nav>
-
-  <section class="service-directory" aria-labelledby="service-directory-heading">
-    <div class="wrap">
-      <div class="service-directory-head">
-        <div><p class="eyebrow">Explore GetEnergy</p><h2 id="service-directory-heading">Our 11 services</h2></div>
-        <a href="/company/solutions">View all detailed solutions →</a>
-      </div>
-      <div class="service-directory-links">
-        <a href="/company/solutions/electricity">Get Electricity</a>
-        <a href="/company/solutions/diesel">Diesel Supply</a>
-        <a href="/company/solutions/cng">CNG</a>
-        <a href="/company/solutions/cng-conversion">CNG Conversion Centres</a>
-        <a href="/company/solutions/ev-mobility">EV &amp; Hybrid Mobility</a>
-        <a href="/company/solutions/ev-charging">EV Charging &amp; Battery Solutions</a>
-        <a href="/company/solutions/power-as-a-service">Power as a Service</a>
-        <a href="/company/solutions/eea">Energy E-Commerce Africa</a>
-        <a href="/company/solutions/training">Training &amp; Certification</a>
-        <a href="/company/solutions/smart-metering">Smart Metering &amp; Vending</a>
-        <a href="/company/solutions/renewables">Renewables, BESS &amp; Generators</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="board-wrap" id="energy-desk" aria-labelledby="desk-h">
-    <div class="wrap">
-      <div class="board">
-        <div class="board-top">
-          <div>
-            <h2 id="desk-h">GetEnergy Energy Desk</h2>
-            <p>Daily energy news, white product prices, EEA marketplace prices and energy markets, summarised by our AI desk.</p>
-          </div>
-          <div class="board-meta">
-            <span class="pill" id="desk-mode">Sample data</span>
-            <span id="desk-updated"></span>
-          </div>
-        </div>
-        <div class="ticker-b" aria-label="Market ticker"><div id="desk-ticker"></div></div>
-        <div class="board-body">
-          <div class="board-main">
-            <div class="btabs" role="tablist" aria-label="Energy desk sections">
-              <button role="tab" id="bt-news" aria-controls="bp-news" aria-selected="true">Energy news</button>
-              <button role="tab" id="bt-white" aria-controls="bp-white" aria-selected="false" tabindex="-1">White products</button>
-              <button role="tab" id="bt-eea" aria-controls="bp-eea" aria-selected="false" tabindex="-1">EEA marketplace</button>
-              <button role="tab" id="bt-mkt" aria-controls="bp-mkt" aria-selected="false" tabindex="-1">Markets and stocks</button>
-            </div>
-            <div class="bpanel on" role="tabpanel" id="bp-news" aria-labelledby="bt-news">
-              <div class="seg small" id="news-filter"><label><input type="radio" name="nf" value="all" checked>All</label><label><input type="radio" name="nf" value="Africa">Africa</label><label><input type="radio" name="nf" value="World">World</label></div>
-              <ul class="news" id="desk-news"></ul>
-            </div>
-            <div class="bpanel" role="tabpanel" id="bp-white" aria-labelledby="bt-white" hidden>
-              <div class="tscroll"><table class="bt" id="desk-white"><thead><tr><th>Product</th><th>Depot (₦/litre)</th><th>Retail, Lagos (₦/litre)</th><th>Retail, Abuja (₦/litre)</th><th>Change</th></tr></thead><tbody></tbody></table></div>
-              <p class="bnote">Depot prices vary by depot and volume. For a firm diesel quote, <a href="/get-fuel">request a quote</a>.</p>
-            </div>
-            <div class="bpanel" role="tabpanel" id="bp-eea" aria-labelledby="bt-eea" hidden>
-              <div class="tscroll"><table class="bt" id="desk-eea"><thead><tr><th>Product</th><th>Average price (₦)</th><th>Suppliers</th><th>Change</th></tr></thead><tbody></tbody></table></div>
-              <p class="bnote">Average prices from verified EEA suppliers. <a href="/energy-ecommerce">Join the EEA pilot</a> to list or buy.</p>
-            </div>
-            <div class="bpanel" role="tabpanel" id="bp-mkt" aria-labelledby="bt-mkt" hidden>
-              <h3 class="bsub">Commodities and currency</h3>
-              <div class="tscroll"><table class="bt" id="desk-comm"><thead><tr><th>Market</th><th>Price</th><th>Change</th></tr></thead><tbody></tbody></table></div>
-              <h3 class="bsub">Energy stocks</h3>
-              <div class="tscroll"><table class="bt" id="desk-stocks"><thead><tr><th>Company</th><th>Exchange</th><th>Price</th><th>Change</th></tr></thead><tbody></tbody></table></div>
-              <p class="bnote">For information only. This is not investment advice.</p>
-            </div>
-          </div>
-          <aside class="board-side">
-            <div class="brief">
-              <h3>Today in 60 seconds</h3>
-              <ul id="desk-brief"></ul>
-              <p class="aimark">Summary written by the GetEnergy AI desk from the sources listed. Check the original source before acting on it.</p>
-            </div>
-            <form class="wa gf" data-kind="whatsapp" novalidate>
-              <h3>Get the daily brief on WhatsApp</h3>
-              <p class="hint">News, prices and markets every morning. Unsubscribe any time by replying STOP.</p>
-              <div class="fields one">
-                <div class="f"><label for="wa-name">Name</label><input id="wa-name" name="name" autocomplete="name" required><p class="err">Enter your name.</p></div>
-                <div class="f"><label for="wa-num">WhatsApp number</label><input id="wa-num" name="whatsapp" type="tel" autocomplete="tel" placeholder="+234..." required><p class="err">Enter a WhatsApp number with at least 10 digits.</p></div>
-                <fieldset class="f"><legend>Send me</legend><div class="cats">
-                  <label><input type="checkbox" name="topic" value="Energy news" checked>News</label>
-                  <label><input type="checkbox" name="topic" value="White product prices" checked>Fuel prices</label>
-                  <label><input type="checkbox" name="topic" value="EEA marketplace prices">EEA prices</label>
-                  <label><input type="checkbox" name="topic" value="Markets and stocks">Markets</label>
-                </div></fieldset>
-                <div class="f"><label style="display:flex;gap:10px;align-items:flex-start;font-weight:500"><input type="checkbox" name="consent" required style="width:auto;min-height:0;margin-top:5px">I agree to receive daily WhatsApp messages from GetEnergy and can opt out at any time.</label><p class="err">Tick to agree before subscribing.</p></div>
-              </div>
-              <div class="form-foot"><button class="btn green" type="submit">Subscribe on WhatsApp</button></div>
-            </form>
-          </aside>
-        </div>
-        <p class="board-foot" id="desk-foot"></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="solutions">
-    <div class="wrap">
-      <div class="head"><div><p class="eyebrow">Our solutions</p><h2>Complete energy solutions<span class="g"> for a cleaner, stronger Africa.</span></h2></div><p class="lede">Built on real operating experience in fuel supply and electricity access, GetEnergy is engineering a practical pathway from reliable energy today toward clean fuels, mobility, smart metering, renewables and skills development for tomorrow.</p></div>
-      <div class="sol">
-        <a href="/get-electricity"><img src="/__l5e/assets-v1/e312daef-9ee7-43f7-b720-fbd95e1aa3a4/ge-27485d5c2cf3.webp" alt="Glowing bulb beside a modern home" loading="lazy"><h3>Get Electricity</h3><ul><li>Electricity token vending</li><li>Smart meters and billing</li><li>Corporate and multi-site vending</li><li>API integration and support</li></ul></a>
-        <a href="/get-fuel"><img src="/__l5e/assets-v1/5c400c5f-28a7-402f-aff6-f3b54c09da73/ge-783825eb65a8.webp" alt="GetEnergy diesel tanker" loading="lazy"><h3>Diesel supply</h3><ul><li>Bulk and scheduled delivery</li><li>Fleet and project supply</li><li>Commercial and institutional accounts</li><li>Reliable logistics</li></ul></a>
-        <a href="#cng-beyond"><img src="/__l5e/assets-v1/d48b31a8-c642-4840-8d8f-7c61c9fe2592/ge-474a3894e966.webp" alt="GetEnergy CNG refuelling station" loading="lazy"><h3>CNG services</h3><ul><li>CNG refuelling stations</li><li>CNG gas supply and logistics</li><li>Fleet CNG supply</li><li>Kits, cylinders and equipment</li></ul></a>
-        <a href="/cng"><img src="/__l5e/assets-v1/07a40680-1153-45e3-8704-786915b50e6b/ge-a171251979e0.webp" alt="Technician converting a car to CNG" loading="lazy"><h3>CNG conversion services and centres</h3><ul><li>Cars, buses, trucks, tricycles and generators</li><li>Centres in Lagos, Ibadan and Ilorin</li><li>Inspection, maintenance and aftercare</li><li>Fleet conversion</li></ul></a>
-        <a href="/ev"><img src="/__l5e/assets-v1/a7294849-8e62-4d2b-9fe5-336fb141ed23/ge-14e48b2e7429.webp" alt="EV charger and electric car" loading="lazy"><h3>EV and mobility</h3><ul><li>EV cars, buses and tricycles</li><li>Charging infrastructure</li><li>Fleet electrification</li><li>Battery swap and support</li></ul></a>
-      </div>
-      <div class="sol six">
-        <a href="/power-as-a-service"><img src="/__l5e/assets-v1/07377a69-8941-4170-980a-af315325d3fc/ge-8cf480b7c8e6.webp" alt="Power as a Service containers" loading="lazy"><h3>Power as a Service</h3><ul><li>Diesel, gas, CNG and hybrid power</li><li>Solar-hybrid and battery storage</li><li>Operation and maintenance</li><li>Pay as you use</li></ul></a>
-        <a href="/energy-ecommerce"><img src="/__l5e/assets-v1/5a145b1c-8e74-4900-a52b-98f0dda8476a/ge-1e332b7061bc.webp" alt="EEA marketplace on a laptop" loading="lazy"><h3>Energy E-Commerce Africa</h3><ul><li>Energy marketplace and e-stores</li><li>Suppliers, tenders and RFQs</li><li>Professional directory and jobs</li><li>Trade fairs and training</li></ul></a>
-        <a href="/training"><img src="/__l5e/assets-v1/d489f38e-e366-4aa1-a58c-5e148171c807/ge-7007819c3f1e.webp" alt="Trainees reviewing a tablet on site" loading="lazy"><h3>Training and certification</h3><ul><li>Green energy skills</li><li>CNG, EV, solar and power systems</li><li>Short courses and professional training</li><li>Health, safety and environment</li></ul></a>
-        <a href="/get-electricity"><img src="/__l5e/assets-v1/db0e62bf-ede1-4a15-bd69-7c36fc8464fb/ge-bc8ea5d36b17.webp" alt="Smart meters and vending terminals" loading="lazy"><h3>Smart metering and electricity vending</h3><ul><li>Prepaid and postpaid metering</li><li>Corporate and institutional solutions</li><li>Usage management and reporting</li><li>Integration and support</li></ul></a>
-        <a href="/power-as-a-service"><img src="/__l5e/assets-v1/2e644ebc-419b-429b-aefb-c40302f1d2da/ge-dc75673ba5a9.webp" alt="Industrial generators" loading="lazy"><h3>Generators and distributed power</h3><ul><li>Diesel, gas, CNG and hybrid generators</li><li>Containerised and modular systems</li><li>Installation and maintenance</li><li>Spare parts and service</li></ul></a>
-        <a href="/power-as-a-service"><img src="/__l5e/assets-v1/68f76474-1b0c-427d-bab6-07b8e33c2d8c/ge-e6f8f9f301e8.webp" alt="Solar panels and wind turbines" loading="lazy"><h3>Renewables and BESS</h3><ul><li>Solar and battery storage</li><li>Microgrids and energy management</li><li>Off-grid and hybrid systems</li><li>Clean energy for communities</li></ul></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="block alt">
-    <div class="wrap">
-      <p class="eyebrow">Who we work with</p><h2 style="margin-bottom:26px">Sectors we serve <a href="/industries" class="btn ghost" style="font-size:.8rem;vertical-align:middle;margin-left:10px">See all industries</a></h2>
-      <ul class="sectors">
-        <li><img src="/__l5e/assets-v1/29ff521b-9e02-4cd1-8738-cdf6cf0d1eca/ge-dd417f4eab22.webp" alt="" loading="lazy">Homes and estates</li>
-        <li><img src="/__l5e/assets-v1/fd77cf61-6073-46fb-8090-ff36abd0aaa3/ge-c522422b4530.webp" alt="" loading="lazy">SMEs</li>
-        <li><img src="/__l5e/assets-v1/f734647b-c9eb-484c-a917-d3647e9d6d6c/ge-a35aad2e10f2.webp" alt="" loading="lazy">Commercial and industrial</li>
-        <li><img src="/__l5e/assets-v1/d41651b6-c554-4288-91ea-42849fabcdf8/ge-e71db9e2ed87.webp" alt="" loading="lazy">Construction sites</li>
-        <li><img src="/__l5e/assets-v1/56695caf-6028-40d0-bfd4-b3760acba141/ge-c656c33186fa.webp" alt="" loading="lazy">Healthcare</li>
-        <li><img src="/__l5e/assets-v1/e66db8f3-38ba-470d-9a7e-8abba7c73a6b/ge-edbf6c539083.webp" alt="" loading="lazy">Hospitality and tourism</li>
-        <li><img src="/__l5e/assets-v1/58bc822f-44b3-4636-a330-d85af98ff53c/ge-195c1c6505ef.webp" alt="" loading="lazy">Education</li>
-        <li><img src="/__l5e/assets-v1/e398b579-9bde-4a00-9bf5-3246d9b65abb/ge-165e8b6def9c.webp" alt="" loading="lazy">Government and institutions</li>
-        <li><img src="/__l5e/assets-v1/4ce515ed-b733-4aa4-aab7-69062e6d1604/ge-20952013d2a8.webp" alt="" loading="lazy">Logistics and fleets</li>
-        <li><img src="/__l5e/assets-v1/894c14c0-df40-48c0-b162-724f62715503/ge-1ba7d95ab6fc.webp" alt="" loading="lazy">Retail and malls</li>
-      </ul>
-    </div>
-  </section>
-
   <section class="block">
     <div class="wrap">
-      <p class="eyebrow">Our process</p><h2 style="margin-bottom:26px">How we work</h2>
-      <ol class="steps five">
-        <li><b>Tell us your need</b><span>Share your energy need or project.</span></li>
-        <li><b>Assessment and site review</b><span>We assess and design the right solution.</span></li>
-        <li><b>Proposal and commercial plan</b><span>Technical and commercial options you can compare.</span></li>
-        <li><b>Supply, deployment and installation</b><span>We deliver and install with professional support.</span></li>
-        <li><b>Ongoing support and account management</b><span>We operate, maintain and support your long-term needs.</span></li>
-      </ol>
+      <p class="lede" style="max-width:780px">Since 2023, GetEnergy has supplied commercial diesel and expanded electricity access for homes and businesses across Nigeria — real operations, real customers, real lessons.</p>
     </div>
   </section>
 
-  <section class="band stats">
-    <div class="wrap statgrid">
-      <div><b>10</b><span>energy solutions under one partner</span></div>
-      <div><b>12</b><span>electricity companies supported for token vending</span></div>
-      <div><b>3</b><span>CNG conversion centres opening in Lagos, Ibadan and Ilorin</span></div>
-      <div><b>54</b><span>African countries EEA is built to serve</span></div>
-      <p class="statline">Powering a cleaner, stronger Africa.</p>
-    </div>
-  </section>
-
-  <section class="block">
+  <section class="block alt" id="solutions">
     <div class="wrap">
-      <p class="eyebrow">One group, connected platforms</p><h2 style="margin-bottom:26px">Our connected platforms</h2>
-      <div class="plat">
-        <div><h3>GetEnergy</h3><p>Corporate platform for all our energy services.</p><span class="dom">getenergy.ng</span><a class="btn ghost" href="/our-services">All services</a></div>
-        <div><h3>Get Electricity</h3><p>Token vending and smart metering for homes, businesses and institutions.</p><span class="dom">Launching soon</span><a class="btn ghost" href="/get-electricity">Get Electricity</a></div>
-        <div><h3>Energy E-Commerce Africa</h3><p>Marketplace, B2B trade and opportunities across Africa's energy industry.</p><span class="dom">eea.africa</span><a class="btn ghost" href="/energy-ecommerce">Explore EEA</a></div>
-        <div><h3>GetEnergy Training</h3><p>Green economy skills and credentials for people and organisations.</p><span class="dom">Launching soon</span><a class="btn ghost" href="/training">Training</a></div>
-        <div><h3>GetEnergy Power as a Service</h3><p>Flexible, managed power solutions with no heavy capital cost.</p><span class="dom">Launching soon</span><a class="btn ghost" href="/power-as-a-service">Power as a Service</a></div>
+      <p class="eyebrow">Where we're headed</p><h2 style="margin-bottom:26px">Three things worth a closer look</h2>
+      <div class="svc three">
+        <div><h3>The shift in fuel</h3><p>Cleaner, cheaper kilometres are already possible — see how CNG changes the maths.</p><p style="margin-top:14px"><a class="btn ghost" href="/cng">Explore</a></p></div>
+        <div><h3>Electricity you can trust</h3><p>Tokens, meters and vending that simply work, for single homes and whole estates.</p><p style="margin-top:14px"><a class="btn ghost" href="/get-electricity">Explore</a></p></div>
+        <div><h3>What powers tomorrow</h3><p>Our staged path from reliable energy today to renewable, low-carbon power.</p><p style="margin-top:14px"><a class="btn ghost" href="/green-energy">Explore</a></p></div>
       </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2 style="max-width:820px">What's next: the energy transition, engineered — not promised.</h2>
+      <p style="margin:16px 0 26px"><a class="btn primary" href="/about">Read our story</a></p>
     </div>
   </section>
 
   <section class="band cta">
     <div class="wrap ctagrid">
-      <h2>What energy solution do you need today?</h2>
+      <h2>Have an energy need today?</h2>
       <div class="ctabtns">
-        <a class="btn green" href="/get-electricity">Buy electricity</a>
-        <a class="btn outline-w" href="/get-fuel">Request diesel</a>
-        <a class="btn outline-w" href="#centres">Find a CNG conversion centre</a>
-        <a class="btn outline-w" href="/energy-ecommerce">Explore EEA</a>
+        <a class="btn green" href="/contact">Talk to us</a>
       </div>
     </div>
   </section>
