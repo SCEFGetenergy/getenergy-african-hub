@@ -4,10 +4,10 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "GetEnergy | Energy for Today. Building What Powers Tomorrow." },
-      { name: "description", content: "Reliable energy supply, smarter utility services and cleaner-energy infrastructure for businesses and communities. Explore GetEnergy's four business areas." },
-      { property: "og:title", content: "GetEnergy | Energy for Today. Building What Powers Tomorrow." },
-      { property: "og:description", content: "Reliable energy supply, smarter utility services and cleaner-energy infrastructure for businesses and communities. Explore GetEnergy's four business areas." },
+      { title: "GET Energy Trading Services | Integrated Energy & Green Energy Solutions" },
+      { name: "description", content: "Integrated conventional and clean-energy solutions in Nigeria: diesel and AGO, CNG, EV charging, solar, storage, electricity services and energy advisory." },
+      { property: "og:title", content: "GET Energy Trading Services | Integrated Energy & Green Energy Solutions" },
+      { property: "og:description", content: "Integrated conventional and clean-energy solutions in Nigeria: diesel and AGO, CNG, EV charging, solar, storage, electricity services and energy advisory." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

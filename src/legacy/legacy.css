@@ -711,3 +711,10 @@ header.site .bar-actions .btn.primary{background:var(--btn-green,#157A38);border
 .vehicle>div{padding-top:22px}.vehicle dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:14px 0 18px;font-size:.95rem}.vehicle dt{color:var(--muted,#5a6b85)}.vehicle dd{margin:0}
 .vstatus{display:inline-block;background:#E6F4EA;color:#157A38;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;padding:4px 10px;border-radius:999px}
 @media (max-width:640px){.vehicle{grid-template-columns:1fr;padding:0 0 20px}.vehicle>div{padding:0 18px}.vehicle img{max-height:260px}}
+.mk-areas.mk-six{grid-template-columns:repeat(3,1fr)}
+.mk-areas .mk-card{background:var(--bg);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;color:inherit;text-decoration:none;margin:0;min-height:0;transition:transform .2s,box-shadow .2s}
+.mk-areas .mk-card:hover,.mk-areas .mk-card:focus-visible{transform:translateY(-3px);box-shadow:0 12px 28px -14px rgba(10,30,60,.35)}
+.mk-areas .mk-card>div{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1;align-items:flex-start}
+.mk-areas .mk-go{margin-top:auto;color:var(--green-ink);font-weight:700;min-height:44px;display:inline-flex;align-items:center}
+@media(max-width:1000px){.mk-areas.mk-six{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.mk-areas.mk-six{grid-template-columns:1fr}}
