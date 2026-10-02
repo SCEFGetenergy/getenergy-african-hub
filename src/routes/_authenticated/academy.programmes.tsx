@@ -48,6 +48,7 @@ function Apply() {
     setBusy(false);
     if (error || !data) return setErr("Your application could not be submitted. Please try again.");
     setDone({ ref: data, item: chosen });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     qc.invalidateQueries({ queryKey: ["academy-mine"] });
   };
 
