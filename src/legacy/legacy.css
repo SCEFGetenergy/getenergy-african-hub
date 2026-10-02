@@ -728,3 +728,5 @@ header.site .bar-actions .btn.primary{background:var(--btn-green,#157A38);border
 .sophia-shell h1{font-size:clamp(2.3rem,5vw,3rem)}
 .sophia-shell h2{font-size:1.25rem}
 .flyers{padding-top:28px;padding-bottom:12px}.flyer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;max-width:1000px}.flyer-grid figure{margin:0;border-radius:16px;overflow:hidden;box-shadow:0 8px 28px rgba(10,40,90,.12)}.flyer-grid img{display:block;width:100%;height:auto}
+.ivsplit{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}.ivsub{font-size:1.2rem;font-weight:700;color:var(--green);margin-top:10px}.ivfig{margin:0}.ivfig img{display:block;width:100%;height:auto;border-radius:18px;box-shadow:0 10px 32px rgba(10,40,90,.15)}.ivfig figcaption{font-size:.85rem;color:var(--muted);margin-top:8px}.ivh{margin:36px 0 6px;font-size:1.1rem}.ivport{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}.ivport>div{background:var(--bg);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:12px;padding:16px;font-weight:600}
+@media (max-width:900px){.ivsplit{grid-template-columns:1fr}}
