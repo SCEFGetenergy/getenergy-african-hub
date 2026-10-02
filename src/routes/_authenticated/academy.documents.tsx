@@ -41,6 +41,7 @@ function Docs() {
     toast.success(`${type} uploaded`);
     setFile(null);
     qc.invalidateQueries({ queryKey: ["academy-mine"] });
+    return;
   };
 
   const open = async (path: string) => {
@@ -52,6 +53,7 @@ function Docs() {
     if (error) return toast.error("Only unreviewed documents can be removed.");
     await supabase.storage.from("academy-documents").remove([path]);
     qc.invalidateQueries({ queryKey: ["academy-mine"] });
+    return;
   };
 
   return (

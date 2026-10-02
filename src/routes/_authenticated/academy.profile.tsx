@@ -40,13 +40,14 @@ function ProfileForm({ p, email }: { p: AcademyProfile; email: string }) {
       const v = String(f.get(k) ?? "").trim().slice(0, 200);
       row[k] = v === "" ? null : t === "number" ? Number(v) : v;
     }
-    if (!row.first_name || !row.last_name) return toast.error("First and last name are required.");
+    if (!row["first_name"] || !row["last_name"]) return toast.error("First and last name are required.");
     setBusy(true);
     const { error } = await supabase.from("academy_profiles").update(row as never).eq("user_id", p.user_id);
     setBusy(false);
     if (error) return toast.error("Could not save your profile.");
     toast.success("Profile saved");
     qc.invalidateQueries({ queryKey: ["academy-profile"] });
+    return;
   };
   return (
     <Panel>

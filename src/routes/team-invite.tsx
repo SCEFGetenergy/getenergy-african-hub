@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Section } from "@/components/site/ui-bits";
 
 export const Route = createFileRoute("/team-invite")({
-  validateSearch: (s: Record<string, unknown>) => ({ token: typeof s.token === "string" ? s.token : "" }),
+  validateSearch: (s: Record<string, unknown>) => ({ token: typeof s["token"] === "string" ? s["token"] : "" }),
   head: () => ({
     meta: [
       { title: "Accept team invitation | GET Energy" },

@@ -47,7 +47,7 @@ function Register() {
       const v = g(k).slice(0, 200);
       if (v) meta[k] = v;
     }
-    meta.full_name = `${meta.first_name ?? ""} ${meta.last_name ?? ""}`.trim();
+    meta["full_name"] = `${meta["first_name"] ?? ""} ${meta["last_name"] ?? ""}`.trim();
     setBusy(true);
     const { data, error } = await supabase.auth.signUp({ email, password: pw, options: { emailRedirectTo: `${window.location.origin}/academy/dashboard`, data: meta } });
     setBusy(false);

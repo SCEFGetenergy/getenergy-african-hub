@@ -27,7 +27,7 @@ function Support() {
     const p = prof.data.profile;
     const { data, error } = await supabase.rpc("submit_service_request", {
       p_request_type: "academy-support", p_service_name: `Academy support — ${topic}`,
-      p_contact_name: `${p.first_name} ${p.last_name}`.trim() || prof.data.email, p_contact_email: prof.data.email, p_contact_phone: p.phone ?? undefined,
+      p_contact_name: `${p.first_name} ${p.last_name}`.trim() || prof.data.email, p_contact_email: prof.data.email, p_contact_phone: p.phone ?? "",
       p_details: { student_id: p.student_id, topic, message: msg.trim().slice(0, 2000) },
     });
     setBusy(false);

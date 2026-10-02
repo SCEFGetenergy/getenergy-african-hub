@@ -60,10 +60,10 @@ export function useAcademyProfile() {
       const m = (user.user_metadata ?? {}) as Record<string, string | undefined>;
       const row: Record<string, unknown> = { user_id: user.id };
       for (const k of META_KEYS) row[k] = m[k] || null;
-      row.first_name = m.first_name || (m.full_name ?? "").split(" ")[0] || "";
-      row.last_name = m.last_name || (m.full_name ?? "").split(" ").slice(1).join(" ") || "";
-      row.years_experience = m.years_experience ? Number(m.years_experience) : null;
-      row.consent_at = m.consent_at || null;
+      row["first_name"] = m["first_name"] || (m["full_name"] ?? "").split(" ")[0] || "";
+      row["last_name"] = m["last_name"] || (m["full_name"] ?? "").split(" ").slice(1).join(" ") || "";
+      row["years_experience"] = m["years_experience"] ? Number(m["years_experience"]) : null;
+      row["consent_at"] = m["consent_at"] || null;
       const { data: created, error } = await supabase.from("academy_profiles").insert(row as never).select("*").single();
       if (error) throw error;
       return { profile: created as AcademyProfile, email: user.email ?? "" };

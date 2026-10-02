@@ -10,7 +10,7 @@ import { CERTIFICATIONS } from "@/lib/certifications";
 
 export const Route = createFileRoute("/_authenticated/academy/programmes")({
   head: () => portalHead("Apply for a programme", "Apply for any GET Energy Academy programme, pathway or professional certification."),
-  validateSearch: (s: Record<string, unknown>) => ({ item: typeof s.item === "string" ? s.item : undefined }),
+  validateSearch: (s: Record<string, unknown>) => ({ item: typeof s["item"] === "string" ? s["item"] : undefined }),
   component: Apply,
 });
 
@@ -42,7 +42,7 @@ function Apply() {
     const { data, error } = await supabase.rpc("submit_service_request", {
       p_request_type: chosen.type, p_service_name: chosen.title.slice(0, 160),
       p_contact_name: `${p.first_name} ${p.last_name}`.trim() || prof.data.email, p_contact_email: prof.data.email,
-      p_contact_phone: p.phone ?? undefined, p_company_name: p.organisation ?? undefined, p_location: [p.city, p.state, p.country].filter(Boolean).join(", ") || undefined,
+      p_contact_phone: p.phone ?? "", p_company_name: p.organisation ?? "", p_location: [p.city, p.state, p.country].filter(Boolean).join(", ") || "",
       p_details: { source: "academy-portal", student_id: p.student_id, item_id: chosen.id, kind: chosen.kind, proposed_fee_ngn: chosen.fee, delivery_mode: mode, motivation: motivation.slice(0, 1500) },
     });
     setBusy(false);

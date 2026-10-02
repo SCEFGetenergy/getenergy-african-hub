@@ -78,7 +78,7 @@ export function DocumentReview() {
             <span className="flex flex-wrap items-center gap-2"><Pill status={d.status} />
               <Button size="sm" variant="outline" className="min-h-11" onClick={() => open(d.file_path)}>Open</Button>
               <Button size="sm" className="min-h-11" onClick={() => review.mutate({ id: d.id, status: "approved", note: null })}>Approve</Button>
-              <Button size="sm" variant="ghost" className="min-h-11" onClick={() => { const n = window.prompt("Reason (shown to the student)"); if (n) review.mutate({ id: d.id, status: "rejected", note: n.slice(0, 300) }); }}>Request replacement</Button>
+              <Button size="sm" variant="ghost" className="min-h-11" onClick={() => { const n = window.prompt("Reason (shown to the student)"); if (n) review.mutate({ id: d.id, status: "rejected", note: n["slice"](0, 300) }); }}>Request replacement</Button>
             </span>
           </li>
         ))}
@@ -107,12 +107,12 @@ function summary(r: { entity_type: string; action: string; old_value: unknown; n
   const o = (r.old_value ?? {}) as Record<string, unknown>;
   const n = (r.new_value ?? {}) as Record<string, unknown>;
   switch (r.entity_type) {
-    case "certification_settings": return `${String(n.code ?? o.code)}: ₦${o.fee_ngn ?? "—"} → ₦${n.fee_ngn ?? "—"}, approved ${String(o.fee_approved ?? "—")} → ${String(n.fee_approved ?? "—")}`;
-    case "certification_employers": return `${String(n.certification_code ?? o.certification_code)}: ${String(n.employer_name ?? o.employer_name)}`;
-    case "service_requests": return `${String(n.reference)}: ${String(o.status)} → ${String(n.status)}`;
-    case "user_roles": return `${String(n.role ?? o.role)} for user ${String(n.user_id ?? o.user_id).slice(0, 8)}`;
-    case "academy_documents": return `${String(n.doc_type ?? o.doc_type)}: ${String(o.status)} → ${String(n.status ?? "deleted")}`;
-    case "admin_invitations": return `${String(n.email)} (${String(n.role)})`;
+    case "certification_settings": return `${String(n["code"] ?? o["code"])}: ₦${o["fee_ngn"] ?? "—"} → ₦${n["fee_ngn"] ?? "—"}, approved ${String(o["fee_approved"] ?? "—")} → ${String(n["fee_approved"] ?? "—")}`;
+    case "certification_employers": return `${String(n["certification_code"] ?? o["certification_code"])}: ${String(n["employer_name"] ?? o["employer_name"])}`;
+    case "service_requests": return `${String(n["reference"])}: ${String(o["status"])} → ${String(n["status"])}`;
+    case "user_roles": return `${String(n["role"] ?? o["role"])} for user ${String(n["user_id"] ?? o["user_id"]).slice(0, 8)}`;
+    case "academy_documents": return `${String(n["doc_type"] ?? o["doc_type"])}: ${String(o["status"])} → ${String(n["status"] ?? "deleted")}`;
+    case "admin_invitations": return `${String(n["email"])} (${String(n["role"])})`;
     default: return "";
   }
 }
