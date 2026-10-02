@@ -90,8 +90,8 @@ export function PortalShell({ title, intro, children }: { title: string; intro?:
   };
   return (
     <div className="bg-surface px-4 py-8 sm:px-6 md:py-12">
-      <div className="mx-auto grid w-full max-w-6xl gap-6 md:grid-cols-[14rem_1fr]">
-        <aside className="md:sticky md:top-24 md:self-start">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-6 md:grid-cols-[14rem_minmax(0,1fr)]">
+        <aside className="min-w-0 md:sticky md:top-24 md:self-start">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">GET Energy Academy</p>
           {data ? <p className="mt-1 text-sm font-semibold">{data.profile.first_name} {data.profile.last_name}<span className="block font-mono text-xs text-muted-foreground">{data.profile.student_id}</span></p> : null}
           <nav aria-label="Academy portal" className="mt-4 flex gap-1 overflow-x-auto pb-2 md:flex-col md:overflow-visible">
@@ -102,7 +102,7 @@ export function PortalShell({ title, intro, children }: { title: string; intro?:
           </nav>
           <Button variant="outline" className="mt-3 min-h-11 w-full" onClick={signOut}><LogOut className="mr-2 size-4" />Sign out</Button>
         </aside>
-        <main>
+        <main className="min-w-0">
           <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
           {intro ? <p className="mt-2 max-w-2xl text-sm text-muted-foreground">{intro}</p> : null}
           <div className="mt-6">{children}</div>
