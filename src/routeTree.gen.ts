@@ -15,7 +15,9 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as CngRouteImport } from './routes/cng'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as EeaRouteImport } from './routes/eea'
 import { Route as EnergyEcommerceRouteImport } from './routes/energy-ecommerce'
+import { Route as EnergyTransitionRouteImport } from './routes/energy-transition'
 import { Route as EvRouteImport } from './routes/ev'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as GetElectricityRouteImport } from './routes/get-electricity'
@@ -89,9 +91,19 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EeaRoute = EeaRouteImport.update({
+  id: '/eea',
+  path: '/eea',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EnergyEcommerceRoute = EnergyEcommerceRouteImport.update({
   id: '/energy-ecommerce',
   path: '/energy-ecommerce',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnergyTransitionRoute = EnergyTransitionRouteImport.update({
+  id: '/energy-transition',
+  path: '/energy-transition',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EvRoute = EvRouteImport.update({
@@ -325,7 +337,9 @@ export interface FileRoutesByFullPath {
   '/careers': typeof CareersRoute
   '/cng': typeof CngRoute
   '/contact': typeof ContactRoute
+  '/eea': typeof EeaRoute
   '/energy-ecommerce': typeof EnergyEcommerceRoute
+  '/energy-transition': typeof EnergyTransitionRoute
   '/ev': typeof EvRoute
   '/faq': typeof FaqRoute
   '/get-electricity': typeof GetElectricityRoute
@@ -376,7 +390,9 @@ export interface FileRoutesByTo {
   '/careers': typeof CareersRoute
   '/cng': typeof CngRoute
   '/contact': typeof ContactRoute
+  '/eea': typeof EeaRoute
   '/energy-ecommerce': typeof EnergyEcommerceRoute
+  '/energy-transition': typeof EnergyTransitionRoute
   '/ev': typeof EvRoute
   '/faq': typeof FaqRoute
   '/get-electricity': typeof GetElectricityRoute
@@ -429,7 +445,9 @@ export interface FileRoutesById {
   '/careers': typeof CareersRoute
   '/cng': typeof CngRoute
   '/contact': typeof ContactRoute
+  '/eea': typeof EeaRoute
   '/energy-ecommerce': typeof EnergyEcommerceRoute
+  '/energy-transition': typeof EnergyTransitionRoute
   '/ev': typeof EvRoute
   '/faq': typeof FaqRoute
   '/get-electricity': typeof GetElectricityRoute
@@ -482,7 +500,9 @@ export interface FileRouteTypes {
     | '/careers'
     | '/cng'
     | '/contact'
+    | '/eea'
     | '/energy-ecommerce'
+    | '/energy-transition'
     | '/ev'
     | '/faq'
     | '/get-electricity'
@@ -533,7 +553,9 @@ export interface FileRouteTypes {
     | '/careers'
     | '/cng'
     | '/contact'
+    | '/eea'
     | '/energy-ecommerce'
+    | '/energy-transition'
     | '/ev'
     | '/faq'
     | '/get-electricity'
@@ -585,7 +607,9 @@ export interface FileRouteTypes {
     | '/careers'
     | '/cng'
     | '/contact'
+    | '/eea'
     | '/energy-ecommerce'
+    | '/energy-transition'
     | '/ev'
     | '/faq'
     | '/get-electricity'
@@ -638,7 +662,9 @@ export interface RootRouteChildren {
   CareersRoute: typeof CareersRoute
   CngRoute: typeof CngRoute
   ContactRoute: typeof ContactRoute
+  EeaRoute: typeof EeaRoute
   EnergyEcommerceRoute: typeof EnergyEcommerceRoute
+  EnergyTransitionRoute: typeof EnergyTransitionRoute
   EvRoute: typeof EvRoute
   FaqRoute: typeof FaqRoute
   GetElectricityRoute: typeof GetElectricityRoute
@@ -727,11 +753,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/eea': {
+      id: '/eea'
+      path: '/eea'
+      fullPath: '/eea'
+      preLoaderRoute: typeof EeaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/energy-ecommerce': {
       id: '/energy-ecommerce'
       path: '/energy-ecommerce'
       fullPath: '/energy-ecommerce'
       preLoaderRoute: typeof EnergyEcommerceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/energy-transition': {
+      id: '/energy-transition'
+      path: '/energy-transition'
+      fullPath: '/energy-transition'
+      preLoaderRoute: typeof EnergyTransitionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ev': {
@@ -1056,7 +1096,9 @@ const rootRouteChildren: RootRouteChildren = {
   CareersRoute: CareersRoute,
   CngRoute: CngRoute,
   ContactRoute: ContactRoute,
+  EeaRoute: EeaRoute,
   EnergyEcommerceRoute: EnergyEcommerceRoute,
+  EnergyTransitionRoute: EnergyTransitionRoute,
   EvRoute: EvRoute,
   FaqRoute: FaqRoute,
   GetElectricityRoute: GetElectricityRoute,
