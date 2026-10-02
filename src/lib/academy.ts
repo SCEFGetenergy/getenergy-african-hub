@@ -382,7 +382,7 @@ export const PROGRAMMES: Programme[] = [
  {
   "n": 36,
   "slug": "get-energy-greentech-launchpad",
-  "title": "GET Energy Greentech Launchpad",
+  "title": "GET Energy GreenTech Launchpad",
   "category": "GreenTech Entrepreneurship",
   "duration": "10–12 weeks",
   "fee": 500000,
@@ -392,7 +392,7 @@ export const PROGRAMMES: Programme[] = [
  {
   "n": 37,
   "slug": "greentech-entrepreneurship",
-  "title": "Greentech Entrepreneurship",
+  "title": "GreenTech Entrepreneurship",
   "category": "GreenTech Entrepreneurship",
   "duration": "5 days",
   "fee": 200000,
@@ -697,7 +697,7 @@ export const PROGRAMMES: Programme[] = [
  {
   "n": 64,
   "slug": "greentech-founder-pathway",
-  "title": "Greentech Founder Pathway",
+  "title": "GreenTech Founder Pathway",
   "category": "Career Pathways",
   "duration": "8–12 weeks",
   "fee": 750000,
