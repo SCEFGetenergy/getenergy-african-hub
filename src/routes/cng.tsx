@@ -5,9 +5,9 @@ export const Route = createFileRoute("/cng")({
   head: () => ({
     meta: [
       { title: "CNG Services & Energy Solutions | GetEnergy" },
-      { name: "description", content: "Explore GetEnergy's developing CNG conversion, refuelling, logistics and power services. Request an assessment; proposed conversion centres are not yet open." },
+      { name: "description", content: "Explore GetEnergy's developing CNG refuelling, supply, logistics and fleet services. Vehicle conversion has its own page; proposed centres are not yet open." },
       { property: "og:title", content: "CNG Services & Energy Solutions | GetEnergy" },
-      { property: "og:description", content: "Cleaner fuel opportunities for fleets and businesses. CNG services and conversion centres are in development." },
+      { property: "og:description", content: "Cleaner fuel opportunities for fleets and businesses. CNG services and refuelling infrastructure are in development." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
