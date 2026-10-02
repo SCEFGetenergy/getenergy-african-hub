@@ -126,7 +126,7 @@ function AcademyPage() {
 
           <div className="mt-10 grid gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center">
             <div className="min-w-0">
-              <h1 className="text-4xl font-black leading-[1.02] tracking-tight sm:text-5xl lg:text-6xl">
+              <h1 className="!text-[2.4rem] font-black !leading-[1.04] tracking-tight sm:!text-5xl lg:!text-[3.6rem]">
                 <span className="block text-brand-green">Green Skills.</span>
                 <span className="block text-brand-deep">Technical Certification.</span>
                 <span className="block text-brand-deep">Career Development.</span>
@@ -153,8 +153,8 @@ function AcademyPage() {
 
             <div className="relative">
               <img src={heroImg} alt="GET Energy-style African energy technicians in hard hats at a solar and wind site" width={1280} height={1024} className="aspect-[5/4] w-full rounded-3xl object-cover shadow-xl" />
-              <div className="relative -mt-16 mx-3 rounded-2xl border border-brand-green/40 bg-brand-deep/95 p-5 text-brand-foreground shadow-xl sm:absolute sm:-bottom-10 sm:-left-8 sm:mx-0 sm:mt-0 sm:max-w-xs">
-                <h2 className="text-lg font-bold leading-snug">Skills for a Cleaner, Smarter and More Productive Africa</h2>
+              <div className="relative -mt-16 mx-3 rounded-2xl border border-brand-green/40 bg-brand-deep/95 p-5 text-brand-foreground shadow-xl lg:absolute lg:-bottom-10 lg:-left-10 lg:mx-0 lg:mt-0 lg:max-w-xs">
+                <p className="text-lg font-bold leading-snug text-brand-foreground">Skills for a Cleaner, Smarter and More Productive Africa</p>
                 <ul className="mt-3 space-y-1.5 text-sm">
                   {TRUST.map((t) => (
                     <li key={t} className="flex items-start gap-2">
