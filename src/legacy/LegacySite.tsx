@@ -8,7 +8,7 @@ const [headPart = "", rest = ""] = bodyHtml.split('<main id="main">');
 const [pagesPart = "", footPart = ""] = rest.split("</main>");
 
 // Paths rendered by React routes rather than the static page markup.
-const APP_PAGES = ["/account", "/admin", "/academy", "/team-invite", "/training-certification", "/company", "/sophia", "/request-energy-quote", "/policies"];
+const APP_PAGES = ["/account", "/admin", "/academy", "/team-invite", "/training-certification", "/sophia", "/request-energy-quote", "/policies"];
 
 function pageName(pathname: string): string | null {
   if (APP_PAGES.some((p) => pathname.startsWith(p))) return null;
@@ -154,22 +154,6 @@ export function LegacySite({ children }: { children: ReactNode }) {
         <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: initialPages }} />
         {isApp && <div className="corporate-content">{children}</div>}
       </main>
-      <nav className="corporate-links" aria-label="More about GetEnergy">
-        <div className="wrap">
-          <span>Explore more about GetEnergy</span>
-          <div>
-            <Link to="/company/about">Our story</Link>
-            <Link to="/company/green-energy">Energy transition</Link>
-            <Link to="/company/industries">Industries</Link>
-            <Link to="/company/technology">Technology</Link>
-            <Link to="/company/partners">Partners & funders</Link>
-            <Link to="/company/solutions">Detailed solutions</Link>
-            <Link to="/company/faq">More questions</Link>
-            <Link to="/company/careers">More careers</Link>
-            <Link to="/company/contact">More contact options</Link>
-          </div>
-        </div>
-      </nav>
       <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: footPart }} />
     </>
   );
