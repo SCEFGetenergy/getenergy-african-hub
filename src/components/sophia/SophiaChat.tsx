@@ -73,13 +73,12 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
   });
   const busy = status === "submitted" || status === "streaming";
 
-  useEffect(() => { inputRef.current?.focus(); }, [status, threadId]);
-
   const send = (t: string) => {
     const v = t.trim();
     if (!v || busy) return;
     sendMessage({ text: v });
     setText("");
+    inputRef.current?.focus({ preventScroll: true });
   };
 
   const newThread = async () => {
@@ -205,7 +204,6 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
               value={text}
               onChange={(e) => setText(e.currentTarget.value)}
               placeholder="Type your message…"
-              autoFocus
             />
             <PromptInputFooter>
               <PromptInputTools>
