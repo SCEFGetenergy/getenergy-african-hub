@@ -81,6 +81,67 @@ function CertsPage() {
       </Section>
 
       <Section>
+        <SectionHeading
+          eyebrow="Compare"
+          title="Compare all 10 certifications"
+          body="Key competencies, contributing courses and capstone requirements side by side. Renewal rules are the same for every certification: 24-month validity, then 40 CPD hours, evidence of professional practice, ethics declaration, safety and technology refreshers, and a short renewal assessment."
+        />
+        <div className="mt-8 overflow-x-auto rounded-xl border border-border">
+          <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+            <thead>
+              <tr className="bg-muted/60 text-xs uppercase tracking-wide text-muted-foreground">
+                <th scope="col" className="px-4 py-3 font-semibold">Certification</th>
+                <th scope="col" className="px-4 py-3 font-semibold">Key competencies</th>
+                <th scope="col" className="px-4 py-3 font-semibold">Contributing courses</th>
+                <th scope="col" className="px-4 py-3 font-semibold">Capstone requirement</th>
+                <th scope="col" className="px-4 py-3 font-semibold">Renewal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {CERTIFICATIONS.map((c) => (
+                <tr key={c.code} className="border-t border-border align-top">
+                  <th scope="row" className="px-4 py-4">
+                    <Link
+                      to="/training-certification/professional-certifications/$code"
+                      params={{ code: c.code.toLowerCase() }}
+                      className="font-semibold text-primary hover:underline"
+                    >
+                      {c.code}
+                    </Link>
+                    <p className="mt-1 text-xs font-normal text-muted-foreground">{c.name}</p>
+                  </th>
+                  <td className="px-4 py-4">
+                    <ul className="space-y-1 text-xs">
+                      {c.competencies.slice(0, 5).map((k) => <li key={k}>• {k}</li>)}
+                      {c.competencies.length > 5 ? (
+                        <li className="text-muted-foreground">+ {c.competencies.length - 5} more</li>
+                      ) : null}
+                    </ul>
+                  </td>
+                  <td className="px-4 py-4">
+                    <ul className="space-y-1 text-xs">
+                      {c.modules.slice(0, 4).map((m) => <li key={m}>• {m}</li>)}
+                      {c.modules.length > 4 ? (
+                        <li className="text-muted-foreground">+ {c.modules.length - 4} more</li>
+                      ) : null}
+                    </ul>
+                  </td>
+                  <td className="px-4 py-4 text-xs">
+                    <p className="font-medium">{c.capstoneTitle}</p>
+                    {c.capstone[0] ? <p className="mt-1 text-muted-foreground">{c.capstone[0]}</p> : null}
+                  </td>
+                  <td className="px-4 py-4 text-xs">24 months, then CPD renewal</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Full competency lists, capstone outputs and target audiences are on each certification's page.
+        </p>
+      </Section>
+
+      <Section>
         <div className="grid gap-10 md:grid-cols-2">
           <div>
             <SectionHeading eyebrow="Validity & renewal" title="Valid for 24 months" body="After 24 months certified professionals must renew. Technical certifications may also require practical reassessment. Credential statuses: Active, Renewal due, Expired, Suspended, Revoked." />
