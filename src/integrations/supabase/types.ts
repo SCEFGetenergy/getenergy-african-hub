@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      certification_employers: {
+        Row: {
+          certification_code: string
+          created_at: string
+          employer_name: string
+          id: string
+          recognised_on: string
+        }
+        Insert: {
+          certification_code: string
+          created_at?: string
+          employer_name: string
+          id?: string
+          recognised_on?: string
+        }
+        Update: {
+          certification_code?: string
+          created_at?: string
+          employer_name?: string
+          id?: string
+          recognised_on?: string
+        }
+        Relationships: []
+      }
+      certification_settings: {
+        Row: {
+          code: string
+          fee_approved: boolean
+          fee_ngn: number | null
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          fee_approved?: boolean
+          fee_ngn?: number | null
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          fee_approved?: boolean
+          fee_ngn?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           account_type: string
@@ -160,12 +205,37 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
       generate_request_reference: { Args: never; Returns: string }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       submit_service_request: {
         Args: {
           p_company_name?: string
@@ -181,7 +251,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "staff"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -308,6 +378,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "staff"],
+    },
   },
 } as const

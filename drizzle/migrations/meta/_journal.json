@@ -36,6 +36,13 @@
       "when": 1790904200994,
       "tag": "0004_sophia_chat",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1790911741517,
+      "tag": "0005_admin_certification_management",
+      "breakpoints": true
     }
   ]
 }

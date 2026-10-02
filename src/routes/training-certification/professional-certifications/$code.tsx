@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Section } from "@/components/site/ui-bits";
 import { AcademyLockup } from "@/components/academy/AcademyParts";
 import { RENEWAL_REQUIREMENTS, getCertification } from "@/lib/certifications";
+import { formatNaira } from "@/lib/academy";
+import { useCertPublic } from "@/hooks/use-cert-public";
 
 export const Route = createFileRoute("/training-certification/professional-certifications/$code")({
   loader: ({ params }) => {
@@ -50,6 +52,7 @@ function List({ items }: { items: string[] }) {
 
 function CertPage() {
   const c = Route.useLoaderData();
+  const pub = useCertPublic(c.code).data;
   const rows: [string, string][] = [
     ["Code", c.code],
     ["Target audience", c.audience.length ? c.audience.join(", ") : "Experienced professionals in this field"],
@@ -60,7 +63,7 @@ function CertPage() {
     ["Certification validity", "24 months"],
     ["CPD requirement", "40 CPD hours within 24 months"],
     ["Credential verification", `Credential ID format GETS-${c.code}-YY-SERIAL`],
-    ["Certification fee", "To be confirmed"],
+    ["Certification fee", pub?.fee != null ? formatNaira(pub.fee) : "To be confirmed"],
     ["Status", "Waiting list open"],
   ];
   return (
@@ -111,7 +114,8 @@ function CertPage() {
             <div><h2 className="text-xl font-bold">Renewal requirements</h2><List items={RENEWAL_REQUIREMENTS} /></div>
             <div>
               <h2 className="text-xl font-bold">What employers can expect</h2><List items={EMPLOYER} />
-              <p className="mt-3 text-xs text-muted-foreground">No specific employer has formally recognised this certification yet. Certification can strengthen career readiness but does not guarantee employment or promotion.</p>
+              {pub?.employers.length ? <p className="mt-3 text-sm"><strong>Formally recognised by: </strong>{pub.employers.map((e) => e.employer_name).join(", ")}</p> : null}
+              <p className="mt-3 text-xs text-muted-foreground">{pub?.employers.length ? "" : "No specific employer has formally recognised this certification yet. "}Certification can strengthen career readiness but does not guarantee employment or promotion.</p>
             </div>
           </div>
           <dl className="h-fit divide-y divide-border rounded-xl border border-border bg-card text-sm">
