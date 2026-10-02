@@ -163,6 +163,7 @@ function Applications() {
         .from("service_requests")
         .select("id, reference, request_type, service_name, contact_name, contact_email, contact_phone, status, created_at")
         .like("request_type", "academy-%")
+        .is("deleted_at", null)
         .order("created_at", { ascending: false })
         .limit(200)).data ?? [],
   });
@@ -174,18 +175,30 @@ function Applications() {
     onSuccess: () => { toast.success("Status updated"); qc.invalidateQueries({ queryKey: ["admin-applications"] }); },
     onError: (e: Error) => toast.error(e.message),
   });
+  const archive = useMutation({
+    mutationFn: async ({ id, reason }: { id: string; reason: string }) => {
+      const { error } = await supabase.rpc("archive_service_request", { p_id: id, p_reason: reason || undefined });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast.success("Moved to deleted requests — you can restore it below");
+      qc.invalidateQueries({ queryKey: ["admin-applications"] });
+      qc.invalidateQueries({ queryKey: ["admin-archived"] });
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
   return (
     <section>
       <h2 className="text-xl font-bold">Applications & waiting lists</h2>
       <p className="mt-1 text-xs text-muted-foreground">Applicants see the new status in their account dashboard.</p>
       <div className="mt-4 overflow-x-auto rounded-xl border border-border bg-card">
-        <table className="w-full min-w-[720px] text-left text-sm">
+        <table className="w-full min-w-[820px] text-left text-sm">
           <thead className="bg-surface text-xs text-muted-foreground">
-            <tr><th className="p-3">Reference</th><th className="p-3">Applicant</th><th className="p-3">For</th><th className="p-3">Date</th><th className="p-3">Status</th></tr>
+            <tr><th className="p-3">Reference</th><th className="p-3">Applicant</th><th className="p-3">For</th><th className="p-3">Date</th><th className="p-3">Status</th><th className="p-3"></th></tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {isLoading ? <tr><td className="p-3" colSpan={5}>Loading…</td></tr> : null}
-            {!isLoading && !data?.length ? <tr><td className="p-3 text-muted-foreground" colSpan={5}>No applications yet.</td></tr> : null}
+            {isLoading ? <tr><td className="p-3" colSpan={6}>Loading…</td></tr> : null}
+            {!isLoading && !data?.length ? <tr><td className="p-3 text-muted-foreground" colSpan={6}>No applications yet.</td></tr> : null}
             {data?.map((r) => (
               <tr key={r.id}>
                 <td className="p-3 font-mono text-xs">{r.reference}</td>
@@ -197,12 +210,77 @@ function Applications() {
                     {STATUSES.map((s) => <option key={s} value={s}>{LABEL[s]}</option>)}
                   </select>
                 </td>
+                <td className="p-3">
+                  <button
+                    type="button"
+                    className="h-10 rounded-md border border-border px-3 text-xs font-semibold text-destructive hover:bg-destructive/10"
+                    onClick={() => {
+                      const reason = window.prompt(`Remove ${r.reference} from the list? Optional reason:`);
+                      if (reason !== null) archive.mutate({ id: r.id, reason });
+                    }}
+                  >Delete</button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <DeletedRequests />
     </section>
+  );
+}
+
+function DeletedRequests() {
+  const qc = useQueryClient();
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin-archived"],
+    queryFn: async () =>
+      (await supabase
+        .from("service_requests")
+        .select("id, reference, request_type, service_name, contact_name, contact_email, deleted_at, delete_reason")
+        .not("deleted_at", "is", null)
+        .order("deleted_at", { ascending: false })
+        .limit(200)).data ?? [],
+  });
+  const restore = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.rpc("restore_service_request", { p_id: id });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast.success("Request restored");
+      qc.invalidateQueries({ queryKey: ["admin-applications"] });
+      qc.invalidateQueries({ queryKey: ["admin-archived"] });
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+  return (
+    <div className="mt-8">
+      <h3 className="text-lg font-bold">Deleted requests</h3>
+      <p className="mt-1 text-xs text-muted-foreground">Removed requests are kept here and can be restored. Every delete and restore is recorded in the audit log with who did it and when.</p>
+      <div className="mt-3 overflow-x-auto rounded-xl border border-border bg-card">
+        <table className="w-full min-w-[720px] text-left text-sm">
+          <thead className="bg-surface text-xs text-muted-foreground">
+            <tr><th className="p-3">Reference</th><th className="p-3">Contact</th><th className="p-3">For</th><th className="p-3">Deleted</th><th className="p-3"></th></tr>
+          </thead>
+          <tbody className="divide-y divide-border">
+            {isLoading ? <tr><td className="p-3" colSpan={5}>Loading…</td></tr> : null}
+            {!isLoading && !data?.length ? <tr><td className="p-3 text-muted-foreground" colSpan={5}>No deleted requests.</td></tr> : null}
+            {data?.map((r) => (
+              <tr key={r.id}>
+                <td className="p-3 font-mono text-xs">{r.reference}</td>
+                <td className="p-3">{r.contact_name}<div className="text-xs text-muted-foreground">{r.contact_email}</div></td>
+                <td className="p-3">{r.service_name}<div className="text-xs text-muted-foreground">{r.request_type}</div></td>
+                <td className="p-3 text-xs">{r.deleted_at ? new Date(r.deleted_at).toLocaleString() : ""}{r.delete_reason ? <div className="text-muted-foreground">“{r.delete_reason}”</div> : null}</td>
+                <td className="p-3">
+                  <button type="button" disabled={restore.isPending} onClick={() => restore.mutate(r.id)} className="h-10 rounded-md bg-primary px-3 text-xs font-semibold text-primary-foreground disabled:opacity-60">Restore</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 
