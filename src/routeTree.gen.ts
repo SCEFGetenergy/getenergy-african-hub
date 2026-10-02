@@ -46,6 +46,8 @@ import { Route as AcademyLoginRouteImport } from './routes/academy.login'
 import { Route as AcademyRegisterRouteImport } from './routes/academy.register'
 import { Route as AcademyResetPasswordRouteImport } from './routes/academy.reset-password'
 import { Route as ApiSophiaRouteImport } from './routes/api/sophia'
+import { Route as CompanyIndexRouteImport } from './routes/company.index'
+import { Route as CompanySplatRouteImport } from './routes/company.$'
 import { Route as PoliciesGenderDiversityInclusionRouteImport } from './routes/policies.gender-diversity-inclusion'
 import { Route as SophiaIndexRouteImport } from './routes/sophia.index'
 import { Route as SophiaThreadIdRouteImport } from './routes/sophia.$threadId'
@@ -253,6 +255,16 @@ const ApiSophiaRoute = ApiSophiaRouteImport.update({
   path: '/api/sophia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompanyIndexRoute = CompanyIndexRouteImport.update({
+  id: '/company/',
+  path: '/company/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanySplatRoute = CompanySplatRouteImport.update({
+  id: '/company/$',
+  path: '/company/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PoliciesGenderDiversityInclusionRoute =
   PoliciesGenderDiversityInclusionRouteImport.update({
     id: '/policies/gender-diversity-inclusion',
@@ -419,6 +431,7 @@ export interface FileRoutesByFullPath {
   '/academy/register': typeof AcademyRegisterRoute
   '/academy/reset-password': typeof AcademyResetPasswordRoute
   '/api/sophia': typeof ApiSophiaRoute
+  '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/training-certification/corporate': typeof TrainingCertificationCorporateRoute
@@ -426,6 +439,7 @@ export interface FileRoutesByFullPath {
   '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
   '/academy/': typeof AcademyIndexRoute
+  '/company/': typeof CompanyIndexRoute
   '/sophia/': typeof SophiaIndexRoute
   '/training-certification/': typeof TrainingCertificationIndexRoute
   '/academy/applications': typeof AuthenticatedAcademyApplicationsRoute
@@ -479,6 +493,7 @@ export interface FileRoutesByTo {
   '/academy/register': typeof AcademyRegisterRoute
   '/academy/reset-password': typeof AcademyResetPasswordRoute
   '/api/sophia': typeof ApiSophiaRoute
+  '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/training-certification/corporate': typeof TrainingCertificationCorporateRoute
@@ -486,6 +501,7 @@ export interface FileRoutesByTo {
   '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
   '/academy': typeof AcademyIndexRoute
+  '/company': typeof CompanyIndexRoute
   '/sophia': typeof SophiaIndexRoute
   '/training-certification': typeof TrainingCertificationIndexRoute
   '/academy/applications': typeof AuthenticatedAcademyApplicationsRoute
@@ -541,6 +557,7 @@ export interface FileRoutesById {
   '/academy/register': typeof AcademyRegisterRoute
   '/academy/reset-password': typeof AcademyResetPasswordRoute
   '/api/sophia': typeof ApiSophiaRoute
+  '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/training-certification/corporate': typeof TrainingCertificationCorporateRoute
@@ -548,6 +565,7 @@ export interface FileRoutesById {
   '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
   '/academy/': typeof AcademyIndexRoute
+  '/company/': typeof CompanyIndexRoute
   '/sophia/': typeof SophiaIndexRoute
   '/training-certification/': typeof TrainingCertificationIndexRoute
   '/_authenticated/academy/applications': typeof AuthenticatedAcademyApplicationsRoute
@@ -603,6 +621,7 @@ export interface FileRouteTypes {
     | '/academy/register'
     | '/academy/reset-password'
     | '/api/sophia'
+    | '/company/$'
     | '/policies/gender-diversity-inclusion'
     | '/sophia/$threadId'
     | '/training-certification/corporate'
@@ -610,6 +629,7 @@ export interface FileRouteTypes {
     | '/training-certification/verify'
     | '/training-certification/waitlist'
     | '/academy/'
+    | '/company/'
     | '/sophia/'
     | '/training-certification/'
     | '/academy/applications'
@@ -663,6 +683,7 @@ export interface FileRouteTypes {
     | '/academy/register'
     | '/academy/reset-password'
     | '/api/sophia'
+    | '/company/$'
     | '/policies/gender-diversity-inclusion'
     | '/sophia/$threadId'
     | '/training-certification/corporate'
@@ -670,6 +691,7 @@ export interface FileRouteTypes {
     | '/training-certification/verify'
     | '/training-certification/waitlist'
     | '/academy'
+    | '/company'
     | '/sophia'
     | '/training-certification'
     | '/academy/applications'
@@ -724,6 +746,7 @@ export interface FileRouteTypes {
     | '/academy/register'
     | '/academy/reset-password'
     | '/api/sophia'
+    | '/company/$'
     | '/policies/gender-diversity-inclusion'
     | '/sophia/$threadId'
     | '/training-certification/corporate'
@@ -731,6 +754,7 @@ export interface FileRouteTypes {
     | '/training-certification/verify'
     | '/training-certification/waitlist'
     | '/academy/'
+    | '/company/'
     | '/sophia/'
     | '/training-certification/'
     | '/_authenticated/academy/applications'
@@ -784,6 +808,7 @@ export interface RootRouteChildren {
   AcademyRegisterRoute: typeof AcademyRegisterRoute
   AcademyResetPasswordRoute: typeof AcademyResetPasswordRoute
   ApiSophiaRoute: typeof ApiSophiaRoute
+  CompanySplatRoute: typeof CompanySplatRoute
   PoliciesGenderDiversityInclusionRoute: typeof PoliciesGenderDiversityInclusionRoute
   SophiaThreadIdRoute: typeof SophiaThreadIdRoute
   TrainingCertificationCorporateRoute: typeof TrainingCertificationCorporateRoute
@@ -791,6 +816,7 @@ export interface RootRouteChildren {
   TrainingCertificationVerifyRoute: typeof TrainingCertificationVerifyRoute
   TrainingCertificationWaitlistRoute: typeof TrainingCertificationWaitlistRoute
   AcademyIndexRoute: typeof AcademyIndexRoute
+  CompanyIndexRoute: typeof CompanyIndexRoute
   SophiaIndexRoute: typeof SophiaIndexRoute
   TrainingCertificationIndexRoute: typeof TrainingCertificationIndexRoute
   TrainingCertificationProfessionalCertificationsCodeRoute: typeof TrainingCertificationProfessionalCertificationsCodeRoute
@@ -1060,6 +1086,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSophiaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/company/': {
+      id: '/company/'
+      path: '/company'
+      fullPath: '/company/'
+      preLoaderRoute: typeof CompanyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/$': {
+      id: '/company/$'
+      path: '/company/$'
+      fullPath: '/company/$'
+      preLoaderRoute: typeof CompanySplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/policies/gender-diversity-inclusion': {
       id: '/policies/gender-diversity-inclusion'
       path: '/policies/gender-diversity-inclusion'
@@ -1287,6 +1327,7 @@ const rootRouteChildren: RootRouteChildren = {
   AcademyRegisterRoute: AcademyRegisterRoute,
   AcademyResetPasswordRoute: AcademyResetPasswordRoute,
   ApiSophiaRoute: ApiSophiaRoute,
+  CompanySplatRoute: CompanySplatRoute,
   PoliciesGenderDiversityInclusionRoute: PoliciesGenderDiversityInclusionRoute,
   SophiaThreadIdRoute: SophiaThreadIdRoute,
   TrainingCertificationCorporateRoute: TrainingCertificationCorporateRoute,
@@ -1294,6 +1335,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrainingCertificationVerifyRoute: TrainingCertificationVerifyRoute,
   TrainingCertificationWaitlistRoute: TrainingCertificationWaitlistRoute,
   AcademyIndexRoute: AcademyIndexRoute,
+  CompanyIndexRoute: CompanyIndexRoute,
   SophiaIndexRoute: SophiaIndexRoute,
   TrainingCertificationIndexRoute: TrainingCertificationIndexRoute,
   TrainingCertificationProfessionalCertificationsCodeRoute:
