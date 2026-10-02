@@ -27,3 +27,4 @@
 - Academy student portal lives at `/academy/*` (public register/login/reset) and `/_authenticated/academy/*`, sharing `src/components/academy/portal.tsx`; applications reuse `submit_service_request`. Why: one lead/request table and reference format across the site.
 - Audit entries are written only by the `write_audit()` database trigger, never by app code; team roles are granted through hashed, expiring `admin_invitations` accepted via RPC. Why: tamper-resistant history and no client-side role grants.
 - Academy payments are stored as `pending_configuration` requests until the GFA Wzip Wallet integration exists; clients cannot set any other status. Why: never represent an unpaid fee as paid.
+- The first admin is created once via /admin-setup with a hashed one-time code (claim_first_admin RPC, locks after use or 10 bad attempts, closed once any admin exists); later admins only via invitations. Why: no manual database edits and no open self-promotion.
