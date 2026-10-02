@@ -32,7 +32,9 @@ export const CERTIFICATIONS: Certification[] = [
   ],
   "capstoneTitle": "Workplace Productivity Improvement Project",
   "capstone": [
-   "The candidate must identify and improve a measurable workplace issue such as:",
+   "Identify and improve a measurable workplace issue, for example:"
+  ],
+  "outputs": [
    "downtime",
    "energy waste",
    "generator consumption",
@@ -42,7 +44,6 @@ export const CERTIFICATIONS: Certification[] = [
    "reporting quality",
    "customer service"
   ],
-  "outputs": [],
   "audience": [
    "Engineers",
    "Technicians",
@@ -77,17 +78,9 @@ export const CERTIFICATIONS: Certification[] = [
    "Energy Audit & Management",
    "Distributed Renewable Energy Systems"
   ],
-  "capstoneTitle": "Capstone project",
+  "capstoneTitle": "Distributed-energy system design",
   "capstone": [
-   "Design a complete distributed-energy system for one approved case:",
-   "Hotel",
-   "Estate",
-   "SME",
-   "School",
-   "Hospital",
-   "Factory",
-   "Community",
-   "Commercial Facility"
+   "Design a complete distributed-energy system for one approved case: Hotel, Estate, SME, School, Hospital, Factory, Community, Commercial Facility."
   ],
   "outputs": [
    "load profile",
@@ -126,10 +119,9 @@ export const CERTIFICATIONS: Certification[] = [
    "Electrical Safety",
    "Smart Metering"
   ],
-  "capstoneTitle": "Capstone project",
+  "capstoneTitle": "Technical design capstone",
   "capstone": [
-   "Practical assessment",
-   "Technical design capstone"
+   "Practical assessment plus a technical design capstone."
   ],
   "outputs": [],
   "audience": [],
@@ -161,14 +153,13 @@ export const CERTIFICATIONS: Certification[] = [
    "Data & Reporting",
    "Digital Productivity"
   ],
-  "capstoneTitle": "Capstone project",
+  "capstoneTitle": "Mandatory capstone",
   "capstone": [
    "Design a smart-metering and energy-monitoring solution for an estate, commercial building or industrial facility."
   ],
   "outputs": [],
   "audience": [],
   "notes": [
-   "Do NOT state that this replaces NEMSA statutory competency certification.",
    "NEMSA-related competency pathways may apply separately."
   ]
  },
@@ -198,10 +189,9 @@ export const CERTIFICATIONS: Certification[] = [
    "CNG Refuelling Infrastructure",
    "HSE"
   ],
-  "capstoneTitle": "50-Vehicle Corporate Fleet",
+  "capstoneTitle": "50-vehicle corporate fleet transition",
   "capstone": [
-   "Design the energy and commercial transition of a:",
-   "or equivalent approved project."
+   "Design the energy and commercial transition of a 50-vehicle corporate fleet, or an equivalent approved project."
   ],
   "outputs": [
    "current fleet energy profile",
@@ -244,7 +234,7 @@ export const CERTIFICATIONS: Certification[] = [
    "ESG & Impact Measurement",
    "Energy Business Development"
   ],
-  "capstoneTitle": "Capstone project",
+  "capstoneTitle": "Investment-ready energy project",
   "capstone": [
    "Develop a complete Investment-Ready Energy Project"
   ],
@@ -342,7 +332,7 @@ export const CERTIFICATIONS: Certification[] = [
    "Project Coordination",
    "Technical Documentation"
   ],
-  "capstoneTitle": "Capstone project",
+  "capstoneTitle": "Mandatory capstone",
   "capstone": [
    "Solve a measurable operational problem in a real or approved simulated workplace."
   ],
@@ -384,7 +374,7 @@ export const CERTIFICATIONS: Certification[] = [
    "Generator & Distributed Power Operations",
    "Technical Documentation"
   ],
-  "capstoneTitle": "Capstone project",
+  "capstoneTitle": "Mandatory capstone",
   "capstone": [
    "Develop an HSE, reliability and compliance improvement plan for an energy or industrial facility."
   ],
