@@ -751,3 +751,26 @@ header.site .bar-actions .btn.primary{background:var(--btn-green,#157A38);border
 .about-pq{border-left:4px solid var(--green);padding:6px 0 6px 20px;max-width:820px}
 .about-pq blockquote{font-size:1.25rem;line-height:1.5;color:var(--navy);margin:8px 0 12px}
 .about-pq a{font-weight:700;color:var(--blue)}
+
+/* Phone layout refinements */
+@media (max-width:1100px){
+  .bar-actions .btn.primary{display:inline-flex;white-space:nowrap;padding:8px 12px;font-size:.85rem;min-height:44px;align-items:center}
+}
+@media (max-width:420px){ .bar-actions .btn.primary{padding:8px 10px;font-size:.78rem} .logo img{max-width:120px} .logo small{display:none} }
+.tscroll{background:linear-gradient(to right,var(--bg) 30%,transparent) left/40px 100% no-repeat local,linear-gradient(to left,var(--bg) 30%,transparent) right/40px 100% no-repeat local,linear-gradient(to left,rgba(0,0,0,.12),transparent) right/14px 100% no-repeat scroll}
+@media (max-width:640px){
+  .tech-arch{gap:10px}
+  .ta-core,.ta-ext{padding:14px;border-radius:14px}
+  .ta-node.hub{margin-bottom:10px;padding:12px}
+  .ta-ring{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .ta-node{padding:10px;border-radius:10px}
+  .ta-node b{font-size:.92rem;line-height:1.25}
+  .ta-node span{font-size:.78rem;line-height:1.35}
+  .ta-link{min-height:44px}
+  #smart-metering .ptrust li,#renewables-bess .ptrust li{padding:8px 0;font-size:.9rem}
+  #smart-metering .ge-grid,#renewables-bess .ge-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  #smart-metering .ge-card,#renewables-bess .ge-card{padding:14px}
+  #smart-metering .ge-card h3,#renewables-bess .ge-card h3{font-size:1rem}
+  #smart-metering .ge-card p,#renewables-bess .ge-card p{font-size:.88rem;line-height:1.45}
+  #smart-metering .btn,#renewables-bess .btn{width:100%;justify-content:center}
+}

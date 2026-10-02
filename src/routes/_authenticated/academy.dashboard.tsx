@@ -24,7 +24,7 @@ function Dashboard() {
   return (
     <PortalShell title={`Welcome${prof.data ? `, ${prof.data.profile.first_name}` : ""}`} intro="Your Academy summary. Statuses update here when the Academy team reviews your applications.">
       {prof.error ? <p className="text-sm text-destructive">Could not load your profile. Please refresh.</p> : null}
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {stats.map(([l, v]) => <div key={l} className="rounded-xl border border-border bg-card p-4"><div className="text-2xl font-bold">{v}</div><div className="text-xs text-muted-foreground">{l}</div></div>)}
       </div>
       <div className="mt-6 grid gap-4 lg:grid-cols-2">

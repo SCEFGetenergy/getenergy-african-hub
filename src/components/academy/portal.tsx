@@ -94,9 +94,9 @@ export function PortalShell({ title, intro, children }: { title: string; intro?:
         <aside className="min-w-0 md:sticky md:top-24 md:self-start">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">GET Energy Academy</p>
           {data ? <p className="mt-1 text-sm font-semibold">{data.profile.first_name} {data.profile.last_name}<span className="block font-mono text-xs text-muted-foreground">{data.profile.student_id}</span></p> : null}
-          <nav aria-label="Academy portal" className="mt-4 flex gap-1 overflow-x-auto pb-2 md:flex-col md:overflow-visible">
+          <nav aria-label="Academy portal" className="mt-4 grid grid-cols-2 gap-1 md:flex md:flex-col">
             {PORTAL_NAV.map((n) => (
-              <Link key={n.to} to={n.to} className={cn("flex min-h-11 shrink-0 items-center rounded-md px-3 text-sm",
+              <Link key={n.to} to={n.to} className={cn("flex min-h-11 min-w-0 items-center rounded-md px-3 text-sm",
                 pathname === n.to ? "bg-primary font-semibold text-primary-foreground" : "text-foreground hover:bg-card")}>{n.label}</Link>
             ))}
           </nav>
