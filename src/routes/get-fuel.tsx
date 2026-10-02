@@ -11,6 +11,7 @@ export const Route = createFileRoute("/get-fuel")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/get-fuel" }],
   }),
   component: () => null,
 });

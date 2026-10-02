@@ -17,6 +17,7 @@ export const Route = createFileRoute("/academy/register")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/academy/register" }],
   }),
   component: Register,
 });

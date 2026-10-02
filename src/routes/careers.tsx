@@ -5,12 +5,13 @@ export const Route = createFileRoute("/careers")({
   head: () => ({
     meta: [
       { title: "Careers | GetEnergy" },
-      { name: "description", content: "Join the team powering Nigeria's move to cleaner energy." },
+      { name: "description", content: "Current opportunities, internships and our talent network at GET Energy." },
       { property: "og:title", content: "Careers | GetEnergy" },
-      { property: "og:description", content: "Join the team powering Nigeria's move to cleaner energy." },
+      { property: "og:description", content: "Current opportunities, internships and our talent network at GET Energy." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/careers" }],
   }),
   component: () => null,
 });

@@ -5,12 +5,13 @@ export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
       { title: "FAQ | GetEnergy" },
-      { name: "description", content: "Join the team powering Nigeria's move to cleaner energy." },
+      { name: "description", content: "Answers about GetEnergy services, requests, payments and what happens after you contact us." },
       { property: "og:title", content: "FAQ | GetEnergy" },
-      { property: "og:description", content: "Join the team powering Nigeria's move to cleaner energy." },
+      { property: "og:description", content: "Answers about GetEnergy services, requests, payments and what happens after you contact us." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/faq" }],
   }),
   component: () => null,
 });

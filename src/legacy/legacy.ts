@@ -4,7 +4,7 @@
 /* Developer settings: switch on once a licensed payment provider, a token/VTU
    aggregator and customer accounts are connected, then implement startPayment(). */
 export var CONFIG={paymentsLive:false,accountsLive:false,boardEndpoint:null,
-  email:{sales:"sales@getenergy.ng",support:"sales@getenergy.ng",careers:"sales@getenergy.ng",training:"sales@getenergy.ng"}};
+  email:{sales:"ccgetenergy@gmail.com",support:"ccgetenergy@gmail.com",careers:"ccgetenergy@gmail.com",training:"ccgetenergy@gmail.com"}};
 function startPayment(request){ /* INTEGRATION POINT */ }
 
 export function initLegacy(api){

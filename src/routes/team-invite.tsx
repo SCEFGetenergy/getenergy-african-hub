@@ -16,6 +16,7 @@ export const Route = createFileRoute("/team-invite")({
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
     ],
+    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/team-invite" }],
   }),
   component: Invite,
 });

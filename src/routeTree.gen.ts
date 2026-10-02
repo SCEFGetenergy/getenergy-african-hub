@@ -46,14 +46,8 @@ import { Route as AcademyLoginRouteImport } from './routes/academy.login'
 import { Route as AcademyRegisterRouteImport } from './routes/academy.register'
 import { Route as AcademyResetPasswordRouteImport } from './routes/academy.reset-password'
 import { Route as ApiSophiaRouteImport } from './routes/api/sophia'
-import { Route as CompanyAboutRouteImport } from './routes/company/about'
-import { Route as CompanyCareersRouteImport } from './routes/company/careers'
-import { Route as CompanyContactRouteImport } from './routes/company/contact'
-import { Route as CompanyFaqRouteImport } from './routes/company/faq'
-import { Route as CompanyGreenEnergyRouteImport } from './routes/company/green-energy'
-import { Route as CompanyIndustriesRouteImport } from './routes/company/industries'
-import { Route as CompanyPartnersRouteImport } from './routes/company/partners'
-import { Route as CompanyTechnologyRouteImport } from './routes/company/technology'
+import { Route as CompanyIndexRouteImport } from './routes/company.index'
+import { Route as CompanySplatRouteImport } from './routes/company.$'
 import { Route as PoliciesGenderDiversityInclusionRouteImport } from './routes/policies.gender-diversity-inclusion'
 import { Route as SophiaIndexRouteImport } from './routes/sophia.index'
 import { Route as SophiaThreadIdRouteImport } from './routes/sophia.$threadId'
@@ -72,19 +66,6 @@ import { Route as AuthenticatedAcademyProfileRouteImport } from './routes/_authe
 import { Route as AuthenticatedAcademyProgrammesRouteImport } from './routes/_authenticated/academy.programmes'
 import { Route as AuthenticatedAcademySkillsPassportRouteImport } from './routes/_authenticated/academy.skills-passport'
 import { Route as AuthenticatedAcademySupportRouteImport } from './routes/_authenticated/academy.support'
-import { Route as CompanySolutionsIndexRouteImport } from './routes/company/solutions/index'
-import { Route as CompanySolutionsCngRouteImport } from './routes/company/solutions/cng'
-import { Route as CompanySolutionsCngConversionRouteImport } from './routes/company/solutions/cng-conversion'
-import { Route as CompanySolutionsDieselRouteImport } from './routes/company/solutions/diesel'
-import { Route as CompanySolutionsEeaRouteImport } from './routes/company/solutions/eea'
-import { Route as CompanySolutionsElectricityRouteImport } from './routes/company/solutions/electricity'
-import { Route as CompanySolutionsEvChargingRouteImport } from './routes/company/solutions/ev-charging'
-import { Route as CompanySolutionsEvMobilityRouteImport } from './routes/company/solutions/ev-mobility'
-import { Route as CompanySolutionsMiniGridsRouteImport } from './routes/company/solutions/mini-grids'
-import { Route as CompanySolutionsPowerAsAServiceRouteImport } from './routes/company/solutions/power-as-a-service'
-import { Route as CompanySolutionsRenewablesRouteImport } from './routes/company/solutions/renewables'
-import { Route as CompanySolutionsSmartMeteringRouteImport } from './routes/company/solutions/smart-metering'
-import { Route as CompanySolutionsTrainingRouteImport } from './routes/company/solutions/training'
 import { Route as TrainingCertificationProfessionalCertificationsIndexRouteImport } from './routes/training-certification/professional-certifications/index'
 import { Route as TrainingCertificationProfessionalCertificationsCodeRouteImport } from './routes/training-certification/professional-certifications/$code'
 import { Route as TrainingCertificationProfessionalCertificationsWaitlistRouteImport } from './routes/training-certification/professional-certifications/waitlist'
@@ -274,44 +255,14 @@ const ApiSophiaRoute = ApiSophiaRouteImport.update({
   path: '/api/sophia',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CompanyAboutRoute = CompanyAboutRouteImport.update({
-  id: '/company/about',
-  path: '/company/about',
+const CompanyIndexRoute = CompanyIndexRouteImport.update({
+  id: '/company/',
+  path: '/company/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CompanyCareersRoute = CompanyCareersRouteImport.update({
-  id: '/company/careers',
-  path: '/company/careers',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompanyContactRoute = CompanyContactRouteImport.update({
-  id: '/company/contact',
-  path: '/company/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompanyFaqRoute = CompanyFaqRouteImport.update({
-  id: '/company/faq',
-  path: '/company/faq',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompanyGreenEnergyRoute = CompanyGreenEnergyRouteImport.update({
-  id: '/company/green-energy',
-  path: '/company/green-energy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompanyIndustriesRoute = CompanyIndustriesRouteImport.update({
-  id: '/company/industries',
-  path: '/company/industries',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompanyPartnersRoute = CompanyPartnersRouteImport.update({
-  id: '/company/partners',
-  path: '/company/partners',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompanyTechnologyRoute = CompanyTechnologyRouteImport.update({
-  id: '/company/technology',
-  path: '/company/technology',
+const CompanySplatRoute = CompanySplatRouteImport.update({
+  id: '/company/$',
+  path: '/company/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PoliciesGenderDiversityInclusionRoute =
@@ -419,80 +370,6 @@ const AuthenticatedAcademySupportRoute =
     path: '/academy/support',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const CompanySolutionsIndexRoute = CompanySolutionsIndexRouteImport.update({
-  id: '/company/solutions/',
-  path: '/company/solutions/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompanySolutionsCngRoute = CompanySolutionsCngRouteImport.update({
-  id: '/company/solutions/cng',
-  path: '/company/solutions/cng',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompanySolutionsCngConversionRoute =
-  CompanySolutionsCngConversionRouteImport.update({
-    id: '/company/solutions/cng-conversion',
-    path: '/company/solutions/cng-conversion',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const CompanySolutionsDieselRoute = CompanySolutionsDieselRouteImport.update({
-  id: '/company/solutions/diesel',
-  path: '/company/solutions/diesel',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompanySolutionsEeaRoute = CompanySolutionsEeaRouteImport.update({
-  id: '/company/solutions/eea',
-  path: '/company/solutions/eea',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompanySolutionsElectricityRoute =
-  CompanySolutionsElectricityRouteImport.update({
-    id: '/company/solutions/electricity',
-    path: '/company/solutions/electricity',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const CompanySolutionsEvChargingRoute =
-  CompanySolutionsEvChargingRouteImport.update({
-    id: '/company/solutions/ev-charging',
-    path: '/company/solutions/ev-charging',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const CompanySolutionsEvMobilityRoute =
-  CompanySolutionsEvMobilityRouteImport.update({
-    id: '/company/solutions/ev-mobility',
-    path: '/company/solutions/ev-mobility',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const CompanySolutionsMiniGridsRoute =
-  CompanySolutionsMiniGridsRouteImport.update({
-    id: '/company/solutions/mini-grids',
-    path: '/company/solutions/mini-grids',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const CompanySolutionsPowerAsAServiceRoute =
-  CompanySolutionsPowerAsAServiceRouteImport.update({
-    id: '/company/solutions/power-as-a-service',
-    path: '/company/solutions/power-as-a-service',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const CompanySolutionsRenewablesRoute =
-  CompanySolutionsRenewablesRouteImport.update({
-    id: '/company/solutions/renewables',
-    path: '/company/solutions/renewables',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const CompanySolutionsSmartMeteringRoute =
-  CompanySolutionsSmartMeteringRouteImport.update({
-    id: '/company/solutions/smart-metering',
-    path: '/company/solutions/smart-metering',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const CompanySolutionsTrainingRoute =
-  CompanySolutionsTrainingRouteImport.update({
-    id: '/company/solutions/training',
-    path: '/company/solutions/training',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const TrainingCertificationProfessionalCertificationsIndexRoute =
   TrainingCertificationProfessionalCertificationsIndexRouteImport.update({
     id: '/training-certification/professional-certifications/',
@@ -554,14 +431,7 @@ export interface FileRoutesByFullPath {
   '/academy/register': typeof AcademyRegisterRoute
   '/academy/reset-password': typeof AcademyResetPasswordRoute
   '/api/sophia': typeof ApiSophiaRoute
-  '/company/about': typeof CompanyAboutRoute
-  '/company/careers': typeof CompanyCareersRoute
-  '/company/contact': typeof CompanyContactRoute
-  '/company/faq': typeof CompanyFaqRoute
-  '/company/green-energy': typeof CompanyGreenEnergyRoute
-  '/company/industries': typeof CompanyIndustriesRoute
-  '/company/partners': typeof CompanyPartnersRoute
-  '/company/technology': typeof CompanyTechnologyRoute
+  '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/training-certification/corporate': typeof TrainingCertificationCorporateRoute
@@ -569,6 +439,7 @@ export interface FileRoutesByFullPath {
   '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
   '/academy/': typeof AcademyIndexRoute
+  '/company/': typeof CompanyIndexRoute
   '/sophia/': typeof SophiaIndexRoute
   '/training-certification/': typeof TrainingCertificationIndexRoute
   '/academy/applications': typeof AuthenticatedAcademyApplicationsRoute
@@ -581,22 +452,9 @@ export interface FileRoutesByFullPath {
   '/academy/programmes': typeof AuthenticatedAcademyProgrammesRoute
   '/academy/skills-passport': typeof AuthenticatedAcademySkillsPassportRoute
   '/academy/support': typeof AuthenticatedAcademySupportRoute
-  '/company/solutions/cng': typeof CompanySolutionsCngRoute
-  '/company/solutions/cng-conversion': typeof CompanySolutionsCngConversionRoute
-  '/company/solutions/diesel': typeof CompanySolutionsDieselRoute
-  '/company/solutions/eea': typeof CompanySolutionsEeaRoute
-  '/company/solutions/electricity': typeof CompanySolutionsElectricityRoute
-  '/company/solutions/ev-charging': typeof CompanySolutionsEvChargingRoute
-  '/company/solutions/ev-mobility': typeof CompanySolutionsEvMobilityRoute
-  '/company/solutions/mini-grids': typeof CompanySolutionsMiniGridsRoute
-  '/company/solutions/power-as-a-service': typeof CompanySolutionsPowerAsAServiceRoute
-  '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
-  '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
-  '/company/solutions/training': typeof CompanySolutionsTrainingRoute
   '/training-certification/professional-certifications/$code': typeof TrainingCertificationProfessionalCertificationsCodeRoute
   '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
-  '/company/solutions/': typeof CompanySolutionsIndexRoute
   '/training-certification/professional-certifications/': typeof TrainingCertificationProfessionalCertificationsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -635,14 +493,7 @@ export interface FileRoutesByTo {
   '/academy/register': typeof AcademyRegisterRoute
   '/academy/reset-password': typeof AcademyResetPasswordRoute
   '/api/sophia': typeof ApiSophiaRoute
-  '/company/about': typeof CompanyAboutRoute
-  '/company/careers': typeof CompanyCareersRoute
-  '/company/contact': typeof CompanyContactRoute
-  '/company/faq': typeof CompanyFaqRoute
-  '/company/green-energy': typeof CompanyGreenEnergyRoute
-  '/company/industries': typeof CompanyIndustriesRoute
-  '/company/partners': typeof CompanyPartnersRoute
-  '/company/technology': typeof CompanyTechnologyRoute
+  '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/training-certification/corporate': typeof TrainingCertificationCorporateRoute
@@ -650,6 +501,7 @@ export interface FileRoutesByTo {
   '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
   '/academy': typeof AcademyIndexRoute
+  '/company': typeof CompanyIndexRoute
   '/sophia': typeof SophiaIndexRoute
   '/training-certification': typeof TrainingCertificationIndexRoute
   '/academy/applications': typeof AuthenticatedAcademyApplicationsRoute
@@ -662,22 +514,9 @@ export interface FileRoutesByTo {
   '/academy/programmes': typeof AuthenticatedAcademyProgrammesRoute
   '/academy/skills-passport': typeof AuthenticatedAcademySkillsPassportRoute
   '/academy/support': typeof AuthenticatedAcademySupportRoute
-  '/company/solutions/cng': typeof CompanySolutionsCngRoute
-  '/company/solutions/cng-conversion': typeof CompanySolutionsCngConversionRoute
-  '/company/solutions/diesel': typeof CompanySolutionsDieselRoute
-  '/company/solutions/eea': typeof CompanySolutionsEeaRoute
-  '/company/solutions/electricity': typeof CompanySolutionsElectricityRoute
-  '/company/solutions/ev-charging': typeof CompanySolutionsEvChargingRoute
-  '/company/solutions/ev-mobility': typeof CompanySolutionsEvMobilityRoute
-  '/company/solutions/mini-grids': typeof CompanySolutionsMiniGridsRoute
-  '/company/solutions/power-as-a-service': typeof CompanySolutionsPowerAsAServiceRoute
-  '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
-  '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
-  '/company/solutions/training': typeof CompanySolutionsTrainingRoute
   '/training-certification/professional-certifications/$code': typeof TrainingCertificationProfessionalCertificationsCodeRoute
   '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
-  '/company/solutions': typeof CompanySolutionsIndexRoute
   '/training-certification/professional-certifications': typeof TrainingCertificationProfessionalCertificationsIndexRoute
 }
 export interface FileRoutesById {
@@ -718,14 +557,7 @@ export interface FileRoutesById {
   '/academy/register': typeof AcademyRegisterRoute
   '/academy/reset-password': typeof AcademyResetPasswordRoute
   '/api/sophia': typeof ApiSophiaRoute
-  '/company/about': typeof CompanyAboutRoute
-  '/company/careers': typeof CompanyCareersRoute
-  '/company/contact': typeof CompanyContactRoute
-  '/company/faq': typeof CompanyFaqRoute
-  '/company/green-energy': typeof CompanyGreenEnergyRoute
-  '/company/industries': typeof CompanyIndustriesRoute
-  '/company/partners': typeof CompanyPartnersRoute
-  '/company/technology': typeof CompanyTechnologyRoute
+  '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/training-certification/corporate': typeof TrainingCertificationCorporateRoute
@@ -733,6 +565,7 @@ export interface FileRoutesById {
   '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
   '/academy/': typeof AcademyIndexRoute
+  '/company/': typeof CompanyIndexRoute
   '/sophia/': typeof SophiaIndexRoute
   '/training-certification/': typeof TrainingCertificationIndexRoute
   '/_authenticated/academy/applications': typeof AuthenticatedAcademyApplicationsRoute
@@ -745,22 +578,9 @@ export interface FileRoutesById {
   '/_authenticated/academy/programmes': typeof AuthenticatedAcademyProgrammesRoute
   '/_authenticated/academy/skills-passport': typeof AuthenticatedAcademySkillsPassportRoute
   '/_authenticated/academy/support': typeof AuthenticatedAcademySupportRoute
-  '/company/solutions/cng': typeof CompanySolutionsCngRoute
-  '/company/solutions/cng-conversion': typeof CompanySolutionsCngConversionRoute
-  '/company/solutions/diesel': typeof CompanySolutionsDieselRoute
-  '/company/solutions/eea': typeof CompanySolutionsEeaRoute
-  '/company/solutions/electricity': typeof CompanySolutionsElectricityRoute
-  '/company/solutions/ev-charging': typeof CompanySolutionsEvChargingRoute
-  '/company/solutions/ev-mobility': typeof CompanySolutionsEvMobilityRoute
-  '/company/solutions/mini-grids': typeof CompanySolutionsMiniGridsRoute
-  '/company/solutions/power-as-a-service': typeof CompanySolutionsPowerAsAServiceRoute
-  '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
-  '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
-  '/company/solutions/training': typeof CompanySolutionsTrainingRoute
   '/training-certification/professional-certifications/$code': typeof TrainingCertificationProfessionalCertificationsCodeRoute
   '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
-  '/company/solutions/': typeof CompanySolutionsIndexRoute
   '/training-certification/professional-certifications/': typeof TrainingCertificationProfessionalCertificationsIndexRoute
 }
 export interface FileRouteTypes {
@@ -801,14 +621,7 @@ export interface FileRouteTypes {
     | '/academy/register'
     | '/academy/reset-password'
     | '/api/sophia'
-    | '/company/about'
-    | '/company/careers'
-    | '/company/contact'
-    | '/company/faq'
-    | '/company/green-energy'
-    | '/company/industries'
-    | '/company/partners'
-    | '/company/technology'
+    | '/company/$'
     | '/policies/gender-diversity-inclusion'
     | '/sophia/$threadId'
     | '/training-certification/corporate'
@@ -816,6 +629,7 @@ export interface FileRouteTypes {
     | '/training-certification/verify'
     | '/training-certification/waitlist'
     | '/academy/'
+    | '/company/'
     | '/sophia/'
     | '/training-certification/'
     | '/academy/applications'
@@ -828,22 +642,9 @@ export interface FileRouteTypes {
     | '/academy/programmes'
     | '/academy/skills-passport'
     | '/academy/support'
-    | '/company/solutions/cng'
-    | '/company/solutions/cng-conversion'
-    | '/company/solutions/diesel'
-    | '/company/solutions/eea'
-    | '/company/solutions/electricity'
-    | '/company/solutions/ev-charging'
-    | '/company/solutions/ev-mobility'
-    | '/company/solutions/mini-grids'
-    | '/company/solutions/power-as-a-service'
-    | '/company/solutions/renewables'
-    | '/company/solutions/smart-metering'
-    | '/company/solutions/training'
     | '/training-certification/professional-certifications/$code'
     | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
-    | '/company/solutions/'
     | '/training-certification/professional-certifications/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -882,14 +683,7 @@ export interface FileRouteTypes {
     | '/academy/register'
     | '/academy/reset-password'
     | '/api/sophia'
-    | '/company/about'
-    | '/company/careers'
-    | '/company/contact'
-    | '/company/faq'
-    | '/company/green-energy'
-    | '/company/industries'
-    | '/company/partners'
-    | '/company/technology'
+    | '/company/$'
     | '/policies/gender-diversity-inclusion'
     | '/sophia/$threadId'
     | '/training-certification/corporate'
@@ -897,6 +691,7 @@ export interface FileRouteTypes {
     | '/training-certification/verify'
     | '/training-certification/waitlist'
     | '/academy'
+    | '/company'
     | '/sophia'
     | '/training-certification'
     | '/academy/applications'
@@ -909,22 +704,9 @@ export interface FileRouteTypes {
     | '/academy/programmes'
     | '/academy/skills-passport'
     | '/academy/support'
-    | '/company/solutions/cng'
-    | '/company/solutions/cng-conversion'
-    | '/company/solutions/diesel'
-    | '/company/solutions/eea'
-    | '/company/solutions/electricity'
-    | '/company/solutions/ev-charging'
-    | '/company/solutions/ev-mobility'
-    | '/company/solutions/mini-grids'
-    | '/company/solutions/power-as-a-service'
-    | '/company/solutions/renewables'
-    | '/company/solutions/smart-metering'
-    | '/company/solutions/training'
     | '/training-certification/professional-certifications/$code'
     | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
-    | '/company/solutions'
     | '/training-certification/professional-certifications'
   id:
     | '__root__'
@@ -964,14 +746,7 @@ export interface FileRouteTypes {
     | '/academy/register'
     | '/academy/reset-password'
     | '/api/sophia'
-    | '/company/about'
-    | '/company/careers'
-    | '/company/contact'
-    | '/company/faq'
-    | '/company/green-energy'
-    | '/company/industries'
-    | '/company/partners'
-    | '/company/technology'
+    | '/company/$'
     | '/policies/gender-diversity-inclusion'
     | '/sophia/$threadId'
     | '/training-certification/corporate'
@@ -979,6 +754,7 @@ export interface FileRouteTypes {
     | '/training-certification/verify'
     | '/training-certification/waitlist'
     | '/academy/'
+    | '/company/'
     | '/sophia/'
     | '/training-certification/'
     | '/_authenticated/academy/applications'
@@ -991,22 +767,9 @@ export interface FileRouteTypes {
     | '/_authenticated/academy/programmes'
     | '/_authenticated/academy/skills-passport'
     | '/_authenticated/academy/support'
-    | '/company/solutions/cng'
-    | '/company/solutions/cng-conversion'
-    | '/company/solutions/diesel'
-    | '/company/solutions/eea'
-    | '/company/solutions/electricity'
-    | '/company/solutions/ev-charging'
-    | '/company/solutions/ev-mobility'
-    | '/company/solutions/mini-grids'
-    | '/company/solutions/power-as-a-service'
-    | '/company/solutions/renewables'
-    | '/company/solutions/smart-metering'
-    | '/company/solutions/training'
     | '/training-certification/professional-certifications/$code'
     | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
-    | '/company/solutions/'
     | '/training-certification/professional-certifications/'
   fileRoutesById: FileRoutesById
 }
@@ -1045,14 +808,7 @@ export interface RootRouteChildren {
   AcademyRegisterRoute: typeof AcademyRegisterRoute
   AcademyResetPasswordRoute: typeof AcademyResetPasswordRoute
   ApiSophiaRoute: typeof ApiSophiaRoute
-  CompanyAboutRoute: typeof CompanyAboutRoute
-  CompanyCareersRoute: typeof CompanyCareersRoute
-  CompanyContactRoute: typeof CompanyContactRoute
-  CompanyFaqRoute: typeof CompanyFaqRoute
-  CompanyGreenEnergyRoute: typeof CompanyGreenEnergyRoute
-  CompanyIndustriesRoute: typeof CompanyIndustriesRoute
-  CompanyPartnersRoute: typeof CompanyPartnersRoute
-  CompanyTechnologyRoute: typeof CompanyTechnologyRoute
+  CompanySplatRoute: typeof CompanySplatRoute
   PoliciesGenderDiversityInclusionRoute: typeof PoliciesGenderDiversityInclusionRoute
   SophiaThreadIdRoute: typeof SophiaThreadIdRoute
   TrainingCertificationCorporateRoute: typeof TrainingCertificationCorporateRoute
@@ -1060,24 +816,12 @@ export interface RootRouteChildren {
   TrainingCertificationVerifyRoute: typeof TrainingCertificationVerifyRoute
   TrainingCertificationWaitlistRoute: typeof TrainingCertificationWaitlistRoute
   AcademyIndexRoute: typeof AcademyIndexRoute
+  CompanyIndexRoute: typeof CompanyIndexRoute
   SophiaIndexRoute: typeof SophiaIndexRoute
   TrainingCertificationIndexRoute: typeof TrainingCertificationIndexRoute
-  CompanySolutionsCngRoute: typeof CompanySolutionsCngRoute
-  CompanySolutionsCngConversionRoute: typeof CompanySolutionsCngConversionRoute
-  CompanySolutionsDieselRoute: typeof CompanySolutionsDieselRoute
-  CompanySolutionsEeaRoute: typeof CompanySolutionsEeaRoute
-  CompanySolutionsElectricityRoute: typeof CompanySolutionsElectricityRoute
-  CompanySolutionsEvChargingRoute: typeof CompanySolutionsEvChargingRoute
-  CompanySolutionsEvMobilityRoute: typeof CompanySolutionsEvMobilityRoute
-  CompanySolutionsMiniGridsRoute: typeof CompanySolutionsMiniGridsRoute
-  CompanySolutionsPowerAsAServiceRoute: typeof CompanySolutionsPowerAsAServiceRoute
-  CompanySolutionsRenewablesRoute: typeof CompanySolutionsRenewablesRoute
-  CompanySolutionsSmartMeteringRoute: typeof CompanySolutionsSmartMeteringRoute
-  CompanySolutionsTrainingRoute: typeof CompanySolutionsTrainingRoute
   TrainingCertificationProfessionalCertificationsCodeRoute: typeof TrainingCertificationProfessionalCertificationsCodeRoute
   TrainingCertificationProfessionalCertificationsWaitlistRoute: typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   TrainingCertificationProgrammesSlugRoute: typeof TrainingCertificationProgrammesSlugRoute
-  CompanySolutionsIndexRoute: typeof CompanySolutionsIndexRoute
   TrainingCertificationProfessionalCertificationsIndexRoute: typeof TrainingCertificationProfessionalCertificationsIndexRoute
 }
 
@@ -1342,60 +1086,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSophiaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/company/about': {
-      id: '/company/about'
-      path: '/company/about'
-      fullPath: '/company/about'
-      preLoaderRoute: typeof CompanyAboutRouteImport
+    '/company/': {
+      id: '/company/'
+      path: '/company'
+      fullPath: '/company/'
+      preLoaderRoute: typeof CompanyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/company/careers': {
-      id: '/company/careers'
-      path: '/company/careers'
-      fullPath: '/company/careers'
-      preLoaderRoute: typeof CompanyCareersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/contact': {
-      id: '/company/contact'
-      path: '/company/contact'
-      fullPath: '/company/contact'
-      preLoaderRoute: typeof CompanyContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/faq': {
-      id: '/company/faq'
-      path: '/company/faq'
-      fullPath: '/company/faq'
-      preLoaderRoute: typeof CompanyFaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/green-energy': {
-      id: '/company/green-energy'
-      path: '/company/green-energy'
-      fullPath: '/company/green-energy'
-      preLoaderRoute: typeof CompanyGreenEnergyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/industries': {
-      id: '/company/industries'
-      path: '/company/industries'
-      fullPath: '/company/industries'
-      preLoaderRoute: typeof CompanyIndustriesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/partners': {
-      id: '/company/partners'
-      path: '/company/partners'
-      fullPath: '/company/partners'
-      preLoaderRoute: typeof CompanyPartnersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/technology': {
-      id: '/company/technology'
-      path: '/company/technology'
-      fullPath: '/company/technology'
-      preLoaderRoute: typeof CompanyTechnologyRouteImport
+    '/company/$': {
+      id: '/company/$'
+      path: '/company/$'
+      fullPath: '/company/$'
+      preLoaderRoute: typeof CompanySplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/policies/gender-diversity-inclusion': {
@@ -1524,97 +1226,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAcademySupportRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/company/solutions/': {
-      id: '/company/solutions/'
-      path: '/company/solutions'
-      fullPath: '/company/solutions/'
-      preLoaderRoute: typeof CompanySolutionsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/solutions/cng': {
-      id: '/company/solutions/cng'
-      path: '/company/solutions/cng'
-      fullPath: '/company/solutions/cng'
-      preLoaderRoute: typeof CompanySolutionsCngRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/solutions/cng-conversion': {
-      id: '/company/solutions/cng-conversion'
-      path: '/company/solutions/cng-conversion'
-      fullPath: '/company/solutions/cng-conversion'
-      preLoaderRoute: typeof CompanySolutionsCngConversionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/solutions/diesel': {
-      id: '/company/solutions/diesel'
-      path: '/company/solutions/diesel'
-      fullPath: '/company/solutions/diesel'
-      preLoaderRoute: typeof CompanySolutionsDieselRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/solutions/eea': {
-      id: '/company/solutions/eea'
-      path: '/company/solutions/eea'
-      fullPath: '/company/solutions/eea'
-      preLoaderRoute: typeof CompanySolutionsEeaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/solutions/electricity': {
-      id: '/company/solutions/electricity'
-      path: '/company/solutions/electricity'
-      fullPath: '/company/solutions/electricity'
-      preLoaderRoute: typeof CompanySolutionsElectricityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/solutions/ev-charging': {
-      id: '/company/solutions/ev-charging'
-      path: '/company/solutions/ev-charging'
-      fullPath: '/company/solutions/ev-charging'
-      preLoaderRoute: typeof CompanySolutionsEvChargingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/solutions/ev-mobility': {
-      id: '/company/solutions/ev-mobility'
-      path: '/company/solutions/ev-mobility'
-      fullPath: '/company/solutions/ev-mobility'
-      preLoaderRoute: typeof CompanySolutionsEvMobilityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/solutions/mini-grids': {
-      id: '/company/solutions/mini-grids'
-      path: '/company/solutions/mini-grids'
-      fullPath: '/company/solutions/mini-grids'
-      preLoaderRoute: typeof CompanySolutionsMiniGridsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/solutions/power-as-a-service': {
-      id: '/company/solutions/power-as-a-service'
-      path: '/company/solutions/power-as-a-service'
-      fullPath: '/company/solutions/power-as-a-service'
-      preLoaderRoute: typeof CompanySolutionsPowerAsAServiceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/solutions/renewables': {
-      id: '/company/solutions/renewables'
-      path: '/company/solutions/renewables'
-      fullPath: '/company/solutions/renewables'
-      preLoaderRoute: typeof CompanySolutionsRenewablesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/solutions/smart-metering': {
-      id: '/company/solutions/smart-metering'
-      path: '/company/solutions/smart-metering'
-      fullPath: '/company/solutions/smart-metering'
-      preLoaderRoute: typeof CompanySolutionsSmartMeteringRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company/solutions/training': {
-      id: '/company/solutions/training'
-      path: '/company/solutions/training'
-      fullPath: '/company/solutions/training'
-      preLoaderRoute: typeof CompanySolutionsTrainingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/training-certification/professional-certifications/': {
       id: '/training-certification/professional-certifications/'
       path: '/training-certification/professional-certifications'
@@ -1716,14 +1327,7 @@ const rootRouteChildren: RootRouteChildren = {
   AcademyRegisterRoute: AcademyRegisterRoute,
   AcademyResetPasswordRoute: AcademyResetPasswordRoute,
   ApiSophiaRoute: ApiSophiaRoute,
-  CompanyAboutRoute: CompanyAboutRoute,
-  CompanyCareersRoute: CompanyCareersRoute,
-  CompanyContactRoute: CompanyContactRoute,
-  CompanyFaqRoute: CompanyFaqRoute,
-  CompanyGreenEnergyRoute: CompanyGreenEnergyRoute,
-  CompanyIndustriesRoute: CompanyIndustriesRoute,
-  CompanyPartnersRoute: CompanyPartnersRoute,
-  CompanyTechnologyRoute: CompanyTechnologyRoute,
+  CompanySplatRoute: CompanySplatRoute,
   PoliciesGenderDiversityInclusionRoute: PoliciesGenderDiversityInclusionRoute,
   SophiaThreadIdRoute: SophiaThreadIdRoute,
   TrainingCertificationCorporateRoute: TrainingCertificationCorporateRoute,
@@ -1731,27 +1335,15 @@ const rootRouteChildren: RootRouteChildren = {
   TrainingCertificationVerifyRoute: TrainingCertificationVerifyRoute,
   TrainingCertificationWaitlistRoute: TrainingCertificationWaitlistRoute,
   AcademyIndexRoute: AcademyIndexRoute,
+  CompanyIndexRoute: CompanyIndexRoute,
   SophiaIndexRoute: SophiaIndexRoute,
   TrainingCertificationIndexRoute: TrainingCertificationIndexRoute,
-  CompanySolutionsCngRoute: CompanySolutionsCngRoute,
-  CompanySolutionsCngConversionRoute: CompanySolutionsCngConversionRoute,
-  CompanySolutionsDieselRoute: CompanySolutionsDieselRoute,
-  CompanySolutionsEeaRoute: CompanySolutionsEeaRoute,
-  CompanySolutionsElectricityRoute: CompanySolutionsElectricityRoute,
-  CompanySolutionsEvChargingRoute: CompanySolutionsEvChargingRoute,
-  CompanySolutionsEvMobilityRoute: CompanySolutionsEvMobilityRoute,
-  CompanySolutionsMiniGridsRoute: CompanySolutionsMiniGridsRoute,
-  CompanySolutionsPowerAsAServiceRoute: CompanySolutionsPowerAsAServiceRoute,
-  CompanySolutionsRenewablesRoute: CompanySolutionsRenewablesRoute,
-  CompanySolutionsSmartMeteringRoute: CompanySolutionsSmartMeteringRoute,
-  CompanySolutionsTrainingRoute: CompanySolutionsTrainingRoute,
   TrainingCertificationProfessionalCertificationsCodeRoute:
     TrainingCertificationProfessionalCertificationsCodeRoute,
   TrainingCertificationProfessionalCertificationsWaitlistRoute:
     TrainingCertificationProfessionalCertificationsWaitlistRoute,
   TrainingCertificationProgrammesSlugRoute:
     TrainingCertificationProgrammesSlugRoute,
-  CompanySolutionsIndexRoute: CompanySolutionsIndexRoute,
   TrainingCertificationProfessionalCertificationsIndexRoute:
     TrainingCertificationProfessionalCertificationsIndexRoute,
 }

@@ -13,6 +13,7 @@ export const Route = createFileRoute("/academy/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/academy" }],
   }),
   component: PortalHome,
 });

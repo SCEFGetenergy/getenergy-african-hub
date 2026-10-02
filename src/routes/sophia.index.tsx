@@ -15,6 +15,7 @@ export const Route = createFileRoute("/sophia/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/sophia" }],
   }),
   component: SophiaIndex,
 });

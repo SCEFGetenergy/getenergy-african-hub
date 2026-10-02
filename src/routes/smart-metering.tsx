@@ -1,16 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
-// The shared site shell renders this page; this route supplies its URL and metadata.
+// Merged into /get-electricity#smart-metering; kept as a one-hop permanent redirect for old links.
 export const Route = createFileRoute("/smart-metering")({
-  head: () => ({
-    meta: [
-      { title: "Smart Metering | GetEnergy" },
-      { name: "description", content: "Digital metering, token vending and energy-use visibility for residential, commercial and industrial customers." },
-      { property: "og:title", content: "Smart Metering | GetEnergy" },
-      { property: "og:description", content: "Digital metering, token vending and energy-use visibility for residential, commercial and industrial customers." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: () => null,
+  beforeLoad: () => {
+    throw redirect({ href: "/get-electricity#smart-metering", statusCode: 301 });
+  },
 });
