@@ -329,6 +329,7 @@ export type Database = {
           deleted_by: string | null
           details: Json
           id: string
+          is_test: boolean
           location: string | null
           reference: string
           request_type: string
@@ -348,6 +349,7 @@ export type Database = {
           deleted_by?: string | null
           details?: Json
           id?: string
+          is_test?: boolean
           location?: string | null
           reference?: string
           request_type: string
@@ -367,6 +369,7 @@ export type Database = {
           deleted_by?: string | null
           details?: Json
           id?: string
+          is_test?: boolean
           location?: string | null
           reference?: string
           request_type?: string
