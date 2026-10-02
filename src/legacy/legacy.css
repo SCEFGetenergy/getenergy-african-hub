@@ -718,3 +718,8 @@ header.site .bar-actions .btn.primary{background:var(--btn-green,#157A38);border
 .mk-areas .mk-go{margin-top:auto;color:var(--green-ink);font-weight:700;min-height:44px;display:inline-flex;align-items:center}
 @media(max-width:1000px){.mk-areas.mk-six{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.mk-areas.mk-six{grid-template-columns:1fr}}
+
+/* SOPHIA chat: neutralise legacy page typography inside the assistant */
+.sophia-shell, .sophia-shell p, .sophia-shell li { text-align: left; }
+.sophia-shell nav a, .sophia-shell nav button { margin: 0; justify-content: flex-start; }
+.sophia-shell textarea { border: 0; box-shadow: none; min-height: 3rem; }

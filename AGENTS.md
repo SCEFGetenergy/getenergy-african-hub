@@ -21,3 +21,5 @@
 - Legacy forms submit through `submit_service_request` and Supabase auth inside `LegacySite`'s submit handler.
 - The `/projects` page uses historical references in the legacy shell with a separate route for metadata; this preserves the supplied site styling while making those references shareable.
 - Keep the Energy Desk interest form in the shared footer rather than the homepage; this keeps registration reachable from every page after the homepage was shortened.
+- SOPHIA chat threads are owned by a random browser visitor token and accessed only through server functions/route using the admin client (tables have RLS with no policies). Why: anonymous visitors need persistent threads without exposing other visitors' chats.
+- SOPHIA's knowledge/system brief lives in `src/lib/sophia/brief.md`, loaded by `/api/sophia`; enquiries she captures are inserted into `service_requests` with request_type `sophia`. Why: one editable source for her behaviour and one lead table for the team.

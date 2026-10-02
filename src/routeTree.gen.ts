@@ -34,6 +34,7 @@ import { Route as SolarPowerRouteImport } from './routes/solar-power'
 import { Route as TechnologyRouteImport } from './routes/technology'
 import { Route as TrainingRouteImport } from './routes/training'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
+import { Route as ApiSophiaRouteImport } from './routes/api/sophia'
 import { Route as CompanyAboutRouteImport } from './routes/company/about'
 import { Route as CompanyCareersRouteImport } from './routes/company/careers'
 import { Route as CompanyContactRouteImport } from './routes/company/contact'
@@ -42,6 +43,8 @@ import { Route as CompanyGreenEnergyRouteImport } from './routes/company/green-e
 import { Route as CompanyIndustriesRouteImport } from './routes/company/industries'
 import { Route as CompanyPartnersRouteImport } from './routes/company/partners'
 import { Route as CompanyTechnologyRouteImport } from './routes/company/technology'
+import { Route as SophiaIndexRouteImport } from './routes/sophia.index'
+import { Route as SophiaThreadIdRouteImport } from './routes/sophia.$threadId'
 import { Route as CompanySolutionsIndexRouteImport } from './routes/company/solutions/index'
 import { Route as CompanySolutionsCngRouteImport } from './routes/company/solutions/cng'
 import { Route as CompanySolutionsCngConversionRouteImport } from './routes/company/solutions/cng-conversion'
@@ -180,6 +183,11 @@ const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
   path: '/account',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiSophiaRoute = ApiSophiaRouteImport.update({
+  id: '/api/sophia',
+  path: '/api/sophia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CompanyAboutRoute = CompanyAboutRouteImport.update({
   id: '/company/about',
   path: '/company/about',
@@ -218,6 +226,16 @@ const CompanyPartnersRoute = CompanyPartnersRouteImport.update({
 const CompanyTechnologyRoute = CompanyTechnologyRouteImport.update({
   id: '/company/technology',
   path: '/company/technology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SophiaIndexRoute = SophiaIndexRouteImport.update({
+  id: '/sophia/',
+  path: '/sophia/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SophiaThreadIdRoute = SophiaThreadIdRouteImport.update({
+  id: '/sophia/$threadId',
+  path: '/sophia/$threadId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompanySolutionsIndexRoute = CompanySolutionsIndexRouteImport.update({
@@ -320,6 +338,7 @@ export interface FileRoutesByFullPath {
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
+  '/api/sophia': typeof ApiSophiaRoute
   '/company/about': typeof CompanyAboutRoute
   '/company/careers': typeof CompanyCareersRoute
   '/company/contact': typeof CompanyContactRoute
@@ -328,6 +347,8 @@ export interface FileRoutesByFullPath {
   '/company/industries': typeof CompanyIndustriesRoute
   '/company/partners': typeof CompanyPartnersRoute
   '/company/technology': typeof CompanyTechnologyRoute
+  '/sophia/$threadId': typeof SophiaThreadIdRoute
+  '/sophia/': typeof SophiaIndexRoute
   '/company/solutions/cng': typeof CompanySolutionsCngRoute
   '/company/solutions/cng-conversion': typeof CompanySolutionsCngConversionRoute
   '/company/solutions/diesel': typeof CompanySolutionsDieselRoute
@@ -367,6 +388,7 @@ export interface FileRoutesByTo {
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
+  '/api/sophia': typeof ApiSophiaRoute
   '/company/about': typeof CompanyAboutRoute
   '/company/careers': typeof CompanyCareersRoute
   '/company/contact': typeof CompanyContactRoute
@@ -375,6 +397,8 @@ export interface FileRoutesByTo {
   '/company/industries': typeof CompanyIndustriesRoute
   '/company/partners': typeof CompanyPartnersRoute
   '/company/technology': typeof CompanyTechnologyRoute
+  '/sophia/$threadId': typeof SophiaThreadIdRoute
+  '/sophia': typeof SophiaIndexRoute
   '/company/solutions/cng': typeof CompanySolutionsCngRoute
   '/company/solutions/cng-conversion': typeof CompanySolutionsCngConversionRoute
   '/company/solutions/diesel': typeof CompanySolutionsDieselRoute
@@ -416,6 +440,7 @@ export interface FileRoutesById {
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
+  '/api/sophia': typeof ApiSophiaRoute
   '/company/about': typeof CompanyAboutRoute
   '/company/careers': typeof CompanyCareersRoute
   '/company/contact': typeof CompanyContactRoute
@@ -424,6 +449,8 @@ export interface FileRoutesById {
   '/company/industries': typeof CompanyIndustriesRoute
   '/company/partners': typeof CompanyPartnersRoute
   '/company/technology': typeof CompanyTechnologyRoute
+  '/sophia/$threadId': typeof SophiaThreadIdRoute
+  '/sophia/': typeof SophiaIndexRoute
   '/company/solutions/cng': typeof CompanySolutionsCngRoute
   '/company/solutions/cng-conversion': typeof CompanySolutionsCngConversionRoute
   '/company/solutions/diesel': typeof CompanySolutionsDieselRoute
@@ -465,6 +492,7 @@ export interface FileRouteTypes {
     | '/technology'
     | '/training'
     | '/account'
+    | '/api/sophia'
     | '/company/about'
     | '/company/careers'
     | '/company/contact'
@@ -473,6 +501,8 @@ export interface FileRouteTypes {
     | '/company/industries'
     | '/company/partners'
     | '/company/technology'
+    | '/sophia/$threadId'
+    | '/sophia/'
     | '/company/solutions/cng'
     | '/company/solutions/cng-conversion'
     | '/company/solutions/diesel'
@@ -512,6 +542,7 @@ export interface FileRouteTypes {
     | '/technology'
     | '/training'
     | '/account'
+    | '/api/sophia'
     | '/company/about'
     | '/company/careers'
     | '/company/contact'
@@ -520,6 +551,8 @@ export interface FileRouteTypes {
     | '/company/industries'
     | '/company/partners'
     | '/company/technology'
+    | '/sophia/$threadId'
+    | '/sophia'
     | '/company/solutions/cng'
     | '/company/solutions/cng-conversion'
     | '/company/solutions/diesel'
@@ -560,6 +593,7 @@ export interface FileRouteTypes {
     | '/technology'
     | '/training'
     | '/_authenticated/account'
+    | '/api/sophia'
     | '/company/about'
     | '/company/careers'
     | '/company/contact'
@@ -568,6 +602,8 @@ export interface FileRouteTypes {
     | '/company/industries'
     | '/company/partners'
     | '/company/technology'
+    | '/sophia/$threadId'
+    | '/sophia/'
     | '/company/solutions/cng'
     | '/company/solutions/cng-conversion'
     | '/company/solutions/diesel'
@@ -608,6 +644,7 @@ export interface RootRouteChildren {
   SolarPowerRoute: typeof SolarPowerRoute
   TechnologyRoute: typeof TechnologyRoute
   TrainingRoute: typeof TrainingRoute
+  ApiSophiaRoute: typeof ApiSophiaRoute
   CompanyAboutRoute: typeof CompanyAboutRoute
   CompanyCareersRoute: typeof CompanyCareersRoute
   CompanyContactRoute: typeof CompanyContactRoute
@@ -616,6 +653,8 @@ export interface RootRouteChildren {
   CompanyIndustriesRoute: typeof CompanyIndustriesRoute
   CompanyPartnersRoute: typeof CompanyPartnersRoute
   CompanyTechnologyRoute: typeof CompanyTechnologyRoute
+  SophiaThreadIdRoute: typeof SophiaThreadIdRoute
+  SophiaIndexRoute: typeof SophiaIndexRoute
   CompanySolutionsCngRoute: typeof CompanySolutionsCngRoute
   CompanySolutionsCngConversionRoute: typeof CompanySolutionsCngConversionRoute
   CompanySolutionsDieselRoute: typeof CompanySolutionsDieselRoute
@@ -808,6 +847,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAccountRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/sophia': {
+      id: '/api/sophia'
+      path: '/api/sophia'
+      fullPath: '/api/sophia'
+      preLoaderRoute: typeof ApiSophiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/company/about': {
       id: '/company/about'
       path: '/company/about'
@@ -862,6 +908,20 @@ declare module '@tanstack/react-router' {
       path: '/company/technology'
       fullPath: '/company/technology'
       preLoaderRoute: typeof CompanyTechnologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sophia/': {
+      id: '/sophia/'
+      path: '/sophia'
+      fullPath: '/sophia/'
+      preLoaderRoute: typeof SophiaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sophia/$threadId': {
+      id: '/sophia/$threadId'
+      path: '/sophia/$threadId'
+      fullPath: '/sophia/$threadId'
+      preLoaderRoute: typeof SophiaThreadIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/company/solutions/': {
@@ -994,6 +1054,7 @@ const rootRouteChildren: RootRouteChildren = {
   SolarPowerRoute: SolarPowerRoute,
   TechnologyRoute: TechnologyRoute,
   TrainingRoute: TrainingRoute,
+  ApiSophiaRoute: ApiSophiaRoute,
   CompanyAboutRoute: CompanyAboutRoute,
   CompanyCareersRoute: CompanyCareersRoute,
   CompanyContactRoute: CompanyContactRoute,
@@ -1002,6 +1063,8 @@ const rootRouteChildren: RootRouteChildren = {
   CompanyIndustriesRoute: CompanyIndustriesRoute,
   CompanyPartnersRoute: CompanyPartnersRoute,
   CompanyTechnologyRoute: CompanyTechnologyRoute,
+  SophiaThreadIdRoute: SophiaThreadIdRoute,
+  SophiaIndexRoute: SophiaIndexRoute,
   CompanySolutionsCngRoute: CompanySolutionsCngRoute,
   CompanySolutionsCngConversionRoute: CompanySolutionsCngConversionRoute,
   CompanySolutionsDieselRoute: CompanySolutionsDieselRoute,

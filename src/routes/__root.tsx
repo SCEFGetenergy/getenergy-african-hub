@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LegacySite } from "@/legacy/LegacySite";
 import legacyCss from "@/legacy/legacy.css?url";
 import { Toaster } from "@/components/ui/sonner";
+import { SophiaLauncher } from "@/components/sophia/SophiaLauncher";
 import { supabase } from "@/integrations/supabase/client";
 
 
@@ -152,6 +153,7 @@ function RootComponent() {
       <LegacySite>
         <Outlet />
       </LegacySite>
+      <SophiaLauncher />
       <Toaster richColors position="top-center" />
     </QueryClientProvider>
   );
