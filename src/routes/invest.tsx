@@ -19,6 +19,7 @@ export const Route = createFileRoute("/invest")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/invest" }],
   }),
   component: () => null,
 });

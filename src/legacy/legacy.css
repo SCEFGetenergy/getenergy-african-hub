@@ -739,7 +739,7 @@ header.site .bar-actions .btn.primary{background:var(--btn-green,#157A38);border
 .ta-label{margin-top:12px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .ta-node{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff}
 .ta-node b{display:block;color:var(--navy)}.ta-node span{display:block;font-size:.85rem;color:var(--muted);margin-top:2px}
-.ta-node.hub{background:var(--navy);border-color:var(--navy);text-align:center;margin-bottom:14px}.ta-node.hub b{color:#fff;font-size:1.15rem}.ta-node.hub span{color:#cfe0f5}
+.ta-node.hub{background:var(--navy-deep);border-color:var(--navy-deep);text-align:center;margin-bottom:14px}.ta-node.hub b{color:#fff;font-size:1.15rem}.ta-node.hub span{color:#cfe0f5}
 .ta-ring{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;position:relative}
 .ta-ring .ta-node{border-left:4px solid var(--green)}
 .ta-node.ext{border-left:4px solid var(--blue)}

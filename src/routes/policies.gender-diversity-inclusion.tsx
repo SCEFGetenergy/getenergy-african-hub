@@ -11,6 +11,7 @@ export const Route = createFileRoute("/policies/gender-diversity-inclusion")({
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/policies/gender-diversity-inclusion" }],
   }),
   component: PolicyPage,
 });
