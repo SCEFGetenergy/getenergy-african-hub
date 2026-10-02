@@ -22,6 +22,7 @@ import { Route as GetElectricityRouteImport } from './routes/get-electricity'
 import { Route as GetFuelRouteImport } from './routes/get-fuel'
 import { Route as GreenEnergyRouteImport } from './routes/green-energy'
 import { Route as IndustriesRouteImport } from './routes/industries'
+import { Route as InvestRouteImport } from './routes/invest'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OurServicesRouteImport } from './routes/our-services'
 import { Route as PartnersRouteImport } from './routes/partners'
@@ -121,6 +122,11 @@ const GreenEnergyRoute = GreenEnergyRouteImport.update({
 const IndustriesRoute = IndustriesRouteImport.update({
   id: '/industries',
   path: '/industries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvestRoute = InvestRouteImport.update({
+  id: '/invest',
+  path: '/invest',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -326,6 +332,7 @@ export interface FileRoutesByFullPath {
   '/get-fuel': typeof GetFuelRoute
   '/green-energy': typeof GreenEnergyRoute
   '/industries': typeof IndustriesRoute
+  '/invest': typeof InvestRoute
   '/login': typeof LoginRoute
   '/our-services': typeof OurServicesRoute
   '/partners': typeof PartnersRoute
@@ -376,6 +383,7 @@ export interface FileRoutesByTo {
   '/get-fuel': typeof GetFuelRoute
   '/green-energy': typeof GreenEnergyRoute
   '/industries': typeof IndustriesRoute
+  '/invest': typeof InvestRoute
   '/login': typeof LoginRoute
   '/our-services': typeof OurServicesRoute
   '/partners': typeof PartnersRoute
@@ -428,6 +436,7 @@ export interface FileRoutesById {
   '/get-fuel': typeof GetFuelRoute
   '/green-energy': typeof GreenEnergyRoute
   '/industries': typeof IndustriesRoute
+  '/invest': typeof InvestRoute
   '/login': typeof LoginRoute
   '/our-services': typeof OurServicesRoute
   '/partners': typeof PartnersRoute
@@ -480,6 +489,7 @@ export interface FileRouteTypes {
     | '/get-fuel'
     | '/green-energy'
     | '/industries'
+    | '/invest'
     | '/login'
     | '/our-services'
     | '/partners'
@@ -530,6 +540,7 @@ export interface FileRouteTypes {
     | '/get-fuel'
     | '/green-energy'
     | '/industries'
+    | '/invest'
     | '/login'
     | '/our-services'
     | '/partners'
@@ -581,6 +592,7 @@ export interface FileRouteTypes {
     | '/get-fuel'
     | '/green-energy'
     | '/industries'
+    | '/invest'
     | '/login'
     | '/our-services'
     | '/partners'
@@ -633,6 +645,7 @@ export interface RootRouteChildren {
   GetFuelRoute: typeof GetFuelRoute
   GreenEnergyRoute: typeof GreenEnergyRoute
   IndustriesRoute: typeof IndustriesRoute
+  InvestRoute: typeof InvestRoute
   LoginRoute: typeof LoginRoute
   OurServicesRoute: typeof OurServicesRoute
   PartnersRoute: typeof PartnersRoute
@@ -761,6 +774,13 @@ declare module '@tanstack/react-router' {
       path: '/industries'
       fullPath: '/industries'
       preLoaderRoute: typeof IndustriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invest': {
+      id: '/invest'
+      path: '/invest'
+      fullPath: '/invest'
+      preLoaderRoute: typeof InvestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -1043,6 +1063,7 @@ const rootRouteChildren: RootRouteChildren = {
   GetFuelRoute: GetFuelRoute,
   GreenEnergyRoute: GreenEnergyRoute,
   IndustriesRoute: IndustriesRoute,
+  InvestRoute: InvestRoute,
   LoginRoute: LoginRoute,
   OurServicesRoute: OurServicesRoute,
   PartnersRoute: PartnersRoute,
