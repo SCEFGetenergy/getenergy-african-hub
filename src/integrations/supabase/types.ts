@@ -14,6 +14,231 @@ export type Database = {
   }
   public: {
     Tables: {
+      academy_documents: {
+        Row: {
+          created_at: string
+          doc_type: string
+          file_name: string
+          file_path: string
+          id: string
+          mime_type: string | null
+          reviewer_note: string | null
+          size_bytes: number
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          doc_type: string
+          file_name: string
+          file_path: string
+          id?: string
+          mime_type?: string | null
+          reviewer_note?: string | null
+          size_bytes?: number
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          doc_type?: string
+          file_name?: string
+          file_path?: string
+          id?: string
+          mime_type?: string | null
+          reviewer_note?: string | null
+          size_bytes?: number
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      academy_payments: {
+        Row: {
+          amount_ngn: number | null
+          application_reference: string | null
+          created_at: string
+          id: string
+          provider: string
+          provider_reference: string | null
+          purpose: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount_ngn?: number | null
+          application_reference?: string | null
+          created_at?: string
+          id?: string
+          provider?: string
+          provider_reference?: string | null
+          purpose: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount_ngn?: number | null
+          application_reference?: string | null
+          created_at?: string
+          id?: string
+          provider?: string
+          provider_reference?: string | null
+          purpose?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      academy_profiles: {
+        Row: {
+          city: string | null
+          consent_at: string | null
+          country: string | null
+          created_at: string
+          date_of_birth: string | null
+          first_name: string
+          gender: string | null
+          interest: string | null
+          last_name: string
+          middle_name: string | null
+          nationality: string | null
+          occupation: string | null
+          organisation: string | null
+          phone: string | null
+          qualification: string | null
+          state: string | null
+          student_id: string
+          updated_at: string
+          user_id: string
+          years_experience: number | null
+        }
+        Insert: {
+          city?: string | null
+          consent_at?: string | null
+          country?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          first_name?: string
+          gender?: string | null
+          interest?: string | null
+          last_name?: string
+          middle_name?: string | null
+          nationality?: string | null
+          occupation?: string | null
+          organisation?: string | null
+          phone?: string | null
+          qualification?: string | null
+          state?: string | null
+          student_id?: string
+          updated_at?: string
+          user_id: string
+          years_experience?: number | null
+        }
+        Update: {
+          city?: string | null
+          consent_at?: string | null
+          country?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          first_name?: string
+          gender?: string | null
+          interest?: string | null
+          last_name?: string
+          middle_name?: string | null
+          nationality?: string | null
+          occupation?: string | null
+          organisation?: string | null
+          phone?: string | null
+          qualification?: string | null
+          state?: string | null
+          student_id?: string
+          updated_at?: string
+          user_id?: string
+          years_experience?: number | null
+        }
+        Relationships: []
+      }
+      admin_invitations: {
+        Row: {
+          accepted_at: string | null
+          accepted_by: string | null
+          created_at: string
+          email: string
+          expires_at: string
+          id: string
+          invited_by: string | null
+          revoked_at: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          token_hash: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          accepted_by?: string | null
+          created_at?: string
+          email: string
+          expires_at?: string
+          id?: string
+          invited_by?: string | null
+          revoked_at?: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          token_hash: string
+        }
+        Update: {
+          accepted_at?: string | null
+          accepted_by?: string | null
+          created_at?: string
+          email?: string
+          expires_at?: string
+          id?: string
+          invited_by?: string | null
+          revoked_at?: string | null
+          role?: Database["public"]["Enums"]["app_role"]
+          token_hash?: string
+        }
+        Relationships: []
+      }
+      audit_log: {
+        Row: {
+          action: string
+          actor_email: string | null
+          actor_id: string | null
+          created_at: string
+          entity_id: string | null
+          entity_type: string
+          id: string
+          new_value: Json | null
+          old_value: Json | null
+        }
+        Insert: {
+          action: string
+          actor_email?: string | null
+          actor_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type: string
+          id?: string
+          new_value?: Json | null
+          old_value?: Json | null
+        }
+        Update: {
+          action?: string
+          actor_email?: string | null
+          actor_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string
+          id?: string
+          new_value?: Json | null
+          old_value?: Json | null
+        }
+        Relationships: []
+      }
       certification_employers: {
         Row: {
           certification_code: string
@@ -228,6 +453,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      accept_admin_invitation: { Args: { p_token: string }; Returns: string }
+      create_admin_invitation: {
+        Args: {
+          p_email: string
+          p_role: Database["public"]["Enums"]["app_role"]
+        }
+        Returns: string
+      }
       generate_request_reference: { Args: never; Returns: string }
       has_role: {
         Args: {
@@ -236,6 +469,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      revoke_admin_invitation: { Args: { p_id: string }; Returns: undefined }
       submit_service_request: {
         Args: {
           p_company_name?: string

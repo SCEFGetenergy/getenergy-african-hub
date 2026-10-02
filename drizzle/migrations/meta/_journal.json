@@ -43,6 +43,13 @@
       "when": 1790911741517,
       "tag": "0005_admin_certification_management",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1790912874151,
+      "tag": "0006_academy_portal",
+      "breakpoints": true
     }
   ]
 }
