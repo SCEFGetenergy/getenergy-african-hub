@@ -31,3 +31,4 @@
 - [x] Academy page, search/filters, 64 programme pages, waiting-list and corporate forms with references, nav link, SOPHIA catalogue
 - [ ] Email copy of submissions to ccgetenergy@gmail.com — needs an email sender domain
 - [ ] Admin cohort/status/price-approval management and payments — future phase
+- [x] 10 GETS professional certifications (pages, waiting list, verify, CPD, SOPHIA) — credential issuing/CPD records/admin wait for first awards
