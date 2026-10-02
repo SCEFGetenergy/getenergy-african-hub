@@ -796,7 +796,7 @@ header.site{padding-top:env(safe-area-inset-top)}
   nav.main{display:block;position:fixed;top:0;right:0;left:auto;bottom:0;width:min(86vw,360px);max-height:none;height:100dvh;z-index:60;padding:calc(18px + env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom));border-left:1px solid var(--line);box-shadow:-12px 0 40px rgba(10,30,60,.25);transform:translateX(105%);visibility:hidden;transition:transform .28s ease,visibility 0s linear .28s}
   nav.main.open{transform:none;visibility:visible;transition:transform .28s ease}
   nav.main.open{box-shadow:0 0 0 100vmax rgba(5,20,40,.5)}
-  body.nav-open .m-actions{display:none}
+  body.nav-open .m-actions,body.nav-open [data-sophia-launcher]{display:none}
   .menu-toggle{min-height:44px;min-width:56px}
   /* in-development cards: one-per-view swipe row */
   .mk-areas.mk-six{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:12px;-webkit-overflow-scrolling:touch}
