@@ -156,7 +156,8 @@ export function initLegacy(api){
     });return lines;
   }
   var KINDS={
-    electricity:{title:"Review your token purchase",to:"support",subject:"Electricity token request",pay:true,note:"Online token payment is launching soon. Send this request to our team and we will contact you to complete your purchase."},
+    electricity:{title:"Electricity token request recorded",to:"support",subject:"Electricity token request",pay:true,note:"Online token payment is launching soon. This is a request, not a payment or token purchase. Our team will contact you about the next step."},
+    equipment:{title:"Your equipment enquiry is recorded",to:"sales",subject:"Energy-saving equipment enquiry",note:"This is an enquiry, not an order. Our team will confirm available products, price, delivery, installation and warranty options before any purchase."},
     bills:{title:"Review your bill payment",to:"support",subject:"Bill payment request",pay:true,note:"Online bill payment is launching soon. Send this request to our team and we will contact you to complete it."},
     fuel:{title:"Your fuel quote request is ready",to:"sales",subject:"Fuel quote request",note:"Your request has been recorded. Our team will review your volume and location before quoting; you can also send a copy by email."},
     cngbook:{title:"Your CNG assessment request is ready",to:"sales",subject:"CNG assessment enquiry",note:"Your interest has been recorded, not booked. The proposed centres are not open yet. We will contact you about availability and next steps; you can also send a copy by email."},

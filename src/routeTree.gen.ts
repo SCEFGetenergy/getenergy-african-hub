@@ -17,6 +17,7 @@ import { Route as CngRouteImport } from './routes/cng'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EeaRouteImport } from './routes/eea'
 import { Route as EnergyEcommerceRouteImport } from './routes/energy-ecommerce'
+import { Route as EnergySavingEquipmentRouteImport } from './routes/energy-saving-equipment'
 import { Route as EnergyTransitionRouteImport } from './routes/energy-transition'
 import { Route as EvRouteImport } from './routes/ev'
 import { Route as FaqRouteImport } from './routes/faq'
@@ -101,6 +102,11 @@ const EeaRoute = EeaRouteImport.update({
 const EnergyEcommerceRoute = EnergyEcommerceRouteImport.update({
   id: '/energy-ecommerce',
   path: '/energy-ecommerce',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnergySavingEquipmentRoute = EnergySavingEquipmentRouteImport.update({
+  id: '/energy-saving-equipment',
+  path: '/energy-saving-equipment',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnergyTransitionRoute = EnergyTransitionRouteImport.update({
@@ -352,6 +358,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/eea': typeof EeaRoute
   '/energy-ecommerce': typeof EnergyEcommerceRoute
+  '/energy-saving-equipment': typeof EnergySavingEquipmentRoute
   '/energy-transition': typeof EnergyTransitionRoute
   '/ev': typeof EvRoute
   '/faq': typeof FaqRoute
@@ -407,6 +414,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/eea': typeof EeaRoute
   '/energy-ecommerce': typeof EnergyEcommerceRoute
+  '/energy-saving-equipment': typeof EnergySavingEquipmentRoute
   '/energy-transition': typeof EnergyTransitionRoute
   '/ev': typeof EvRoute
   '/faq': typeof FaqRoute
@@ -464,6 +472,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/eea': typeof EeaRoute
   '/energy-ecommerce': typeof EnergyEcommerceRoute
+  '/energy-saving-equipment': typeof EnergySavingEquipmentRoute
   '/energy-transition': typeof EnergyTransitionRoute
   '/ev': typeof EvRoute
   '/faq': typeof FaqRoute
@@ -521,6 +530,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/eea'
     | '/energy-ecommerce'
+    | '/energy-saving-equipment'
     | '/energy-transition'
     | '/ev'
     | '/faq'
@@ -576,6 +586,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/eea'
     | '/energy-ecommerce'
+    | '/energy-saving-equipment'
     | '/energy-transition'
     | '/ev'
     | '/faq'
@@ -632,6 +643,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/eea'
     | '/energy-ecommerce'
+    | '/energy-saving-equipment'
     | '/energy-transition'
     | '/ev'
     | '/faq'
@@ -689,6 +701,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   EeaRoute: typeof EeaRoute
   EnergyEcommerceRoute: typeof EnergyEcommerceRoute
+  EnergySavingEquipmentRoute: typeof EnergySavingEquipmentRoute
   EnergyTransitionRoute: typeof EnergyTransitionRoute
   EvRoute: typeof EvRoute
   FaqRoute: typeof FaqRoute
@@ -792,6 +805,13 @@ declare module '@tanstack/react-router' {
       path: '/energy-ecommerce'
       fullPath: '/energy-ecommerce'
       preLoaderRoute: typeof EnergyEcommerceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/energy-saving-equipment': {
+      id: '/energy-saving-equipment'
+      path: '/energy-saving-equipment'
+      fullPath: '/energy-saving-equipment'
+      preLoaderRoute: typeof EnergySavingEquipmentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/energy-transition': {
@@ -1139,6 +1159,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   EeaRoute: EeaRoute,
   EnergyEcommerceRoute: EnergyEcommerceRoute,
+  EnergySavingEquipmentRoute: EnergySavingEquipmentRoute,
   EnergyTransitionRoute: EnergyTransitionRoute,
   EvRoute: EvRoute,
   FaqRoute: FaqRoute,

@@ -20,3 +20,9 @@
 
 ## Refuelling-station investment
 - [x] Add an honest “Invest in GET Energy Refuelling Stations” opportunity page and relevant site links
+
+## SOPHIA, tokens and equipment
+- [x] Refresh SOPHIA welcome and service/support actions from the reference
+- [x] Clarify token request and online-payment status on electricity page
+- [x] Add equipment enquiry page with real request reference
+- [ ] Equipment storefront, inventory and checkout — blocked until Shopify connection is approved
