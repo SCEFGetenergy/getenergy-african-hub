@@ -104,7 +104,7 @@ function FeeRow({ code, name, fee, approved, onSave }: { code: string; name: str
 
 function Employers() {
   const qc = useQueryClient();
-  const [code, setCode] = useState(CERTIFICATIONS[0].code);
+  const [code, setCode] = useState(CERTIFICATIONS[0]?.code ?? "");
   const [name, setName] = useState("");
   const { data } = useQuery({
     queryKey: ["admin-employers"],
