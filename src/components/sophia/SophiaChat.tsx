@@ -125,8 +125,8 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
           <a href="https://wa.me/2348180742835" target="_blank" rel="noopener noreferrer" className="hidden min-h-11 items-center rounded-md px-2 text-sm text-primary sm:flex">Talk to a person</a>
         </header>
 
-        <Conversation className="flex-1">
-          <ConversationContent>
+        <div className="flex-1 overflow-y-auto" role="log">
+          <div className="flex flex-col gap-8 p-4">
             {messages.length === 0 && (
               <div className="space-y-7 pb-5">
                 <div className="sophia-welcome relative overflow-hidden rounded-md px-4 py-6 sm:px-8">
@@ -193,9 +193,8 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
             {status === "submitted" && (
               <Message from="assistant"><MessageContent><Shimmer>SOPHIA is thinking…</Shimmer></MessageContent></Message>
             )}
-          </ConversationContent>
-          <ConversationScrollButton />
-        </Conversation>
+          </div>
+        </div>
 
         <div className="border-t bg-background p-3">
           <PromptInput onSubmit={(msg) => send(msg.text)}>
