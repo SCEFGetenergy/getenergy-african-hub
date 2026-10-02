@@ -112,7 +112,9 @@ export const Route = createFileRoute("/api/sophia")({
           originalMessages: body.messages,
           sendReasoning: true,
           onFinish: async ({ messages }) => {
-            const rows = messages.map((m) => ({
+            const base = Date.now() - messages.length;
+            const rows = messages.map((m, i) => ({
+              created_at: new Date(base + i).toISOString(),
               thread_id: threadId,
               message_id: m.id,
               role: m.role,

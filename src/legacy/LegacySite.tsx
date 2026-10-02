@@ -8,7 +8,7 @@ const [headPart = "", rest = ""] = bodyHtml.split('<main id="main">');
 const [pagesPart = "", footPart = ""] = rest.split("</main>");
 
 // Paths rendered by React routes rather than the static page markup.
-const APP_PAGES = ["/account", "/company"];
+const APP_PAGES = ["/account", "/company", "/sophia"];
 
 function pageName(pathname: string): string | null {
   if (APP_PAGES.some((p) => pathname.startsWith(p))) return null;

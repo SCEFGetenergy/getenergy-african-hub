@@ -34,6 +34,7 @@ import { Route as SolarPowerRouteImport } from './routes/solar-power'
 import { Route as TechnologyRouteImport } from './routes/technology'
 import { Route as TrainingRouteImport } from './routes/training'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
+import { Route as ApiSophiaRouteImport } from './routes/api/sophia'
 import { Route as CompanyAboutRouteImport } from './routes/company/about'
 import { Route as CompanyCareersRouteImport } from './routes/company/careers'
 import { Route as CompanyContactRouteImport } from './routes/company/contact'
@@ -180,6 +181,11 @@ const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
   path: '/account',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiSophiaRoute = ApiSophiaRouteImport.update({
+  id: '/api/sophia',
+  path: '/api/sophia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CompanyAboutRoute = CompanyAboutRouteImport.update({
   id: '/company/about',
   path: '/company/about',
@@ -320,6 +326,7 @@ export interface FileRoutesByFullPath {
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
+  '/api/sophia': typeof ApiSophiaRoute
   '/company/about': typeof CompanyAboutRoute
   '/company/careers': typeof CompanyCareersRoute
   '/company/contact': typeof CompanyContactRoute
@@ -367,6 +374,7 @@ export interface FileRoutesByTo {
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
+  '/api/sophia': typeof ApiSophiaRoute
   '/company/about': typeof CompanyAboutRoute
   '/company/careers': typeof CompanyCareersRoute
   '/company/contact': typeof CompanyContactRoute
@@ -416,6 +424,7 @@ export interface FileRoutesById {
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
+  '/api/sophia': typeof ApiSophiaRoute
   '/company/about': typeof CompanyAboutRoute
   '/company/careers': typeof CompanyCareersRoute
   '/company/contact': typeof CompanyContactRoute
@@ -465,6 +474,7 @@ export interface FileRouteTypes {
     | '/technology'
     | '/training'
     | '/account'
+    | '/api/sophia'
     | '/company/about'
     | '/company/careers'
     | '/company/contact'
@@ -512,6 +522,7 @@ export interface FileRouteTypes {
     | '/technology'
     | '/training'
     | '/account'
+    | '/api/sophia'
     | '/company/about'
     | '/company/careers'
     | '/company/contact'
@@ -560,6 +571,7 @@ export interface FileRouteTypes {
     | '/technology'
     | '/training'
     | '/_authenticated/account'
+    | '/api/sophia'
     | '/company/about'
     | '/company/careers'
     | '/company/contact'
@@ -608,6 +620,7 @@ export interface RootRouteChildren {
   SolarPowerRoute: typeof SolarPowerRoute
   TechnologyRoute: typeof TechnologyRoute
   TrainingRoute: typeof TrainingRoute
+  ApiSophiaRoute: typeof ApiSophiaRoute
   CompanyAboutRoute: typeof CompanyAboutRoute
   CompanyCareersRoute: typeof CompanyCareersRoute
   CompanyContactRoute: typeof CompanyContactRoute
@@ -808,6 +821,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAccountRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/sophia': {
+      id: '/api/sophia'
+      path: '/api/sophia'
+      fullPath: '/api/sophia'
+      preLoaderRoute: typeof ApiSophiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/company/about': {
       id: '/company/about'
       path: '/company/about'
@@ -994,6 +1014,7 @@ const rootRouteChildren: RootRouteChildren = {
   SolarPowerRoute: SolarPowerRoute,
   TechnologyRoute: TechnologyRoute,
   TrainingRoute: TrainingRoute,
+  ApiSophiaRoute: ApiSophiaRoute,
   CompanyAboutRoute: CompanyAboutRoute,
   CompanyCareersRoute: CompanyCareersRoute,
   CompanyContactRoute: CompanyContactRoute,
