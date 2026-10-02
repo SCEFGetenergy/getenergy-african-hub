@@ -6,7 +6,6 @@ import { DefaultChatTransport, type UIMessage } from "ai";
 import { toast } from "sonner";
 import { BatteryCharging, Bolt, ChevronRight, Flame, Fuel, GraduationCap, Headset, Lightbulb, MessageCircle, Phone, Plus, ReceiptText, SolarPanel, Trash2, TruckElectric, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Conversation, ConversationContent, ConversationScrollButton } from "@/components/ai-elements/conversation";
 import { Message, MessageContent, MessageResponse } from "@/components/ai-elements/message";
 import { PromptInput, PromptInputFooter, PromptInputSubmit, PromptInputTextarea, PromptInputTools } from "@/components/ai-elements/prompt-input";
 import { Tool, ToolContent, ToolHeader, ToolInput, ToolOutput } from "@/components/ai-elements/tool";
