@@ -121,11 +121,13 @@ export function initLegacy(api){
     if(pg&&location.hash){var el=document.getElementById(location.hash.slice(1));if(el){el.scrollIntoView();return}}
   }
   var t=document.querySelector(".menu-toggle"),n=document.getElementById("nav");
-  t.addEventListener("click",function(){var o=n.classList.toggle("open");t.setAttribute("aria-expanded",o)});
+  function setNav(o){n.classList.toggle("open",o);document.body.classList.toggle("nav-open",o);t.setAttribute("aria-expanded",o)}
+  t.addEventListener("click",function(){setNav(!n.classList.contains("open"))});
+  document.addEventListener("click",function(e){if(n.classList.contains("open")&&!n.contains(e.target)&&!t.contains(e.target))setNav(false)});
   var solutions=n.querySelector(".solutions-nav details");
-  n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");t.setAttribute("aria-expanded","false");solutions.open=false}});
+  n.addEventListener("click",function(e){if(e.target.closest("a")){document.body.classList.remove("nav-open");n.classList.remove("open");t.setAttribute("aria-expanded","false");solutions.open=false}});
   document.addEventListener("click",function(e){if(!solutions.contains(e.target))solutions.open=false});
-  document.addEventListener("keydown",function(e){if(e.key==="Escape"){solutions.open=false;n.classList.remove("open");t.setAttribute("aria-expanded","false")}});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"){solutions.open=false;n.classList.remove("open");document.body.classList.remove("nav-open");t.setAttribute("aria-expanded","false")}});
 
   [].forEach.call(document.querySelectorAll("[role=tablist]"),function(list){
     var tabs=[].slice.call(list.querySelectorAll("[role=tab]"));
@@ -173,7 +175,10 @@ export function initLegacy(api){
     invest:{title:"Your investment interest has been registered",to:"sales",subject:"GET Energy investment enquiry",note:"Your enquiry has been recorded. Our team will review your interest, the investment areas and project fit before discussing any next steps or terms."},
     login:{title:"Accounts are not open yet",nosend:true,note:"Online accounts open when our platform goes live. You can still buy tokens, pay bills and request quotes without an account."}
   };
-  (function(){var vids=[].slice.call(document.querySelectorAll("video[data-autoplay]"));if(!vids.length||!("IntersectionObserver" in window))return;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting&&e.intersectionRatio>=.6){if(window.innerWidth<=640)vids.forEach(function(o){if(o!==v)o.pause()});v.muted=true;v.play().catch(function(){})}else v.pause()})},{threshold:[0,.6]});vids.forEach(function(v){io.observe(v)})})();
+  (function(){var bar=document.querySelector(".m-actions");if(bar){var last=scrollY,closed=false;bar.querySelector(".m-actions-x").addEventListener("click",function(){closed=true;bar.classList.add("hide")});addEventListener("scroll",function(){if(closed)return;var y=scrollY;bar.classList.toggle("hide",y>last+4&&y>200);if(y<last-4)bar.classList.remove("hide");last=y},{passive:true})}})();
+  (function(){[].forEach.call(document.querySelectorAll('input[type=tel]'),function(i){i.setAttribute("inputmode","tel")});[].forEach.call(document.querySelectorAll(".f"),function(f,k){var e=f.querySelector(".err"),i=f.querySelector("input,select,textarea");if(e&&i){if(!e.id)e.id="err-"+k;i.setAttribute("aria-describedby",e.id);e.setAttribute("aria-live","polite")}})})();
+  (function(){var nums=[].slice.call(document.querySelectorAll("[data-count]"));if(!nums.length||window.innerWidth>640||matchMedia("(prefers-reduced-motion: reduce)").matches||!("IntersectionObserver" in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.disconnect();nums.forEach(function(el,i){var end=+el.dataset.count,t0=null;el.textContent="0";setTimeout(function(){requestAnimationFrame(function step(ts){t0=t0||ts;var p=Math.min(1,(ts-t0)/600);el.textContent=Math.round(end*(1-Math.pow(1-p,3))).toLocaleString("en-GB");if(p<1)requestAnimationFrame(step)})},i*100)})})},{threshold:.4});io.observe(nums[0].closest("section"))})();
+  (function(){var vids=[].slice.call(document.querySelectorAll("video[data-autoplay]"));if(!vids.length||!("IntersectionObserver" in window))return;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var cn=navigator.connection;if(window.innerWidth<=640||(cn&&(cn.saveData||/cellular/.test(cn.type||"")||/2g|3g/.test(cn.effectiveType||""))))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting&&e.intersectionRatio>=.6){if(window.innerWidth<=640)vids.forEach(function(o){if(o!==v)o.pause()});v.muted=true;v.play().catch(function(){})}else v.pause()})},{threshold:[0,.6]});vids.forEach(function(v){io.observe(v)})})();
   function showResult(form,kind,lines,reference,error){
     var k=KINDS[kind];var box=document.createElement("div");box.className="result";box.setAttribute("role","status");box.tabIndex=-1;
     var body=lines.join("\n"),subj=k.subject+(lines[0]?" - "+lines[0].split(": ").slice(1).join(": "):"");
