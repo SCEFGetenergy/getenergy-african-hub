@@ -164,6 +164,30 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_bootstrap: {
+        Row: {
+          attempts: number
+          code_hash: string
+          id: number
+          used_at: string | null
+          used_by: string | null
+        }
+        Insert: {
+          attempts?: number
+          code_hash: string
+          id?: number
+          used_at?: string | null
+          used_by?: string | null
+        }
+        Update: {
+          attempts?: number
+          code_hash?: string
+          id?: number
+          used_at?: string | null
+          used_by?: string | null
+        }
+        Relationships: []
+      }
       admin_invitations: {
         Row: {
           accepted_at: string | null
@@ -470,6 +494,7 @@ export type Database = {
         Args: { p_id: string; p_reason?: string }
         Returns: undefined
       }
+      claim_first_admin: { Args: { p_code: string }; Returns: string }
       create_admin_invitation: {
         Args: {
           p_email: string
@@ -477,6 +502,7 @@ export type Database = {
         }
         Returns: string
       }
+      first_admin_available: { Args: never; Returns: boolean }
       generate_request_reference: { Args: never; Returns: string }
       has_role: {
         Args: {
