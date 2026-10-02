@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PortalShell, Panel, portalHead, useMyAcademy } from "@/components/academy/portal";
+import { PortalShell, Panel, portalHead } from "@/components/academy/portal";
 import { RENEWAL_REQUIREMENTS } from "@/lib/certifications";
 
 export const Route = createFileRoute("/_authenticated/academy/cpd")({

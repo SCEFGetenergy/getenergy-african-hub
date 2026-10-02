@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PortalShell, Panel, useAcademyProfile, completion, portalHead, WALLET_NOTICE, useMyAcademy } from "@/components/academy/portal";
+import { PortalShell, Panel, useAcademyProfile, completion, portalHead, WALLET_NOTICE } from "@/components/academy/portal";
 import { PROGRAMMES, formatNaira } from "@/lib/academy";
 import { CERTIFICATIONS } from "@/lib/certifications";
 
@@ -70,7 +70,7 @@ function Apply() {
           <p className="mt-3 text-sm text-muted-foreground">Track its status under My applications. The Academy team confirms the cohort, final fee and next steps.</p>
           <div className="mt-5 rounded-lg border border-border bg-surface p-4">
             <h2 className="font-bold">Pay with GFA Wzip Wallet</h2>
-            <p className="mt-1 text-sm text-muted-foreground">{WALLET_NOTICE}</p>
+            <p className="mt-1 text-sm text-muted-foreground">{WALLET_NOTICE }</p>
             {payRef ? <p className="mt-3 text-sm font-semibold text-brand-green">Payment request saved (ID {payRef}). Status: awaiting wallet launch — nothing has been charged.</p>
               : <Button className="mt-3 min-h-11" variant="outline" onClick={requestPayment}>Save a payment request</Button>}
           </div>

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PortalShell, Panel, useAcademyProfile, portalHead, useMyAcademy } from "@/components/academy/portal";
+import { PortalShell, Panel, useAcademyProfile, portalHead } from "@/components/academy/portal";
 
 export const Route = createFileRoute("/_authenticated/academy/skills-passport")({
   head: () => portalHead("Skills Passport", "Your GET Energy Academy Skills Passport of verified training and competencies."),

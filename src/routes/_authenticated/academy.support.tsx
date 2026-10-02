@@ -3,7 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { PortalShell, Panel, useAcademyProfile, portalHead, useMyAcademy } from "@/components/academy/portal";
+import { PortalShell, Panel, useAcademyProfile, portalHead } from "@/components/academy/portal";
 import { whatsappFor } from "@/lib/academy";
 
 export const Route = createFileRoute("/_authenticated/academy/support")({
