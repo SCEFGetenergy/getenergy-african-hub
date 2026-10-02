@@ -15,7 +15,9 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as CngRouteImport } from './routes/cng'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as EeaRouteImport } from './routes/eea'
 import { Route as EnergyEcommerceRouteImport } from './routes/energy-ecommerce'
+import { Route as EnergyTransitionRouteImport } from './routes/energy-transition'
 import { Route as EvRouteImport } from './routes/ev'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as GetElectricityRouteImport } from './routes/get-electricity'
@@ -30,6 +32,7 @@ import { Route as PayBillsRouteImport } from './routes/pay-bills'
 import { Route as PowerAsAServiceRouteImport } from './routes/power-as-a-service'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as RequestEnergyQuoteRouteImport } from './routes/request-energy-quote'
 import { Route as SmartMeteringRouteImport } from './routes/smart-metering'
 import { Route as SolarPowerRouteImport } from './routes/solar-power'
 import { Route as TechnologyRouteImport } from './routes/technology'
@@ -44,6 +47,7 @@ import { Route as CompanyGreenEnergyRouteImport } from './routes/company/green-e
 import { Route as CompanyIndustriesRouteImport } from './routes/company/industries'
 import { Route as CompanyPartnersRouteImport } from './routes/company/partners'
 import { Route as CompanyTechnologyRouteImport } from './routes/company/technology'
+import { Route as PoliciesGenderDiversityInclusionRouteImport } from './routes/policies.gender-diversity-inclusion'
 import { Route as SophiaIndexRouteImport } from './routes/sophia.index'
 import { Route as SophiaThreadIdRouteImport } from './routes/sophia.$threadId'
 import { Route as CompanySolutionsIndexRouteImport } from './routes/company/solutions/index'
@@ -89,9 +93,19 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EeaRoute = EeaRouteImport.update({
+  id: '/eea',
+  path: '/eea',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EnergyEcommerceRoute = EnergyEcommerceRouteImport.update({
   id: '/energy-ecommerce',
   path: '/energy-ecommerce',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnergyTransitionRoute = EnergyTransitionRouteImport.update({
+  id: '/energy-transition',
+  path: '/energy-transition',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EvRoute = EvRouteImport.update({
@@ -164,6 +178,11 @@ const RegisterRoute = RegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RequestEnergyQuoteRoute = RequestEnergyQuoteRouteImport.update({
+  id: '/request-energy-quote',
+  path: '/request-energy-quote',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SmartMeteringRoute = SmartMeteringRouteImport.update({
   id: '/smart-metering',
   path: '/smart-metering',
@@ -234,6 +253,12 @@ const CompanyTechnologyRoute = CompanyTechnologyRouteImport.update({
   path: '/company/technology',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PoliciesGenderDiversityInclusionRoute =
+  PoliciesGenderDiversityInclusionRouteImport.update({
+    id: '/policies/gender-diversity-inclusion',
+    path: '/policies/gender-diversity-inclusion',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SophiaIndexRoute = SophiaIndexRouteImport.update({
   id: '/sophia/',
   path: '/sophia/',
@@ -325,7 +350,9 @@ export interface FileRoutesByFullPath {
   '/careers': typeof CareersRoute
   '/cng': typeof CngRoute
   '/contact': typeof ContactRoute
+  '/eea': typeof EeaRoute
   '/energy-ecommerce': typeof EnergyEcommerceRoute
+  '/energy-transition': typeof EnergyTransitionRoute
   '/ev': typeof EvRoute
   '/faq': typeof FaqRoute
   '/get-electricity': typeof GetElectricityRoute
@@ -340,6 +367,7 @@ export interface FileRoutesByFullPath {
   '/power-as-a-service': typeof PowerAsAServiceRoute
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
+  '/request-energy-quote': typeof RequestEnergyQuoteRoute
   '/smart-metering': typeof SmartMeteringRoute
   '/solar-power': typeof SolarPowerRoute
   '/technology': typeof TechnologyRoute
@@ -354,6 +382,7 @@ export interface FileRoutesByFullPath {
   '/company/industries': typeof CompanyIndustriesRoute
   '/company/partners': typeof CompanyPartnersRoute
   '/company/technology': typeof CompanyTechnologyRoute
+  '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/sophia/': typeof SophiaIndexRoute
   '/company/solutions/cng': typeof CompanySolutionsCngRoute
@@ -376,7 +405,9 @@ export interface FileRoutesByTo {
   '/careers': typeof CareersRoute
   '/cng': typeof CngRoute
   '/contact': typeof ContactRoute
+  '/eea': typeof EeaRoute
   '/energy-ecommerce': typeof EnergyEcommerceRoute
+  '/energy-transition': typeof EnergyTransitionRoute
   '/ev': typeof EvRoute
   '/faq': typeof FaqRoute
   '/get-electricity': typeof GetElectricityRoute
@@ -391,6 +422,7 @@ export interface FileRoutesByTo {
   '/power-as-a-service': typeof PowerAsAServiceRoute
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
+  '/request-energy-quote': typeof RequestEnergyQuoteRoute
   '/smart-metering': typeof SmartMeteringRoute
   '/solar-power': typeof SolarPowerRoute
   '/technology': typeof TechnologyRoute
@@ -405,6 +437,7 @@ export interface FileRoutesByTo {
   '/company/industries': typeof CompanyIndustriesRoute
   '/company/partners': typeof CompanyPartnersRoute
   '/company/technology': typeof CompanyTechnologyRoute
+  '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/sophia': typeof SophiaIndexRoute
   '/company/solutions/cng': typeof CompanySolutionsCngRoute
@@ -429,7 +462,9 @@ export interface FileRoutesById {
   '/careers': typeof CareersRoute
   '/cng': typeof CngRoute
   '/contact': typeof ContactRoute
+  '/eea': typeof EeaRoute
   '/energy-ecommerce': typeof EnergyEcommerceRoute
+  '/energy-transition': typeof EnergyTransitionRoute
   '/ev': typeof EvRoute
   '/faq': typeof FaqRoute
   '/get-electricity': typeof GetElectricityRoute
@@ -444,6 +479,7 @@ export interface FileRoutesById {
   '/power-as-a-service': typeof PowerAsAServiceRoute
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
+  '/request-energy-quote': typeof RequestEnergyQuoteRoute
   '/smart-metering': typeof SmartMeteringRoute
   '/solar-power': typeof SolarPowerRoute
   '/technology': typeof TechnologyRoute
@@ -458,6 +494,7 @@ export interface FileRoutesById {
   '/company/industries': typeof CompanyIndustriesRoute
   '/company/partners': typeof CompanyPartnersRoute
   '/company/technology': typeof CompanyTechnologyRoute
+  '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/sophia/': typeof SophiaIndexRoute
   '/company/solutions/cng': typeof CompanySolutionsCngRoute
@@ -482,7 +519,9 @@ export interface FileRouteTypes {
     | '/careers'
     | '/cng'
     | '/contact'
+    | '/eea'
     | '/energy-ecommerce'
+    | '/energy-transition'
     | '/ev'
     | '/faq'
     | '/get-electricity'
@@ -497,6 +536,7 @@ export interface FileRouteTypes {
     | '/power-as-a-service'
     | '/projects'
     | '/register'
+    | '/request-energy-quote'
     | '/smart-metering'
     | '/solar-power'
     | '/technology'
@@ -511,6 +551,7 @@ export interface FileRouteTypes {
     | '/company/industries'
     | '/company/partners'
     | '/company/technology'
+    | '/policies/gender-diversity-inclusion'
     | '/sophia/$threadId'
     | '/sophia/'
     | '/company/solutions/cng'
@@ -533,7 +574,9 @@ export interface FileRouteTypes {
     | '/careers'
     | '/cng'
     | '/contact'
+    | '/eea'
     | '/energy-ecommerce'
+    | '/energy-transition'
     | '/ev'
     | '/faq'
     | '/get-electricity'
@@ -548,6 +591,7 @@ export interface FileRouteTypes {
     | '/power-as-a-service'
     | '/projects'
     | '/register'
+    | '/request-energy-quote'
     | '/smart-metering'
     | '/solar-power'
     | '/technology'
@@ -562,6 +606,7 @@ export interface FileRouteTypes {
     | '/company/industries'
     | '/company/partners'
     | '/company/technology'
+    | '/policies/gender-diversity-inclusion'
     | '/sophia/$threadId'
     | '/sophia'
     | '/company/solutions/cng'
@@ -585,7 +630,9 @@ export interface FileRouteTypes {
     | '/careers'
     | '/cng'
     | '/contact'
+    | '/eea'
     | '/energy-ecommerce'
+    | '/energy-transition'
     | '/ev'
     | '/faq'
     | '/get-electricity'
@@ -600,6 +647,7 @@ export interface FileRouteTypes {
     | '/power-as-a-service'
     | '/projects'
     | '/register'
+    | '/request-energy-quote'
     | '/smart-metering'
     | '/solar-power'
     | '/technology'
@@ -614,6 +662,7 @@ export interface FileRouteTypes {
     | '/company/industries'
     | '/company/partners'
     | '/company/technology'
+    | '/policies/gender-diversity-inclusion'
     | '/sophia/$threadId'
     | '/sophia/'
     | '/company/solutions/cng'
@@ -638,7 +687,9 @@ export interface RootRouteChildren {
   CareersRoute: typeof CareersRoute
   CngRoute: typeof CngRoute
   ContactRoute: typeof ContactRoute
+  EeaRoute: typeof EeaRoute
   EnergyEcommerceRoute: typeof EnergyEcommerceRoute
+  EnergyTransitionRoute: typeof EnergyTransitionRoute
   EvRoute: typeof EvRoute
   FaqRoute: typeof FaqRoute
   GetElectricityRoute: typeof GetElectricityRoute
@@ -653,6 +704,7 @@ export interface RootRouteChildren {
   PowerAsAServiceRoute: typeof PowerAsAServiceRoute
   ProjectsRoute: typeof ProjectsRoute
   RegisterRoute: typeof RegisterRoute
+  RequestEnergyQuoteRoute: typeof RequestEnergyQuoteRoute
   SmartMeteringRoute: typeof SmartMeteringRoute
   SolarPowerRoute: typeof SolarPowerRoute
   TechnologyRoute: typeof TechnologyRoute
@@ -666,6 +718,7 @@ export interface RootRouteChildren {
   CompanyIndustriesRoute: typeof CompanyIndustriesRoute
   CompanyPartnersRoute: typeof CompanyPartnersRoute
   CompanyTechnologyRoute: typeof CompanyTechnologyRoute
+  PoliciesGenderDiversityInclusionRoute: typeof PoliciesGenderDiversityInclusionRoute
   SophiaThreadIdRoute: typeof SophiaThreadIdRoute
   SophiaIndexRoute: typeof SophiaIndexRoute
   CompanySolutionsCngRoute: typeof CompanySolutionsCngRoute
@@ -727,11 +780,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/eea': {
+      id: '/eea'
+      path: '/eea'
+      fullPath: '/eea'
+      preLoaderRoute: typeof EeaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/energy-ecommerce': {
       id: '/energy-ecommerce'
       path: '/energy-ecommerce'
       fullPath: '/energy-ecommerce'
       preLoaderRoute: typeof EnergyEcommerceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/energy-transition': {
+      id: '/energy-transition'
+      path: '/energy-transition'
+      fullPath: '/energy-transition'
+      preLoaderRoute: typeof EnergyTransitionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ev': {
@@ -832,6 +899,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/request-energy-quote': {
+      id: '/request-energy-quote'
+      path: '/request-energy-quote'
+      fullPath: '/request-energy-quote'
+      preLoaderRoute: typeof RequestEnergyQuoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/smart-metering': {
       id: '/smart-metering'
       path: '/smart-metering'
@@ -928,6 +1002,13 @@ declare module '@tanstack/react-router' {
       path: '/company/technology'
       fullPath: '/company/technology'
       preLoaderRoute: typeof CompanyTechnologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/gender-diversity-inclusion': {
+      id: '/policies/gender-diversity-inclusion'
+      path: '/policies/gender-diversity-inclusion'
+      fullPath: '/policies/gender-diversity-inclusion'
+      preLoaderRoute: typeof PoliciesGenderDiversityInclusionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sophia/': {
@@ -1056,7 +1137,9 @@ const rootRouteChildren: RootRouteChildren = {
   CareersRoute: CareersRoute,
   CngRoute: CngRoute,
   ContactRoute: ContactRoute,
+  EeaRoute: EeaRoute,
   EnergyEcommerceRoute: EnergyEcommerceRoute,
+  EnergyTransitionRoute: EnergyTransitionRoute,
   EvRoute: EvRoute,
   FaqRoute: FaqRoute,
   GetElectricityRoute: GetElectricityRoute,
@@ -1071,6 +1154,7 @@ const rootRouteChildren: RootRouteChildren = {
   PowerAsAServiceRoute: PowerAsAServiceRoute,
   ProjectsRoute: ProjectsRoute,
   RegisterRoute: RegisterRoute,
+  RequestEnergyQuoteRoute: RequestEnergyQuoteRoute,
   SmartMeteringRoute: SmartMeteringRoute,
   SolarPowerRoute: SolarPowerRoute,
   TechnologyRoute: TechnologyRoute,
@@ -1084,6 +1168,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompanyIndustriesRoute: CompanyIndustriesRoute,
   CompanyPartnersRoute: CompanyPartnersRoute,
   CompanyTechnologyRoute: CompanyTechnologyRoute,
+  PoliciesGenderDiversityInclusionRoute: PoliciesGenderDiversityInclusionRoute,
   SophiaThreadIdRoute: SophiaThreadIdRoute,
   SophiaIndexRoute: SophiaIndexRoute,
   CompanySolutionsCngRoute: CompanySolutionsCngRoute,
