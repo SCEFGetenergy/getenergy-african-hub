@@ -156,16 +156,26 @@ function Employers() {
 
 function Applications() {
   const qc = useQueryClient();
+  const [showTest, setShowTest] = useState(false);
   const { data, isLoading } = useQuery({
-    queryKey: ["admin-applications"],
-    queryFn: async () =>
-      (await supabase
+    queryKey: ["admin-applications", showTest],
+    queryFn: async () => {
+      let q = supabase
         .from("service_requests")
-        .select("id, reference, request_type, service_name, contact_name, contact_email, contact_phone, status, created_at")
+        .select("id, reference, request_type, service_name, contact_name, contact_email, contact_phone, status, created_at, is_test")
         .like("request_type", "academy-%")
-        .is("deleted_at", null)
-        .order("created_at", { ascending: false })
-        .limit(200)).data ?? [],
+        .is("deleted_at", null);
+      if (!showTest) q = q.eq("is_test", false);
+      return (await q.order("created_at", { ascending: false }).limit(200)).data ?? [];
+    },
+  });
+  const toggleTest = useMutation({
+    mutationFn: async ({ id, is_test }: { id: string; is_test: boolean }) => {
+      const { error } = await supabase.from("service_requests").update({ is_test }).eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: (_d, v) => { toast.success(v.is_test ? "Marked as test entry" : "Marked as real enquiry"); qc.invalidateQueries({ queryKey: ["admin-applications"] }); },
+    onError: (e: Error) => toast.error(e.message),
   });
   const update = useMutation({
     mutationFn: async ({ id, status }: { id: string; status: string }) => {
