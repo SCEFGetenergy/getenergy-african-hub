@@ -139,9 +139,8 @@ export function LegacySite({ children }: { children: ReactNode }) {
       "distributed-power": "Distributed Power",
     };
     const sel = document.getElementById("ct-sub") as HTMLSelectElement | null;
-    if (svc && sel && map[svc] && sel.dataset.pre !== svc) {
+    if (svc && sel && map[svc] && sel.value === "") {
       sel.value = map[svc];
-      sel.dataset.pre = svc;
     }
   });
 
