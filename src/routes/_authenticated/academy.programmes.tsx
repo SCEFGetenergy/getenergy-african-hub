@@ -10,7 +10,7 @@ import { CERTIFICATIONS } from "@/lib/certifications";
 
 export const Route = createFileRoute("/_authenticated/academy/programmes")({
   head: () => portalHead("Apply for a programme", "Apply for any GET Energy Academy programme, pathway or professional certification."),
-  validateSearch: (s: Record<string, unknown>): { item?: string } => ({ item: typeof s["item"] === "string" ? s["item"] : undefined }),
+  validateSearch: (s: Record<string, unknown>): { item?: string | undefined } => ({ item: typeof s["item"] === "string" ? s["item"] : undefined }),
   component: Apply,
 });
 
