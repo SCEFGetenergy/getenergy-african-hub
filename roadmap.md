@@ -26,3 +26,8 @@
 - [x] Clarify token request and online-payment status on electricity page
 - [x] Add equipment enquiry page with real request reference
 - [ ] Equipment storefront, inventory and checkout — blocked until Shopify connection is approved
+
+## GET Energy Academy (64 offerings)
+- [x] Academy page, search/filters, 64 programme pages, waiting-list and corporate forms with references, nav link, SOPHIA catalogue
+- [ ] Email copy of submissions to ccgetenergy@gmail.com — needs an email sender domain
+- [ ] Admin cohort/status/price-approval management and payments — future phase
