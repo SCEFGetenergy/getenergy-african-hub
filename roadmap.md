@@ -17,3 +17,6 @@
 - [ ] Phase 5: battery storage, generators, advisory, C&I pages
 - [ ] Phase 6: email to ccgetenergy@gmail.com (needs email domain setup) + WhatsApp +234 818 074 2835
 - [ ] Phase 7-8: mobile/performance + QA
+
+## Refuelling-station investment
+- [ ] Add an honest “Invest in GET Energy Refuelling Stations” opportunity page and relevant site links
