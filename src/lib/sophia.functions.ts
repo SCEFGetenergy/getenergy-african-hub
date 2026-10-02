@@ -57,7 +57,7 @@ export const getSophiaThread = createServerFn({ method: "POST" })
       .eq("thread_id", data.threadId)
       .order("created_at", { ascending: true });
     if (error) throw new Error(error.message);
-    return { id: thread.id as string, messages: (rows ?? []).map((r) => r.message as unknown as UIMessage) };
+    return { id: thread.id as string, messagesJson: JSON.stringify((rows ?? []).map((r) => r.message as unknown as UIMessage)) };
   });
 
 export const deleteSophiaThread = createServerFn({ method: "POST" })

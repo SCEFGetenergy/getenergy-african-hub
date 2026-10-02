@@ -31,7 +31,7 @@ function ThreadPage() {
     setState(null);
     const token = getVisitorToken();
     get({ data: { token, threadId } })
-      .then((t) => setState(t ? { token, messages: t.messages } : "missing"))
+      .then((t) => setState(t ? { token, messages: JSON.parse(t.messagesJson) as UIMessage[] } : "missing"))
       .catch(() => setState("missing"));
   }, [threadId, get]);
 
