@@ -75,7 +75,7 @@ function CertsPage() {
 
       <Section tone="surface">
         <SectionHeading eyebrow="10 certifications" title="Choose your professional certification" />
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
+        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {CERTIFICATIONS.map((c) => <CertificationCard key={c.code} c={c} />)}
         </div>
       </Section>
