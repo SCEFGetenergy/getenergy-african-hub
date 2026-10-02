@@ -775,3 +775,46 @@ header.site .bar-actions .btn.primary{background:var(--btn-green,#157A38);border
   #smart-metering .ge-card p,#renewables-bess .ge-card p{font-size:.88rem;line-height:1.45}
   #smart-metering .btn,#renewables-bess .btn{width:100%;justify-content:center}
 }
+
+/* ===== Mobile-first pass ===== */
+header.site{padding-top:env(safe-area-inset-top)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.opnow{padding:28px 0 8px}.opnow h2{display:flex;align-items:center;gap:10px;font-size:1.35rem;margin:0 0 14px}
+.opnow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.opn{display:flex;flex-direction:column;gap:4px;padding:16px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);background:var(--bg);min-height:44px}
+.opn b{font-size:1.7rem;color:var(--navy-deep,var(--blue));font-variant-numeric:tabular-nums}.opn span{color:var(--muted)}
+.op-tag{font-style:normal;font-weight:700;font-size:.85rem;color:var(--green-ink,var(--green));margin-top:4px}
+.live-dot{width:10px;height:10px;border-radius:50%;background:var(--green);flex:none}
+.m-actions{display:none}
+@media (max-width:640px){
+  .opnow-grid{grid-template-columns:1fr}
+  .opnow-grid .opn{flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:8px}
+  .live-dot{animation:livepulse 2s ease-out 1}
+  @keyframes livepulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--green) 60%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
+  /* menu as slide-in drawer */
+  nav.main{display:block;position:fixed;top:0;right:0;left:auto;bottom:0;width:min(86vw,360px);max-height:none;height:100dvh;z-index:60;padding:calc(18px + env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom));border-left:1px solid var(--line);box-shadow:-12px 0 40px rgba(10,30,60,.25);transform:translateX(105%);visibility:hidden;transition:transform .28s ease,visibility 0s linear .28s}
+  nav.main.open{transform:none;visibility:visible;transition:transform .28s ease}
+  body.nav-open::after{content:"";position:fixed;inset:0;background:rgba(5,20,40,.45);z-index:55}
+  .menu-toggle{min-height:44px;min-width:56px}
+  /* in-development cards: one-per-view swipe row */
+  .mk-areas.mk-six{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:12px;-webkit-overflow-scrolling:touch}
+  .mk-areas.mk-six>.mk-card{flex:0 0 86%;scroll-snap-align:start}
+  /* forms */
+  form.gf input,form.gf select,form.gf textarea{min-height:48px;font-size:16px}
+  form.gf .f{margin-bottom:6px}
+  .btn{min-height:48px}
+  /* sticky quick actions */
+  .m-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:40;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(10,30,60,.12);transition:transform .25s ease}
+  .m-actions .btn{font-size:.88rem;padding:8px;width:auto;margin:0;text-align:center;justify-content:center}
+  .m-actions-x{min-width:44px;min-height:44px;border:0;background:none;font-size:1.4rem;color:var(--muted)}
+  .m-actions.hide{transform:translateY(110%)}
+  footer{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
+}
+@media (hover:none){a:hover,.btn:hover{filter:none}.card-lift:hover{transform:none}.btn:active,.mk-card:active,.opn:active{transform:scale(.98);filter:brightness(.95)}}
+details>summary{min-height:44px}
+details[open]>*:not(summary){animation:detopen .22s ease-out}
+@keyframes detopen{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.result{animation:detopen .3s ease-out}
+.result h3::before{content:"";display:inline-block;width:1.1em;height:1.1em;margin-right:8px;vertical-align:-3px;background:var(--green);border-radius:50%;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12'/%3E%3C/svg%3E");animation:checkin .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes checkin{from{transform:scale(0)}to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
