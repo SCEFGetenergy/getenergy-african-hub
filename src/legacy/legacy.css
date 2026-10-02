@@ -734,20 +734,20 @@ header.site .bar-actions .btn.primary{background:var(--btn-green,#157A38);border
 /* Technology ecosystem diagram */
 .tech-arch{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;align-items:center}
 @media(min-width:900px){.tech-arch{grid-template-columns:minmax(0,3fr) 120px minmax(0,1.2fr)}}
-.ta-core,.ta-ext{border:1px solid var(--line);border-radius:18px;padding:20px;background:#fff;position:relative}
-.ta-ext{border-style:dashed;background:#f6f8fb}
-.ta-label{margin-top:12px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#4a5a70}
+.ta-core,.ta-ext{border:1px solid var(--line);border-radius:18px;padding:20px;background:var(--bg);position:relative}
+.ta-ext{border-style:dashed;background:var(--panel)}
+.ta-label{margin-top:12px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .ta-node{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff}
-.ta-node b{display:block;color:#0b2a5b}.ta-node span{display:block;font-size:.85rem;color:#4a5a70;margin-top:2px}
-.ta-node.hub{background:#0b2a5b;border-color:#0b2a5b;text-align:center;margin-bottom:14px}.ta-node.hub b{color:#fff;font-size:1.15rem}.ta-node.hub span{color:#cfe0f5}
+.ta-node b{display:block;color:var(--navy)}.ta-node span{display:block;font-size:.85rem;color:var(--muted);margin-top:2px}
+.ta-node.hub{background:var(--navy);border-color:var(--navy);text-align:center;margin-bottom:14px}.ta-node.hub b{color:#fff;font-size:1.15rem}.ta-node.hub span{color:#cfe0f5}
 .ta-ring{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;position:relative}
-.ta-ring .ta-node{border-left:4px solid #1f9d55}
-.ta-node.ext{border-left:4px solid #0b5ed7}
+.ta-ring .ta-node{border-left:4px solid var(--green)}
+.ta-node.ext{border-left:4px solid var(--blue)}
 .ta-link{display:flex;align-items:center;justify-content:center;position:relative;min-height:40px}
-.ta-link:before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:2px dashed #8aa0bd}
-@media(min-width:900px){.ta-link:before{left:0;right:0;top:50%;bottom:auto;border-left:0;border-top:2px dashed #8aa0bd}}
-.ta-link span{position:relative;background:#fff;padding:2px 8px;font-size:.75rem;color:#4a5a70;text-align:center}
+.ta-link:before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:2px dashed var(--line)}
+@media(min-width:900px){.ta-link:before{left:0;right:0;top:50%;bottom:auto;border-left:0;border-top:2px dashed var(--line)}}
+.ta-link span{position:relative;background:var(--bg);padding:2px 8px;font-size:.75rem;color:var(--muted);text-align:center}
 /* About pull-quote */
-.about-pq{border-left:4px solid #1f9d55;padding:6px 0 6px 20px;max-width:820px}
-.about-pq blockquote{font-size:1.25rem;line-height:1.5;color:#0b2a5b;margin:8px 0 12px}
-.about-pq a{font-weight:700;color:#0b5ed7}
+.about-pq{border-left:4px solid var(--green);padding:6px 0 6px 20px;max-width:820px}
+.about-pq blockquote{font-size:1.25rem;line-height:1.5;color:var(--navy);margin:8px 0 12px}
+.about-pq a{font-weight:700;color:var(--blue)}
