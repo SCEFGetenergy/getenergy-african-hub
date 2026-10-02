@@ -35,13 +35,13 @@ export function AcademyForm({
   const [ref, setRef] = useState<string | null>(null);
   const set = (k: string, val: string) => setV((p) => ({ ...p, [k]: val }));
 
-  const programmeTitle = getProgramme(v.programme ?? "")?.title ?? v.programmes ?? "";
+  const programmeTitle = getProgramme(v['programme'] ?? "")?.title ?? v['programmes'] ?? "";
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     const missing = fields.find((f) => f.required && !(v[f.name] ?? "").trim());
     if (missing) return setErr(`${missing.label.replace(" *", "")} is required.`);
-    const email = (v.email ?? "").trim();
+    const email = (v['email'] ?? "").trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 255) return setErr("Please enter a valid email.");
     if (Object.values(v).some((x) => x.length > 2000)) return setErr("Please shorten your answers.");
     setErr(null);
@@ -49,16 +49,16 @@ export function AcademyForm({
     const lines = fields
       .filter((f) => f.type !== "consent" && v[f.name])
       .map((f) => `${f.label.replace(" *", "")}: ${f.type === "programme" ? programmeTitle : v[f.name]}`);
-    const name = (v.name ?? v.contact ?? email).trim();
+    const name = (v['name'] ?? v['contact'] ?? email).trim();
     const { data, error } = await supabase.rpc("submit_service_request", {
       p_request_type: kind === "waitlist" ? "academy-waitlist" : "academy-corporate",
       p_service_name:
         kind === "waitlist" ? `GET Energy Academy Waiting List — ${programmeTitle}` : "GET Energy Academy Corporate Training",
       p_contact_name: name.slice(0, 200),
       p_contact_email: email,
-      p_contact_phone: (v.phone ?? "").trim(),
-      ...(v.organisation?.trim() ? { p_company_name: v.organisation.trim() } : {}),
-      ...(v.city?.trim() || v.country?.trim() ? { p_location: [v.city, v.country].filter(Boolean).join(", ") } : {}),
+      p_contact_phone: (v['phone'] ?? "").trim(),
+      ...(v['organisation']?.trim() ? { p_company_name: v['organisation'].trim() } : {}),
+      ...(v['city']?.trim() || v['country']?.trim() ? { p_location: [v['city'], v['country']].filter(Boolean).join(", ") } : {}),
       p_details: { lines, ...v },
     });
     setBusy(false);

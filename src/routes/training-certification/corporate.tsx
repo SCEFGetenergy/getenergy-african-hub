@@ -8,7 +8,7 @@ const DESC = "Train your team: customised technical, HSE, energy-management and 
 
 export const Route = createFileRoute("/training-certification/corporate")({
   validateSearch: (s: Record<string, unknown>): { programme?: string } =>
-    typeof s.programme === "string" ? { programme: s.programme } : {},
+    typeof s['programme'] === "string" ? { programme: s['programme'] } : {},
   head: () => ({
     meta: [
       { title: TITLE },
