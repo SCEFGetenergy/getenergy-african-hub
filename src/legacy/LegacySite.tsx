@@ -39,6 +39,7 @@ const SERVICE_NAMES: Record<string, string> = {
   contact: "Contact",
   careers: "Careers",
   invest: "Refuelling Station Investment",
+  equipment: "Energy-Saving Equipment",
 };
 
 export function LegacySite({ children }: { children: ReactNode }) {

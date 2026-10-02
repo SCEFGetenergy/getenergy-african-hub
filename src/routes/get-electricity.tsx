@@ -5,9 +5,9 @@ export const Route = createFileRoute("/get-electricity")({
   head: () => ({
     meta: [
       { title: "Get Electricity | Token Vending & Smart Electricity | GetEnergy" },
-      { name: "description", content: "Token vending and smart electricity solutions. Buy tokens, pay bills and manage meters for homes, businesses and communities. Power access made simple." },
+      { name: "description", content: "Request an electricity token and receive a reference. Online payment is launching soon. Explore smart electricity solutions for homes, businesses and communities." },
       { property: "og:title", content: "Get Electricity | Token Vending & Smart Electricity | GetEnergy" },
-      { property: "og:description", content: "Token vending and smart electricity solutions. Buy tokens, pay bills and manage meters for homes, businesses and communities. Power access made simple." },
+      { property: "og:description", content: "Request an electricity token and receive a reference. Online payment is launching soon. Explore smart electricity solutions for homes, businesses and communities." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
