@@ -787,6 +787,7 @@ header.site{padding-top:env(safe-area-inset-top)}
 .live-dot{width:10px;height:10px;border-radius:50%;background:var(--green);flex:none}
 .m-actions{display:none}
 @media (max-width:640px){
+  html,body{overflow-x:clip}
   .opnow-grid{grid-template-columns:1fr}
   .opnow-grid .opn{flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:8px}
   .live-dot{animation:livepulse 2s ease-out 1}
