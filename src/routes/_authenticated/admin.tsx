@@ -177,7 +177,7 @@ function Applications() {
   });
   const archive = useMutation({
     mutationFn: async ({ id, reason }: { id: string; reason: string }) => {
-      const { error } = await supabase.rpc("archive_service_request", { p_id: id, p_reason: reason || undefined });
+      const { error } = await supabase.rpc("archive_service_request", reason ? { p_id: id, p_reason: reason } : { p_id: id });
       if (error) throw error;
     },
     onSuccess: () => {
