@@ -33,3 +33,12 @@
 - [x] Admin screen: certification fees, application statuses, recognised employers
 - [ ] Cohort management and payments — future phase
 - [x] 10 GETS professional certifications (pages, waiting list, verify, CPD, SOPHIA) — credential issuing/CPD records/admin wait for first awards
+
+## Academy portal (registration, dashboards, wallet, CV, invitations, audit)
+- [x] /academy portal home, register (full fields + consent), login, forgot/reset password, student ID
+- [x] Student pages: dashboard, profile, apply (all 74), applications, payments, documents/CV, certifications, Skills Passport, CPD, support
+- [x] Private CV/document upload with admin review; payment requests saved as "awaiting wallet launch"
+- [x] Admin: invitations (72h single-use links), audit log (database-recorded), document review, payment requests
+- [ ] GFA Wzip Wallet live payments, receipts, instalments — waiting on wallet API docs and keys
+- [ ] Emailed invitations/notifications — needs an email sender domain
+- [ ] First admin account — waiting on the team's email address
