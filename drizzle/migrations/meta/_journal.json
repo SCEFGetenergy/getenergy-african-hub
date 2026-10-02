@@ -29,6 +29,13 @@
       "when": 1790403245983,
       "tag": "0003_tighten_reference_function_grants",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1790904200994,
+      "tag": "0004_sophia_chat",
+      "breakpoints": true
     }
   ]
 }
