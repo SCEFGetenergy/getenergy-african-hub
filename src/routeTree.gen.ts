@@ -50,6 +50,7 @@ import { Route as CompanySolutionsEeaRouteImport } from './routes/company/soluti
 import { Route as CompanySolutionsElectricityRouteImport } from './routes/company/solutions/electricity'
 import { Route as CompanySolutionsEvChargingRouteImport } from './routes/company/solutions/ev-charging'
 import { Route as CompanySolutionsEvMobilityRouteImport } from './routes/company/solutions/ev-mobility'
+import { Route as CompanySolutionsMiniGridsRouteImport } from './routes/company/solutions/mini-grids'
 import { Route as CompanySolutionsPowerAsAServiceRouteImport } from './routes/company/solutions/power-as-a-service'
 import { Route as CompanySolutionsRenewablesRouteImport } from './routes/company/solutions/renewables'
 import { Route as CompanySolutionsSmartMeteringRouteImport } from './routes/company/solutions/smart-metering'
@@ -263,6 +264,12 @@ const CompanySolutionsEvMobilityRoute =
     path: '/company/solutions/ev-mobility',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CompanySolutionsMiniGridsRoute =
+  CompanySolutionsMiniGridsRouteImport.update({
+    id: '/company/solutions/mini-grids',
+    path: '/company/solutions/mini-grids',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CompanySolutionsPowerAsAServiceRoute =
   CompanySolutionsPowerAsAServiceRouteImport.update({
     id: '/company/solutions/power-as-a-service',
@@ -328,6 +335,7 @@ export interface FileRoutesByFullPath {
   '/company/solutions/electricity': typeof CompanySolutionsElectricityRoute
   '/company/solutions/ev-charging': typeof CompanySolutionsEvChargingRoute
   '/company/solutions/ev-mobility': typeof CompanySolutionsEvMobilityRoute
+  '/company/solutions/mini-grids': typeof CompanySolutionsMiniGridsRoute
   '/company/solutions/power-as-a-service': typeof CompanySolutionsPowerAsAServiceRoute
   '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
   '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
@@ -374,6 +382,7 @@ export interface FileRoutesByTo {
   '/company/solutions/electricity': typeof CompanySolutionsElectricityRoute
   '/company/solutions/ev-charging': typeof CompanySolutionsEvChargingRoute
   '/company/solutions/ev-mobility': typeof CompanySolutionsEvMobilityRoute
+  '/company/solutions/mini-grids': typeof CompanySolutionsMiniGridsRoute
   '/company/solutions/power-as-a-service': typeof CompanySolutionsPowerAsAServiceRoute
   '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
   '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
@@ -422,6 +431,7 @@ export interface FileRoutesById {
   '/company/solutions/electricity': typeof CompanySolutionsElectricityRoute
   '/company/solutions/ev-charging': typeof CompanySolutionsEvChargingRoute
   '/company/solutions/ev-mobility': typeof CompanySolutionsEvMobilityRoute
+  '/company/solutions/mini-grids': typeof CompanySolutionsMiniGridsRoute
   '/company/solutions/power-as-a-service': typeof CompanySolutionsPowerAsAServiceRoute
   '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
   '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
@@ -470,6 +480,7 @@ export interface FileRouteTypes {
     | '/company/solutions/electricity'
     | '/company/solutions/ev-charging'
     | '/company/solutions/ev-mobility'
+    | '/company/solutions/mini-grids'
     | '/company/solutions/power-as-a-service'
     | '/company/solutions/renewables'
     | '/company/solutions/smart-metering'
@@ -516,6 +527,7 @@ export interface FileRouteTypes {
     | '/company/solutions/electricity'
     | '/company/solutions/ev-charging'
     | '/company/solutions/ev-mobility'
+    | '/company/solutions/mini-grids'
     | '/company/solutions/power-as-a-service'
     | '/company/solutions/renewables'
     | '/company/solutions/smart-metering'
@@ -563,6 +575,7 @@ export interface FileRouteTypes {
     | '/company/solutions/electricity'
     | '/company/solutions/ev-charging'
     | '/company/solutions/ev-mobility'
+    | '/company/solutions/mini-grids'
     | '/company/solutions/power-as-a-service'
     | '/company/solutions/renewables'
     | '/company/solutions/smart-metering'
@@ -610,6 +623,7 @@ export interface RootRouteChildren {
   CompanySolutionsElectricityRoute: typeof CompanySolutionsElectricityRoute
   CompanySolutionsEvChargingRoute: typeof CompanySolutionsEvChargingRoute
   CompanySolutionsEvMobilityRoute: typeof CompanySolutionsEvMobilityRoute
+  CompanySolutionsMiniGridsRoute: typeof CompanySolutionsMiniGridsRoute
   CompanySolutionsPowerAsAServiceRoute: typeof CompanySolutionsPowerAsAServiceRoute
   CompanySolutionsRenewablesRoute: typeof CompanySolutionsRenewablesRoute
   CompanySolutionsSmartMeteringRoute: typeof CompanySolutionsSmartMeteringRoute
@@ -906,6 +920,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompanySolutionsEvMobilityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/company/solutions/mini-grids': {
+      id: '/company/solutions/mini-grids'
+      path: '/company/solutions/mini-grids'
+      fullPath: '/company/solutions/mini-grids'
+      preLoaderRoute: typeof CompanySolutionsMiniGridsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/company/solutions/power-as-a-service': {
       id: '/company/solutions/power-as-a-service'
       path: '/company/solutions/power-as-a-service'
@@ -988,6 +1009,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompanySolutionsElectricityRoute: CompanySolutionsElectricityRoute,
   CompanySolutionsEvChargingRoute: CompanySolutionsEvChargingRoute,
   CompanySolutionsEvMobilityRoute: CompanySolutionsEvMobilityRoute,
+  CompanySolutionsMiniGridsRoute: CompanySolutionsMiniGridsRoute,
   CompanySolutionsPowerAsAServiceRoute: CompanySolutionsPowerAsAServiceRoute,
   CompanySolutionsRenewablesRoute: CompanySolutionsRenewablesRoute,
   CompanySolutionsSmartMeteringRoute: CompanySolutionsSmartMeteringRoute,
