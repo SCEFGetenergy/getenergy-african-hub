@@ -324,6 +324,9 @@ export type Database = {
           contact_name: string
           contact_phone: string | null
           created_at: string
+          delete_reason: string | null
+          deleted_at: string | null
+          deleted_by: string | null
           details: Json
           id: string
           location: string | null
@@ -340,6 +343,9 @@ export type Database = {
           contact_name: string
           contact_phone?: string | null
           created_at?: string
+          delete_reason?: string | null
+          deleted_at?: string | null
+          deleted_by?: string | null
           details?: Json
           id?: string
           location?: string | null
@@ -356,6 +362,9 @@ export type Database = {
           contact_name?: string
           contact_phone?: string | null
           created_at?: string
+          delete_reason?: string | null
+          deleted_at?: string | null
+          deleted_by?: string | null
           details?: Json
           id?: string
           location?: string | null
@@ -454,6 +463,10 @@ export type Database = {
     }
     Functions: {
       accept_admin_invitation: { Args: { p_token: string }; Returns: string }
+      archive_service_request: {
+        Args: { p_id: string; p_reason?: string }
+        Returns: undefined
+      }
       create_admin_invitation: {
         Args: {
           p_email: string
@@ -469,6 +482,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      restore_service_request: { Args: { p_id: string }; Returns: undefined }
       revoke_admin_invitation: { Args: { p_id: string }; Returns: undefined }
       submit_service_request: {
         Args: {
