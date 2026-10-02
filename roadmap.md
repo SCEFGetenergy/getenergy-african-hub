@@ -19,4 +19,4 @@
 - [ ] Phase 7-8: mobile/performance + QA
 
 ## Refuelling-station investment
-- [ ] Add an honest “Invest in GET Energy Refuelling Stations” opportunity page and relevant site links
+- [x] Add an honest “Invest in GET Energy Refuelling Stations” opportunity page and relevant site links
