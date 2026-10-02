@@ -131,6 +131,17 @@ export function LegacySite({ children }: { children: ReactNode }) {
   // page markup on re-render, which would otherwise reset it to the first page loaded.
   useEffect(() => {
     api.current?.show(pageName(pathname));
+    // Pre-select the contact subject from ?service=...
+    const svc = new URLSearchParams(window.location.search).get("service");
+    const map: Record<string, string> = {
+      "mini-grid": "Mini-Grid",
+      "power-as-a-service": "Power-as-a-Service",
+      "distributed-power": "Distributed Power",
+    };
+    const sel = document.getElementById("ct-sub") as HTMLSelectElement | null;
+    if (svc && sel && map[svc] && sel.value === "") {
+      sel.value = map[svc];
+    }
   });
 
   const isApp = pageName(pathname) === null;
