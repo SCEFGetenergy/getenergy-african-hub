@@ -40,6 +40,10 @@ import { Route as TechnologyRouteImport } from './routes/technology'
 import { Route as TrainingRouteImport } from './routes/training'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AcademyIndexRouteImport } from './routes/academy.index'
+import { Route as AcademyLoginRouteImport } from './routes/academy.login'
+import { Route as AcademyRegisterRouteImport } from './routes/academy.register'
+import { Route as AcademyResetPasswordRouteImport } from './routes/academy.reset-password'
 import { Route as ApiSophiaRouteImport } from './routes/api/sophia'
 import { Route as CompanyAboutRouteImport } from './routes/company/about'
 import { Route as CompanyCareersRouteImport } from './routes/company/careers'
@@ -228,6 +232,26 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AcademyIndexRoute = AcademyIndexRouteImport.update({
+  id: '/academy/',
+  path: '/academy/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyLoginRoute = AcademyLoginRouteImport.update({
+  id: '/academy/login',
+  path: '/academy/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyRegisterRoute = AcademyRegisterRouteImport.update({
+  id: '/academy/register',
+  path: '/academy/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyResetPasswordRoute = AcademyResetPasswordRouteImport.update({
+  id: '/academy/reset-password',
+  path: '/academy/reset-password',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiSophiaRoute = ApiSophiaRouteImport.update({
   id: '/api/sophia',
@@ -450,6 +474,9 @@ export interface FileRoutesByFullPath {
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/academy/login': typeof AcademyLoginRoute
+  '/academy/register': typeof AcademyRegisterRoute
+  '/academy/reset-password': typeof AcademyResetPasswordRoute
   '/api/sophia': typeof ApiSophiaRoute
   '/company/about': typeof CompanyAboutRoute
   '/company/careers': typeof CompanyCareersRoute
@@ -465,6 +492,7 @@ export interface FileRoutesByFullPath {
   '/training-certification/cpd': typeof TrainingCertificationCpdRoute
   '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
+  '/academy/': typeof AcademyIndexRoute
   '/sophia/': typeof SophiaIndexRoute
   '/training-certification/': typeof TrainingCertificationIndexRoute
   '/company/solutions/cng': typeof CompanySolutionsCngRoute
@@ -516,6 +544,9 @@ export interface FileRoutesByTo {
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/academy/login': typeof AcademyLoginRoute
+  '/academy/register': typeof AcademyRegisterRoute
+  '/academy/reset-password': typeof AcademyResetPasswordRoute
   '/api/sophia': typeof ApiSophiaRoute
   '/company/about': typeof CompanyAboutRoute
   '/company/careers': typeof CompanyCareersRoute
@@ -531,6 +562,7 @@ export interface FileRoutesByTo {
   '/training-certification/cpd': typeof TrainingCertificationCpdRoute
   '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
+  '/academy': typeof AcademyIndexRoute
   '/sophia': typeof SophiaIndexRoute
   '/training-certification': typeof TrainingCertificationIndexRoute
   '/company/solutions/cng': typeof CompanySolutionsCngRoute
@@ -584,6 +616,9 @@ export interface FileRoutesById {
   '/training': typeof TrainingRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/academy/login': typeof AcademyLoginRoute
+  '/academy/register': typeof AcademyRegisterRoute
+  '/academy/reset-password': typeof AcademyResetPasswordRoute
   '/api/sophia': typeof ApiSophiaRoute
   '/company/about': typeof CompanyAboutRoute
   '/company/careers': typeof CompanyCareersRoute
@@ -599,6 +634,7 @@ export interface FileRoutesById {
   '/training-certification/cpd': typeof TrainingCertificationCpdRoute
   '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
+  '/academy/': typeof AcademyIndexRoute
   '/sophia/': typeof SophiaIndexRoute
   '/training-certification/': typeof TrainingCertificationIndexRoute
   '/company/solutions/cng': typeof CompanySolutionsCngRoute
@@ -652,6 +688,9 @@ export interface FileRouteTypes {
     | '/training'
     | '/account'
     | '/admin'
+    | '/academy/login'
+    | '/academy/register'
+    | '/academy/reset-password'
     | '/api/sophia'
     | '/company/about'
     | '/company/careers'
@@ -667,6 +706,7 @@ export interface FileRouteTypes {
     | '/training-certification/cpd'
     | '/training-certification/verify'
     | '/training-certification/waitlist'
+    | '/academy/'
     | '/sophia/'
     | '/training-certification/'
     | '/company/solutions/cng'
@@ -718,6 +758,9 @@ export interface FileRouteTypes {
     | '/training'
     | '/account'
     | '/admin'
+    | '/academy/login'
+    | '/academy/register'
+    | '/academy/reset-password'
     | '/api/sophia'
     | '/company/about'
     | '/company/careers'
@@ -733,6 +776,7 @@ export interface FileRouteTypes {
     | '/training-certification/cpd'
     | '/training-certification/verify'
     | '/training-certification/waitlist'
+    | '/academy'
     | '/sophia'
     | '/training-certification'
     | '/company/solutions/cng'
@@ -785,6 +829,9 @@ export interface FileRouteTypes {
     | '/training'
     | '/_authenticated/account'
     | '/_authenticated/admin'
+    | '/academy/login'
+    | '/academy/register'
+    | '/academy/reset-password'
     | '/api/sophia'
     | '/company/about'
     | '/company/careers'
@@ -800,6 +847,7 @@ export interface FileRouteTypes {
     | '/training-certification/cpd'
     | '/training-certification/verify'
     | '/training-certification/waitlist'
+    | '/academy/'
     | '/sophia/'
     | '/training-certification/'
     | '/company/solutions/cng'
@@ -851,6 +899,9 @@ export interface RootRouteChildren {
   SolarPowerRoute: typeof SolarPowerRoute
   TechnologyRoute: typeof TechnologyRoute
   TrainingRoute: typeof TrainingRoute
+  AcademyLoginRoute: typeof AcademyLoginRoute
+  AcademyRegisterRoute: typeof AcademyRegisterRoute
+  AcademyResetPasswordRoute: typeof AcademyResetPasswordRoute
   ApiSophiaRoute: typeof ApiSophiaRoute
   CompanyAboutRoute: typeof CompanyAboutRoute
   CompanyCareersRoute: typeof CompanyCareersRoute
@@ -866,6 +917,7 @@ export interface RootRouteChildren {
   TrainingCertificationCpdRoute: typeof TrainingCertificationCpdRoute
   TrainingCertificationVerifyRoute: typeof TrainingCertificationVerifyRoute
   TrainingCertificationWaitlistRoute: typeof TrainingCertificationWaitlistRoute
+  AcademyIndexRoute: typeof AcademyIndexRoute
   SophiaIndexRoute: typeof SophiaIndexRoute
   TrainingCertificationIndexRoute: typeof TrainingCertificationIndexRoute
   CompanySolutionsCngRoute: typeof CompanySolutionsCngRoute
@@ -1105,6 +1157,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin'
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/academy/': {
+      id: '/academy/'
+      path: '/academy'
+      fullPath: '/academy/'
+      preLoaderRoute: typeof AcademyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/login': {
+      id: '/academy/login'
+      path: '/academy/login'
+      fullPath: '/academy/login'
+      preLoaderRoute: typeof AcademyLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/register': {
+      id: '/academy/register'
+      path: '/academy/register'
+      fullPath: '/academy/register'
+      preLoaderRoute: typeof AcademyRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/reset-password': {
+      id: '/academy/reset-password'
+      path: '/academy/reset-password'
+      fullPath: '/academy/reset-password'
+      preLoaderRoute: typeof AcademyResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/sophia': {
       id: '/api/sophia'
@@ -1390,6 +1470,9 @@ const rootRouteChildren: RootRouteChildren = {
   SolarPowerRoute: SolarPowerRoute,
   TechnologyRoute: TechnologyRoute,
   TrainingRoute: TrainingRoute,
+  AcademyLoginRoute: AcademyLoginRoute,
+  AcademyRegisterRoute: AcademyRegisterRoute,
+  AcademyResetPasswordRoute: AcademyResetPasswordRoute,
   ApiSophiaRoute: ApiSophiaRoute,
   CompanyAboutRoute: CompanyAboutRoute,
   CompanyCareersRoute: CompanyCareersRoute,
@@ -1405,6 +1488,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrainingCertificationCpdRoute: TrainingCertificationCpdRoute,
   TrainingCertificationVerifyRoute: TrainingCertificationVerifyRoute,
   TrainingCertificationWaitlistRoute: TrainingCertificationWaitlistRoute,
+  AcademyIndexRoute: AcademyIndexRoute,
   SophiaIndexRoute: SophiaIndexRoute,
   TrainingCertificationIndexRoute: TrainingCertificationIndexRoute,
   CompanySolutionsCngRoute: CompanySolutionsCngRoute,
