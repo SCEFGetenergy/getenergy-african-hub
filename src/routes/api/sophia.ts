@@ -38,7 +38,7 @@ export const Route = createFileRoute("/api/sophia")({
           .maybeSingle();
         if (!thread) return new Response("Conversation not found", { status: 404 });
 
-        const apiKey = process.env.LOVABLE_API_KEY;
+        const apiKey = process.env['LOVABLE_API_KEY'];
         if (!apiKey) return new Response("AI is not configured", { status: 500 });
 
         const runIdFetch = createRunIdFetch(getRequestRunId(request));
