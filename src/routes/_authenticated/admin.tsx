@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Section } from "@/components/site/ui-bits";
 import { CERTIFICATIONS } from "@/lib/certifications";
-import { formatNaira } from "@/lib/academy";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -202,4 +201,3 @@ function Applications() {
   );
 }
 
-export { formatNaira };
