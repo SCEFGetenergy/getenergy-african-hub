@@ -754,9 +754,9 @@ header.site .bar-actions .btn.primary{background:var(--btn-green,#157A38);border
 
 /* Phone layout refinements */
 @media (max-width:1100px){
-  .bar-actions .btn.primary{display:inline-flex;padding:8px 12px;font-size:.85rem;min-height:44px;align-items:center}
+  .bar-actions .btn.primary{display:inline-flex;white-space:nowrap;padding:8px 12px;font-size:.85rem;min-height:44px;align-items:center}
 }
-@media (max-width:420px){ .bar-actions .btn.primary{padding:8px 10px;font-size:.8rem} .logo small{display:none} }
+@media (max-width:420px){ .bar-actions .btn.primary{padding:8px 10px;font-size:.78rem} .logo img{max-width:120px} .logo small{display:none} }
 .tscroll{background:linear-gradient(to right,var(--bg) 30%,transparent) left/40px 100% no-repeat local,linear-gradient(to left,var(--bg) 30%,transparent) right/40px 100% no-repeat local,linear-gradient(to left,rgba(0,0,0,.12),transparent) right/14px 100% no-repeat scroll}
 @media (max-width:640px){
   .tech-arch{gap:10px}
@@ -767,8 +767,7 @@ header.site .bar-actions .btn.primary{background:var(--btn-green,#157A38);border
   .ta-node b{font-size:.92rem;line-height:1.25}
   .ta-node span{font-size:.78rem;line-height:1.35}
   .ta-link{min-height:44px}
-  #smart-metering .ptrust,#renewables-bess .ptrust{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px}
-  #smart-metering .ptrust li,#renewables-bess .ptrust li{flex-direction:column;align-items:flex-start;gap:6px;font-size:.88rem}
+  #smart-metering .ptrust li,#renewables-bess .ptrust li{padding:8px 0;font-size:.9rem}
   #smart-metering .ge-grid,#renewables-bess .ge-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   #smart-metering .ge-card,#renewables-bess .ge-card{padding:14px}
   #smart-metering .ge-card h3,#renewables-bess .ge-card h3{font-size:1rem}
