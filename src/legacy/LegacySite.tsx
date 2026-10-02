@@ -125,6 +125,12 @@ export function LegacySite({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!window.location.hash) window.scrollTo(0, 0);
+  }, [pathname]);
+
+  // Re-apply the visible page after every commit: React may re-apply the static
+  // page markup on re-render, which would otherwise reset it to the first page loaded.
+  useEffect(() => {
+    api.current?.show(pageName(pathname));
     // Pre-select the contact subject from ?service=...
     const svc = new URLSearchParams(window.location.search).get("service");
     const map: Record<string, string> = {
@@ -133,13 +139,10 @@ export function LegacySite({ children }: { children: ReactNode }) {
       "distributed-power": "Distributed Power",
     };
     const sel = document.getElementById("ct-sub") as HTMLSelectElement | null;
-    if (svc && sel && map[svc]) sel.value = map[svc];
-  }, [pathname]);
-
-  // Re-apply the visible page after every commit: React may re-apply the static
-  // page markup on re-render, which would otherwise reset it to the first page loaded.
-  useEffect(() => {
-    api.current?.show(pageName(pathname));
+    if (svc && sel && map[svc] && sel.dataset.pre !== svc) {
+      sel.value = map[svc];
+      sel.dataset.pre = svc;
+    }
   });
 
   const isApp = pageName(pathname) === null;
