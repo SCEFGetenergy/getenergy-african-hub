@@ -36,6 +36,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as RequestEnergyQuoteRouteImport } from './routes/request-energy-quote'
 import { Route as SmartMeteringRouteImport } from './routes/smart-metering'
 import { Route as SolarPowerRouteImport } from './routes/solar-power'
+import { Route as TeamInviteRouteImport } from './routes/team-invite'
 import { Route as TechnologyRouteImport } from './routes/technology'
 import { Route as TrainingRouteImport } from './routes/training'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
@@ -221,6 +222,11 @@ const SmartMeteringRoute = SmartMeteringRouteImport.update({
 const SolarPowerRoute = SolarPowerRouteImport.update({
   id: '/solar-power',
   path: '/solar-power',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeamInviteRoute = TeamInviteRouteImport.update({
+  id: '/team-invite',
+  path: '/team-invite',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TechnologyRoute = TechnologyRouteImport.update({
@@ -539,6 +545,7 @@ export interface FileRoutesByFullPath {
   '/request-energy-quote': typeof RequestEnergyQuoteRoute
   '/smart-metering': typeof SmartMeteringRoute
   '/solar-power': typeof SolarPowerRoute
+  '/team-invite': typeof TeamInviteRoute
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
@@ -619,6 +626,7 @@ export interface FileRoutesByTo {
   '/request-energy-quote': typeof RequestEnergyQuoteRoute
   '/smart-metering': typeof SmartMeteringRoute
   '/solar-power': typeof SolarPowerRoute
+  '/team-invite': typeof TeamInviteRoute
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
@@ -701,6 +709,7 @@ export interface FileRoutesById {
   '/request-energy-quote': typeof RequestEnergyQuoteRoute
   '/smart-metering': typeof SmartMeteringRoute
   '/solar-power': typeof SolarPowerRoute
+  '/team-invite': typeof TeamInviteRoute
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
@@ -783,6 +792,7 @@ export interface FileRouteTypes {
     | '/request-energy-quote'
     | '/smart-metering'
     | '/solar-power'
+    | '/team-invite'
     | '/technology'
     | '/training'
     | '/account'
@@ -863,6 +873,7 @@ export interface FileRouteTypes {
     | '/request-energy-quote'
     | '/smart-metering'
     | '/solar-power'
+    | '/team-invite'
     | '/technology'
     | '/training'
     | '/account'
@@ -944,6 +955,7 @@ export interface FileRouteTypes {
     | '/request-energy-quote'
     | '/smart-metering'
     | '/solar-power'
+    | '/team-invite'
     | '/technology'
     | '/training'
     | '/_authenticated/account'
@@ -1026,6 +1038,7 @@ export interface RootRouteChildren {
   RequestEnergyQuoteRoute: typeof RequestEnergyQuoteRoute
   SmartMeteringRoute: typeof SmartMeteringRoute
   SolarPowerRoute: typeof SolarPowerRoute
+  TeamInviteRoute: typeof TeamInviteRoute
   TechnologyRoute: typeof TechnologyRoute
   TrainingRoute: typeof TrainingRoute
   AcademyLoginRoute: typeof AcademyLoginRoute
@@ -1257,6 +1270,13 @@ declare module '@tanstack/react-router' {
       path: '/solar-power'
       fullPath: '/solar-power'
       preLoaderRoute: typeof SolarPowerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/team-invite': {
+      id: '/team-invite'
+      path: '/team-invite'
+      fullPath: '/team-invite'
+      preLoaderRoute: typeof TeamInviteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/technology': {
@@ -1689,6 +1709,7 @@ const rootRouteChildren: RootRouteChildren = {
   RequestEnergyQuoteRoute: RequestEnergyQuoteRoute,
   SmartMeteringRoute: SmartMeteringRoute,
   SolarPowerRoute: SolarPowerRoute,
+  TeamInviteRoute: TeamInviteRoute,
   TechnologyRoute: TechnologyRoute,
   TrainingRoute: TrainingRoute,
   AcademyLoginRoute: AcademyLoginRoute,
