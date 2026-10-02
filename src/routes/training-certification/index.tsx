@@ -3,6 +3,7 @@ import { Award, BriefcaseBusiness, GraduationCap, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/site/ui-bits";
 import { AcademyLockup, Catalogue, ProgrammeCard } from "@/components/academy/AcademyParts";
+import { CERTIFICATIONS } from "@/lib/certifications";
 import { CERT_DISCLAIMER, FEATURED_SLUGS, PROGRAMMES, getProgramme, whatsappFor } from "@/lib/academy";
 
 const TITLE = "GET Energy Academy — Training & Certification in Nigeria | GetEnergy";
@@ -88,8 +89,9 @@ function AcademyPage() {
           body="GET Energy Academy is a commercial training and workforce-development business of GET Energy Trading Services, providing practical technical, HSE, green-economy, energy-business, workforce-productivity and career-development programmes for individuals, professionals, companies and institutions. Selected programmes may be delivered directly by GET Energy or in collaboration with recognized technical institutions, OEMs, professional bodies, HSE providers, certification bodies and other approved training partners."
         />
         <p className="mt-6 text-sm font-medium text-primary">
-          {courses} standalone programmes + {pathways} career pathways = {PROGRAMMES.length} offerings. All currently open
-          for waiting-list registration.
+          {PROGRAMMES.length + CERTIFICATIONS.length} training, career & professional certification products: {courses} standalone
+          programmes + {pathways} career pathways + {CERTIFICATIONS.length} GETS professional certifications. All currently open for
+          waiting-list registration.
         </p>
       </Section>
 
@@ -111,6 +113,18 @@ function AcademyPage() {
           <strong className="text-foreground">Certification: </strong>
           {CERT_DISCLAIMER} All fees shown are proposed programme fees until approved.
         </p>
+      </Section>
+
+      <Section tone="brand">
+        <SectionHeading invert eyebrow="Premium certification layer" title="GET Energy Professional Certifications" body="Advanced competency-based professional credentials that combine GET Energy's proprietary curriculum, selected technical and professional training modules, practical assessment, workplace productivity, capstone projects and continuing professional development. These are not ordinary attendance certificates." />
+        <ul className="mt-6 flex flex-wrap gap-2">
+          {CERTIFICATIONS.map((c) => (
+            <li key={c.code}><Link to="/training-certification/professional-certifications/$code" params={{ code: c.code.toLowerCase() }} className="inline-flex min-h-9 items-center rounded-full border border-primary-foreground/30 px-3 font-mono text-xs text-primary-foreground hover:bg-primary-foreground/10">{c.code}</Link></li>
+          ))}
+        </ul>
+        <Button asChild size="lg" className="mt-7 min-h-12 bg-brand-green text-brand-green-foreground hover:bg-brand-green/90">
+          <Link to="/training-certification/professional-certifications">Explore professional certifications</Link>
+        </Button>
       </Section>
 
       <Section tone="brand">
