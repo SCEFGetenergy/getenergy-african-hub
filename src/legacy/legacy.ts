@@ -111,7 +111,7 @@ export function initLegacy(api){
 
   // router (driven by the app router)
   var pages=[].slice.call(document.querySelectorAll("[data-page]")),links=[].slice.call(document.querySelectorAll("nav.main a"));
-  var aliases={"about-us":"about","paas":"power-as-a-service","eea":"energy-ecommerce","diesel":"get-fuel","cng-ev":"cng","cng-conversion":"cng"};
+  var aliases={"about-us":"about","paas":"power-as-a-service","eea":"energy-ecommerce","diesel":"get-fuel","cng-ev":"cng","cng-conversion":"cng-conversion"};
   function show(name){
     pages=[].slice.call(document.querySelectorAll("[data-page]"));links=[].slice.call(document.querySelectorAll("nav.main a"));
     name=aliases[name]||name;

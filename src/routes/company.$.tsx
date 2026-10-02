@@ -14,7 +14,7 @@ const CANONICAL: Record<string, string> = {
   "solutions/electricity": "/get-electricity",
   "solutions/diesel": "/get-fuel",
   "solutions/cng": "/cng",
-  "solutions/cng-conversion": "/cng#book-conversion",
+  "solutions/cng-conversion": "/cng-conversion",
   "solutions/ev-mobility": "/ev",
   "solutions/ev-charging": "/ev#ev-charging",
   "solutions/power-as-a-service": "/power-as-a-service",

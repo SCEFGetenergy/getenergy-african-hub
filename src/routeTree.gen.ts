@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as CngRouteImport } from './routes/cng'
+import { Route as CngConversionRouteImport } from './routes/cng-conversion'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EeaRouteImport } from './routes/eea'
 import { Route as EnergyEcommerceRouteImport } from './routes/energy-ecommerce'
@@ -93,6 +94,11 @@ const CareersRoute = CareersRouteImport.update({
 const CngRoute = CngRouteImport.update({
   id: '/cng',
   path: '/cng',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CngConversionRoute = CngConversionRouteImport.update({
+  id: '/cng-conversion',
+  path: '/cng-conversion',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -400,6 +406,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/careers': typeof CareersRoute
   '/cng': typeof CngRoute
+  '/cng-conversion': typeof CngConversionRoute
   '/contact': typeof ContactRoute
   '/eea': typeof EeaRoute
   '/energy-ecommerce': typeof EnergyEcommerceRoute
@@ -462,6 +469,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/careers': typeof CareersRoute
   '/cng': typeof CngRoute
+  '/cng-conversion': typeof CngConversionRoute
   '/contact': typeof ContactRoute
   '/eea': typeof EeaRoute
   '/energy-ecommerce': typeof EnergyEcommerceRoute
@@ -526,6 +534,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/careers': typeof CareersRoute
   '/cng': typeof CngRoute
+  '/cng-conversion': typeof CngConversionRoute
   '/contact': typeof ContactRoute
   '/eea': typeof EeaRoute
   '/energy-ecommerce': typeof EnergyEcommerceRoute
@@ -590,6 +599,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/careers'
     | '/cng'
+    | '/cng-conversion'
     | '/contact'
     | '/eea'
     | '/energy-ecommerce'
@@ -652,6 +662,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/careers'
     | '/cng'
+    | '/cng-conversion'
     | '/contact'
     | '/eea'
     | '/energy-ecommerce'
@@ -715,6 +726,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/careers'
     | '/cng'
+    | '/cng-conversion'
     | '/contact'
     | '/eea'
     | '/energy-ecommerce'
@@ -779,6 +791,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CareersRoute: typeof CareersRoute
   CngRoute: typeof CngRoute
+  CngConversionRoute: typeof CngConversionRoute
   ContactRoute: typeof ContactRoute
   EeaRoute: typeof EeaRoute
   EnergyEcommerceRoute: typeof EnergyEcommerceRoute
@@ -860,6 +873,13 @@ declare module '@tanstack/react-router' {
       path: '/cng'
       fullPath: '/cng'
       preLoaderRoute: typeof CngRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cng-conversion': {
+      id: '/cng-conversion'
+      path: '/cng-conversion'
+      fullPath: '/cng-conversion'
+      preLoaderRoute: typeof CngConversionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -1298,6 +1318,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CareersRoute: CareersRoute,
   CngRoute: CngRoute,
+  CngConversionRoute: CngConversionRoute,
   ContactRoute: ContactRoute,
   EeaRoute: EeaRoute,
   EnergyEcommerceRoute: EnergyEcommerceRoute,
