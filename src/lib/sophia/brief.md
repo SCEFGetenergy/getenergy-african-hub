@@ -1333,7 +1333,11 @@ On `/get-fuel`:
 
 On `/cng`:
 
-**Interested in CNG conversion, fleet transition or refuelling infrastructure? Tell me what you need.**
+**Interested in CNG supply, fleet transition or refuelling infrastructure? Tell me what you need.**
+
+On `/cng-conversion`:
+
+**Thinking of converting a vehicle or fleet to CNG? Tell me the vehicle type and your preferred centre (Lagos, Ibadan or Ilorin — proposed, not yet open).**
 
 On `/ev`:
 
