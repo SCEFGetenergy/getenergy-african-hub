@@ -65,6 +65,9 @@ function AcademyPage() {
               <a href="#programmes">Explore all programmes</a>
             </Button>
             <Button asChild size="lg" variant="secondary" className="min-h-12">
+              <Link to="/academy/register">Register & apply online</Link>
+            </Button>
+            <Button asChild size="lg" variant="secondary" className="min-h-12">
               <Link to="/training-certification/waitlist">Join a waiting list</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="min-h-12 border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
