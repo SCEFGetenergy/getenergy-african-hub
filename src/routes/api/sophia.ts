@@ -2,10 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createOpenAI } from "@ai-sdk/openai";
 import { convertToModelMessages, stepCountIs, streamText, tool, type UIMessage } from "ai";
 import { z } from "zod";
-import brief from "@/server/sophia-brief.md?raw";
-import { createRunIdFetch, getRequestRunId, withRunIdHeader } from "@/server/sophia-gateway";
 
-const SYSTEM = `You are SOPHIA, GET Energy Trading Services' Intelligent Energy Assistant on the company website.
+const systemPrompt = (brief: string) => `You are SOPHIA, GET Energy Trading Services' Intelligent Energy Assistant on the company website.
 Follow the full brief below. Key rules that always apply:
 - Professional international English, warm and concise. No slang. Keep replies short; ask at most 2 questions at a time.
 - Be honest about status. Diesel/AGO supply is operating; electricity token vending operates via implementation partners; CNG, EV, solar, BESS, mini-grid, Power-as-a-Service, training programmes and smart metering are in development or planned. Never present plans as achievements. Never quote prices, guarantee availability, savings or delivery times, or claim programmes are scheduled/accredited.
@@ -30,6 +28,8 @@ export const Route = createFileRoute("/api/sophia")({
           return new Response("Bad request", { status: 400 });
         }
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+        const { createRunIdFetch, getRequestRunId, withRunIdHeader } = await import("@/lib/sophia/gateway.server");
+        const brief = (await import("@/lib/sophia/brief.md?raw")).default;
         const { data: thread } = await supabaseAdmin
           .from("sophia_threads")
           .select("id, title")
@@ -52,7 +52,7 @@ export const Route = createFileRoute("/api/sophia")({
         const threadId = thread.id;
         const result = streamText({
           model: provider.responses("openai/gpt-6-astra"),
-          system: `${SYSTEM}\n\nThe visitor is currently on page: ${body.page ?? "unknown"}.`,
+          system: `${systemPrompt(brief)}\n\nThe visitor is currently on page: ${body.page ?? "unknown"}.`,
           messages: await convertToModelMessages(body.messages),
           abortSignal: request.signal,
           stopWhen: stepCountIs(5),
