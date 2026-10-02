@@ -71,6 +71,13 @@
       "when": 1790936232693,
       "tag": "0009_service_requests_test_flag",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1790938894007,
+      "tag": "0010_first_admin_setup",
+      "breakpoints": true
     }
   ]
 }
