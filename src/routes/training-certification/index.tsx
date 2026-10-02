@@ -6,6 +6,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/site/ui-bits";
 import { Catalogue } from "@/components/academy/AcademyParts";
+import { CertificationCard } from "@/components/academy/CertificationCard";
 import { CERTIFICATIONS } from "@/lib/certifications";
 import { CERT_DISCLAIMER, PROGRAMMES, formatNaira, getProgramme, statusOf, whatsappFor } from "@/lib/academy";
 import heroImg from "@/assets/academy/hero.jpg";
@@ -225,13 +226,10 @@ function AcademyPage() {
       {/* CERTIFICATIONS */}
       <Section tone="brand">
         <SectionHeading invert eyebrow="Premium certification layer" title="GET Energy Professional Certifications" body="Advanced competency-based certifications combining technical skills, workplace productivity, practical assessment and real-world industry projects." />
-        <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {CERTIFICATIONS.map((c) => (
             <li key={c.code}>
-              <Link to="/training-certification/professional-certifications/$code" params={{ code: c.code.toLowerCase() }} className="flex h-full min-h-28 flex-col rounded-xl border border-brand-green/40 bg-primary-foreground/5 p-4 text-primary-foreground transition-colors hover:bg-primary-foreground/10">
-                <span className="font-mono text-sm font-bold text-brand-green-soft">{c.code}</span>
-                <span className="mt-1 text-xs leading-snug text-primary-foreground/85">{c.name}</span>
-              </Link>
+              <CertificationCard c={c} compact />
             </li>
           ))}
         </ul>
