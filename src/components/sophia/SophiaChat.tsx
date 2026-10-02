@@ -79,7 +79,7 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
         </button>
         <nav aria-label="Your conversations" className="flex flex-col gap-1 overflow-y-auto">
           {threads.map((t) => (
-            <div key={t.id} className={`group flex items-center rounded-md ${t.id === threadId ? "bg-muted" : "hover:bg-muted/60"}`}>
+            <div key={t.id} className={`group flex items-center rounded-md ${t.id === threadId ? "bg-secondary" : "hover:bg-secondary/60"}`}>
               <Link to="/sophia/$threadId" params={{ threadId: t.id }} className="flex min-h-11 flex-1 items-center gap-2 truncate px-2 text-sm text-foreground">
                 <MessageCircle className="size-4 shrink-0 text-muted-foreground" />
                 <span className="truncate">{t.title}</span>
