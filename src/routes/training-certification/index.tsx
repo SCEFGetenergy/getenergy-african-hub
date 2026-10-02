@@ -171,9 +171,9 @@ function AcademyPage() {
 
       {/* ICON STRIP */}
       <section aria-label="Training categories" className="border-b border-border bg-background">
-        <ul className="mx-auto flex max-w-6xl snap-x gap-2 overflow-x-auto px-4 py-6 sm:px-6 lg:grid lg:grid-cols-5 lg:gap-4 lg:overflow-visible">
+        <ul className="mx-auto grid max-w-6xl grid-cols-2 gap-x-3 gap-y-5 px-4 py-6 sm:grid-cols-5 sm:px-6 lg:gap-4">
           {ICONS.map(({ icon: I, t }) => (
-            <li key={t} className="flex w-32 shrink-0 snap-start flex-col items-center gap-2 text-center lg:w-auto">
+            <li key={t} className="flex min-w-0 flex-col items-center gap-2 text-center">
               <span className="grid size-14 place-items-center rounded-full bg-brand-green-soft text-brand-green"><I className="size-6" /></span>
               <span className="text-xs font-semibold uppercase leading-tight tracking-wide text-brand-deep">{t}</span>
             </li>
