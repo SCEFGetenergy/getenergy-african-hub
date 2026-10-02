@@ -53,6 +53,8 @@ import { Route as SophiaIndexRouteImport } from './routes/sophia.index'
 import { Route as SophiaThreadIdRouteImport } from './routes/sophia.$threadId'
 import { Route as TrainingCertificationIndexRouteImport } from './routes/training-certification/index'
 import { Route as TrainingCertificationCorporateRouteImport } from './routes/training-certification/corporate'
+import { Route as TrainingCertificationCpdRouteImport } from './routes/training-certification/cpd'
+import { Route as TrainingCertificationVerifyRouteImport } from './routes/training-certification/verify'
 import { Route as TrainingCertificationWaitlistRouteImport } from './routes/training-certification/waitlist'
 import { Route as CompanySolutionsIndexRouteImport } from './routes/company/solutions/index'
 import { Route as CompanySolutionsCngRouteImport } from './routes/company/solutions/cng'
@@ -67,6 +69,9 @@ import { Route as CompanySolutionsPowerAsAServiceRouteImport } from './routes/co
 import { Route as CompanySolutionsRenewablesRouteImport } from './routes/company/solutions/renewables'
 import { Route as CompanySolutionsSmartMeteringRouteImport } from './routes/company/solutions/smart-metering'
 import { Route as CompanySolutionsTrainingRouteImport } from './routes/company/solutions/training'
+import { Route as TrainingCertificationProfessionalCertificationsIndexRouteImport } from './routes/training-certification/professional-certifications/index'
+import { Route as TrainingCertificationProfessionalCertificationsCodeRouteImport } from './routes/training-certification/professional-certifications/$code'
+import { Route as TrainingCertificationProfessionalCertificationsWaitlistRouteImport } from './routes/training-certification/professional-certifications/waitlist'
 import { Route as TrainingCertificationProgrammesSlugRouteImport } from './routes/training-certification/programmes.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -291,6 +296,18 @@ const TrainingCertificationCorporateRoute =
     path: '/training-certification/corporate',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TrainingCertificationCpdRoute =
+  TrainingCertificationCpdRouteImport.update({
+    id: '/training-certification/cpd',
+    path: '/training-certification/cpd',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TrainingCertificationVerifyRoute =
+  TrainingCertificationVerifyRouteImport.update({
+    id: '/training-certification/verify',
+    path: '/training-certification/verify',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TrainingCertificationWaitlistRoute =
   TrainingCertificationWaitlistRouteImport.update({
     id: '/training-certification/waitlist',
@@ -371,6 +388,24 @@ const CompanySolutionsTrainingRoute =
     path: '/company/solutions/training',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TrainingCertificationProfessionalCertificationsIndexRoute =
+  TrainingCertificationProfessionalCertificationsIndexRouteImport.update({
+    id: '/training-certification/professional-certifications/',
+    path: '/training-certification/professional-certifications/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TrainingCertificationProfessionalCertificationsCodeRoute =
+  TrainingCertificationProfessionalCertificationsCodeRouteImport.update({
+    id: '/training-certification/professional-certifications/$code',
+    path: '/training-certification/professional-certifications/$code',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TrainingCertificationProfessionalCertificationsWaitlistRoute =
+  TrainingCertificationProfessionalCertificationsWaitlistRouteImport.update({
+    id: '/training-certification/professional-certifications/waitlist',
+    path: '/training-certification/professional-certifications/waitlist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TrainingCertificationProgrammesSlugRoute =
   TrainingCertificationProgrammesSlugRouteImport.update({
     id: '/training-certification/programmes/$slug',
@@ -420,6 +455,8 @@ export interface FileRoutesByFullPath {
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/training-certification/corporate': typeof TrainingCertificationCorporateRoute
+  '/training-certification/cpd': typeof TrainingCertificationCpdRoute
+  '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
   '/sophia/': typeof SophiaIndexRoute
   '/training-certification/': typeof TrainingCertificationIndexRoute
@@ -435,8 +472,11 @@ export interface FileRoutesByFullPath {
   '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
   '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
   '/company/solutions/training': typeof CompanySolutionsTrainingRoute
+  '/training-certification/professional-certifications/$code': typeof TrainingCertificationProfessionalCertificationsCodeRoute
+  '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
   '/company/solutions/': typeof CompanySolutionsIndexRoute
+  '/training-certification/professional-certifications/': typeof TrainingCertificationProfessionalCertificationsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -480,6 +520,8 @@ export interface FileRoutesByTo {
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/training-certification/corporate': typeof TrainingCertificationCorporateRoute
+  '/training-certification/cpd': typeof TrainingCertificationCpdRoute
+  '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
   '/sophia': typeof SophiaIndexRoute
   '/training-certification': typeof TrainingCertificationIndexRoute
@@ -495,8 +537,11 @@ export interface FileRoutesByTo {
   '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
   '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
   '/company/solutions/training': typeof CompanySolutionsTrainingRoute
+  '/training-certification/professional-certifications/$code': typeof TrainingCertificationProfessionalCertificationsCodeRoute
+  '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
   '/company/solutions': typeof CompanySolutionsIndexRoute
+  '/training-certification/professional-certifications': typeof TrainingCertificationProfessionalCertificationsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -542,6 +587,8 @@ export interface FileRoutesById {
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/training-certification/corporate': typeof TrainingCertificationCorporateRoute
+  '/training-certification/cpd': typeof TrainingCertificationCpdRoute
+  '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
   '/sophia/': typeof SophiaIndexRoute
   '/training-certification/': typeof TrainingCertificationIndexRoute
@@ -557,8 +604,11 @@ export interface FileRoutesById {
   '/company/solutions/renewables': typeof CompanySolutionsRenewablesRoute
   '/company/solutions/smart-metering': typeof CompanySolutionsSmartMeteringRoute
   '/company/solutions/training': typeof CompanySolutionsTrainingRoute
+  '/training-certification/professional-certifications/$code': typeof TrainingCertificationProfessionalCertificationsCodeRoute
+  '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
   '/company/solutions/': typeof CompanySolutionsIndexRoute
+  '/training-certification/professional-certifications/': typeof TrainingCertificationProfessionalCertificationsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -604,6 +654,8 @@ export interface FileRouteTypes {
     | '/policies/gender-diversity-inclusion'
     | '/sophia/$threadId'
     | '/training-certification/corporate'
+    | '/training-certification/cpd'
+    | '/training-certification/verify'
     | '/training-certification/waitlist'
     | '/sophia/'
     | '/training-certification/'
@@ -619,8 +671,11 @@ export interface FileRouteTypes {
     | '/company/solutions/renewables'
     | '/company/solutions/smart-metering'
     | '/company/solutions/training'
+    | '/training-certification/professional-certifications/$code'
+    | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
     | '/company/solutions/'
+    | '/training-certification/professional-certifications/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -664,6 +719,8 @@ export interface FileRouteTypes {
     | '/policies/gender-diversity-inclusion'
     | '/sophia/$threadId'
     | '/training-certification/corporate'
+    | '/training-certification/cpd'
+    | '/training-certification/verify'
     | '/training-certification/waitlist'
     | '/sophia'
     | '/training-certification'
@@ -679,8 +736,11 @@ export interface FileRouteTypes {
     | '/company/solutions/renewables'
     | '/company/solutions/smart-metering'
     | '/company/solutions/training'
+    | '/training-certification/professional-certifications/$code'
+    | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
     | '/company/solutions'
+    | '/training-certification/professional-certifications'
   id:
     | '__root__'
     | '/'
@@ -725,6 +785,8 @@ export interface FileRouteTypes {
     | '/policies/gender-diversity-inclusion'
     | '/sophia/$threadId'
     | '/training-certification/corporate'
+    | '/training-certification/cpd'
+    | '/training-certification/verify'
     | '/training-certification/waitlist'
     | '/sophia/'
     | '/training-certification/'
@@ -740,8 +802,11 @@ export interface FileRouteTypes {
     | '/company/solutions/renewables'
     | '/company/solutions/smart-metering'
     | '/company/solutions/training'
+    | '/training-certification/professional-certifications/$code'
+    | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
     | '/company/solutions/'
+    | '/training-certification/professional-certifications/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -786,6 +851,8 @@ export interface RootRouteChildren {
   PoliciesGenderDiversityInclusionRoute: typeof PoliciesGenderDiversityInclusionRoute
   SophiaThreadIdRoute: typeof SophiaThreadIdRoute
   TrainingCertificationCorporateRoute: typeof TrainingCertificationCorporateRoute
+  TrainingCertificationCpdRoute: typeof TrainingCertificationCpdRoute
+  TrainingCertificationVerifyRoute: typeof TrainingCertificationVerifyRoute
   TrainingCertificationWaitlistRoute: typeof TrainingCertificationWaitlistRoute
   SophiaIndexRoute: typeof SophiaIndexRoute
   TrainingCertificationIndexRoute: typeof TrainingCertificationIndexRoute
@@ -801,8 +868,11 @@ export interface RootRouteChildren {
   CompanySolutionsRenewablesRoute: typeof CompanySolutionsRenewablesRoute
   CompanySolutionsSmartMeteringRoute: typeof CompanySolutionsSmartMeteringRoute
   CompanySolutionsTrainingRoute: typeof CompanySolutionsTrainingRoute
+  TrainingCertificationProfessionalCertificationsCodeRoute: typeof TrainingCertificationProfessionalCertificationsCodeRoute
+  TrainingCertificationProfessionalCertificationsWaitlistRoute: typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   TrainingCertificationProgrammesSlugRoute: typeof TrainingCertificationProgrammesSlugRoute
   CompanySolutionsIndexRoute: typeof CompanySolutionsIndexRoute
+  TrainingCertificationProfessionalCertificationsIndexRoute: typeof TrainingCertificationProfessionalCertificationsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1115,6 +1185,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrainingCertificationCorporateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/training-certification/cpd': {
+      id: '/training-certification/cpd'
+      path: '/training-certification/cpd'
+      fullPath: '/training-certification/cpd'
+      preLoaderRoute: typeof TrainingCertificationCpdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/training-certification/verify': {
+      id: '/training-certification/verify'
+      path: '/training-certification/verify'
+      fullPath: '/training-certification/verify'
+      preLoaderRoute: typeof TrainingCertificationVerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/training-certification/waitlist': {
       id: '/training-certification/waitlist'
       path: '/training-certification/waitlist'
@@ -1213,6 +1297,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompanySolutionsTrainingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/training-certification/professional-certifications/': {
+      id: '/training-certification/professional-certifications/'
+      path: '/training-certification/professional-certifications'
+      fullPath: '/training-certification/professional-certifications/'
+      preLoaderRoute: typeof TrainingCertificationProfessionalCertificationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/training-certification/professional-certifications/$code': {
+      id: '/training-certification/professional-certifications/$code'
+      path: '/training-certification/professional-certifications/$code'
+      fullPath: '/training-certification/professional-certifications/$code'
+      preLoaderRoute: typeof TrainingCertificationProfessionalCertificationsCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/training-certification/professional-certifications/waitlist': {
+      id: '/training-certification/professional-certifications/waitlist'
+      path: '/training-certification/professional-certifications/waitlist'
+      fullPath: '/training-certification/professional-certifications/waitlist'
+      preLoaderRoute: typeof TrainingCertificationProfessionalCertificationsWaitlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/training-certification/programmes/$slug': {
       id: '/training-certification/programmes/$slug'
       path: '/training-certification/programmes/$slug'
@@ -1276,6 +1381,8 @@ const rootRouteChildren: RootRouteChildren = {
   PoliciesGenderDiversityInclusionRoute: PoliciesGenderDiversityInclusionRoute,
   SophiaThreadIdRoute: SophiaThreadIdRoute,
   TrainingCertificationCorporateRoute: TrainingCertificationCorporateRoute,
+  TrainingCertificationCpdRoute: TrainingCertificationCpdRoute,
+  TrainingCertificationVerifyRoute: TrainingCertificationVerifyRoute,
   TrainingCertificationWaitlistRoute: TrainingCertificationWaitlistRoute,
   SophiaIndexRoute: SophiaIndexRoute,
   TrainingCertificationIndexRoute: TrainingCertificationIndexRoute,
@@ -1291,9 +1398,15 @@ const rootRouteChildren: RootRouteChildren = {
   CompanySolutionsRenewablesRoute: CompanySolutionsRenewablesRoute,
   CompanySolutionsSmartMeteringRoute: CompanySolutionsSmartMeteringRoute,
   CompanySolutionsTrainingRoute: CompanySolutionsTrainingRoute,
+  TrainingCertificationProfessionalCertificationsCodeRoute:
+    TrainingCertificationProfessionalCertificationsCodeRoute,
+  TrainingCertificationProfessionalCertificationsWaitlistRoute:
+    TrainingCertificationProfessionalCertificationsWaitlistRoute,
   TrainingCertificationProgrammesSlugRoute:
     TrainingCertificationProgrammesSlugRoute,
   CompanySolutionsIndexRoute: CompanySolutionsIndexRoute,
+  TrainingCertificationProfessionalCertificationsIndexRoute:
+    TrainingCertificationProfessionalCertificationsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
