@@ -7,11 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { PROGRAMMES, getProgramme, whatsappFor } from "@/lib/academy";
+import { CERTIFICATIONS, getCertification } from "@/lib/certifications";
 
 export type Field = {
   name: string;
   label: string;
-  type?: "text" | "email" | "tel" | "number" | "select" | "textarea" | "programme" | "consent";
+  type?: "text" | "email" | "tel" | "number" | "select" | "textarea" | "programme" | "certification" | "consent";
   options?: string[];
   required?: boolean;
 };
@@ -24,7 +25,7 @@ export function AcademyForm({
   submitLabel,
   initial = {},
 }: {
-  kind: "waitlist" | "corporate";
+  kind: "waitlist" | "corporate" | "certification";
   fields: Field[];
   submitLabel: string;
   initial?: Record<string, string>;
@@ -35,7 +36,8 @@ export function AcademyForm({
   const [ref, setRef] = useState<string | null>(null);
   const set = (k: string, val: string) => setV((p) => ({ ...p, [k]: val }));
 
-  const programmeTitle = getProgramme(v['programme'] ?? "")?.title ?? v['programmes'] ?? "";
+  const cert = getCertification(v['certification'] ?? "");
+  const programmeTitle = cert ? `${cert.name} (${cert.code})` : getProgramme(v['programme'] ?? "")?.title ?? v['programmes'] ?? "";
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -48,12 +50,12 @@ export function AcademyForm({
     setBusy(true);
     const lines = fields
       .filter((f) => f.type !== "consent" && v[f.name])
-      .map((f) => `${f.label.replace(" *", "")}: ${f.type === "programme" ? programmeTitle : v[f.name]}`);
+      .map((f) => `${f.label.replace(" *", "")}: ${f.type === "programme" || f.type === "certification" ? programmeTitle : v[f.name]}`);
     const name = (v['name'] ?? v['contact'] ?? email).trim();
     const { data, error } = await supabase.rpc("submit_service_request", {
-      p_request_type: kind === "waitlist" ? "academy-waitlist" : "academy-corporate",
+      p_request_type: kind === "waitlist" ? "academy-waitlist" : kind === "certification" ? "academy-certification" : "academy-corporate",
       p_service_name:
-        kind === "waitlist" ? `GET Energy Academy Waiting List — ${programmeTitle}` : "GET Energy Academy Corporate Training",
+        kind === "corporate" ? "GET Energy Academy Corporate Training" : `GET Energy Academy Waiting List — ${programmeTitle}`,
       p_contact_name: name.slice(0, 200),
       p_contact_email: email,
       p_contact_phone: (v['phone'] ?? "").trim(),
@@ -71,13 +73,13 @@ export function AcademyForm({
       <div className="rounded-2xl border border-brand-green/40 bg-card p-6 card-elevated" role="status">
         <CheckCircle2 className="size-8 text-brand-green" />
         <h2 className="mt-3 text-2xl font-bold">
-          {kind === "waitlist" ? "You're on the waiting list" : "Corporate training request received"}
+          {kind !== "corporate" ? "You're on the waiting list" : "Corporate training request received"}
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Request reference: <strong className="font-mono text-foreground">{ref}</strong>
         </p>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          {kind === "waitlist" ? (
+          {kind !== "corporate" ? (
             <>
               Thank you for your interest in GET Energy Academy. We have received your details for{" "}
               <strong className="text-foreground">{programmeTitle}</strong>. Our training team will contact you when the
@@ -111,7 +113,7 @@ export function AcademyForm({
       {fields.map((f) => {
         const id = `ac-${f.name}`;
         const label = `${f.label}${f.required ? " *" : ""}`;
-        const wide = f.type === "textarea" || f.type === "consent" || f.type === "programme";
+        const wide = f.type === "textarea" || f.type === "consent" || f.type === "programme" || f.type === "certification";
         if (f.type === "consent") {
           return (
             <label key={f.name} className="flex gap-3 text-xs leading-relaxed text-muted-foreground sm:col-span-2">
@@ -135,6 +137,15 @@ export function AcademyForm({
                   {PROGRAMMES.map((p) => (
                     <option key={p.slug} value={p.slug}>
                       {String(p.n).padStart(2, "0")}. {p.title}
+                    </option>
+                  ))}
+                </select>
+              ) : f.type === "certification" ? (
+                <select id={id} className={selectCls} value={v[f.name] ?? ""} onChange={(e) => set(f.name, e.target.value)}>
+                  <option value="">Select a certification</option>
+                  {CERTIFICATIONS.map((c) => (
+                    <option key={c.code} value={c.code}>
+                      {c.code} — {c.name}
                     </option>
                   ))}
                 </select>
