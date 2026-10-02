@@ -23,3 +23,4 @@
 - Keep the Energy Desk interest form in the shared footer rather than the homepage; this keeps registration reachable from every page after the homepage was shortened.
 - SOPHIA chat threads are owned by a random browser visitor token and accessed only through server functions/route using the admin client (tables have RLS with no policies). Why: anonymous visitors need persistent threads without exposing other visitors' chats.
 - SOPHIA's knowledge/system brief lives in `src/lib/sophia/brief.md`, loaded by `/api/sophia`; enquiries she captures are inserted into `service_requests` with request_type `sophia`. Why: one editable source for her behaviour and one lead table for the team.
+- Energy-saving equipment uses the legacy-shell enquiry form and request-reference flow, not a shopping checkout. Why: availability and commercial terms must be confirmed before any order or payment is represented.
