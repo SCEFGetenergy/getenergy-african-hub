@@ -130,13 +130,13 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
           <ConversationContent>
             {messages.length === 0 && (
               <div className="space-y-7 pb-5">
-                <div className="sophia-welcome relative overflow-hidden rounded-md px-5 py-7 sm:px-8">
+                <div className="sophia-welcome relative overflow-hidden rounded-md px-4 py-6 sm:px-8">
                   <div className="relative z-10">
                     <p className="text-sm font-semibold uppercase text-primary">GET ENERGY</p>
                     <h1 className="mt-4 text-4xl font-bold text-primary sm:text-5xl">SOPHIA</h1>
                     <p className="mt-1 max-w-sm text-sm text-muted-foreground sm:text-base">Your GET Energy Intelligent Energy Assistant</p>
-                    <div className="mt-6 flex items-start gap-4">
-                      <SophiaAvatar className="size-14 sm:size-16" />
+                    <div className="mt-6 flex items-start gap-3 sm:gap-4">
+                      <SophiaAvatar className="size-10 shrink-0 sm:size-16" />
                       <div className="max-w-lg rounded-md border bg-background p-4 shadow-sm">
                         <p className="text-sm leading-relaxed text-foreground sm:text-base">Hello, I’m SOPHIA — GET Energy’s Intelligent Energy Assistant. I can help you find the right energy solution, request a quotation, get customer support, explore training programmes or connect you with our team.</p>
                         <p className="mt-3 font-semibold text-primary">What can I help you with today?</p>
@@ -145,7 +145,7 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
                   </div>
                 </div>
                 <div>
-                  <div className="mb-3 flex items-center justify-between gap-3"><h2 className="text-xl font-semibold text-foreground">Explore GET Energy Services</h2><a href="/our-services" className="text-sm font-semibold text-primary">View all →</a></div>
+                  <div className="mb-3 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3"><h2 className="min-w-0 text-xl font-semibold text-foreground">Explore GET Energy Services</h2><Link to="/our-services" className="text-sm font-semibold text-primary">View all →</Link></div>
                   <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
                     {SERVICE_ACTIONS.map(({ label, prompt, icon: Icon }) => <Button key={label} type="button" variant="outline" onClick={() => send(prompt)} className="h-auto min-h-16 justify-start whitespace-normal px-3 py-3 text-left text-foreground"><Icon className="size-6 shrink-0 text-primary" /><span className="flex-1 text-sm">{label}</span><ChevronRight className="size-4 shrink-0 text-primary" /></Button>)}
                   </div>
