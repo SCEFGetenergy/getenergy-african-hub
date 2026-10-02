@@ -111,7 +111,7 @@ export function initLegacy(api){
 
   // router (driven by the app router)
   var pages=[].slice.call(document.querySelectorAll("[data-page]")),links=[].slice.call(document.querySelectorAll("nav.main a"));
-  var aliases={"about-us":"about","invest":"home","paas":"power-as-a-service","eea":"energy-ecommerce","diesel":"get-fuel","cng-ev":"cng","cng-conversion":"cng"};
+  var aliases={"about-us":"about","paas":"power-as-a-service","eea":"energy-ecommerce","diesel":"get-fuel","cng-ev":"cng","cng-conversion":"cng"};
   function show(name){
     pages=[].slice.call(document.querySelectorAll("[data-page]"));links=[].slice.call(document.querySelectorAll("nav.main a"));
     name=aliases[name]||name;
@@ -169,6 +169,7 @@ export function initLegacy(api){
     careers:{title:"Your application is ready to send",to:"careers",subject:"Job application",note:"Send it by email to complete your application."},
     register:{title:"Check your email to finish",nosend:true,note:"We sent a confirmation link to your email. Click it to activate your account, then log in to track your requests."},
     whatsapp:{title:"Your WhatsApp subscription is ready",to:"sales",subject:"Energy Desk WhatsApp subscription",note:"Send it to our team to confirm your subscription. Once the Energy Desk goes live, the daily brief arrives on WhatsApp automatically."},
+    invest:{title:"Your investor interest has been registered",to:"sales",subject:"Refuelling station investment enquiry",note:"Your enquiry has been recorded. Our team will review the proposed participation, location and project fit before discussing any next steps or terms."},
     login:{title:"Accounts are not open yet",nosend:true,note:"Online accounts open when our platform goes live. You can still buy tokens, pay bills and request quotes without an account."}
   };
   (function(){var vids=[].slice.call(document.querySelectorAll("video[data-autoplay]"));if(!vids.length||!("IntersectionObserver" in window))return;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting&&e.intersectionRatio>=.6){if(window.innerWidth<=640)vids.forEach(function(o){if(o!==v)o.pause()});v.muted=true;v.play().catch(function(){})}else v.pause()})},{threshold:[0,.6]});vids.forEach(function(v){io.observe(v)})})();
