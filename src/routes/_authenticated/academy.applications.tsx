@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { PortalShell, Panel, Pill, portalHead } from "@/components/academy/portal";
-import { useMyAcademy } from "./academy.dashboard";
+import { PortalShell, Panel, Pill, portalHead, useMyAcademy } from "@/components/academy/portal";
+
 
 export const Route = createFileRoute("/_authenticated/academy/applications")({
   head: () => portalHead("My applications", "Track your GET Energy Academy applications and waiting-list entries."),

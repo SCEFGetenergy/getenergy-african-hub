@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { PortalShell, Panel, Pill, portalHead } from "@/components/academy/portal";
+import { PortalShell, Panel, Pill, portalHead, useMyAcademy } from "@/components/academy/portal";
 import { CERTIFICATIONS, CERT_VALIDITY_MONTHS } from "@/lib/certifications";
-import { useMyAcademy } from "./academy.dashboard";
+
 
 export const Route = createFileRoute("/_authenticated/academy/certifications")({
   head: () => portalHead("My certifications", "Your GET Energy professional certification applications and credentials."),

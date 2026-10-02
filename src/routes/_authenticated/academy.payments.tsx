@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PortalShell, Panel, Pill, portalHead, WALLET_NOTICE } from "@/components/academy/portal";
+import { PortalShell, Panel, Pill, portalHead, WALLET_NOTICE, useMyAcademy } from "@/components/academy/portal";
 import { formatNaira } from "@/lib/academy";
-import { useMyAcademy } from "./academy.dashboard";
+
 
 export const Route = createFileRoute("/_authenticated/academy/payments")({
   head: () => portalHead("Payments & GFA Wzip Wallet", "Your Academy payment requests and GFA Wzip Wallet status."),

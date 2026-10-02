@@ -4,8 +4,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { PortalShell, Panel, Pill, portalHead } from "@/components/academy/portal";
-import { useMyAcademy } from "./academy.dashboard";
+import { PortalShell, Panel, Pill, portalHead, useMyAcademy } from "@/components/academy/portal";
+
 
 export const Route = createFileRoute("/_authenticated/academy/documents")({
   head: () => portalHead("Documents & CV", "Securely upload your CV and supporting documents to GET Energy Academy."),

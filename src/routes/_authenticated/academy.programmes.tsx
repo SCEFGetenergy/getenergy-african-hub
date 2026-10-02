@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PortalShell, Panel, useAcademyProfile, completion, portalHead, WALLET_NOTICE } from "@/components/academy/portal";
+import { PortalShell, Panel, useAcademyProfile, completion, portalHead, WALLET_NOTICE, useMyAcademy } from "@/components/academy/portal";
 import { PROGRAMMES, formatNaira } from "@/lib/academy";
 import { CERTIFICATIONS } from "@/lib/certifications";
 

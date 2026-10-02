@@ -136,3 +136,18 @@ export function portalHead(title: string, description: string) {
     ],
   };
 }
+
+export function useMyAcademy() {
+  return useQuery({
+    queryKey: ["academy-mine"],
+    queryFn: async () => {
+      const [a, d, p] = await Promise.all([
+        supabase.from("service_requests").select("id, reference, service_name, request_type, status, created_at").like("request_type", "academy-%").order("created_at", { ascending: false }),
+        supabase.from("academy_documents").select("id, doc_type, file_name, status, reviewer_note, created_at, file_path, size_bytes").order("created_at", { ascending: false }),
+        supabase.from("academy_payments").select("*").order("created_at", { ascending: false }),
+      ]);
+      return { apps: a.data ?? [], docs: d.data ?? [], pays: p.data ?? [] };
+    },
+  });
+}
+

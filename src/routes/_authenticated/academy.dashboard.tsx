@@ -1,27 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { PortalShell, Panel, Pill, useAcademyProfile, completion, portalHead, WALLET_NOTICE } from "@/components/academy/portal";
+import { PortalShell, Panel, Pill, useAcademyProfile, completion, portalHead, WALLET_NOTICE, useMyAcademy } from "@/components/academy/portal";
 
 export const Route = createFileRoute("/_authenticated/academy/dashboard")({
   head: () => portalHead("Student dashboard", "Your GET Energy Academy applications, documents, payments and certification status."),
   component: Dashboard,
 });
-
-export function useMyAcademy() {
-  return useQuery({
-    queryKey: ["academy-mine"],
-    queryFn: async () => {
-      const [a, d, p] = await Promise.all([
-        supabase.from("service_requests").select("id, reference, service_name, request_type, status, created_at").like("request_type", "academy-%").order("created_at", { ascending: false }),
-        supabase.from("academy_documents").select("id, doc_type, file_name, status, reviewer_note, created_at, file_path, size_bytes").order("created_at", { ascending: false }),
-        supabase.from("academy_payments").select("*").order("created_at", { ascending: false }),
-      ]);
-      return { apps: a.data ?? [], docs: d.data ?? [], pays: p.data ?? [] };
-    },
-  });
-}
 
 function Dashboard() {
   const prof = useAcademyProfile();
