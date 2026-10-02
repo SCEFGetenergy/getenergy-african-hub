@@ -36,10 +36,15 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as RequestEnergyQuoteRouteImport } from './routes/request-energy-quote'
 import { Route as SmartMeteringRouteImport } from './routes/smart-metering'
 import { Route as SolarPowerRouteImport } from './routes/solar-power'
+import { Route as TeamInviteRouteImport } from './routes/team-invite'
 import { Route as TechnologyRouteImport } from './routes/technology'
 import { Route as TrainingRouteImport } from './routes/training'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AcademyIndexRouteImport } from './routes/academy.index'
+import { Route as AcademyLoginRouteImport } from './routes/academy.login'
+import { Route as AcademyRegisterRouteImport } from './routes/academy.register'
+import { Route as AcademyResetPasswordRouteImport } from './routes/academy.reset-password'
 import { Route as ApiSophiaRouteImport } from './routes/api/sophia'
 import { Route as CompanyAboutRouteImport } from './routes/company/about'
 import { Route as CompanyCareersRouteImport } from './routes/company/careers'
@@ -57,6 +62,16 @@ import { Route as TrainingCertificationCorporateRouteImport } from './routes/tra
 import { Route as TrainingCertificationCpdRouteImport } from './routes/training-certification/cpd'
 import { Route as TrainingCertificationVerifyRouteImport } from './routes/training-certification/verify'
 import { Route as TrainingCertificationWaitlistRouteImport } from './routes/training-certification/waitlist'
+import { Route as AuthenticatedAcademyApplicationsRouteImport } from './routes/_authenticated/academy.applications'
+import { Route as AuthenticatedAcademyCertificationsRouteImport } from './routes/_authenticated/academy.certifications'
+import { Route as AuthenticatedAcademyCpdRouteImport } from './routes/_authenticated/academy.cpd'
+import { Route as AuthenticatedAcademyDashboardRouteImport } from './routes/_authenticated/academy.dashboard'
+import { Route as AuthenticatedAcademyDocumentsRouteImport } from './routes/_authenticated/academy.documents'
+import { Route as AuthenticatedAcademyPaymentsRouteImport } from './routes/_authenticated/academy.payments'
+import { Route as AuthenticatedAcademyProfileRouteImport } from './routes/_authenticated/academy.profile'
+import { Route as AuthenticatedAcademyProgrammesRouteImport } from './routes/_authenticated/academy.programmes'
+import { Route as AuthenticatedAcademySkillsPassportRouteImport } from './routes/_authenticated/academy.skills-passport'
+import { Route as AuthenticatedAcademySupportRouteImport } from './routes/_authenticated/academy.support'
 import { Route as CompanySolutionsIndexRouteImport } from './routes/company/solutions/index'
 import { Route as CompanySolutionsCngRouteImport } from './routes/company/solutions/cng'
 import { Route as CompanySolutionsCngConversionRouteImport } from './routes/company/solutions/cng-conversion'
@@ -209,6 +224,11 @@ const SolarPowerRoute = SolarPowerRouteImport.update({
   path: '/solar-power',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeamInviteRoute = TeamInviteRouteImport.update({
+  id: '/team-invite',
+  path: '/team-invite',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TechnologyRoute = TechnologyRouteImport.update({
   id: '/technology',
   path: '/technology',
@@ -228,6 +248,26 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AcademyIndexRoute = AcademyIndexRouteImport.update({
+  id: '/academy/',
+  path: '/academy/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyLoginRoute = AcademyLoginRouteImport.update({
+  id: '/academy/login',
+  path: '/academy/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyRegisterRoute = AcademyRegisterRouteImport.update({
+  id: '/academy/register',
+  path: '/academy/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyResetPasswordRoute = AcademyResetPasswordRouteImport.update({
+  id: '/academy/reset-password',
+  path: '/academy/reset-password',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiSophiaRoute = ApiSophiaRouteImport.update({
   id: '/api/sophia',
@@ -319,6 +359,65 @@ const TrainingCertificationWaitlistRoute =
     id: '/training-certification/waitlist',
     path: '/training-certification/waitlist',
     getParentRoute: () => rootRouteImport,
+  } as any)
+const AuthenticatedAcademyApplicationsRoute =
+  AuthenticatedAcademyApplicationsRouteImport.update({
+    id: '/academy/applications',
+    path: '/academy/applications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademyCertificationsRoute =
+  AuthenticatedAcademyCertificationsRouteImport.update({
+    id: '/academy/certifications',
+    path: '/academy/certifications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademyCpdRoute = AuthenticatedAcademyCpdRouteImport.update({
+  id: '/academy/cpd',
+  path: '/academy/cpd',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAcademyDashboardRoute =
+  AuthenticatedAcademyDashboardRouteImport.update({
+    id: '/academy/dashboard',
+    path: '/academy/dashboard',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademyDocumentsRoute =
+  AuthenticatedAcademyDocumentsRouteImport.update({
+    id: '/academy/documents',
+    path: '/academy/documents',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademyPaymentsRoute =
+  AuthenticatedAcademyPaymentsRouteImport.update({
+    id: '/academy/payments',
+    path: '/academy/payments',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademyProfileRoute =
+  AuthenticatedAcademyProfileRouteImport.update({
+    id: '/academy/profile',
+    path: '/academy/profile',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademyProgrammesRoute =
+  AuthenticatedAcademyProgrammesRouteImport.update({
+    id: '/academy/programmes',
+    path: '/academy/programmes',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademySkillsPassportRoute =
+  AuthenticatedAcademySkillsPassportRouteImport.update({
+    id: '/academy/skills-passport',
+    path: '/academy/skills-passport',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademySupportRoute =
+  AuthenticatedAcademySupportRouteImport.update({
+    id: '/academy/support',
+    path: '/academy/support',
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const CompanySolutionsIndexRoute = CompanySolutionsIndexRouteImport.update({
   id: '/company/solutions/',
@@ -446,10 +545,14 @@ export interface FileRoutesByFullPath {
   '/request-energy-quote': typeof RequestEnergyQuoteRoute
   '/smart-metering': typeof SmartMeteringRoute
   '/solar-power': typeof SolarPowerRoute
+  '/team-invite': typeof TeamInviteRoute
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/academy/login': typeof AcademyLoginRoute
+  '/academy/register': typeof AcademyRegisterRoute
+  '/academy/reset-password': typeof AcademyResetPasswordRoute
   '/api/sophia': typeof ApiSophiaRoute
   '/company/about': typeof CompanyAboutRoute
   '/company/careers': typeof CompanyCareersRoute
@@ -465,8 +568,19 @@ export interface FileRoutesByFullPath {
   '/training-certification/cpd': typeof TrainingCertificationCpdRoute
   '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
+  '/academy/': typeof AcademyIndexRoute
   '/sophia/': typeof SophiaIndexRoute
   '/training-certification/': typeof TrainingCertificationIndexRoute
+  '/academy/applications': typeof AuthenticatedAcademyApplicationsRoute
+  '/academy/certifications': typeof AuthenticatedAcademyCertificationsRoute
+  '/academy/cpd': typeof AuthenticatedAcademyCpdRoute
+  '/academy/dashboard': typeof AuthenticatedAcademyDashboardRoute
+  '/academy/documents': typeof AuthenticatedAcademyDocumentsRoute
+  '/academy/payments': typeof AuthenticatedAcademyPaymentsRoute
+  '/academy/profile': typeof AuthenticatedAcademyProfileRoute
+  '/academy/programmes': typeof AuthenticatedAcademyProgrammesRoute
+  '/academy/skills-passport': typeof AuthenticatedAcademySkillsPassportRoute
+  '/academy/support': typeof AuthenticatedAcademySupportRoute
   '/company/solutions/cng': typeof CompanySolutionsCngRoute
   '/company/solutions/cng-conversion': typeof CompanySolutionsCngConversionRoute
   '/company/solutions/diesel': typeof CompanySolutionsDieselRoute
@@ -512,10 +626,14 @@ export interface FileRoutesByTo {
   '/request-energy-quote': typeof RequestEnergyQuoteRoute
   '/smart-metering': typeof SmartMeteringRoute
   '/solar-power': typeof SolarPowerRoute
+  '/team-invite': typeof TeamInviteRoute
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/academy/login': typeof AcademyLoginRoute
+  '/academy/register': typeof AcademyRegisterRoute
+  '/academy/reset-password': typeof AcademyResetPasswordRoute
   '/api/sophia': typeof ApiSophiaRoute
   '/company/about': typeof CompanyAboutRoute
   '/company/careers': typeof CompanyCareersRoute
@@ -531,8 +649,19 @@ export interface FileRoutesByTo {
   '/training-certification/cpd': typeof TrainingCertificationCpdRoute
   '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
+  '/academy': typeof AcademyIndexRoute
   '/sophia': typeof SophiaIndexRoute
   '/training-certification': typeof TrainingCertificationIndexRoute
+  '/academy/applications': typeof AuthenticatedAcademyApplicationsRoute
+  '/academy/certifications': typeof AuthenticatedAcademyCertificationsRoute
+  '/academy/cpd': typeof AuthenticatedAcademyCpdRoute
+  '/academy/dashboard': typeof AuthenticatedAcademyDashboardRoute
+  '/academy/documents': typeof AuthenticatedAcademyDocumentsRoute
+  '/academy/payments': typeof AuthenticatedAcademyPaymentsRoute
+  '/academy/profile': typeof AuthenticatedAcademyProfileRoute
+  '/academy/programmes': typeof AuthenticatedAcademyProgrammesRoute
+  '/academy/skills-passport': typeof AuthenticatedAcademySkillsPassportRoute
+  '/academy/support': typeof AuthenticatedAcademySupportRoute
   '/company/solutions/cng': typeof CompanySolutionsCngRoute
   '/company/solutions/cng-conversion': typeof CompanySolutionsCngConversionRoute
   '/company/solutions/diesel': typeof CompanySolutionsDieselRoute
@@ -580,10 +709,14 @@ export interface FileRoutesById {
   '/request-energy-quote': typeof RequestEnergyQuoteRoute
   '/smart-metering': typeof SmartMeteringRoute
   '/solar-power': typeof SolarPowerRoute
+  '/team-invite': typeof TeamInviteRoute
   '/technology': typeof TechnologyRoute
   '/training': typeof TrainingRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/academy/login': typeof AcademyLoginRoute
+  '/academy/register': typeof AcademyRegisterRoute
+  '/academy/reset-password': typeof AcademyResetPasswordRoute
   '/api/sophia': typeof ApiSophiaRoute
   '/company/about': typeof CompanyAboutRoute
   '/company/careers': typeof CompanyCareersRoute
@@ -599,8 +732,19 @@ export interface FileRoutesById {
   '/training-certification/cpd': typeof TrainingCertificationCpdRoute
   '/training-certification/verify': typeof TrainingCertificationVerifyRoute
   '/training-certification/waitlist': typeof TrainingCertificationWaitlistRoute
+  '/academy/': typeof AcademyIndexRoute
   '/sophia/': typeof SophiaIndexRoute
   '/training-certification/': typeof TrainingCertificationIndexRoute
+  '/_authenticated/academy/applications': typeof AuthenticatedAcademyApplicationsRoute
+  '/_authenticated/academy/certifications': typeof AuthenticatedAcademyCertificationsRoute
+  '/_authenticated/academy/cpd': typeof AuthenticatedAcademyCpdRoute
+  '/_authenticated/academy/dashboard': typeof AuthenticatedAcademyDashboardRoute
+  '/_authenticated/academy/documents': typeof AuthenticatedAcademyDocumentsRoute
+  '/_authenticated/academy/payments': typeof AuthenticatedAcademyPaymentsRoute
+  '/_authenticated/academy/profile': typeof AuthenticatedAcademyProfileRoute
+  '/_authenticated/academy/programmes': typeof AuthenticatedAcademyProgrammesRoute
+  '/_authenticated/academy/skills-passport': typeof AuthenticatedAcademySkillsPassportRoute
+  '/_authenticated/academy/support': typeof AuthenticatedAcademySupportRoute
   '/company/solutions/cng': typeof CompanySolutionsCngRoute
   '/company/solutions/cng-conversion': typeof CompanySolutionsCngConversionRoute
   '/company/solutions/diesel': typeof CompanySolutionsDieselRoute
@@ -648,10 +792,14 @@ export interface FileRouteTypes {
     | '/request-energy-quote'
     | '/smart-metering'
     | '/solar-power'
+    | '/team-invite'
     | '/technology'
     | '/training'
     | '/account'
     | '/admin'
+    | '/academy/login'
+    | '/academy/register'
+    | '/academy/reset-password'
     | '/api/sophia'
     | '/company/about'
     | '/company/careers'
@@ -667,8 +815,19 @@ export interface FileRouteTypes {
     | '/training-certification/cpd'
     | '/training-certification/verify'
     | '/training-certification/waitlist'
+    | '/academy/'
     | '/sophia/'
     | '/training-certification/'
+    | '/academy/applications'
+    | '/academy/certifications'
+    | '/academy/cpd'
+    | '/academy/dashboard'
+    | '/academy/documents'
+    | '/academy/payments'
+    | '/academy/profile'
+    | '/academy/programmes'
+    | '/academy/skills-passport'
+    | '/academy/support'
     | '/company/solutions/cng'
     | '/company/solutions/cng-conversion'
     | '/company/solutions/diesel'
@@ -714,10 +873,14 @@ export interface FileRouteTypes {
     | '/request-energy-quote'
     | '/smart-metering'
     | '/solar-power'
+    | '/team-invite'
     | '/technology'
     | '/training'
     | '/account'
     | '/admin'
+    | '/academy/login'
+    | '/academy/register'
+    | '/academy/reset-password'
     | '/api/sophia'
     | '/company/about'
     | '/company/careers'
@@ -733,8 +896,19 @@ export interface FileRouteTypes {
     | '/training-certification/cpd'
     | '/training-certification/verify'
     | '/training-certification/waitlist'
+    | '/academy'
     | '/sophia'
     | '/training-certification'
+    | '/academy/applications'
+    | '/academy/certifications'
+    | '/academy/cpd'
+    | '/academy/dashboard'
+    | '/academy/documents'
+    | '/academy/payments'
+    | '/academy/profile'
+    | '/academy/programmes'
+    | '/academy/skills-passport'
+    | '/academy/support'
     | '/company/solutions/cng'
     | '/company/solutions/cng-conversion'
     | '/company/solutions/diesel'
@@ -781,10 +955,14 @@ export interface FileRouteTypes {
     | '/request-energy-quote'
     | '/smart-metering'
     | '/solar-power'
+    | '/team-invite'
     | '/technology'
     | '/training'
     | '/_authenticated/account'
     | '/_authenticated/admin'
+    | '/academy/login'
+    | '/academy/register'
+    | '/academy/reset-password'
     | '/api/sophia'
     | '/company/about'
     | '/company/careers'
@@ -800,8 +978,19 @@ export interface FileRouteTypes {
     | '/training-certification/cpd'
     | '/training-certification/verify'
     | '/training-certification/waitlist'
+    | '/academy/'
     | '/sophia/'
     | '/training-certification/'
+    | '/_authenticated/academy/applications'
+    | '/_authenticated/academy/certifications'
+    | '/_authenticated/academy/cpd'
+    | '/_authenticated/academy/dashboard'
+    | '/_authenticated/academy/documents'
+    | '/_authenticated/academy/payments'
+    | '/_authenticated/academy/profile'
+    | '/_authenticated/academy/programmes'
+    | '/_authenticated/academy/skills-passport'
+    | '/_authenticated/academy/support'
     | '/company/solutions/cng'
     | '/company/solutions/cng-conversion'
     | '/company/solutions/diesel'
@@ -849,8 +1038,12 @@ export interface RootRouteChildren {
   RequestEnergyQuoteRoute: typeof RequestEnergyQuoteRoute
   SmartMeteringRoute: typeof SmartMeteringRoute
   SolarPowerRoute: typeof SolarPowerRoute
+  TeamInviteRoute: typeof TeamInviteRoute
   TechnologyRoute: typeof TechnologyRoute
   TrainingRoute: typeof TrainingRoute
+  AcademyLoginRoute: typeof AcademyLoginRoute
+  AcademyRegisterRoute: typeof AcademyRegisterRoute
+  AcademyResetPasswordRoute: typeof AcademyResetPasswordRoute
   ApiSophiaRoute: typeof ApiSophiaRoute
   CompanyAboutRoute: typeof CompanyAboutRoute
   CompanyCareersRoute: typeof CompanyCareersRoute
@@ -866,6 +1059,7 @@ export interface RootRouteChildren {
   TrainingCertificationCpdRoute: typeof TrainingCertificationCpdRoute
   TrainingCertificationVerifyRoute: typeof TrainingCertificationVerifyRoute
   TrainingCertificationWaitlistRoute: typeof TrainingCertificationWaitlistRoute
+  AcademyIndexRoute: typeof AcademyIndexRoute
   SophiaIndexRoute: typeof SophiaIndexRoute
   TrainingCertificationIndexRoute: typeof TrainingCertificationIndexRoute
   CompanySolutionsCngRoute: typeof CompanySolutionsCngRoute
@@ -1078,6 +1272,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolarPowerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/team-invite': {
+      id: '/team-invite'
+      path: '/team-invite'
+      fullPath: '/team-invite'
+      preLoaderRoute: typeof TeamInviteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/technology': {
       id: '/technology'
       path: '/technology'
@@ -1105,6 +1306,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin'
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/academy/': {
+      id: '/academy/'
+      path: '/academy'
+      fullPath: '/academy/'
+      preLoaderRoute: typeof AcademyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/login': {
+      id: '/academy/login'
+      path: '/academy/login'
+      fullPath: '/academy/login'
+      preLoaderRoute: typeof AcademyLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/register': {
+      id: '/academy/register'
+      path: '/academy/register'
+      fullPath: '/academy/register'
+      preLoaderRoute: typeof AcademyRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/reset-password': {
+      id: '/academy/reset-password'
+      path: '/academy/reset-password'
+      fullPath: '/academy/reset-password'
+      preLoaderRoute: typeof AcademyResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/sophia': {
       id: '/api/sophia'
@@ -1224,6 +1453,76 @@ declare module '@tanstack/react-router' {
       fullPath: '/training-certification/waitlist'
       preLoaderRoute: typeof TrainingCertificationWaitlistRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/academy/applications': {
+      id: '/_authenticated/academy/applications'
+      path: '/academy/applications'
+      fullPath: '/academy/applications'
+      preLoaderRoute: typeof AuthenticatedAcademyApplicationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academy/certifications': {
+      id: '/_authenticated/academy/certifications'
+      path: '/academy/certifications'
+      fullPath: '/academy/certifications'
+      preLoaderRoute: typeof AuthenticatedAcademyCertificationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academy/cpd': {
+      id: '/_authenticated/academy/cpd'
+      path: '/academy/cpd'
+      fullPath: '/academy/cpd'
+      preLoaderRoute: typeof AuthenticatedAcademyCpdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academy/dashboard': {
+      id: '/_authenticated/academy/dashboard'
+      path: '/academy/dashboard'
+      fullPath: '/academy/dashboard'
+      preLoaderRoute: typeof AuthenticatedAcademyDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academy/documents': {
+      id: '/_authenticated/academy/documents'
+      path: '/academy/documents'
+      fullPath: '/academy/documents'
+      preLoaderRoute: typeof AuthenticatedAcademyDocumentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academy/payments': {
+      id: '/_authenticated/academy/payments'
+      path: '/academy/payments'
+      fullPath: '/academy/payments'
+      preLoaderRoute: typeof AuthenticatedAcademyPaymentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academy/profile': {
+      id: '/_authenticated/academy/profile'
+      path: '/academy/profile'
+      fullPath: '/academy/profile'
+      preLoaderRoute: typeof AuthenticatedAcademyProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academy/programmes': {
+      id: '/_authenticated/academy/programmes'
+      path: '/academy/programmes'
+      fullPath: '/academy/programmes'
+      preLoaderRoute: typeof AuthenticatedAcademyProgrammesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academy/skills-passport': {
+      id: '/_authenticated/academy/skills-passport'
+      path: '/academy/skills-passport'
+      fullPath: '/academy/skills-passport'
+      preLoaderRoute: typeof AuthenticatedAcademySkillsPassportRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academy/support': {
+      id: '/_authenticated/academy/support'
+      path: '/academy/support'
+      fullPath: '/academy/support'
+      preLoaderRoute: typeof AuthenticatedAcademySupportRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/company/solutions/': {
       id: '/company/solutions/'
@@ -1350,11 +1649,33 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAccountRoute: typeof AuthenticatedAccountRoute
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAcademyApplicationsRoute: typeof AuthenticatedAcademyApplicationsRoute
+  AuthenticatedAcademyCertificationsRoute: typeof AuthenticatedAcademyCertificationsRoute
+  AuthenticatedAcademyCpdRoute: typeof AuthenticatedAcademyCpdRoute
+  AuthenticatedAcademyDashboardRoute: typeof AuthenticatedAcademyDashboardRoute
+  AuthenticatedAcademyDocumentsRoute: typeof AuthenticatedAcademyDocumentsRoute
+  AuthenticatedAcademyPaymentsRoute: typeof AuthenticatedAcademyPaymentsRoute
+  AuthenticatedAcademyProfileRoute: typeof AuthenticatedAcademyProfileRoute
+  AuthenticatedAcademyProgrammesRoute: typeof AuthenticatedAcademyProgrammesRoute
+  AuthenticatedAcademySkillsPassportRoute: typeof AuthenticatedAcademySkillsPassportRoute
+  AuthenticatedAcademySupportRoute: typeof AuthenticatedAcademySupportRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAccountRoute: AuthenticatedAccountRoute,
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAcademyApplicationsRoute: AuthenticatedAcademyApplicationsRoute,
+  AuthenticatedAcademyCertificationsRoute:
+    AuthenticatedAcademyCertificationsRoute,
+  AuthenticatedAcademyCpdRoute: AuthenticatedAcademyCpdRoute,
+  AuthenticatedAcademyDashboardRoute: AuthenticatedAcademyDashboardRoute,
+  AuthenticatedAcademyDocumentsRoute: AuthenticatedAcademyDocumentsRoute,
+  AuthenticatedAcademyPaymentsRoute: AuthenticatedAcademyPaymentsRoute,
+  AuthenticatedAcademyProfileRoute: AuthenticatedAcademyProfileRoute,
+  AuthenticatedAcademyProgrammesRoute: AuthenticatedAcademyProgrammesRoute,
+  AuthenticatedAcademySkillsPassportRoute:
+    AuthenticatedAcademySkillsPassportRoute,
+  AuthenticatedAcademySupportRoute: AuthenticatedAcademySupportRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -1388,8 +1709,12 @@ const rootRouteChildren: RootRouteChildren = {
   RequestEnergyQuoteRoute: RequestEnergyQuoteRoute,
   SmartMeteringRoute: SmartMeteringRoute,
   SolarPowerRoute: SolarPowerRoute,
+  TeamInviteRoute: TeamInviteRoute,
   TechnologyRoute: TechnologyRoute,
   TrainingRoute: TrainingRoute,
+  AcademyLoginRoute: AcademyLoginRoute,
+  AcademyRegisterRoute: AcademyRegisterRoute,
+  AcademyResetPasswordRoute: AcademyResetPasswordRoute,
   ApiSophiaRoute: ApiSophiaRoute,
   CompanyAboutRoute: CompanyAboutRoute,
   CompanyCareersRoute: CompanyCareersRoute,
@@ -1405,6 +1730,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrainingCertificationCpdRoute: TrainingCertificationCpdRoute,
   TrainingCertificationVerifyRoute: TrainingCertificationVerifyRoute,
   TrainingCertificationWaitlistRoute: TrainingCertificationWaitlistRoute,
+  AcademyIndexRoute: AcademyIndexRoute,
   SophiaIndexRoute: SophiaIndexRoute,
   TrainingCertificationIndexRoute: TrainingCertificationIndexRoute,
   CompanySolutionsCngRoute: CompanySolutionsCngRoute,
