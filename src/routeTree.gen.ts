@@ -51,6 +51,8 @@ import { Route as ApiSophiaRouteImport } from './routes/api/sophia'
 import { Route as CompanyIndexRouteImport } from './routes/company.index'
 import { Route as CompanySplatRouteImport } from './routes/company.$'
 import { Route as PoliciesGenderDiversityInclusionRouteImport } from './routes/policies.gender-diversity-inclusion'
+import { Route as SolutionsSlugRouteImport } from './routes/solutions.$slug'
+import { Route as SolutionsCleanMobilityRouteImport } from './routes/solutions.clean-mobility'
 import { Route as SophiaIndexRouteImport } from './routes/sophia.index'
 import { Route as SophiaThreadIdRouteImport } from './routes/sophia.$threadId'
 import { Route as TrainingCertificationIndexRouteImport } from './routes/training-certification/index'
@@ -283,6 +285,16 @@ const PoliciesGenderDiversityInclusionRoute =
     path: '/policies/gender-diversity-inclusion',
     getParentRoute: () => rootRouteImport,
   } as any)
+const SolutionsSlugRoute = SolutionsSlugRouteImport.update({
+  id: '/solutions/$slug',
+  path: '/solutions/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsCleanMobilityRoute = SolutionsCleanMobilityRouteImport.update({
+  id: '/solutions/clean-mobility',
+  path: '/solutions/clean-mobility',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SophiaIndexRoute = SophiaIndexRouteImport.update({
   id: '/sophia/',
   path: '/sophia/',
@@ -447,6 +459,8 @@ export interface FileRoutesByFullPath {
   '/api/sophia': typeof ApiSophiaRoute
   '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
+  '/solutions/$slug': typeof SolutionsSlugRoute
+  '/solutions/clean-mobility': typeof SolutionsCleanMobilityRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/training-certification/corporate': typeof TrainingCertificationCorporateRoute
   '/training-certification/cpd': typeof TrainingCertificationCpdRoute
@@ -511,6 +525,8 @@ export interface FileRoutesByTo {
   '/api/sophia': typeof ApiSophiaRoute
   '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
+  '/solutions/$slug': typeof SolutionsSlugRoute
+  '/solutions/clean-mobility': typeof SolutionsCleanMobilityRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/training-certification/corporate': typeof TrainingCertificationCorporateRoute
   '/training-certification/cpd': typeof TrainingCertificationCpdRoute
@@ -577,6 +593,8 @@ export interface FileRoutesById {
   '/api/sophia': typeof ApiSophiaRoute
   '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
+  '/solutions/$slug': typeof SolutionsSlugRoute
+  '/solutions/clean-mobility': typeof SolutionsCleanMobilityRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
   '/training-certification/corporate': typeof TrainingCertificationCorporateRoute
   '/training-certification/cpd': typeof TrainingCertificationCpdRoute
@@ -643,6 +661,8 @@ export interface FileRouteTypes {
     | '/api/sophia'
     | '/company/$'
     | '/policies/gender-diversity-inclusion'
+    | '/solutions/$slug'
+    | '/solutions/clean-mobility'
     | '/sophia/$threadId'
     | '/training-certification/corporate'
     | '/training-certification/cpd'
@@ -707,6 +727,8 @@ export interface FileRouteTypes {
     | '/api/sophia'
     | '/company/$'
     | '/policies/gender-diversity-inclusion'
+    | '/solutions/$slug'
+    | '/solutions/clean-mobility'
     | '/sophia/$threadId'
     | '/training-certification/corporate'
     | '/training-certification/cpd'
@@ -772,6 +794,8 @@ export interface FileRouteTypes {
     | '/api/sophia'
     | '/company/$'
     | '/policies/gender-diversity-inclusion'
+    | '/solutions/$slug'
+    | '/solutions/clean-mobility'
     | '/sophia/$threadId'
     | '/training-certification/corporate'
     | '/training-certification/cpd'
@@ -836,6 +860,8 @@ export interface RootRouteChildren {
   ApiSophiaRoute: typeof ApiSophiaRoute
   CompanySplatRoute: typeof CompanySplatRoute
   PoliciesGenderDiversityInclusionRoute: typeof PoliciesGenderDiversityInclusionRoute
+  SolutionsSlugRoute: typeof SolutionsSlugRoute
+  SolutionsCleanMobilityRoute: typeof SolutionsCleanMobilityRoute
   SophiaThreadIdRoute: typeof SophiaThreadIdRoute
   TrainingCertificationCorporateRoute: typeof TrainingCertificationCorporateRoute
   TrainingCertificationCpdRoute: typeof TrainingCertificationCpdRoute
@@ -1147,6 +1173,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoliciesGenderDiversityInclusionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/solutions/$slug': {
+      id: '/solutions/$slug'
+      path: '/solutions/$slug'
+      fullPath: '/solutions/$slug'
+      preLoaderRoute: typeof SolutionsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions/clean-mobility': {
+      id: '/solutions/clean-mobility'
+      path: '/solutions/clean-mobility'
+      fullPath: '/solutions/clean-mobility'
+      preLoaderRoute: typeof SolutionsCleanMobilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sophia/': {
       id: '/sophia/'
       path: '/sophia'
@@ -1371,6 +1411,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSophiaRoute: ApiSophiaRoute,
   CompanySplatRoute: CompanySplatRoute,
   PoliciesGenderDiversityInclusionRoute: PoliciesGenderDiversityInclusionRoute,
+  SolutionsSlugRoute: SolutionsSlugRoute,
+  SolutionsCleanMobilityRoute: SolutionsCleanMobilityRoute,
   SophiaThreadIdRoute: SophiaThreadIdRoute,
   TrainingCertificationCorporateRoute: TrainingCertificationCorporateRoute,
   TrainingCertificationCpdRoute: TrainingCertificationCpdRoute,
