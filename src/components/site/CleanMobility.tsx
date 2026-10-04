@@ -25,7 +25,7 @@ function Hero({ eyebrow, title, body, status, children }: { eyebrow: string; tit
       <div className="mx-auto w-full max-w-6xl">
         <Link to="/solutions/clean-mobility" className="text-sm text-primary-foreground/80 underline-offset-4 hover:underline">{eyebrow}</Link>
         <h1 className="mt-3 max-w-3xl text-3xl font-bold text-primary-foreground sm:text-4xl md:text-5xl">{title}</h1>
-        {status ? <StatusBadge status={status} className="mt-4" /> : null}
+        {status ? <span className="mt-4 inline-block rounded-full bg-background px-3 py-1 text-xs font-semibold uppercase tracking-wide text-foreground">{status}</span> : null}
         <p className="mt-4 max-w-2xl leading-relaxed text-primary-foreground/85">{body}</p>
         {children}
       </div>
