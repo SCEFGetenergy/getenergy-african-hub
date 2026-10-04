@@ -30,6 +30,7 @@
 
 ## GET Energy Academy (64 offerings)
 - [x] Academy page, search/filters, 64 programme pages, waiting-list and corporate forms with references, nav link, SOPHIA catalogue
+- [x] Refactor Academy positioning around Green Skills, Technical Certification and Career Development; add six-area delivery and prospective-partner framework
 - [ ] Email copy of submissions to ccgetenergy@gmail.com — needs an email sender domain
 - [x] Admin screen: certification fees, application statuses, recognised employers
 - [ ] Cohort management and payments — future phase
