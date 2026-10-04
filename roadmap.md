@@ -13,6 +13,7 @@
 ## GET Energy integrated refactor (brief, 45 sections)
 - [x] Phase 3a: header nav (Energy Solutions dropdown, Industries, Partners, EEA54.Africa, About, Contact), hero, six service cards
 - [ ] Phase 3b: rest of homepage (how we work, C&I, partnerships, EEA54 as separate platform)
+- [x] Clean Mobility pages linked, /solutions/cng-conversion redirects to /cng-conversion
 - [ ] Phase 4: refactor /get-fuel, /get-electricity, /ev, /cng, /green-energy, /contact
 - [ ] Phase 5: battery storage, generators, advisory, C&I pages
 - [ ] Phase 6: email to ccgetenergy@gmail.com (needs email domain setup) + WhatsApp +234 818 074 2835
