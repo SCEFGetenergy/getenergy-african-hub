@@ -5,6 +5,8 @@ import { CLEAN_MOBILITY_PAGES, TRAINING_LINK } from "@/lib/clean-mobility";
 export const Route = createFileRoute("/solutions/$slug")({
   beforeLoad: ({ params }) => {
     if (params.slug === "green-energy-training") throw redirect({ href: TRAINING_LINK, statusCode: 301 });
+    // One canonical page per topic: CNG conversion lives at /cng-conversion.
+    if (params.slug === "cng-conversion") throw redirect({ href: "/cng-conversion", statusCode: 301 });
   },
   loader: ({ params }) => {
     const page = CLEAN_MOBILITY_PAGES.find((p) => p.slug === params.slug);

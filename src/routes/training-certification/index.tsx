@@ -8,7 +8,7 @@ import { Section, SectionHeading } from "@/components/site/ui-bits";
 import { Catalogue } from "@/components/academy/AcademyParts";
 import { CertificationCard } from "@/components/academy/CertificationCard";
 import { CERTIFICATIONS } from "@/lib/certifications";
-import { CERT_DISCLAIMER, PROGRAMMES, formatNaira, getProgramme, statusOf, whatsappFor } from "@/lib/academy";
+import { ACADEMY_AREAS, CERT_DISCLAIMER, PROGRAMMES, formatNaira, getProgramme, statusOf, whatsappFor } from "@/lib/academy";
 import heroImg from "@/assets/academy/hero.jpg";
 import solarImg from "@/assets/academy/solar.jpg";
 import bessImg from "@/assets/academy/bess.jpg";
@@ -90,7 +90,23 @@ const PILLARS = [
   { icon: BriefcaseBusiness, t: "Career development" },
 ];
 
-const PARTNER_TYPES = ["NAPTIN", "HSE training providers", "IOSH-approved providers", "NEBOSH learning partners", "NEMSA competency pathways", "OEM training partners", "Solar OEMs", "BESS manufacturers", "EV technology companies", "CNG technology companies", "Smart meter manufacturers", "Universities, polytechnics & technical colleges", "Professional bodies", "Green economy organisations", "International certification organisations"];
+const ACADEMY_PROMISE = [
+  {
+    icon: Sun,
+    title: "Green Skills",
+    body: "Practical capabilities for renewable energy, storage, efficiency, clean mobility and the wider green economy.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Technical Certification",
+    body: "Competency-led learning, practical assessment and certification pathways whose recognition is confirmed programme by programme.",
+  },
+  {
+    icon: BriefcaseBusiness,
+    title: "Career Development",
+    body: "Workplace, leadership and commercial skills that help learners apply technical knowledge responsibly in real organisations.",
+  },
+];
 
 const FAQ = [
   ["Are the fees final?", "No. Fees shown are proposed GET Energy Academy training fees until a programme is marked price-approved. External certification or examination fees are confirmed separately by the partner."],
@@ -136,7 +152,7 @@ function AcademyPage() {
                 Build practical skills. Earn relevant certification. Advance your career.
               </p>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-                GET Energy Academy provides practical, industry-relevant technical, professional and certification programmes designed to develop a skilled workforce for the energy transition, green economy and modern workplace.
+                GET Energy Academy is a commercial learning platform for practical energy skills, competency-based development and career growth across Nigeria’s evolving energy economy.
               </p>
               <div aria-hidden className="mt-5 h-1 w-16 rounded-full bg-brand-green" />
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -168,6 +184,45 @@ function AcademyPage() {
           </div>
         </div>
       </section>
+
+      {/* ACADEMY PROMISE */}
+      <Section>
+        <SectionHeading eyebrow="One academy, three outcomes" title="Skills for Work. Certification for Growth. Training for the Energy Transition." body="Every learning route connects technical understanding with practical application, workplace productivity and responsible career development." />
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {ACADEMY_PROMISE.map(({ icon: Icon, title, body }) => (
+            <article key={title} className="border-l-4 border-brand-green bg-surface p-5">
+              <Icon className="size-7 text-brand-green" />
+              <h2 className="mt-4 text-xl font-bold text-brand-deep">{title}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
+            </article>
+          ))}
+        </div>
+      </Section>
+
+      {/* DELIVERY AREAS */}
+      <Section tone="surface">
+        <SectionHeading eyebrow="Academy structure" title="Six Energy Learning Areas" body="GET Energy organises its catalogue around the technical systems, commercial capabilities and specialist knowledge needed across the energy value chain." />
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {ACADEMY_AREAS.map((area, index) => {
+            const AreaIcon = [Sun, Network, Gauge, Flame, Car, Lightbulb][index] ?? Lightbulb;
+            return (
+              <article key={area.title} className="flex flex-col border-t-4 border-brand-green bg-card p-5 shadow-sm">
+                <div className="flex items-start gap-3">
+                  <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand-green-soft text-brand-green"><AreaIcon className="size-5" /></span>
+                  <div>
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Area {index + 1}</span>
+                    <h2 className="text-lg font-bold text-brand-deep">{area.title}</h2>
+                  </div>
+                </div>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{area.summary}</p>
+                <ul className="mt-4 grid gap-2 text-sm">
+                  {area.focus.map((item) => <li key={item} className="flex items-start gap-2"><Check className="mt-0.5 size-4 shrink-0 text-brand-green" />{item}</li>)}
+                </ul>
+              </article>
+            );
+          })}
+        </div>
+      </Section>
 
       {/* ICON STRIP */}
       <section aria-label="Training categories" className="border-b border-border bg-background">
@@ -322,12 +377,26 @@ function AcademyPage() {
         </div>
       </Section>
 
-      {/* PARTNERS */}
+      {/* PARTNERSHIP PLANNING */}
       <Section tone="surface">
-        <SectionHeading eyebrow="Training & certification partners" title="Who we intend to work with" body="These are partner categories we are pursuing. A named partner or logo will only appear here once the relationship is formally verified and approved for public use." />
-        <ul className="mt-6 flex flex-wrap gap-2">
-          {PARTNER_TYPES.map((p) => <li key={p} className="rounded-full border border-border bg-card px-3 py-1.5 text-xs">{p}</li>)}
-        </ul>
+        <SectionHeading eyebrow="Partnership planning" title="A Platform Supported by Specialist Capability" body="GET Energy operates the Academy platform. Depending on the programme, suitable institutions may support facilities, instructors, practical assessments or recognised certification after formal agreement and verification." />
+        <div className="mt-6 divide-y divide-border border-y border-border bg-card">
+          {ACADEMY_AREAS.map((area) => (
+            <details key={area.title} className="group px-4 py-4 sm:px-5">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 font-semibold text-brand-deep">
+                <span>{area.shortTitle}</span>
+                <span aria-hidden className="text-xl text-brand-green transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <div className="pb-2 pt-3">
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Prospective organisations under evaluation</p>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {area.prospectiveOrganisations.map((organisation) => <li key={organisation} className="border border-border bg-surface px-3 py-2 text-xs">{organisation}</li>)}
+                </ul>
+              </div>
+            </details>
+          ))}
+        </div>
+        <p className="mt-5 border-l-4 border-brand-green bg-card p-4 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Important:</strong> These names are a partnership-planning reference only. They are not presented as current GET Energy partners. Certification, accreditation, facilities and assessment arrangements must be confirmed with the relevant organisation for each programme before enrolment or public promotion.</p>
         <p className="mt-6 text-sm text-muted-foreground">Training can strengthen skills and readiness for career opportunities; we do not promise employment, promotion, salary, visas or placement. We encourage women to participate in engineering, energy and technical pathways.</p>
       </Section>
 

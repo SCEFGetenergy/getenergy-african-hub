@@ -7,6 +7,67 @@ export type Programme = {
   status?: ProgrammeStatus; priceApproved?: boolean;
 };
 export const ACADEMY_CATEGORIES = ["Technical Energy","Solar & BESS","Mini-Grid & Power","Smart Energy","Energy Efficiency","HSE & Safety","Green Economy","EV & Mobility","CNG","Project Development","Finance","GreenTech Entrepreneurship","Professional Skills","Corporate Training","Career Pathways"] as const;
+
+export type AcademyArea = {
+  title: string;
+  shortTitle: string;
+  summary: string;
+  focus: string[];
+  prospectiveOrganisations: string[];
+};
+
+// Partnership-planning reference only. Listing an organisation here does not claim a current
+// partnership, accreditation or permission to advertise its qualifications.
+export const ACADEMY_AREAS: AcademyArea[] = [
+  {
+    title: "Solar & Renewable Energy Academy",
+    shortTitle: "Solar & Renewables",
+    summary: "Practical capability for solar PV, storage, distributed renewables and installation supervision.",
+    focus: ["Solar PV installation", "Solar-plus-storage", "Installer development", "Renewable-energy systems"],
+    prospectiveOrganisations: [
+      "RETTI", "Gennex Academy", "Asteven Energy Institute", "Energy Future Academy / e-Phaim",
+      "SolarCore Academy", "Firstoption Renewable Energy", "Osak Orbit Global Power", "KD Solar Tech",
+      "Rubitec Academy / BAS Associates", "Lagos Energy Academy", "CRET – FUTA", "CERD – OAU",
+      "NCERD – UNN", "SERC – UDUS", "NCEE – UNIBEN", "BARECKS / CUSTECH",
+    ],
+  },
+  {
+    title: "Power & Electrical Academy",
+    shortTitle: "Power & Electrical",
+    summary: "Technical learning for generation, distribution, electrical safety, metering and modern power systems.",
+    focus: ["Power systems", "Electrical competency", "Metering & automation", "Safety & compliance"],
+    prospectiveOrganisations: ["NAPTIN", "NEMSA", "Lagos Energy Academy", "NCEEC – University of Lagos", "Covenant University EIE"],
+  },
+  {
+    title: "Energy Efficiency Academy",
+    shortTitle: "Energy Efficiency",
+    summary: "Workplace and technical programmes in energy audits, conservation, management and performance.",
+    focus: ["Energy audits", "Energy management", "Conservation", "Professional development"],
+    prospectiveOrganisations: ["NCEEC – University of Lagos", "Energy Institute – Nigeria Committee", "Lagos Energy Academy", "NCERD – UNN", "NCEE – UNIBEN"],
+  },
+  {
+    title: "Oil, Gas & CNG Academy",
+    shortTitle: "Oil, Gas & CNG",
+    summary: "Responsible technical and safety development for petroleum energy, natural gas and alternative fuels.",
+    focus: ["CNG fundamentals", "Gas safety", "Petroleum operations", "Gas-to-power"],
+    prospectiveOrganisations: ["Petroleum Training Institute", "Energy Training Centre", "International Energy Training Centre", "OGTAN", "NCPRD – ATBU", "NAPTIN"],
+  },
+  {
+    title: "EV & Battery Academy",
+    shortTitle: "EV & Battery",
+    summary: "Skills for charging infrastructure, battery systems, solar integration and electric mobility.",
+    focus: ["EV charging", "Battery systems", "Solar integration", "E-mobility infrastructure"],
+    prospectiveOrganisations: ["Osak Orbit Global Power", "Gennex Academy", "Asteven Energy Institute", "Lagos Energy Academy", "NAPTIN", "Covenant University EIE"],
+  },
+  {
+    title: "Advanced Energy Academy",
+    shortTitle: "Advanced Energy",
+    summary: "Specialist and research-led learning across hydropower, biomass, biogas and sustainable energy.",
+    focus: ["Hydropower", "Biomass & biogas", "Waste-to-energy", "Energy research"],
+    prospectiveOrganisations: ["NACHRED – University of Ilorin", "NCERD – UNN", "SERC – UDUS", "CRET – FUTA", "CERD – OAU", "NCEE – UNIBEN"],
+  },
+];
+
 export const PRICE_TIERS = [
   { label: "Under ₦150,000", min: 0, max: 149999 },
   { label: "₦150,000–₦249,999", min: 150000, max: 249999 },
