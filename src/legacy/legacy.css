@@ -71,6 +71,11 @@ nav.main a[aria-current="page"]{color:var(--blue);box-shadow:inset 0 -3px 0 var(
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.navy{background:#1F4A8F}}
 .btn.ghost{border-color:var(--line);color:var(--ink);background:transparent}
 .btn.ghost:hover{border-color:var(--navy)}
+.btn.outline{background:#fff;color:#0B2A5B;border-color:#0A4C9C}
+.btn.outline:hover{background:#EAF0FA;border-color:#0B2A5B;filter:none}
+/* Home hero: lift the two secondary CTAs to the same visibility as the primary */
+.hx .btn.ghost{border-color:#0A4C9C;color:#0B2A5B;background:rgba(255,255,255,.72)}
+.hx .btn.ghost:hover{background:#fff;border-color:#0B2A5B;filter:none}
 .btn[disabled],.btn[aria-disabled="true"]{background:#E4E8EF;color:#3A4658;border-color:#C3CBD8;cursor:not-allowed;filter:none}
 .menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:9px 12px;font:600 .95rem var(--body);color:var(--ink);cursor:pointer}
 .m-only{display:none}
