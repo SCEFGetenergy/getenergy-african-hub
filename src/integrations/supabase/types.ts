@@ -308,6 +308,757 @@ export type Database = {
         }
         Relationships: []
       }
+      electricity_agents: {
+        Row: {
+          business_address: string | null
+          business_name: string
+          city_lga: string | null
+          commission_rate: number
+          commission_type: string
+          created_at: string
+          id: string
+          state: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_address?: string | null
+          business_name: string
+          city_lga?: string | null
+          commission_rate?: number
+          commission_type?: string
+          created_at?: string
+          id?: string
+          state?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_address?: string | null
+          business_name?: string
+          city_lga?: string | null
+          commission_rate?: number
+          commission_type?: string
+          created_at?: string
+          id?: string
+          state?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      electricity_api_connector_logs: {
+        Row: {
+          connector_id: string | null
+          created_at: string
+          error_message: string | null
+          id: string
+          request_payload: Json
+          request_type: string
+          response_payload: Json
+          response_status: string | null
+          transaction_id: string | null
+        }
+        Insert: {
+          connector_id?: string | null
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          request_payload?: Json
+          request_type: string
+          response_payload?: Json
+          response_status?: string | null
+          transaction_id?: string | null
+        }
+        Update: {
+          connector_id?: string | null
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          request_payload?: Json
+          request_type?: string
+          response_payload?: Json
+          response_status?: string | null
+          transaction_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "electricity_api_connector_logs_connector_id_fkey"
+            columns: ["connector_id"]
+            isOneToOne: false
+            referencedRelation: "electricity_api_connectors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "electricity_api_connector_logs_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "electricity_transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      electricity_api_connectors: {
+        Row: {
+          auth_type: string | null
+          base_url: string | null
+          contact_person: string | null
+          created_at: string
+          fallback_provider: string | null
+          id: string
+          live_status: string
+          priority_order: number
+          provider_name: string
+          provider_type: string
+          sandbox_status: string
+          support_email: string | null
+          support_phone: string | null
+          supported_discos: string[]
+          updated_at: string
+        }
+        Insert: {
+          auth_type?: string | null
+          base_url?: string | null
+          contact_person?: string | null
+          created_at?: string
+          fallback_provider?: string | null
+          id?: string
+          live_status?: string
+          priority_order?: number
+          provider_name: string
+          provider_type: string
+          sandbox_status?: string
+          support_email?: string | null
+          support_phone?: string | null
+          supported_discos?: string[]
+          updated_at?: string
+        }
+        Update: {
+          auth_type?: string | null
+          base_url?: string | null
+          contact_person?: string | null
+          created_at?: string
+          fallback_provider?: string | null
+          id?: string
+          live_status?: string
+          priority_order?: number
+          provider_name?: string
+          provider_type?: string
+          sandbox_status?: string
+          support_email?: string | null
+          support_phone?: string | null
+          supported_discos?: string[]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "electricity_api_connectors_fallback_provider_fkey"
+            columns: ["fallback_provider"]
+            isOneToOne: false
+            referencedRelation: "electricity_api_connectors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      electricity_corporate_accounts: {
+        Row: {
+          address: string | null
+          admin_notes: string | null
+          contact_person: string
+          created_at: string
+          email: string
+          id: string
+          main_disco: string | null
+          monthly_electricity_spend_ngn: number | null
+          number_of_meters: number
+          organisation_name: string
+          phone: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          address?: string | null
+          admin_notes?: string | null
+          contact_person: string
+          created_at?: string
+          email: string
+          id?: string
+          main_disco?: string | null
+          monthly_electricity_spend_ngn?: number | null
+          number_of_meters?: number
+          organisation_name: string
+          phone: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          address?: string | null
+          admin_notes?: string | null
+          contact_person?: string
+          created_at?: string
+          email?: string
+          id?: string
+          main_disco?: string | null
+          monthly_electricity_spend_ngn?: number | null
+          number_of_meters?: number
+          organisation_name?: string
+          phone?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      electricity_corporate_meters: {
+        Row: {
+          corporate_account_id: string
+          created_at: string
+          department: string | null
+          disco: string
+          id: string
+          location_name: string | null
+          meter_number: string
+          meter_type: string
+          status: string
+        }
+        Insert: {
+          corporate_account_id: string
+          created_at?: string
+          department?: string | null
+          disco: string
+          id?: string
+          location_name?: string | null
+          meter_number: string
+          meter_type: string
+          status?: string
+        }
+        Update: {
+          corporate_account_id?: string
+          created_at?: string
+          department?: string | null
+          disco?: string
+          id?: string
+          location_name?: string | null
+          meter_number?: string
+          meter_type?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "electricity_corporate_meters_corporate_account_id_fkey"
+            columns: ["corporate_account_id"]
+            isOneToOne: false
+            referencedRelation: "electricity_corporate_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      electricity_disco_api_routes: {
+        Row: {
+          backup_connector_id: string | null
+          created_at: string
+          disco_code: string
+          disco_name: string
+          id: string
+          preferred_connector_id: string | null
+          status: string
+          supports_meter_verification: boolean
+          supports_postpaid: boolean
+          supports_prepaid: boolean
+          updated_at: string
+        }
+        Insert: {
+          backup_connector_id?: string | null
+          created_at?: string
+          disco_code: string
+          disco_name: string
+          id?: string
+          preferred_connector_id?: string | null
+          status?: string
+          supports_meter_verification?: boolean
+          supports_postpaid?: boolean
+          supports_prepaid?: boolean
+          updated_at?: string
+        }
+        Update: {
+          backup_connector_id?: string | null
+          created_at?: string
+          disco_code?: string
+          disco_name?: string
+          id?: string
+          preferred_connector_id?: string | null
+          status?: string
+          supports_meter_verification?: boolean
+          supports_postpaid?: boolean
+          supports_prepaid?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "electricity_disco_api_routes_backup_connector_id_fkey"
+            columns: ["backup_connector_id"]
+            isOneToOne: false
+            referencedRelation: "electricity_api_connectors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "electricity_disco_api_routes_preferred_connector_id_fkey"
+            columns: ["preferred_connector_id"]
+            isOneToOne: false
+            referencedRelation: "electricity_api_connectors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      electricity_meter_verification_logs: {
+        Row: {
+          api_provider: string
+          created_at: string
+          customer_address: string | null
+          customer_name: string
+          disco: string
+          error_message: string | null
+          id: string
+          meter_number: string
+          meter_type: string
+          minimum_amount_ngn: number
+          tariff_class: string | null
+          user_id: string
+          verification_status: string
+        }
+        Insert: {
+          api_provider?: string
+          created_at?: string
+          customer_address?: string | null
+          customer_name: string
+          disco: string
+          error_message?: string | null
+          id?: string
+          meter_number: string
+          meter_type: string
+          minimum_amount_ngn?: number
+          tariff_class?: string | null
+          user_id: string
+          verification_status?: string
+        }
+        Update: {
+          api_provider?: string
+          created_at?: string
+          customer_address?: string | null
+          customer_name?: string
+          disco?: string
+          error_message?: string | null
+          id?: string
+          meter_number?: string
+          meter_type?: string
+          minimum_amount_ngn?: number
+          tariff_class?: string | null
+          user_id?: string
+          verification_status?: string
+        }
+        Relationships: []
+      }
+      electricity_payment_logs: {
+        Row: {
+          amount_ngn: number
+          created_at: string
+          error_message: string | null
+          id: string
+          payment_reference: string
+          payment_status: string
+          provider_name: string
+          response_payload: Json
+          transaction_id: string | null
+        }
+        Insert: {
+          amount_ngn?: number
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          payment_reference: string
+          payment_status?: string
+          provider_name?: string
+          response_payload?: Json
+          transaction_id?: string | null
+        }
+        Update: {
+          amount_ngn?: number
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          payment_reference?: string
+          payment_status?: string
+          provider_name?: string
+          response_payload?: Json
+          transaction_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "electricity_payment_logs_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "electricity_transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      electricity_payment_providers: {
+        Row: {
+          created_at: string
+          id: string
+          provider_name: string
+          provider_type: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          provider_name: string
+          provider_type: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          provider_name?: string
+          provider_type?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      electricity_platform_settings: {
+        Row: {
+          convenience_fee_ngn: number
+          id: number
+          live_mode_enabled: boolean
+          mode: string
+          updated_at: string
+        }
+        Insert: {
+          convenience_fee_ngn?: number
+          id?: number
+          live_mode_enabled?: boolean
+          mode?: string
+          updated_at?: string
+        }
+        Update: {
+          convenience_fee_ngn?: number
+          id?: number
+          live_mode_enabled?: boolean
+          mode?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      electricity_saved_meters: {
+        Row: {
+          created_at: string
+          disco: string
+          id: string
+          label: string
+          meter_number: string
+          meter_type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          disco: string
+          id?: string
+          label: string
+          meter_number: string
+          meter_type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          disco?: string
+          id?: string
+          label?: string
+          meter_number?: string
+          meter_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      electricity_support_tickets: {
+        Row: {
+          admin_notes: string | null
+          assigned_to: string | null
+          created_at: string
+          id: string
+          issue_type: string
+          message: string
+          status: string
+          transaction_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          assigned_to?: string | null
+          created_at?: string
+          id?: string
+          issue_type: string
+          message: string
+          status?: string
+          transaction_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          admin_notes?: string | null
+          assigned_to?: string | null
+          created_at?: string
+          id?: string
+          issue_type?: string
+          message?: string
+          status?: string
+          transaction_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "electricity_support_tickets_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "electricity_transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      electricity_token_requests: {
+        Row: {
+          admin_notes: string | null
+          amount_ngn: number
+          assigned_to: string | null
+          city_lga: string
+          consent_at: string
+          created_at: string
+          disco: string
+          email: string
+          full_name: string
+          id: string
+          meter_number: string
+          meter_type: string
+          phone: string
+          preferred_contact_method: string
+          request_reference: string
+          state: string
+          status: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          amount_ngn: number
+          assigned_to?: string | null
+          city_lga: string
+          consent_at?: string
+          created_at?: string
+          disco: string
+          email: string
+          full_name: string
+          id?: string
+          meter_number: string
+          meter_type: string
+          phone: string
+          preferred_contact_method: string
+          request_reference: string
+          state: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          amount_ngn?: number
+          assigned_to?: string | null
+          city_lga?: string
+          consent_at?: string
+          created_at?: string
+          disco?: string
+          email?: string
+          full_name?: string
+          id?: string
+          meter_number?: string
+          meter_type?: string
+          phone?: string
+          preferred_contact_method?: string
+          request_reference?: string
+          state?: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      electricity_transactions: {
+        Row: {
+          amount_ngn: number
+          api_provider: string
+          api_reference: string | null
+          convenience_fee_ngn: number
+          created_at: string
+          customer_name: string
+          disco: string
+          id: string
+          meter_number: string
+          meter_type: string
+          mode: string
+          payment_method: string
+          payment_status: string
+          token_status: string
+          token_value: string | null
+          total_amount_ngn: number
+          transaction_reference: string
+          units: number | null
+          user_id: string
+        }
+        Insert: {
+          amount_ngn: number
+          api_provider?: string
+          api_reference?: string | null
+          convenience_fee_ngn?: number
+          created_at?: string
+          customer_name: string
+          disco: string
+          id?: string
+          meter_number: string
+          meter_type: string
+          mode?: string
+          payment_method: string
+          payment_status?: string
+          token_status: string
+          token_value?: string | null
+          total_amount_ngn: number
+          transaction_reference: string
+          units?: number | null
+          user_id: string
+        }
+        Update: {
+          amount_ngn?: number
+          api_provider?: string
+          api_reference?: string | null
+          convenience_fee_ngn?: number
+          created_at?: string
+          customer_name?: string
+          disco?: string
+          id?: string
+          meter_number?: string
+          meter_type?: string
+          mode?: string
+          payment_method?: string
+          payment_status?: string
+          token_status?: string
+          token_value?: string | null
+          total_amount_ngn?: number
+          transaction_reference?: string
+          units?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      electricity_user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      electricity_wallet_transactions: {
+        Row: {
+          amount_ngn: number
+          created_at: string
+          id: string
+          reference: string
+          status: string
+          transaction_type: string
+          wallet_id: string
+        }
+        Insert: {
+          amount_ngn: number
+          created_at?: string
+          id?: string
+          reference: string
+          status?: string
+          transaction_type: string
+          wallet_id: string
+        }
+        Update: {
+          amount_ngn?: number
+          created_at?: string
+          id?: string
+          reference?: string
+          status?: string
+          transaction_type?: string
+          wallet_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "electricity_wallet_transactions_wallet_id_fkey"
+            columns: ["wallet_id"]
+            isOneToOne: false
+            referencedRelation: "electricity_wallets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      electricity_wallets: {
+        Row: {
+          balance_ngn: number
+          created_at: string
+          id: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          balance_ngn?: number
+          created_at?: string
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          balance_ngn?: number
+          created_at?: string
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           account_type: string
@@ -513,6 +1264,33 @@ export type Database = {
       }
       restore_service_request: { Args: { p_id: string }; Returns: undefined }
       revoke_admin_invitation: { Args: { p_id: string }; Returns: undefined }
+      run_electricity_sandbox_transaction: {
+        Args: {
+          p_amount_ngn: number
+          p_customer_name: string
+          p_disco: string
+          p_meter_number: string
+          p_meter_type: string
+          p_payment_method: string
+        }
+        Returns: Json
+      }
+      submit_electricity_token_request: {
+        Args: {
+          p_amount_ngn: number
+          p_city_lga: string
+          p_consent: boolean
+          p_disco: string
+          p_email: string
+          p_full_name: string
+          p_meter_number: string
+          p_meter_type: string
+          p_phone: string
+          p_preferred_contact_method: string
+          p_state: string
+        }
+        Returns: string
+      }
       submit_service_request: {
         Args: {
           p_company_name?: string
@@ -525,6 +1303,10 @@ export type Database = {
           p_service_name: string
         }
         Returns: string
+      }
+      verify_electricity_meter_sandbox: {
+        Args: { p_disco: string; p_meter_number: string; p_meter_type: string }
+        Returns: Json
       }
     }
     Enums: {

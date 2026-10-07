@@ -44,3 +44,10 @@
 - [ ] GFA Wzip Wallet live payments, receipts, instalments — waiting on wallet API docs and keys
 - [ ] Emailed invitations/notifications — needs an email sender domain
 - [ ] First admin account — waiting on the team's email address
+
+## GetEnergy Token electricity platform
+- [ ] Add structured electricity requests and sandbox operations with GETELEC references and database-enforced access/audit
+- [ ] Expand the public electricity page while preserving launching-soon and no-payment messaging
+- [ ] Build authenticated customer, agent, corporate and admin workspace surfaces under /app/getenergy-token
+- [ ] Add electricity enquiries and sandbox transaction/support operations to team admin
+- [ ] Verify request references, sandbox-only behavior, access boundaries, route metadata and mobile/desktop screens
