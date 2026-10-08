@@ -3,8 +3,20 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import bodyHtml from "./body.html?raw";
 import { initLegacy } from "./legacy";
 import { supabase } from "@/integrations/supabase/client";
+import evChargingVideo from "@/assets/ev-charging.mp4?url";
+import evInteriorVideo from "@/assets/ev-interior.mp4?url";
 
-const [headPart = "", rest = ""] = bodyHtml.split('<main id="main">');
+const bodyWithLocalVideos = bodyHtml
+  .replaceAll(
+    "/__l5e/assets-v1/d47d36c1-5f2f-474b-8df1-f0d0a3a7c972/ev-charging.mp4",
+    evChargingVideo,
+  )
+  .replaceAll(
+    "/__l5e/assets-v1/6fb78e22-4195-40de-842f-88c772c23717/ev-interior.mp4",
+    evInteriorVideo,
+  );
+
+const [headPart = "", rest = ""] = bodyWithLocalVideos.split('<main id="main">');
 const [pagesPart = "", footPart = ""] = rest.split("</main>");
 
 // Paths rendered by React routes rather than the static page markup.
