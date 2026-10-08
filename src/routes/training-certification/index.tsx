@@ -20,7 +20,7 @@ import hseImg from "@/assets/academy/hse.jpg";
 import greentechImg from "@/assets/academy/greentech.jpg";
 import teamImg from "@/assets/academy/team.jpg";
 
-const LOGO = "/__l5e/assets-v1/b4ef2a93-b69e-4238-b069-3718af4c155e/ge-b6568e0e8cd0.svg";
+const LOGO = "/images/getenergylogo.svg";
 const TITLE = "GET Energy Academy — Green Skills & Technical Certification | GetEnergy";
 const DESC =
   "74 training, career-pathway and professional certification products: solar, BESS, mini-grid, EV, CNG, HSE, smart energy, green economy and project finance. Join a waiting list.";
