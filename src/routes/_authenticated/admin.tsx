@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Section } from "@/components/site/ui-bits";
 import { CERTIFICATIONS } from "@/lib/certifications";
+import { ElectricityQueue } from "@/components/admin/ElectricityQueue";
 import { AuditLog, DocumentReview, Invitations, PaymentRequests } from "@/components/admin/AdminExtras";
 
 export const Route = createFileRoute("/_authenticated/admin")({
@@ -56,6 +57,7 @@ function AdminPage() {
       <div className="mt-8 space-y-12">
         <Fees />
         <Employers />
+        <ElectricityQueue />
         <Applications />
         <DocumentReview />
         <PaymentRequests />
