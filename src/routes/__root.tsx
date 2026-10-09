@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LegacySite } from "@/legacy/LegacySite";
+import { SiteNotices } from "@/components/site/SiteNotices";
 import legacyCss from "@/legacy/legacy.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { SophiaLauncher } from "@/components/sophia/SophiaLauncher";
@@ -149,6 +150,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <SiteNotices />
       {/* Required: nested routes render inside the site shell via <Outlet />. */}
       <LegacySite>
         <Outlet />

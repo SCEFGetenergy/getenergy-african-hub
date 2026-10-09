@@ -10,6 +10,8 @@ import { Section } from "@/components/site/ui-bits";
 import { CERTIFICATIONS } from "@/lib/certifications";
 import { ElectricityQueue } from "@/components/admin/ElectricityQueue";
 import { AuditLog, DocumentReview, Invitations, PaymentRequests } from "@/components/admin/AdminExtras";
+import { Overview, RequestsInbox, ServiceAvailability, SiteNoticeEditor } from "@/components/admin/ControlCentre";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -50,20 +52,27 @@ function AdminPage() {
       </Section>
     );
 
+  const tab = "min-h-11 px-3";
   return (
     <Section>
-      <h1 className="text-3xl font-bold">Team admin</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Changes here appear on the public certification pages straight away.</p>
-      <div className="mt-8 space-y-12">
-        <Fees />
-        <Employers />
-        <ElectricityQueue />
-        <Applications />
-        <DocumentReview />
-        <PaymentRequests />
-        <Invitations />
-        <AuditLog />
-      </div>
+      <h1 className="text-3xl font-bold">Admin control centre</h1>
+      <p className="mt-2 text-sm text-muted-foreground">Manage service requests, site content and service availability in one place. Every change is recorded in the audit log.</p>
+      <Tabs defaultValue="overview" className="mt-6">
+        <TabsList className="h-auto flex-wrap justify-start">
+          <TabsTrigger className={tab} value="overview">Overview</TabsTrigger>
+          <TabsTrigger className={tab} value="requests">Requests</TabsTrigger>
+          <TabsTrigger className={tab} value="electricity">Electricity</TabsTrigger>
+          <TabsTrigger className={tab} value="content">Content & availability</TabsTrigger>
+          <TabsTrigger className={tab} value="academy">Academy</TabsTrigger>
+          <TabsTrigger className={tab} value="team">Team & audit</TabsTrigger>
+        </TabsList>
+        <TabsContent value="overview" className="mt-6 space-y-12"><Overview /><ServiceAvailability /></TabsContent>
+        <TabsContent value="requests" className="mt-6 space-y-12"><RequestsInbox /></TabsContent>
+        <TabsContent value="electricity" className="mt-6 space-y-12"><ElectricityQueue /></TabsContent>
+        <TabsContent value="content" className="mt-6 space-y-12"><SiteNoticeEditor /><ServiceAvailability /></TabsContent>
+        <TabsContent value="academy" className="mt-6 space-y-12"><Fees /><Employers /><Applications /><DocumentReview /><PaymentRequests /></TabsContent>
+        <TabsContent value="team" className="mt-6 space-y-12"><Invitations /><AuditLog /></TabsContent>
+      </Tabs>
     </Section>
   );
 }
