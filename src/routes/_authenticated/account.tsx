@@ -73,6 +73,18 @@ function AccountPage() {
     },
   });
 
+  const electricityQuery = useQuery({
+    queryKey: ["my-electricity-requests"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("electricity_token_requests")
+        .select("id, request_reference, disco, meter_type, meter_number, amount_ngn, status, created_at")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+  });
+
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [companyName, setCompanyName] = useState("");
