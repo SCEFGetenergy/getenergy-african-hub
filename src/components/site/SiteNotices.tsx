@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, useLocation } from "@tanstack/react-router";
+import { useLocation } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { SERVICE_STATUS_LABEL } from "@/components/admin/ControlCentre";
 
@@ -24,7 +24,7 @@ export function SiteNotices() {
       {n ? (
         <div className="bg-primary px-4 py-2 text-center text-primary-foreground">
           {n.message}
-          {n.link_url ? <> {" "}<Link to={n.link_url} className="font-semibold underline">{n.link_label || "Learn more"}</Link></> : null}
+          {n.link_url ? <> {" "}<a href={n.link_url} className="font-semibold underline">{n.link_label || "Learn more"}</a></> : null}
         </div>
       ) : null}
       {svc ? (
