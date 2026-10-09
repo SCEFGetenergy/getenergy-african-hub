@@ -92,6 +92,13 @@
       "when": 1791359011382,
       "tag": "0012_getenergy_token_sandbox_foundation",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1791520181645,
+      "tag": "0013_restrict_electricity_settings_read",
+      "breakpoints": true
     }
   ]
 }
