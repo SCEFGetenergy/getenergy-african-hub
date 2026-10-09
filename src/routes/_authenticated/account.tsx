@@ -40,11 +40,18 @@ const STATUS_LABELS: Record<string, string> = {
 
 const STATUS_STYLES: Record<string, string> = {
   submitted: "bg-secondary text-secondary-foreground",
-  in_review: "bg-secondary text-secondary-foreground",
+  new: "bg-secondary text-secondary-foreground",
+  "in review": "bg-secondary text-secondary-foreground",
+  "pending partner integration": "bg-secondary text-secondary-foreground",
+  "waiting for customer": "bg-secondary text-secondary-foreground",
   contacted: "bg-brand-green-soft text-brand-green",
   in_progress: "bg-brand-green-soft text-brand-green",
+  "converted to customer": "bg-brand-green-soft text-brand-green",
   closed: "bg-muted text-muted-foreground",
 };
+
+const statusLabel = (status: string) => STATUS_LABELS[status.toLowerCase()] ?? status;
+const statusStyle = (status: string) => STATUS_STYLES[status.toLowerCase()] ?? "bg-muted text-muted-foreground";
 
 function AccountPage() {
   const navigate = useNavigate();
