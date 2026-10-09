@@ -95,9 +95,9 @@ describe.skipIf(!enabled)("mixed staff permissions unlock only matching server a
         });
       }
 
-      it("still cannot grant itself permissions or invite team members", async () => {
+      it("still cannot grant itself permissions or invite a full administrator", async () => {
         const g = await staff.rpc("set_admin_permission", { p_user_id: userId, p_permission: "manage_team", p_granted: true });
-        const i = await staff.rpc("create_admin_invitation", { p_email: "x@getenergytest.dev", p_role: "staff" });
+        const i = await staff.rpc("create_admin_invitation", { p_email: "x@getenergytest.dev", p_role: "admin" });
         expect(g.error).not.toBeNull();
         expect(i.error).not.toBeNull();
       });
