@@ -144,6 +144,7 @@ function AccountPage() {
 
   const profile = profileQuery.data;
   const requests = requestsQuery.data ?? [];
+  const electricityRequests = electricityQuery.data ?? [];
 
   return (
     <>
