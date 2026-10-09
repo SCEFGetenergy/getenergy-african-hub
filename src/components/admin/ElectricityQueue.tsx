@@ -82,13 +82,63 @@ export function ElectricityQueue() {
                     {ELEC_STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </td>
-                <td className="p-3"><NoteEditor initial={r.admin_notes ?? ""} onSave={(n) => save.mutate({ id: r.id, admin_notes: n })} /></td>
+                <td className="p-3"><NoteEditor initial={r.admin_notes ?? ""} onSave={(n) => save.mutate({ id: r.id, admin_notes: n })} /><EnquiryTimeline reference={r.request_reference} /></td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
     </section>
+  );
+}
+
+const ACTION_LABEL: Record<string, string> = { insert: "Request received", status_change: "Status changed", note_update: "Internal note saved", update: "Updated" };
+
+function EnquiryTimeline({ reference }: { reference: string }) {
+  const [open, setOpen] = useState(false);
+  const { data, isLoading } = useQuery({
+    queryKey: ["elec-audit", reference],
+    enabled: open,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("audit_log")
+        .select("id, created_at, actor_email, action, old_value, new_value")
+        .eq("entity_type", "electricity_token_requests")
+        .eq("entity_id", reference)
+        .order("created_at", { ascending: true });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+  return (
+    <div className="mt-2">
+      <button type="button" aria-expanded={open} onClick={() => setOpen(!open)} className="min-h-11 rounded-md border border-border px-3 text-xs font-semibold">
+        {open ? "Hide history" : "View history"}
+      </button>
+      {open ? (
+        <ol className="mt-2 w-72 space-y-2 border-l-2 border-border pl-3 text-xs">
+          {isLoading ? <li className="text-muted-foreground">Loading…</li> : null}
+          {!isLoading && !data?.length ? <li className="text-muted-foreground">No changes recorded yet.</li> : null}
+          {data?.map((e) => {
+            const o = (e.old_value ?? {}) as Record<string, unknown>;
+            const n = (e.new_value ?? {}) as Record<string, unknown>;
+            const detail =
+              e.action === "status_change" ? `${String(o["status"] ?? "—")} → ${String(n["status"] ?? "—")}`
+              : e.action === "note_update" ? `Note: ${String(n["admin_notes"] ?? "").slice(0, 120) || "(cleared)"}`
+              : e.action === "insert" ? `Submitted as ${String(n["status"] ?? "New")}`
+              : "";
+            return (
+              <li key={e.id} className="relative">
+                <span className="absolute -left-[1.15rem] top-1 size-2 rounded-full bg-primary" aria-hidden />
+                <p className="font-semibold">{ACTION_LABEL[e.action] ?? e.action}</p>
+                {detail ? <p className="text-muted-foreground">{detail}</p> : null}
+                <p className="text-muted-foreground">{new Date(e.created_at).toLocaleString()} · {e.actor_email ?? "System"}</p>
+              </li>
+            );
+          })}
+        </ol>
+      ) : null}
+    </div>
   );
 }
 
