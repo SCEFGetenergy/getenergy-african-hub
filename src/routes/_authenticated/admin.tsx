@@ -11,6 +11,7 @@ import { CERTIFICATIONS } from "@/lib/certifications";
 import { ElectricityQueue } from "@/components/admin/ElectricityQueue";
 import { AuditLog, DocumentReview, Invitations, PaymentRequests } from "@/components/admin/AdminExtras";
 import { Overview, RequestsInbox, ServiceAvailability, SiteNoticeEditor } from "@/components/admin/ControlCentre";
+import { PERMISSIONS, TeamPermissions, type PermissionKey } from "@/components/admin/TeamPermissions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const Route = createFileRoute("/_authenticated/admin")({
@@ -32,18 +33,25 @@ const STATUSES = ["submitted", "in_review", "contacted", "in_progress", "closed"
 const LABEL: Record<string, string> = { submitted: "Submitted", in_review: "In review", contacted: "Contacted", in_progress: "In progress", closed: "Closed" };
 
 function AdminPage() {
-  const isAdmin = useQuery({
-    queryKey: ["is-admin"],
+  const access = useQuery({
+    queryKey: ["admin-access"],
     queryFn: async () => {
       const { data: u } = await supabase.auth.getUser();
-      if (!u.user) return false;
-      const { data } = await supabase.rpc("has_role", { _user_id: u.user.id, _role: "admin" });
-      return !!data;
+      if (!u.user) return null;
+      const id = u.user.id;
+      const [{ data: admin }, ...perms] = await Promise.all([
+        supabase.rpc("has_role", { _user_id: id, _role: "admin" }),
+        ...PERMISSIONS.map((p) => supabase.rpc("has_permission", { _user_id: id, _permission: p.key })),
+      ]);
+      const p = Object.fromEntries(PERMISSIONS.map((x, i) => [x.key, !!perms[i]?.data])) as Record<PermissionKey, boolean>;
+      return { admin: !!admin, ...p };
     },
   });
 
-  if (isAdmin.isLoading) return <Section><p>Checking access…</p></Section>;
-  if (!isAdmin.data)
+  if (access.isLoading) return <Section><p>Checking access…</p></Section>;
+  const a = access.data;
+  const any = a && (a.admin || PERMISSIONS.some((p) => a[p.key]));
+  if (!a || !any)
     return (
       <Section>
         <h1 className="text-2xl font-bold">Team access only</h1>
@@ -52,26 +60,25 @@ function AdminPage() {
       </Section>
     );
 
+  const tabs = [
+    a.view_requests && { v: "overview", l: "Overview", c: <><Overview /></> },
+    a.view_requests && { v: "requests", l: "Requests", c: <RequestsInbox /> },
+    a.view_requests && { v: "electricity", l: "Electricity", c: <ElectricityQueue /> },
+    (a.edit_content || a.manage_availability) && { v: "content", l: "Content & availability", c: <>{a.edit_content ? <SiteNoticeEditor /> : null}{a.manage_availability ? <ServiceAvailability /> : null}</> },
+    a.admin && { v: "academy", l: "Academy", c: <><Fees /><Employers /><Applications /><DocumentReview /><PaymentRequests /></> },
+    a.manage_team && { v: "team", l: "Team & audit", c: <>{a.admin ? <TeamPermissions /> : null}<Invitations /><AuditLog /></> },
+  ].filter(Boolean) as { v: string; l: string; c: React.ReactNode }[];
+
   const tab = "min-h-11 px-3";
   return (
     <Section>
       <h1 className="text-3xl font-bold">Admin control centre</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Manage service requests, site content and service availability in one place. Every change is recorded in the audit log.</p>
-      <Tabs defaultValue="overview" className="mt-6">
+      <p className="mt-2 text-sm text-muted-foreground">{a.admin ? "Full administrator access." : "You see only the areas your permissions allow."} Every change is recorded in the audit log.</p>
+      <Tabs defaultValue={tabs[0]?.v} className="mt-6">
         <TabsList className="h-auto flex-wrap justify-start">
-          <TabsTrigger className={tab} value="overview">Overview</TabsTrigger>
-          <TabsTrigger className={tab} value="requests">Requests</TabsTrigger>
-          <TabsTrigger className={tab} value="electricity">Electricity</TabsTrigger>
-          <TabsTrigger className={tab} value="content">Content & availability</TabsTrigger>
-          <TabsTrigger className={tab} value="academy">Academy</TabsTrigger>
-          <TabsTrigger className={tab} value="team">Team & audit</TabsTrigger>
+          {tabs.map((t) => <TabsTrigger key={t.v} className={tab} value={t.v}>{t.l}</TabsTrigger>)}
         </TabsList>
-        <TabsContent value="overview" className="mt-6 space-y-12"><Overview /><ServiceAvailability /></TabsContent>
-        <TabsContent value="requests" className="mt-6 space-y-12"><RequestsInbox /></TabsContent>
-        <TabsContent value="electricity" className="mt-6 space-y-12"><ElectricityQueue /></TabsContent>
-        <TabsContent value="content" className="mt-6 space-y-12"><SiteNoticeEditor /><ServiceAvailability /></TabsContent>
-        <TabsContent value="academy" className="mt-6 space-y-12"><Fees /><Employers /><Applications /><DocumentReview /><PaymentRequests /></TabsContent>
-        <TabsContent value="team" className="mt-6 space-y-12"><Invitations /><AuditLog /></TabsContent>
+        {tabs.map((t) => <TabsContent key={t.v} value={t.v} className="mt-6 space-y-12">{t.c}</TabsContent>)}
       </Tabs>
     </Section>
   );

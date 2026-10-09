@@ -227,6 +227,27 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_permissions: {
+        Row: {
+          created_at: string
+          granted_by: string | null
+          permission: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          granted_by?: string | null
+          permission: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          granted_by?: string | null
+          permission?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       audit_log: {
         Row: {
           action: string
@@ -1318,12 +1339,25 @@ export type Database = {
       }
       first_admin_available: { Args: never; Returns: boolean }
       generate_request_reference: { Args: never; Returns: string }
+      has_permission: {
+        Args: { _permission: string; _user_id: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
         Returns: boolean
+      }
+      list_team_members: {
+        Args: never
+        Returns: {
+          email: string
+          permissions: string[]
+          role: string
+          user_id: string
+        }[]
       }
       restore_service_request: { Args: { p_id: string }; Returns: undefined }
       revoke_admin_invitation: { Args: { p_id: string }; Returns: undefined }
@@ -1337,6 +1371,10 @@ export type Database = {
           p_payment_method: string
         }
         Returns: Json
+      }
+      set_admin_permission: {
+        Args: { p_granted: boolean; p_permission: string; p_user_id: string }
+        Returns: undefined
       }
       submit_electricity_token_request: {
         Args: {

@@ -113,6 +113,13 @@
       "when": 1791552655318,
       "tag": "0015_admin_control_centre",
       "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1791552927397,
+      "tag": "0016_admin_permissions",
+      "breakpoints": true
     }
   ]
 }
