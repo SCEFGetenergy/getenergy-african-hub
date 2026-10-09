@@ -231,11 +231,9 @@ function AccountPage() {
                           <h3 className="mt-1 font-semibold">{request.service_name}</h3>
                         </div>
                         <span
-                          className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${
-                            STATUS_STYLES[request.status] ?? "bg-muted text-muted-foreground"
-                          }`}
+                          className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${statusStyle(request.status)}`}
                         >
-                          {STATUS_LABELS[request.status] ?? request.status}
+                          {statusLabel(request.status)}
                         </span>
                       </div>
                       <p className="mt-3 text-xs text-muted-foreground">
