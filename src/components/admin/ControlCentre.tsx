@@ -138,7 +138,7 @@ export function ServiceAvailability() {
   const save = useMutation({
     mutationFn: async (r: { slug: string; status: string; public_note: string }) => {
       const { data: u } = await supabase.auth.getUser();
-      const { error } = await supabase.from("service_statuses").update({ status: r.status, public_note: r.public_note.trim() || null, updated_at: new Date().toISOString(), updated_by: u.user?.id }).eq("slug", r.slug);
+      const { error } = await supabase.from("service_statuses").update({ status: r.status, public_note: r.public_note.trim() || null, updated_at: new Date().toISOString(), updated_by: u.user?.id ?? null }).eq("slug", r.slug);
       if (error) throw error;
     },
     onSuccess: () => { toast.success("Service availability saved"); qc.invalidateQueries({ queryKey: ["service-statuses"] }); },
@@ -190,7 +190,7 @@ function NoticeForm({ initial, onSaved }: { initial: { message: string; link_url
       if (active && !message.trim()) throw new Error("Write a message before switching the notice on");
       if (url && !/^\/[A-Za-z0-9/_#?=&.-]*$/.test(url)) throw new Error("Link must be a page on this site, starting with /");
       const { data: u } = await supabase.auth.getUser();
-      const { error } = await supabase.from("site_notices").update({ message: message.trim(), link_url: url || null, link_label: label.trim() || null, active, updated_at: new Date().toISOString(), updated_by: u.user?.id }).eq("id", 1);
+      const { error } = await supabase.from("site_notices").update({ message: message.trim(), link_url: url || null, link_label: label.trim() || null, active, updated_at: new Date().toISOString(), updated_by: u.user?.id ?? null }).eq("id", 1);
       if (error) throw error;
     },
     onSuccess: () => { toast.success("Site notice saved"); onSaved(); },
