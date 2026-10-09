@@ -82,7 +82,7 @@ export function ElectricityQueue() {
                     {ELEC_STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </td>
-                <td className="p-3"><NoteEditor initial={r.admin_notes ?? ""} onSave={(n) => save.mutate({ id: r.id, admin_notes: n })} /></td>
+                <td className="p-3"><NoteEditor initial={r.admin_notes ?? ""} onSave={(n) => save.mutate({ id: r.id, admin_notes: n })} /><EnquiryTimeline reference={r.request_reference} /></td>
               </tr>
             ))}
           </tbody>
