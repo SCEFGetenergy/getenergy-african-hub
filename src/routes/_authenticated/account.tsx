@@ -258,6 +258,52 @@ function AccountPage() {
           </div>
         </div>
       </Section>
+
+      <Section>
+        <SectionHeading eyebrow="Electricity" title="My electricity token requests" />
+        <p className="mt-2 text-sm text-muted-foreground">
+          GETELEC requests you submitted while signed in. No payment has been taken and no token has been issued for these requests.
+        </p>
+        <div className="mt-6 space-y-4">
+          {electricityQuery.isLoading ? (
+            <p className="text-sm text-muted-foreground">Loading your electricity requests…</p>
+          ) : electricityRequests.length === 0 ? (
+            <Card>
+              <CardContent className="py-8 text-center">
+                <p className="text-sm text-muted-foreground">
+                  You have not submitted an electricity token request yet. Requests made while signed in appear here.
+                </p>
+                <Button asChild className="mt-4">
+                  <Link to="/get-electricity">Request an electricity token</Link>
+                </Button>
+              </CardContent>
+            </Card>
+          ) : (
+            electricityRequests.map((request) => (
+              <Card key={request.id} className="card-elevated">
+                <CardContent className="pt-6">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <p className="font-display text-sm font-bold text-brand">{request.request_reference}</p>
+                      <h3 className="mt-1 font-semibold">
+                        {request.disco} · {request.meter_type} meter {request.meter_number}
+                      </h3>
+                    </div>
+                    <span
+                      className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${statusStyle(request.status)}`}
+                    >
+                      {statusLabel(request.status)}
+                    </span>
+                  </div>
+                  <p className="mt-3 text-xs text-muted-foreground">
+                    Submitted {new Date(request.created_at).toLocaleDateString()} · ₦{request.amount_ngn.toLocaleString()}
+                  </p>
+                </CardContent>
+              </Card>
+            ))
+          )}
+        </div>
+      </Section>
     </>
   );
 }
