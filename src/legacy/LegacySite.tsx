@@ -187,11 +187,14 @@ export function LegacySite({ children }: { children: ReactNode }) {
   }, [pathname]);
 
   // Wire up forms, tabs and widgets of the page that was just mounted.
-  const pageKey = page?.key ?? null;
+  // Runs after every commit; binds once per mounted page element.
   useEffect(() => {
-    const el = pageRef.current?.firstElementChild;
-    if (el && api.current) { api.current.bind(el) }
-  }, [pageKey]);
+    const el = pageRef.current?.firstElementChild as HTMLElement | null | undefined;
+    if (el && api.current && !el.dataset.bound) {
+      el.dataset.bound = "1";
+      api.current.bind(el);
+    }
+  });
 
   // Re-apply the visible page after every commit: React may re-apply the static
   // page markup on re-render, which would otherwise reset it to the first page loaded.
