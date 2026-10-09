@@ -4,7 +4,7 @@ import { Section, SectionHeading, StatusBadge } from "@/components/site/ui-bits"
 import { PIPELINE, type CMPage, type PipelineProject } from "@/lib/clean-mobility";
 
 export function cmHead(title: string, description: string, path: string) {
-  const url = `https://getenergy-african-hub.lovable.app${path}`;
+  const url = `https://getenergy.ng${path}`;
   return {
     meta: [
       { title },

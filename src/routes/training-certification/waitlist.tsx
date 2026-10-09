@@ -14,10 +14,12 @@ export const Route = createFileRoute("/training-certification/waitlist")({
       { title: TITLE },
       { name: "description", content: DESC },
       { property: "og:title", content: TITLE },
+      { property: "og:url", content: "https://getenergy.ng/training-certification/waitlist" },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/training-certification/waitlist" }],
   }),
   component: Waitlist,
 });

@@ -9,8 +9,6 @@ function startPayment(request){ /* INTEGRATION POINT */ }
 
 export function initLegacy(api){
 
-  var DISCOS=["Abuja Electricity (AEDC)","Benin Electricity (BEDC)","Eko Electricity (EKEDC)","Enugu Electricity (EEDC)","Ibadan Electricity (IBEDC)","Ikeja Electric (IE)","Jos Electricity (JED)","Kaduna Electric (KAEDCO)","Kano Electricity (KEDCO)","Port Harcourt Electricity (PHED)","Yola Electricity (YEDC)","Aba Power"];
-  [].forEach.call(document.querySelectorAll("select[data-disco]"),function(s){s.innerHTML='<option value="">Select your DISCO</option>'+DISCOS.map(function(d){return "<option>"+d+"</option>"}).join("")});
   var BILLS={
     airtime:{label:"Airtime",prov:["MTN","Airtel","Glo","9mobile"],id:"Phone number to recharge"},
     data:{label:"Data",prov:["MTN","Airtel","Glo","9mobile"],id:"Phone number to recharge",plan:"Data plan"},
@@ -21,19 +19,6 @@ export function initLegacy(api){
     religious:{label:"Religious institutions",prov:null,id:"Purpose of payment"},
     betting:{label:"Betting and lottery",prov:null,id:"Betting account ID"}
   };
-  var cat=document.getElementById("bl-cat");
-  cat.innerHTML='<option value="">Select bill type</option>'+Object.keys(BILLS).map(function(k){return '<option value="'+k+'">'+BILLS[k].label+"</option>"}).join("");
-  function setBill(k){
-    var b=BILLS[k],pw=document.getElementById("bl-prov-wrap"),tw=document.getElementById("bl-provtxt-wrap"),plw=document.getElementById("bl-plan-wrap"),pt=document.getElementById("bl-provtxt");
-    if(!b){pw.hidden=false;tw.hidden=true;plw.hidden=true;pt.required=false;return}
-    if(b.prov){pw.hidden=false;tw.hidden=true;pt.required=false;document.getElementById("bl-prov").innerHTML=b.prov.map(function(p){return "<option>"+p+"</option>"}).join("")}
-    else{pw.hidden=true;tw.hidden=false;pt.required=true}
-    document.getElementById("bl-id-label").textContent=b.id;plw.hidden=!b.plan;if(b.plan)document.getElementById("bl-plan-label").textContent=b.plan;
-  }
-  cat.addEventListener("change",function(){setBill(cat.value)});setBill("");
-
-  // our services page mirrors home list
-  document.getElementById("svc-copy").innerHTML=[].map.call(document.querySelectorAll("[data-page=home] .sol"),function(s){return s.innerHTML}).join("");
 
   /* ---------- Energy Desk ----------
      In production, CONFIG.boardEndpoint points to the backend (e.g. /api/energy-desk/today),
@@ -99,15 +84,6 @@ export function initLegacy(api){
     document.getElementById("desk-foot").innerHTML=D.live?"Updated daily by the GetEnergy AI desk from licensed news, price and market data feeds.":
       "Preview: news items are real recent stories linked to their sources. Prices, markets and stocks appear when the Energy Desk backend and its data feeds are switched on.";
   }
-  var DESK=SAMPLE;
-  if(document.getElementById("desk-mode")){
-    [].forEach.call(document.querySelectorAll("input[name=nf]"),function(r){r.addEventListener("change",function(){renderDesk(DESK)})});
-    renderDesk(DESK);
-    if(CONFIG.boardEndpoint){
-      fetch(CONFIG.boardEndpoint).then(function(r){return r.json()}).then(function(d){DESK=d;renderDesk(d)}).catch(function(){/* keep last good data */});
-      setInterval(function(){fetch(CONFIG.boardEndpoint).then(function(r){return r.json()}).then(function(d){DESK=d;renderDesk(d)}).catch(function(){})},15*60*1000);
-    }
-  }
 
   // router (driven by the app router)
   var pages=[].slice.call(document.querySelectorAll("[data-page]")),links=[].slice.call(document.querySelectorAll("nav.main a"));
@@ -129,13 +105,6 @@ export function initLegacy(api){
   document.addEventListener("click",function(e){if(!solutions.contains(e.target))solutions.open=false});
   document.addEventListener("keydown",function(e){if(e.key==="Escape"){solutions.open=false;n.classList.remove("open");document.body.classList.remove("nav-open");t.setAttribute("aria-expanded","false")}});
 
-  [].forEach.call(document.querySelectorAll("[role=tablist]"),function(list){
-    var tabs=[].slice.call(list.querySelectorAll("[role=tab]"));
-    function sel(tab){tabs.forEach(function(b){var on=b===tab;b.setAttribute("aria-selected",on);b.tabIndex=on?0:-1;var p=document.getElementById(b.getAttribute("aria-controls"));p.hidden=!on;p.classList.toggle("on",on)})}
-    tabs.forEach(function(b,i){b.addEventListener("click",function(){sel(b)});b.addEventListener("keydown",function(e){var j=null;if(e.key==="ArrowRight")j=(i+1)%tabs.length;if(e.key==="ArrowLeft")j=(i-1+tabs.length)%tabs.length;if(j!==null){e.preventDefault();sel(tabs[j]);tabs[j].focus()}})});
-  });
-  [].forEach.call(document.querySelectorAll("[data-centre]"),function(b){b.addEventListener("click",function(){document.getElementById("cb-centre").value=b.dataset.centre;document.getElementById("book-conversion").scrollIntoView({behavior:"smooth"});document.getElementById("cb-name").focus({preventScroll:true})})});
-  [].forEach.call(document.querySelectorAll("[data-apply]"),function(b){b.addEventListener("click",function(){document.getElementById("ap-pos").value=b.dataset.apply;document.getElementById("apply").scrollIntoView({behavior:"smooth"});document.getElementById("ap-name").focus({preventScroll:true})})});
 
   function check(el){
     var v=el.type==="checkbox"?(el.checked?"y":""):el.value.trim(),ok=!!v;
@@ -176,9 +145,6 @@ export function initLegacy(api){
     login:{title:"Accounts are not open yet",nosend:true,note:"Online accounts open when our platform goes live. You can still buy tokens, pay bills and request quotes without an account."}
   };
   (function(){var bar=document.querySelector(".m-actions");if(bar){var last=scrollY,closed=false;bar.querySelector(".m-actions-x").addEventListener("click",function(){closed=true;bar.classList.add("hide")});addEventListener("scroll",function(){if(closed)return;var y=scrollY;bar.classList.toggle("hide",y>last+4&&y>200);if(y<last-4)bar.classList.remove("hide");last=y},{passive:true})}})();
-  (function(){[].forEach.call(document.querySelectorAll('input[type=tel]'),function(i){i.setAttribute("inputmode","tel")});[].forEach.call(document.querySelectorAll(".f"),function(f,k){var e=f.querySelector(".err"),i=f.querySelector("input,select,textarea");if(e&&i){if(!e.id)e.id="err-"+k;i.setAttribute("aria-describedby",e.id);e.setAttribute("aria-live","polite")}})})();
-  (function(){var nums=[].slice.call(document.querySelectorAll("[data-count]"));if(!nums.length||window.innerWidth>640||matchMedia("(prefers-reduced-motion: reduce)").matches||!("IntersectionObserver" in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.disconnect();nums.forEach(function(el,i){var end=+el.dataset.count,t0=null;el.textContent="0";setTimeout(function(){requestAnimationFrame(function step(ts){t0=t0||ts;var p=Math.min(1,(ts-t0)/600);el.textContent=Math.round(end*(1-Math.pow(1-p,3))).toLocaleString("en-GB");if(p<1)requestAnimationFrame(step)})},i*100)})})},{threshold:.4});io.observe(nums[0].closest("section"))})();
-  (function(){var vids=[].slice.call(document.querySelectorAll("video[data-autoplay]"));if(!vids.length||!("IntersectionObserver" in window))return;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var cn=navigator.connection;if(window.innerWidth<=640||(cn&&(cn.saveData||/cellular/.test(cn.type||"")||/2g|3g/.test(cn.effectiveType||""))))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting&&e.intersectionRatio>=.6){if(window.innerWidth<=640)vids.forEach(function(o){if(o!==v)o.pause()});v.muted=true;v.play().catch(function(){})}else v.pause()})},{threshold:[0,.6]});vids.forEach(function(v){io.observe(v)})})();
   function showResult(form,kind,lines,reference,error){
     var k=KINDS[kind];var box=document.createElement("div");box.className="result";box.setAttribute("role","status");box.tabIndex=-1;
     var body=lines.join("\n"),subj=k.subject+(lines[0]?" - "+lines[0].split(": ").slice(1).join(": "):"");
@@ -194,7 +160,40 @@ export function initLegacy(api){
     box.querySelector(".edit").addEventListener("click",function(){box.remove();form.hidden=false;var f=form.querySelector("input,select");if(f)f.focus()});
     form.hidden=true;form.parentNode.insertBefore(box,form.nextSibling);box.focus();
   }
-  [].forEach.call(document.querySelectorAll("form.gf"),function(form){
+  function bind(S){
+    function Q(sel){return S===document?[].filter.call(document.querySelectorAll(sel),function(e){return !e.closest("#main")}):[].slice.call(S.querySelectorAll(sel))}
+  var DISCOS=["Abuja Electricity (AEDC)","Benin Electricity (BEDC)","Eko Electricity (EKEDC)","Enugu Electricity (EEDC)","Ibadan Electricity (IBEDC)","Ikeja Electric (IE)","Jos Electricity (JED)","Kaduna Electric (KAEDCO)","Kano Electricity (KEDCO)","Port Harcourt Electricity (PHED)","Yola Electricity (YEDC)","Aba Power"];
+  [].forEach.call(Q("select[data-disco]"),function(s){s.innerHTML='<option value="">Select your DISCO</option>'+DISCOS.map(function(d){return "<option>"+d+"</option>"}).join("")});
+  var cat=document.getElementById("bl-cat");if(cat&&!cat.dataset.bound&&(S===document?!cat.closest("#main"):S.contains(cat))){cat.dataset.bound='1';
+  cat.innerHTML='<option value="">Select bill type</option>'+Object.keys(BILLS).map(function(k){return '<option value="'+k+'">'+BILLS[k].label+"</option>"}).join("");
+  function setBill(k){
+    var b=BILLS[k],pw=document.getElementById("bl-prov-wrap"),tw=document.getElementById("bl-provtxt-wrap"),plw=document.getElementById("bl-plan-wrap"),pt=document.getElementById("bl-provtxt");
+    if(!b){pw.hidden=false;tw.hidden=true;plw.hidden=true;pt.required=false;return}
+    if(b.prov){pw.hidden=false;tw.hidden=true;pt.required=false;document.getElementById("bl-prov").innerHTML=b.prov.map(function(p){return "<option>"+p+"</option>"}).join("")}
+    else{pw.hidden=true;tw.hidden=false;pt.required=true}
+    document.getElementById("bl-id-label").textContent=b.id;plw.hidden=!b.plan;if(b.plan)document.getElementById("bl-plan-label").textContent=b.plan;
+  }
+  cat.addEventListener("change",function(){setBill(cat.value)});setBill("");
+  }
+  var dm=document.getElementById("desk-mode");if(dm&&(S===document?!dm.closest("#main"):S.contains(dm))){
+    [].forEach.call(Q("input[name=nf]"),function(r){r.addEventListener("change",function(){renderDesk(DESK)})});
+    renderDesk(DESK);
+    if(CONFIG.boardEndpoint){
+      fetch(CONFIG.boardEndpoint).then(function(r){return r.json()}).then(function(d){DESK=d;renderDesk(d)}).catch(function(){/* keep last good data */});
+      setInterval(function(){fetch(CONFIG.boardEndpoint).then(function(r){return r.json()}).then(function(d){DESK=d;renderDesk(d)}).catch(function(){})},15*60*1000);
+    }
+  }
+  [].forEach.call(Q("[role=tablist]"),function(list){
+    var tabs=[].slice.call(list.querySelectorAll("[role=tab]"));
+    function sel(tab){tabs.forEach(function(b){var on=b===tab;b.setAttribute("aria-selected",on);b.tabIndex=on?0:-1;var p=document.getElementById(b.getAttribute("aria-controls"));p.hidden=!on;p.classList.toggle("on",on)})}
+    tabs.forEach(function(b,i){b.addEventListener("click",function(){sel(b)});b.addEventListener("keydown",function(e){var j=null;if(e.key==="ArrowRight")j=(i+1)%tabs.length;if(e.key==="ArrowLeft")j=(i-1+tabs.length)%tabs.length;if(j!==null){e.preventDefault();sel(tabs[j]);tabs[j].focus()}})});
+  });
+  [].forEach.call(Q("[data-centre]"),function(b){b.addEventListener("click",function(){document.getElementById("cb-centre").value=b.dataset.centre;document.getElementById("book-conversion").scrollIntoView({behavior:"smooth"});document.getElementById("cb-name").focus({preventScroll:true})})});
+  [].forEach.call(Q("[data-apply]"),function(b){b.addEventListener("click",function(){document.getElementById("ap-pos").value=b.dataset.apply;document.getElementById("apply").scrollIntoView({behavior:"smooth"});document.getElementById("ap-name").focus({preventScroll:true})})});
+  (function(){[].forEach.call(Q('input[type=tel]'),function(i){i.setAttribute("inputmode","tel")});[].forEach.call(Q(".f"),function(f,k){var e=f.querySelector(".err"),i=f.querySelector("input,select,textarea");if(e&&i){if(!e.id)e.id="err-"+k;i.setAttribute("aria-describedby",e.id);e.setAttribute("aria-live","polite")}})})();
+  (function(){var nums=[].slice.call(Q("[data-count]"));if(!nums.length||window.innerWidth>640||matchMedia("(prefers-reduced-motion: reduce)").matches||!("IntersectionObserver" in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.disconnect();nums.forEach(function(el,i){var end=+el.dataset.count,t0=null;el.textContent="0";setTimeout(function(){requestAnimationFrame(function step(ts){t0=t0||ts;var p=Math.min(1,(ts-t0)/600);el.textContent=Math.round(end*(1-Math.pow(1-p,3))).toLocaleString("en-GB");if(p<1)requestAnimationFrame(step)})},i*100)})})},{threshold:.4});io.observe(nums[0].closest("section"))})();
+  (function(){var vids=[].slice.call(Q("video[data-autoplay]"));if(!vids.length||!("IntersectionObserver" in window))return;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var cn=navigator.connection;if(window.innerWidth<=640||(cn&&(cn.saveData||/cellular/.test(cn.type||"")||/2g|3g/.test(cn.effectiveType||""))))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting&&e.intersectionRatio>=.6){if(window.innerWidth<=640)vids.forEach(function(o){if(o!==v)o.pause()});v.muted=true;v.play().catch(function(){})}else v.pause()})},{threshold:[0,.6]});vids.forEach(function(v){io.observe(v)})})();
+  [].forEach.call(Q("form.gf"),function(form){
     [].forEach.call(form.querySelectorAll("[required]"),function(el){el.addEventListener("blur",function(){if(el.value)check(el)})});
     form.addEventListener("submit",function(e){
       e.preventDefault();
@@ -210,7 +209,9 @@ export function initLegacy(api){
       });
     });
   });
-  return {show:show};
+  }
+  bind(document);
+  return {show:show,bind:bind};
 }
 
 if(typeof document!=="undefined")document.addEventListener("click",function(e){var b=e.target&&e.target.closest&&e.target.closest("[data-scroll]");if(!b)return;var r=document.getElementById("sol-rail");if(r)r.scrollBy({left:+b.dataset.scroll*r.clientWidth*0.8,behavior:"smooth"})});

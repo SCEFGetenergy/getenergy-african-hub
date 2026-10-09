@@ -12,10 +12,12 @@ export const Route = createFileRoute("/academy/login")({
       { title: "Sign in | GET Energy Academy Portal" },
       { name: "description", content: "Sign in to your GET Energy Academy student portal." },
       { property: "og:title", content: "Sign in | GET Energy Academy Portal" },
+      { property: "og:url", content: "https://getenergy.ng/academy/login" },
       { property: "og:description", content: "Access your Academy applications, documents, payments and certifications." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/academy/login" }],
   }),
   component: Login,
 });

@@ -11,6 +11,7 @@ export const Route = createFileRoute("/invest")({
           "Investment opportunities in CNG infrastructure, EV & hybrid mobility, solar, BESS, mini-grids, refuelling stations and green skills across Nigeria and Africa.",
       },
       { property: "og:title", content: "Invest in GET Energy — CNG, EV, Solar & Skills | GetEnergy" },
+      { property: "og:url", content: "https://getenergy.ng/invest" },
       {
         property: "og:description",
         content:
@@ -19,7 +20,7 @@ export const Route = createFileRoute("/invest")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/invest" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/invest" }],
   }),
   component: () => null,
 });

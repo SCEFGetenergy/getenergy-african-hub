@@ -7,11 +7,12 @@ export const Route = createFileRoute("/technology")({
       { title: "Technology | GetEnergy" },
       { name: "description", content: "The systems connecting customers, energy assets, suppliers and payments across GetEnergy and Energy E-Commerce Africa (EEA54)." },
       { property: "og:title", content: "Technology | GetEnergy" },
+      { property: "og:url", content: "https://getenergy.ng/technology" },
       { property: "og:description", content: "The systems connecting customers, energy assets, suppliers and payments across GetEnergy and Energy E-Commerce Africa (EEA54)." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/technology" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/technology" }],
   }),
   component: () => null,
 });

@@ -7,11 +7,12 @@ export const Route = createFileRoute("/")({
       { title: "GET Energy Trading Services | Integrated Energy & Green Energy Solutions" },
       { name: "description", content: "Integrated conventional and clean-energy solutions in Nigeria: diesel and AGO, CNG, EV charging, solar, storage, electricity services and energy advisory." },
       { property: "og:title", content: "GET Energy Trading Services | Integrated Energy & Green Energy Solutions" },
+      { property: "og:url", content: "https://getenergy.ng/" },
       { property: "og:description", content: "Integrated conventional and clean-energy solutions in Nigeria: diesel and AGO, CNG, EV charging, solar, storage, electricity services and energy advisory." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/" }],
   }),
   component: () => null,
 });

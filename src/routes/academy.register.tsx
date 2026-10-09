@@ -13,11 +13,12 @@ export const Route = createFileRoute("/academy/register")({
       { title: "Create your Academy account | GET Energy Academy" },
       { name: "description", content: "Register for a secure GET Energy Academy student account to apply for training and certifications." },
       { property: "og:title", content: "Create your Academy account | GET Energy Academy" },
+      { property: "og:url", content: "https://getenergy.ng/academy/register" },
       { property: "og:description", content: "Secure student registration for GET Energy Academy programmes and certifications." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/academy/register" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/academy/register" }],
   }),
   component: Register,
 });

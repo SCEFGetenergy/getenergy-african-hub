@@ -11,11 +11,12 @@ export const Route = createFileRoute("/sophia/")({
       { title: "Ask SOPHIA | GET Energy Intelligent Energy Assistant" },
       { name: "description", content: "SOPHIA helps you find the right GET Energy solution, request a quotation, register for training or get customer support." },
       { property: "og:title", content: "Ask SOPHIA | GET Energy" },
+      { property: "og:url", content: "https://getenergy.ng/sophia" },
       { property: "og:description", content: "GET Energy's intelligent energy assistant for solutions, training and customer support." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/sophia" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/sophia" }],
   }),
   component: SophiaIndex,
 });

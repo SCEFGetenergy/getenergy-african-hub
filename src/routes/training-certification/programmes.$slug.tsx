@@ -18,11 +18,12 @@ export const Route = createFileRoute("/training-certification/programmes/$slug")
         { title },
         { name: "description", content: loaderData.description },
         { property: "og:title", content: title },
+        { property: "og:url", content: `https://getenergy.ng/training-certification/programmes/${params.slug}` },
         { property: "og:description", content: loaderData.description },
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
-      links: [{ rel: "canonical", href: `https://getenergy-african-hub.lovable.app/training-certification/programmes/${params.slug}` }],
+      links: [{ rel: "canonical", href: `https://getenergy.ng/training-certification/programmes/${params.slug}` }],
       scripts: [
         {
           type: "application/ld+json",

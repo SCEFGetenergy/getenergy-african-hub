@@ -32,11 +32,12 @@ export const Route = createFileRoute("/training-certification/")({
       { name: "description", content: DESC },
       { name: "keywords", content: "energy training Nigeria, solar training Nigeria, HSE training Nigeria, mini-grid training, BESS training, EV charging training, CNG training, smart metering training, GreenTech training Africa, corporate energy training Nigeria" },
       { property: "og:title", content: TITLE },
+      { property: "og:url", content: "https://getenergy.ng/training-certification" },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/training-certification" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/training-certification" }],
   }),
   component: AcademyPage,
 });

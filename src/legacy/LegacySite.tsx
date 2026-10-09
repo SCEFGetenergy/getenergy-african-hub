@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import bodyHtml from "./body.html?raw";
 import { initLegacy } from "./legacy";
@@ -28,11 +28,19 @@ function pageName(pathname: string): string | null {
   return slug === "" ? "home" : slug;
 }
 
-function withActivePage(markup: string, name: string | null) {
-  if (!name) return markup;
-  const re = new RegExp(`<div data-page="${name}"`);
-  const target = re.test(markup) ? name : "notfound";
-  return markup.replace(`<div data-page="${target}"`, `<div class="on" data-page="${target}"`);
+// Split the static markup into one chunk per page so each URL only carries its own content.
+const PAGES: Record<string, string> = {};
+for (const chunk of pagesPart.split(/(?=<div data-page=")/)) {
+  const m = chunk.match(/^<div data-page="([^"]+)"/);
+  if (m?.[1]) PAGES[m[1]] = chunk.replace(/<!--[\s\S]*?-->\s*$/, "");
+}
+const ALIASES: Record<string, string> = { "about-us": "about", paas: "power-as-a-service", diesel: "get-fuel", "cng-ev": "cng" };
+
+function pageMarkup(name: string | null): { key: string; html: string } | null {
+  if (!name) return null;
+  const n = ALIASES[name] ?? name;
+  const key = PAGES[n] ? n : "notfound";
+  return { key, html: (PAGES[key] ?? "").replace(`<div data-page="${key}"`, `<div class="on" data-page="${key}"`) };
 }
 
 const val = (form: HTMLFormElement, sel: string) =>
@@ -74,8 +82,9 @@ const DISCO_NAMES: Record<string, string> = {
 export function LegacySite({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
-  const [initialPages] = useState(() => withActivePage(pagesPart, pageName(pathname)));
-  const api = useRef<{ show: (n: string | null) => void } | null>(null);
+  const page = pageMarkup(pageName(pathname));
+  const pageRef = useRef<HTMLDivElement>(null);
+  const api = useRef<{ show: (n: string | null) => void; bind: (s: Element) => void } | null>(null);
   const navRef = useRef(navigate);
   navRef.current = navigate;
 
@@ -177,6 +186,16 @@ export function LegacySite({ children }: { children: ReactNode }) {
     if (!window.location.hash) window.scrollTo(0, 0);
   }, [pathname]);
 
+  // Wire up forms, tabs and widgets of the page that was just mounted.
+  // Runs after every commit; binds once per mounted page element.
+  useEffect(() => {
+    const el = pageRef.current?.firstElementChild as HTMLElement | null | undefined;
+    if (el && api.current && !el.dataset["bound"]) {
+      el.dataset["bound"] = "1";
+      api.current.bind(el);
+    }
+  });
+
   // Re-apply the visible page after every commit: React may re-apply the static
   // page markup on re-render, which would otherwise reset it to the first page loaded.
   useEffect(() => {
@@ -199,7 +218,9 @@ export function LegacySite({ children }: { children: ReactNode }) {
     <>
       <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: headPart }} />
       <main id="main">
-        <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: initialPages }} />
+        {page && (
+          <div key={page.key} ref={pageRef} style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: page.html }} />
+        )}
         {isApp && <div className="corporate-content">{children}</div>}
       </main>
       <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: footPart }} />
