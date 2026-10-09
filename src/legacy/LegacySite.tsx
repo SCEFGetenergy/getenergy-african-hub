@@ -190,8 +190,8 @@ export function LegacySite({ children }: { children: ReactNode }) {
   // Runs after every commit; binds once per mounted page element.
   useEffect(() => {
     const el = pageRef.current?.firstElementChild as HTMLElement | null | undefined;
-    if (el && api.current && !el.dataset.bound) {
-      el.dataset.bound = "1";
+    if (el && api.current && !el.dataset["bound"]) {
+      el.dataset["bound"] = "1";
       api.current.bind(el);
     }
   });
