@@ -7,11 +7,12 @@ export const Route = createFileRoute("/industries")({
       { title: "Industries We Serve | GetEnergy" },
       { name: "description", content: "Explore twelve sectors GetEnergy serves, from construction and healthcare to manufacturing, fleets and public services, with historical work clearly identified." },
       { property: "og:title", content: "Industries We Serve | GetEnergy" },
+      { property: "og:url", content: "https://getenergy.ng/industries" },
       { property: "og:description", content: "Explore twelve sectors GetEnergy serves, from construction and healthcare to manufacturing, fleets and public services, with historical work clearly identified." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/industries" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/industries" }],
   }),
   component: () => null,
 });

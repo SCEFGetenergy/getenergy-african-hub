@@ -7,11 +7,12 @@ export const Route = createFileRoute("/about")({
       { title: "About GetEnergy | Energy for Today. Cleaner Opportunities for Tomorrow." },
       { name: "description", content: "Built on commercial fuel supply and electricity access since 2023, GetEnergy is engineering a practical transition toward cleaner mobility, smarter power and green energy." },
       { property: "og:title", content: "About GetEnergy | Energy for Today. Cleaner Opportunities for Tomorrow." },
+      { property: "og:url", content: "https://getenergy.ng/about" },
       { property: "og:description", content: "Built on commercial fuel supply and electricity access since 2023, GetEnergy is engineering a practical transition toward cleaner mobility, smarter power and green energy." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/about" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/about" }],
   }),
   component: () => null,
 });

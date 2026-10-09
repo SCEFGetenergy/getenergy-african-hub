@@ -7,11 +7,12 @@ export const Route = createFileRoute("/faq")({
       { title: "FAQ | GetEnergy" },
       { name: "description", content: "Answers about GetEnergy services, requests, payments and what happens after you contact us." },
       { property: "og:title", content: "FAQ | GetEnergy" },
+      { property: "og:url", content: "https://getenergy.ng/faq" },
       { property: "og:description", content: "Answers about GetEnergy services, requests, payments and what happens after you contact us." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/faq" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/faq" }],
   }),
   component: () => null,
 });

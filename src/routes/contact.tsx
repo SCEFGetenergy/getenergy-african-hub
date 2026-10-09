@@ -7,11 +7,12 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact Us | GetEnergy" },
       { name: "description", content: "Questions, quotes or partnerships. Our team replies within one business day. For urgent diesel orders, call us directly." },
       { property: "og:title", content: "Contact Us | GetEnergy" },
+      { property: "og:url", content: "https://getenergy.ng/contact" },
       { property: "og:description", content: "Questions, quotes or partnerships. Our team replies within one business day. For urgent diesel orders, call us directly." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/contact" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/contact" }],
   }),
   component: () => null,
 });

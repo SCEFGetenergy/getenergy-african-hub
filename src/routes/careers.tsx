@@ -7,11 +7,12 @@ export const Route = createFileRoute("/careers")({
       { title: "Careers | GetEnergy" },
       { name: "description", content: "Current opportunities, internships and our talent network at GET Energy." },
       { property: "og:title", content: "Careers | GetEnergy" },
+      { property: "og:url", content: "https://getenergy.ng/careers" },
       { property: "og:description", content: "Current opportunities, internships and our talent network at GET Energy." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/careers" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/careers" }],
   }),
   component: () => null,
 });

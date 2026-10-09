@@ -7,11 +7,12 @@ export const Route = createFileRoute("/login")({
       { title: "Log in | GetEnergy" },
       { name: "description", content: "The link may be old or mistyped. Go to the homepage or choose a service." },
       { property: "og:title", content: "Log in | GetEnergy" },
+      { property: "og:url", content: "https://getenergy.ng/login" },
       { property: "og:description", content: "The link may be old or mistyped. Go to the homepage or choose a service." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/login" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/login" }],
   }),
   component: () => null,
 });

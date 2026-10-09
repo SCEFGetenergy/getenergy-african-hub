@@ -32,11 +32,12 @@ export const Route = createFileRoute("/request-energy-quote")({
       { title: "Request an Energy Quote | GetEnergy" },
       { name: "description", content: "Tell GET Energy what you need, where and when — diesel, CNG, EV charging, solar, storage, mini-grids and more. Every request gets a reference." },
       { property: "og:title", content: "Request an Energy Quote | GetEnergy" },
+      { property: "og:url", content: "https://getenergy.ng/request-energy-quote" },
       { property: "og:description", content: "Let's power your next project. Request a quote from GET Energy Trading Services." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/request-energy-quote" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/request-energy-quote" }],
   }),
   component: QuotePage,
 });

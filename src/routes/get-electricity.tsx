@@ -7,11 +7,12 @@ export const Route = createFileRoute("/get-electricity")({
       { title: "Get Electricity | Token Vending & Smart Electricity | GetEnergy" },
       { name: "description", content: "Request an electricity token and receive a reference. Online payment is launching soon. Explore smart electricity solutions for homes, businesses and communities." },
       { property: "og:title", content: "Get Electricity | Token Vending & Smart Electricity | GetEnergy" },
+      { property: "og:url", content: "https://getenergy.ng/get-electricity" },
       { property: "og:description", content: "Request an electricity token and receive a reference. Online payment is launching soon. Explore smart electricity solutions for homes, businesses and communities." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/get-electricity" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/get-electricity" }],
   }),
   component: () => null,
 });

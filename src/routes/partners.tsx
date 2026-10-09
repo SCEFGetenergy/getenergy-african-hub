@@ -7,11 +7,12 @@ export const Route = createFileRoute("/partners")({
       { title: "Funders & Strategic Partners | GetEnergy" },
       { name: "description", content: "For DFIs, climate funds, development partners, manufacturers, OEMs, investors and technology companies exploring GetEnergy's project pipeline." },
       { property: "og:title", content: "Funders & Strategic Partners | GetEnergy" },
+      { property: "og:url", content: "https://getenergy.ng/partners" },
       { property: "og:description", content: "For DFIs, climate funds, development partners, manufacturers, OEMs, investors and technology companies exploring GetEnergy's project pipeline." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/partners" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/partners" }],
   }),
   component: () => null,
 });

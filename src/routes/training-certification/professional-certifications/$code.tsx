@@ -21,11 +21,12 @@ export const Route = createFileRoute("/training-certification/professional-certi
         { title },
         { name: "description", content: loaderData.purpose },
         { property: "og:title", content: title },
+        { property: "og:url", content: `https://getenergy.ng/training-certification/professional-certifications/${params.code}` },
         { property: "og:description", content: loaderData.purpose },
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
-      links: [{ rel: "canonical", href: `https://getenergy-african-hub.lovable.app/training-certification/professional-certifications/${params.code}` }],
+      links: [{ rel: "canonical", href: `https://getenergy.ng/training-certification/professional-certifications/${params.code}` }],
     };
   },
   notFoundComponent: () => (

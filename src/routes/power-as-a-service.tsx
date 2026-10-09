@@ -7,11 +7,12 @@ export const Route = createFileRoute("/power-as-a-service")({
       { title: "Power as a Service (PaaS) | GetEnergy" },
       { name: "description", content: "On-demand, on-site power on your terms. We design, finance, deploy, operate and maintain your power system. You pay as you use, with no heavy capital cost." },
       { property: "og:title", content: "Power as a Service (PaaS) | GetEnergy" },
+      { property: "og:url", content: "https://getenergy.ng/power-as-a-service" },
       { property: "og:description", content: "On-demand, on-site power on your terms. We design, finance, deploy, operate and maintain your power system. You pay as you use, with no heavy capital cost." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/power-as-a-service" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/power-as-a-service" }],
   }),
   component: () => null,
 });

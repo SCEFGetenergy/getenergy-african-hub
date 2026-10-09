@@ -7,11 +7,12 @@ export const Route = createFileRoute("/policies/gender-diversity-inclusion")({
       { title: "Gender Diversity & Inclusion Policy | GetEnergy" },
       { name: "description", content: "GET Energy Trading Services Ltd's Gender Diversity & Inclusion Policy: equal opportunity, training access, non-discrimination, support for women in technical roles and annual review." },
       { property: "og:title", content: "Gender Diversity & Inclusion Policy | GetEnergy" },
+      { property: "og:url", content: "https://getenergy.ng/policies/gender-diversity-inclusion" },
       { property: "og:description", content: "Our commitment to a diverse, equitable and inclusive workplace." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy-african-hub.lovable.app/policies/gender-diversity-inclusion" }],
+    links: [{ rel: "canonical", href: "https://getenergy.ng/policies/gender-diversity-inclusion" }],
   }),
   component: PolicyPage,
 });
