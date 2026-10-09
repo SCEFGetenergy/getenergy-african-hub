@@ -1,0 +1,3 @@
+DROP POLICY IF EXISTS "Signed-in users read sandbox settings" ON public.electricity_platform_settings;
+CREATE POLICY "Admins read electricity settings" ON public.electricity_platform_settings FOR SELECT TO authenticated USING (public.has_role(auth.uid(),'admin'));
+GRANT EXECUTE ON FUNCTION public.submit_electricity_token_request(text,text,text,text,integer,text,text,text,text,text,boolean) TO anon, authenticated;

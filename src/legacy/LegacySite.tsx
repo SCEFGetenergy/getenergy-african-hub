@@ -54,6 +54,23 @@ const SERVICE_NAMES: Record<string, string> = {
   equipment: "Energy-Saving Equipment",
 };
 
+// Dropdown labels → names accepted by the electricity request function.
+const DISCO_NAMES: Record<string, string> = {
+  "Abuja Electricity (AEDC)": "Abuja Electricity Distribution Company",
+  "Benin Electricity (BEDC)": "Benin Electricity Distribution Company",
+  "Eko Electricity (EKEDC)": "Eko Electricity Distribution Company",
+  "Enugu Electricity (EEDC)": "Enugu Electricity Distribution Company",
+  "Ibadan Electricity (IBEDC)": "Ibadan Electricity Distribution Company",
+  "Ikeja Electric (IE)": "Ikeja Electric",
+  "Jos Electricity (JED)": "Jos Electricity Distribution Company",
+  "Kaduna Electric (KAEDCO)": "Kaduna Electric",
+  "Kano Electricity (KEDCO)": "Kano Electricity Distribution Company",
+  "Port Harcourt Electricity (PHED)": "Port Harcourt Electricity Distribution Company",
+  "Yola Electricity (YEDC)": "Yola Electricity Distribution Company",
+  "Aba Power": "Aba Power",
+};
+
+
 export function LegacySite({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
@@ -90,6 +107,25 @@ export function LegacySite({ children }: { children: ReactNode }) {
               },
             });
             return error ? { error: error.message } : {};
+          }
+          if (kind === "electricity") {
+            const disco = val(form, "#el-disco");
+            const meterType = (form.querySelector('input[name="metertype"]:checked') as HTMLInputElement | null)?.value ?? "Prepaid";
+            const { data, error } = await supabase.rpc("submit_electricity_token_request", {
+              p_full_name: val(form, "#el-name"),
+              p_disco: DISCO_NAMES[disco] ?? disco,
+              p_meter_type: meterType,
+              p_meter_number: val(form, "#el-meter").replace(/\s/g, ""),
+              p_amount_ngn: Math.round(Number(val(form, "#el-amt"))),
+              p_phone: val(form, "#el-phone"),
+              p_email: val(form, "#el-email"),
+              p_state: val(form, "#el-state"),
+              p_city_lga: val(form, "#el-city"),
+              p_preferred_contact_method: val(form, "#el-contact"),
+              p_consent: (form.querySelector("#el-consent") as HTMLInputElement | null)?.checked === true,
+            });
+            if (error) return { error: error.message || "Please try again in a moment." };
+            return { reference: data as string };
           }
           const email = val(form, 'input[type="email"]');
           const nameEl = form.querySelector('input[id$="-name"]') as HTMLInputElement | null;
