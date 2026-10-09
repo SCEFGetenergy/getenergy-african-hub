@@ -32,7 +32,7 @@ function pageName(pathname: string): string | null {
 const PAGES: Record<string, string> = {};
 for (const chunk of pagesPart.split(/(?=<div data-page=")/)) {
   const m = chunk.match(/^<div data-page="([^"]+)"/);
-  if (m) PAGES[m[1]] = chunk.replace(/<!--[\s\S]*?-->\s*$/, "");
+  if (m?.[1]) PAGES[m[1]] = chunk.replace(/<!--[\s\S]*?-->\s*$/, "");
 }
 const ALIASES: Record<string, string> = { "about-us": "about", paas: "power-as-a-service", diesel: "get-fuel", "cng-ev": "cng" };
 
@@ -40,7 +40,7 @@ function pageMarkup(name: string | null): { key: string; html: string } | null {
   if (!name) return null;
   const n = ALIASES[name] ?? name;
   const key = PAGES[n] ? n : "notfound";
-  return { key, html: PAGES[key].replace(`<div data-page="${key}"`, `<div class="on" data-page="${key}"`) };
+  return { key, html: (PAGES[key] ?? "").replace(`<div data-page="${key}"`, `<div class="on" data-page="${key}"`) };
 }
 
 const val = (form: HTMLFormElement, sel: string) =>
