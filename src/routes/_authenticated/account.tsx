@@ -31,6 +31,11 @@ const STATUS_LABELS: Record<string, string> = {
   contacted: "Contacted",
   in_progress: "In progress",
   closed: "Closed",
+  new: "New",
+  "in review": "In review",
+  "pending partner integration": "Pending partner integration",
+  "waiting for customer": "Waiting for you",
+  "converted to customer": "Converted to customer",
 };
 
 const STATUS_STYLES: Record<string, string> = {
