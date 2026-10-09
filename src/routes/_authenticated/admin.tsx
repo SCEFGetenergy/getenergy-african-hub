@@ -76,7 +76,7 @@ function AdminPage() {
     <Section>
       <h1 className="text-3xl font-bold">Admin control centre</h1>
       <p className="mt-2 text-sm text-muted-foreground">{a.admin ? "Full administrator access." : "You see only the areas your permissions allow."} Every change is recorded in the audit log.</p>
-      <Tabs defaultValue={tabs[0]?.v} className="mt-6">
+      <Tabs defaultValue={tabs[0]?.v ?? "overview"} className="mt-6">
         <TabsList className="h-auto flex-wrap justify-start">
           {tabs.map((t) => <TabsTrigger key={t.v} className={tab} value={t.v}>{t.l}</TabsTrigger>)}
         </TabsList>
