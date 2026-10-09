@@ -31,15 +31,27 @@ const STATUS_LABELS: Record<string, string> = {
   contacted: "Contacted",
   in_progress: "In progress",
   closed: "Closed",
+  new: "New",
+  "in review": "In review",
+  "pending partner integration": "Pending partner integration",
+  "waiting for customer": "Waiting for you",
+  "converted to customer": "Converted to customer",
 };
 
 const STATUS_STYLES: Record<string, string> = {
   submitted: "bg-secondary text-secondary-foreground",
-  in_review: "bg-secondary text-secondary-foreground",
+  new: "bg-secondary text-secondary-foreground",
+  "in review": "bg-secondary text-secondary-foreground",
+  "pending partner integration": "bg-secondary text-secondary-foreground",
+  "waiting for customer": "bg-secondary text-secondary-foreground",
   contacted: "bg-brand-green-soft text-brand-green",
   in_progress: "bg-brand-green-soft text-brand-green",
+  "converted to customer": "bg-brand-green-soft text-brand-green",
   closed: "bg-muted text-muted-foreground",
 };
+
+const statusLabel = (status: string) => STATUS_LABELS[status.toLowerCase()] ?? status;
+const statusStyle = (status: string) => STATUS_STYLES[status.toLowerCase()] ?? "bg-muted text-muted-foreground";
 
 function AccountPage() {
   const navigate = useNavigate();
@@ -67,6 +79,18 @@ function AccountPage() {
       const { data, error } = await supabase
         .from("service_requests")
         .select("id, reference, service_name, request_type, status, created_at, location, details")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const electricityQuery = useQuery({
+    queryKey: ["my-electricity-requests"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("electricity_token_requests")
+        .select("id, request_reference, disco, meter_type, meter_number, amount_ngn, status, created_at")
         .order("created_at", { ascending: false });
       if (error) throw error;
       return data;
@@ -120,6 +144,7 @@ function AccountPage() {
 
   const profile = profileQuery.data;
   const requests = requestsQuery.data ?? [];
+  const electricityRequests = electricityQuery.data ?? [];
 
   return (
     <>
@@ -207,11 +232,9 @@ function AccountPage() {
                           <h3 className="mt-1 font-semibold">{request.service_name}</h3>
                         </div>
                         <span
-                          className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${
-                            STATUS_STYLES[request.status] ?? "bg-muted text-muted-foreground"
-                          }`}
+                          className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${statusStyle(request.status)}`}
                         >
-                          {STATUS_LABELS[request.status] ?? request.status}
+                          {statusLabel(request.status)}
                         </span>
                       </div>
                       <p className="mt-3 text-xs text-muted-foreground">
@@ -234,6 +257,52 @@ function AccountPage() {
               )}
             </div>
           </div>
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading eyebrow="Electricity" title="My electricity token requests" />
+        <p className="mt-2 text-sm text-muted-foreground">
+          GETELEC requests you submitted while signed in. No payment has been taken and no token has been issued for these requests.
+        </p>
+        <div className="mt-6 space-y-4">
+          {electricityQuery.isLoading ? (
+            <p className="text-sm text-muted-foreground">Loading your electricity requests…</p>
+          ) : electricityRequests.length === 0 ? (
+            <Card>
+              <CardContent className="py-8 text-center">
+                <p className="text-sm text-muted-foreground">
+                  You have not submitted an electricity token request yet. Requests made while signed in appear here.
+                </p>
+                <Button asChild className="mt-4">
+                  <Link to="/get-electricity">Request an electricity token</Link>
+                </Button>
+              </CardContent>
+            </Card>
+          ) : (
+            electricityRequests.map((request) => (
+              <Card key={request.id} className="card-elevated">
+                <CardContent className="pt-6">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <p className="font-display text-sm font-bold text-brand">{request.request_reference}</p>
+                      <h3 className="mt-1 font-semibold">
+                        {request.disco} · {request.meter_type} meter {request.meter_number}
+                      </h3>
+                    </div>
+                    <span
+                      className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${statusStyle(request.status)}`}
+                    >
+                      {statusLabel(request.status)}
+                    </span>
+                  </div>
+                  <p className="mt-3 text-xs text-muted-foreground">
+                    Submitted {new Date(request.created_at).toLocaleDateString()} · ₦{request.amount_ngn.toLocaleString()}
+                  </p>
+                </CardContent>
+              </Card>
+            ))
+          )}
         </div>
       </Section>
     </>
