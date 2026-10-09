@@ -1155,6 +1155,69 @@ export type Database = {
         }
         Relationships: []
       }
+      service_statuses: {
+        Row: {
+          label: string
+          path: string
+          public_note: string | null
+          slug: string
+          sort_order: number
+          status: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          label: string
+          path: string
+          public_note?: string | null
+          slug: string
+          sort_order?: number
+          status?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          label?: string
+          path?: string
+          public_note?: string | null
+          slug?: string
+          sort_order?: number
+          status?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      site_notices: {
+        Row: {
+          active: boolean
+          id: number
+          link_label: string | null
+          link_url: string | null
+          message: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          active?: boolean
+          id?: number
+          link_label?: string | null
+          link_url?: string | null
+          message?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          active?: boolean
+          id?: number
+          link_label?: string | null
+          link_url?: string | null
+          message?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       sophia_messages: {
         Row: {
           created_at: string
