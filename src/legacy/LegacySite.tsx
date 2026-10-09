@@ -190,8 +190,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
   const pageKey = page?.key ?? null;
   useEffect(() => {
     const el = pageRef.current?.firstElementChild;
-    if (el && api.current) { api.current.bind(el); (el.querySelector("form.gf") as HTMLElement | null)?.setAttribute("data-b", "1"); }
-    console.log("bind", pageKey, !!el, !!api.current);
+    if (el && api.current) { api.current.bind(el) }
   }, [pageKey]);
 
   // Re-apply the visible page after every commit: React may re-apply the static
