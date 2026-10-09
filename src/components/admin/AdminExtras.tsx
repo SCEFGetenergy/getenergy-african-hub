@@ -120,14 +120,24 @@ function summary(r: { entity_type: string; action: string; old_value: unknown; n
 export function AuditLog() {
   const [q, setQ] = useState("");
   const [type, setType] = useState("");
+  const [action, setAction] = useState("");
+  const [actor, setActor] = useState("");
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
   const { data } = useQuery({
-    queryKey: ["admin-audit", type],
+    queryKey: ["admin-audit", type, action, actor, from, to],
     queryFn: async () => {
       let qy = supabase.from("audit_log").select("*").order("created_at", { ascending: false }).limit(300);
       if (type) qy = qy.eq("entity_type", type);
+      if (action) qy = qy.eq("action", action);
+      if (actor) qy = qy.eq("actor_email", actor);
+      if (from) qy = qy.gte("created_at", new Date(`${from}T00:00:00`).toISOString());
+      if (to) qy = qy.lte("created_at", new Date(`${to}T23:59:59.999`).toISOString());
       return (await qy).data ?? [];
     },
   });
+  const actors = Array.from(new Set((data ?? []).map((r) => r.actor_email).filter(Boolean) as string[])).sort();
+  const hasFilters = Boolean(type || action || actor || from || to);
   const rows = (data ?? []).filter((r) => !q || `${r.actor_email} ${summary(r)}`.toLowerCase().includes(q.toLowerCase()));
   return (
     <section>
@@ -136,12 +146,28 @@ export function AuditLog() {
       <div className="mt-4 flex flex-wrap gap-2">
         <Input aria-label="Search audit log" placeholder="Search by person or detail" value={q} onChange={(e) => setQ(e.target.value)} className="h-11 max-w-xs" />
         <select aria-label="Filter by type" value={type} onChange={(e) => setType(e.target.value)} className="h-11 rounded-md border border-input bg-background px-2 text-sm"><option value="">All changes</option>{Object.entries(ENTITY).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select>
+        <select aria-label="Filter by action" value={action} onChange={(e) => setAction(e.target.value)} className="h-11 rounded-md border border-input bg-background px-2 text-sm">
+          <option value="">All actions</option>
+          <option value="insert">Created</option>
+          <option value="status_change">Status change</option>
+          <option value="note_update">Note update</option>
+          <option value="update">Other update</option>
+          <option value="archive">Archived</option>
+          <option value="restore">Restored</option>
+        </select>
+        <select aria-label="Filter by admin" value={actor} onChange={(e) => setActor(e.target.value)} className="h-11 max-w-[220px] rounded-md border border-input bg-background px-2 text-sm">
+          <option value="">All admins</option>
+          {actors.map((a) => <option key={a} value={a}>{a}</option>)}
+        </select>
+        <label className="flex items-center gap-1 text-xs text-muted-foreground"><span>From</span><Input aria-label="From date" type="date" value={from} onChange={(e) => setFrom(e.target.value)} className="h-11 w-auto" /></label>
+        <label className="flex items-center gap-1 text-xs text-muted-foreground"><span>To</span><Input aria-label="To date" type="date" value={to} onChange={(e) => setTo(e.target.value)} className="h-11 w-auto" /></label>
+        {hasFilters ? <Button variant="ghost" className="min-h-11" onClick={() => { setType(""); setAction(""); setActor(""); setFrom(""); setTo(""); }}>Clear filters</Button> : null}
       </div>
       <div className={box}>
         <table className="w-full min-w-[720px] text-left text-sm">
           <thead className="bg-surface text-xs text-muted-foreground"><tr><th className="p-3">When</th><th className="p-3">Who</th><th className="p-3">What</th><th className="p-3">Detail</th></tr></thead>
           <tbody className="divide-y divide-border">
-            {!rows.length ? <tr><td colSpan={4} className="p-3 text-muted-foreground">No changes recorded yet.</td></tr> : null}
+            {!rows.length ? <tr><td colSpan={4} className="p-3 text-muted-foreground">{hasFilters ? "No changes match these filters." : "No changes recorded yet."}</td></tr> : null}
             {rows.map((r) => <tr key={r.id}><td className="p-3 text-xs">{new Date(r.created_at).toLocaleString()}</td><td className="p-3">{r.actor_email ?? "System"}</td><td className="p-3">{ENTITY[r.entity_type] ?? r.entity_type} · {r.action}</td><td className="p-3 text-xs">{summary(r)}</td></tr>)}
           </tbody>
         </table>
