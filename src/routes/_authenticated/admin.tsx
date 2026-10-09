@@ -12,6 +12,7 @@ import { ElectricityQueue } from "@/components/admin/ElectricityQueue";
 import { AuditLog, DocumentReview, Invitations, PaymentRequests } from "@/components/admin/AdminExtras";
 import { Overview, RequestsInbox, ServiceAvailability, SiteNoticeEditor } from "@/components/admin/ControlCentre";
 import { PERMISSIONS, TeamPermissions, type PermissionKey } from "@/components/admin/TeamPermissions";
+import { visibleSections } from "@/lib/adminAccess";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const Route = createFileRoute("/_authenticated/admin")({
@@ -60,13 +61,14 @@ function AdminPage() {
       </Section>
     );
 
+  const s = new Set(visibleSections(a));
   const tabs = [
-    a.view_requests && { v: "overview", l: "Overview", c: <><Overview /></> },
-    a.view_requests && { v: "requests", l: "Requests", c: <RequestsInbox /> },
-    a.view_requests && { v: "electricity", l: "Electricity", c: <ElectricityQueue /> },
-    (a.edit_content || a.manage_availability) && { v: "content", l: "Content & availability", c: <>{a.edit_content ? <SiteNoticeEditor /> : null}{a.manage_availability ? <ServiceAvailability /> : null}</> },
-    a.admin && { v: "academy", l: "Academy", c: <><Fees /><Employers /><Applications /><DocumentReview /><PaymentRequests /></> },
-    a.manage_team && { v: "team", l: "Team & audit", c: <>{a.admin ? <TeamPermissions /> : null}<Invitations /><AuditLog /></> },
+    s.has("overview") && { v: "overview", l: "Overview", c: <><Overview /></> },
+    s.has("requests") && { v: "requests", l: "Requests", c: <RequestsInbox /> },
+    s.has("electricity") && { v: "electricity", l: "Electricity", c: <ElectricityQueue /> },
+    (s.has("notice") || s.has("availability")) && { v: "content", l: "Content & availability", c: <>{s.has("notice") ? <SiteNoticeEditor /> : null}{s.has("availability") ? <ServiceAvailability /> : null}</> },
+    s.has("academy") && { v: "academy", l: "Academy", c: <><Fees /><Employers /><Applications /><DocumentReview /><PaymentRequests /></> },
+    s.has("team") && { v: "team", l: "Team & audit", c: <>{s.has("permissions") ? <TeamPermissions /> : null}<Invitations /><AuditLog /></> },
   ].filter(Boolean) as { v: string; l: string; c: React.ReactNode }[];
 
   const tab = "min-h-11 px-3";
