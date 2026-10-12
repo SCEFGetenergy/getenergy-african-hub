@@ -825,3 +825,39 @@ details[open]>*:not(summary){animation:detopen .22s ease-out}
 .result h3::before{content:"✓";display:inline-grid;place-items:center;width:1.3em;height:1.3em;margin-right:8px;background:var(--green);color:#fff;border-radius:50%;font-size:.9em;animation:checkin .45s cubic-bezier(.3,1.6,.5,1)}
 @keyframes checkin{from{transform:scale(0)}to{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Get Electricity hero */
+.ehero{display:grid;grid-template-columns:60% 40%;min-height:720px;font-family:Figtree,system-ui,sans-serif;--eb:#0B2A4A;--ea:#E8A33D;--eo:#F7F5F0;--es:#2B4562}
+.ehero[hidden]{display:none}
+.ehero-l{background:var(--eo);color:var(--es);padding:48px 56px;display:flex;flex-direction:column;gap:22px;justify-content:center}
+.ehero-brand{display:inline-flex;align-items:center;gap:12px;color:var(--eb);font-weight:600;text-decoration:none;align-self:flex-start}
+.ehero-tile{width:44px;height:44px;border-radius:12px;background:var(--eb);display:grid;place-items:center;flex:none}
+.ehero-tile img{width:30px;height:30px;object-fit:contain}
+.ehero-pill{align-self:flex-start;background:var(--eb);color:var(--eo);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600;margin:0}
+.ehero h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:76px;line-height:.98;letter-spacing:-.02em;color:var(--eb);margin:0;text-transform:none}
+.ehero-sub{font-size:20px;line-height:1.5;max-width:36ch;margin:0;color:var(--es)}
+.ehero-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.ehero-cta span{font-size:15px;color:var(--es)}
+.ehero-btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 28px;border-radius:14px;background:var(--ea);color:var(--eb);font-size:20px;font-weight:600;text-decoration:none}
+.ehero-btn:active{transform:translateY(1px);filter:brightness(.95)}
+.ehero a:focus-visible{outline:3px solid var(--eb);outline-offset:3px}
+.ehero-chiplabel{margin:12px 0 0;font-weight:600;font-size:15px;color:var(--eb)}
+.ehero-chips{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+.ehero-chips li{border:1px solid var(--es);color:var(--eb);border-radius:999px;padding:4px 12px;font-size:14px}
+.ehero-r{background:var(--eb);padding:48px 40px;display:flex;flex-direction:column;justify-content:center;gap:32px}
+.ehero-card{background:var(--eo);border-radius:20px;border-top:8px solid var(--ea);padding:22px 24px;position:relative;color:var(--eb)}
+.ehero-card-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.ehero-card-top b{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px}
+.ehero-card-top small,.ehero-card-foot small{font-size:13px;color:var(--es)}
+.ehero-dots{display:flex;gap:14px;margin:18px 0}
+.ehero-dots span{display:flex;gap:4px}
+.ehero-dots i{width:8px;height:8px;border-radius:50%;background:var(--eb)}
+.ehero-cut{border-top:2px dashed #b9c2cc;margin:0 -24px;position:relative}
+.ehero-cut::before,.ehero-cut::after{content:"";position:absolute;top:-13px;width:24px;height:24px;border-radius:50%;background:var(--eb)}
+.ehero-cut::before{left:-12px}.ehero-cut::after{right:-12px}
+.ehero-card-foot{display:flex;justify-content:space-between;padding-top:14px}
+.ehero-steps{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.ehero-steps li{display:flex;gap:14px;align-items:flex-start;color:var(--eo);font-size:18px;line-height:1.4}
+.ehero-steps li span{flex:none;width:34px;height:34px;border:2px solid var(--ea);color:var(--ea);border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:16px}
+@media (max-width:767px){.ehero{grid-template-columns:1fr;min-height:0}.ehero-l,.ehero-r{padding:36px 24px}.ehero h1{font-size:44px}.ehero-sub{font-size:18px}.ehero-btn{width:100%}}
+@media (prefers-reduced-motion:reduce){.ehero *{transition:none!important;animation:none!important}.ehero-btn:active{transform:none}}

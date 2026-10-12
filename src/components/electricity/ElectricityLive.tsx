@@ -52,6 +52,15 @@ export function ElectricityLive({ pathname }: { pathname: string }) {
     if (!cfg?.live || !PAGES_WITH_COPY.has(pathname)) return;
     applySwaps();
     if (pathname !== "/get-electricity") return;
+    // Hero: show live state; if no DISCO is confirmed yet, its button still routes to the request form.
+    const off = document.querySelector<HTMLElement>("[data-ehero='off']");
+    const on = document.querySelector<HTMLElement>("[data-ehero='on']");
+    if (off && on) {
+      off.hidden = true;
+      on.hidden = false;
+      const buy = on.querySelector<HTMLAnchorElement>("[data-ehero-buy]");
+      if (buy && !cfg.discos.some((d) => d.confirmed)) { buy.textContent = "Request a token"; buy.href = "#elecform"; }
+    }
     const form = document.getElementById("elecform");
     const grid = form?.parentElement;
     if (!grid) return;
