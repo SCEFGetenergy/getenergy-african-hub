@@ -51,3 +51,11 @@
 - [ ] Build authenticated customer, agent, corporate and admin workspace surfaces under /app/getenergy-token
 - [ ] Add electricity enquiries and sandbox transaction/support operations to team admin
 - [ ] Verify request references, sandbox-only behavior, access boundaries, route metadata and mobile/desktop screens
+
+## Live electricity token purchase (VTpass)
+- [x] Orders, refunds, events, rate limits, per-DISCO live toggles; VTpass client; mock gateway; webhooks; 2-minute requery job
+- [x] Buy form, result/token screen, "Token not received?" lookup, live copy swaps (flag on only), refund/terms/privacy pages, Token sales admin
+- [ ] Run EKEDC sandbox matrix and per-DISCO tests — waiting on VTpass sandbox keys
+- [ ] Real payment gateway adapter — waiting on gateway choice and keys
+- [ ] Email/SMS receipt delivery — needs email sender domain and SMS provider
+- [ ] Static-IP relay for live VTpass — needs a host the team controls

@@ -636,6 +636,27 @@ export type Database = {
           },
         ]
       }
+      electricity_disco_live: {
+        Row: {
+          confirmed_live: boolean
+          label: string
+          service_id: string
+          updated_at: string
+        }
+        Insert: {
+          confirmed_live?: boolean
+          label: string
+          service_id: string
+          updated_at?: string
+        }
+        Update: {
+          confirmed_live?: boolean
+          label?: string
+          service_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       electricity_meter_verification_logs: {
         Row: {
           api_provider: string
@@ -681,6 +702,137 @@ export type Database = {
           tariff_class?: string | null
           user_id?: string
           verification_status?: string
+        }
+        Relationships: []
+      }
+      electricity_order_events: {
+        Row: {
+          created_at: string
+          event: string
+          id: string
+          order_id: string | null
+          payload: Json
+          source: string
+        }
+        Insert: {
+          created_at?: string
+          event: string
+          id?: string
+          order_id?: string | null
+          payload?: Json
+          source: string
+        }
+        Update: {
+          created_at?: string
+          event?: string
+          id?: string
+          order_id?: string | null
+          payload?: Json
+          source?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "electricity_order_events_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "electricity_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      electricity_orders: {
+        Row: {
+          amount_ngn: number
+          created_at: string
+          customer_address: string | null
+          customer_message: string | null
+          customer_name: string | null
+          disco_label: string
+          email: string
+          gateway: string
+          gateway_reference: string | null
+          id: string
+          last_error: string | null
+          meter_number: string
+          meter_type: string
+          min_amount_ngn: number
+          order_reference: string
+          paid_amount_ngn: number | null
+          paid_at: string | null
+          pending_since: string | null
+          phone: string
+          request_id: string
+          service_id: string
+          status: string
+          token: string | null
+          units: string | null
+          updated_at: string
+          user_id: string | null
+          vend_attempted_at: string | null
+          vtpass_code: string | null
+          vtpass_transaction_id: string | null
+        }
+        Insert: {
+          amount_ngn: number
+          created_at?: string
+          customer_address?: string | null
+          customer_message?: string | null
+          customer_name?: string | null
+          disco_label: string
+          email: string
+          gateway: string
+          gateway_reference?: string | null
+          id?: string
+          last_error?: string | null
+          meter_number: string
+          meter_type: string
+          min_amount_ngn?: number
+          order_reference: string
+          paid_amount_ngn?: number | null
+          paid_at?: string | null
+          pending_since?: string | null
+          phone: string
+          request_id: string
+          service_id: string
+          status?: string
+          token?: string | null
+          units?: string | null
+          updated_at?: string
+          user_id?: string | null
+          vend_attempted_at?: string | null
+          vtpass_code?: string | null
+          vtpass_transaction_id?: string | null
+        }
+        Update: {
+          amount_ngn?: number
+          created_at?: string
+          customer_address?: string | null
+          customer_message?: string | null
+          customer_name?: string | null
+          disco_label?: string
+          email?: string
+          gateway?: string
+          gateway_reference?: string | null
+          id?: string
+          last_error?: string | null
+          meter_number?: string
+          meter_type?: string
+          min_amount_ngn?: number
+          order_reference?: string
+          paid_amount_ngn?: number | null
+          paid_at?: string | null
+          pending_since?: string | null
+          phone?: string
+          request_id?: string
+          service_id?: string
+          status?: string
+          token?: string | null
+          units?: string | null
+          updated_at?: string
+          user_id?: string | null
+          vend_attempted_at?: string | null
+          vtpass_code?: string | null
+          vtpass_transaction_id?: string | null
         }
         Relationships: []
       }
@@ -778,6 +930,80 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      electricity_private_config: {
+        Row: {
+          key: string
+          value: string
+        }
+        Insert: {
+          key: string
+          value: string
+        }
+        Update: {
+          key?: string
+          value?: string
+        }
+        Relationships: []
+      }
+      electricity_rate_limits: {
+        Row: {
+          bucket: string
+          hits: number
+          window_start: string
+        }
+        Insert: {
+          bucket: string
+          hits?: number
+          window_start: string
+        }
+        Update: {
+          bucket?: string
+          hits?: number
+          window_start?: string
+        }
+        Relationships: []
+      }
+      electricity_refunds: {
+        Row: {
+          amount_ngn: number
+          created_at: string
+          gateway_refund_reference: string | null
+          id: string
+          order_id: string
+          raw: Json
+          reason: string
+          status: string
+        }
+        Insert: {
+          amount_ngn: number
+          created_at?: string
+          gateway_refund_reference?: string | null
+          id?: string
+          order_id: string
+          raw?: Json
+          reason: string
+          status?: string
+        }
+        Update: {
+          amount_ngn?: number
+          created_at?: string
+          gateway_refund_reference?: string | null
+          id?: string
+          order_id?: string
+          raw?: Json
+          reason?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "electricity_refunds_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: true
+            referencedRelation: "electricity_orders"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       electricity_saved_meters: {
         Row: {
@@ -1336,6 +1562,15 @@ export type Database = {
           p_role: Database["public"]["Enums"]["app_role"]
         }
         Returns: string
+      }
+      electricity_check_cron_token: {
+        Args: { p_token: string }
+        Returns: boolean
+      }
+      electricity_claim_vend: { Args: { p_order_id: string }; Returns: boolean }
+      electricity_hit_rate_limit: {
+        Args: { p_bucket: string; p_limit: number; p_window_seconds: number }
+        Returns: boolean
       }
       first_admin_available: { Args: never; Returns: boolean }
       generate_request_reference: { Args: never; Returns: string }

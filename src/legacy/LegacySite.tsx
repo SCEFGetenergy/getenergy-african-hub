@@ -3,6 +3,7 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import bodyHtml from "./body.html?raw";
 import { initLegacy } from "./legacy";
 import { supabase } from "@/integrations/supabase/client";
+import { ElectricityLive } from "@/components/electricity/ElectricityLive";
 import evChargingVideo from "@/assets/ev-charging.mp4?url";
 import evInteriorVideo from "@/assets/ev-interior.mp4?url";
 
@@ -313,6 +314,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
         {isApp && <div className="corporate-content">{children}</div>}
       </main>
       <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: footPart }} />
+      <ElectricityLive pathname={pathname} />
     </>
   );
 }

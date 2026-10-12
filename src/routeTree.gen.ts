@@ -53,6 +53,9 @@ import { Route as ApiSophiaRouteImport } from './routes/api/sophia'
 import { Route as CompanyIndexRouteImport } from './routes/company.index'
 import { Route as CompanySplatRouteImport } from './routes/company.$'
 import { Route as PoliciesGenderDiversityInclusionRouteImport } from './routes/policies.gender-diversity-inclusion'
+import { Route as PoliciesPrivacyRouteImport } from './routes/policies.privacy'
+import { Route as PoliciesRefundsRouteImport } from './routes/policies.refunds'
+import { Route as PoliciesTermsRouteImport } from './routes/policies.terms'
 import { Route as SolutionsSlugRouteImport } from './routes/solutions.$slug'
 import { Route as SolutionsCleanMobilityRouteImport } from './routes/solutions.clean-mobility'
 import { Route as SophiaIndexRouteImport } from './routes/sophia.index'
@@ -76,6 +79,9 @@ import { Route as TrainingCertificationProfessionalCertificationsIndexRouteImpor
 import { Route as TrainingCertificationProfessionalCertificationsCodeRouteImport } from './routes/training-certification/professional-certifications/$code'
 import { Route as TrainingCertificationProfessionalCertificationsWaitlistRouteImport } from './routes/training-certification/professional-certifications/waitlist'
 import { Route as TrainingCertificationProgrammesSlugRouteImport } from './routes/training-certification/programmes.$slug'
+import { Route as ApiPublicCronElectricityRequeryRouteImport } from './routes/api/public/cron/electricity-requery'
+import { Route as ApiPublicGatewayWebhookRouteImport } from './routes/api/public/gateway/webhook'
+import { Route as ApiPublicVtpassWebhookRouteImport } from './routes/api/public/vtpass/webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -297,6 +303,21 @@ const PoliciesGenderDiversityInclusionRoute =
     path: '/policies/gender-diversity-inclusion',
     getParentRoute: () => rootRouteImport,
   } as any)
+const PoliciesPrivacyRoute = PoliciesPrivacyRouteImport.update({
+  id: '/policies/privacy',
+  path: '/policies/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesRefundsRoute = PoliciesRefundsRouteImport.update({
+  id: '/policies/refunds',
+  path: '/policies/refunds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesTermsRoute = PoliciesTermsRouteImport.update({
+  id: '/policies/terms',
+  path: '/policies/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsSlugRoute = SolutionsSlugRouteImport.update({
   id: '/solutions/$slug',
   path: '/solutions/$slug',
@@ -430,6 +451,22 @@ const TrainingCertificationProgrammesSlugRoute =
     path: '/training-certification/programmes/$slug',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicCronElectricityRequeryRoute =
+  ApiPublicCronElectricityRequeryRouteImport.update({
+    id: '/api/public/cron/electricity-requery',
+    path: '/api/public/cron/electricity-requery',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicGatewayWebhookRoute = ApiPublicGatewayWebhookRouteImport.update({
+  id: '/api/public/gateway/webhook',
+  path: '/api/public/gateway/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicVtpassWebhookRoute = ApiPublicVtpassWebhookRouteImport.update({
+  id: '/api/public/vtpass/webhook',
+  path: '/api/public/vtpass/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -473,6 +510,9 @@ export interface FileRoutesByFullPath {
   '/api/sophia': typeof ApiSophiaRoute
   '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
+  '/policies/refunds': typeof PoliciesRefundsRoute
+  '/policies/terms': typeof PoliciesTermsRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/solutions/clean-mobility': typeof SolutionsCleanMobilityRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
@@ -498,6 +538,9 @@ export interface FileRoutesByFullPath {
   '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
   '/training-certification/professional-certifications/': typeof TrainingCertificationProfessionalCertificationsIndexRoute
+  '/api/public/cron/electricity-requery': typeof ApiPublicCronElectricityRequeryRoute
+  '/api/public/gateway/webhook': typeof ApiPublicGatewayWebhookRoute
+  '/api/public/vtpass/webhook': typeof ApiPublicVtpassWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -541,6 +584,9 @@ export interface FileRoutesByTo {
   '/api/sophia': typeof ApiSophiaRoute
   '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
+  '/policies/refunds': typeof PoliciesRefundsRoute
+  '/policies/terms': typeof PoliciesTermsRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/solutions/clean-mobility': typeof SolutionsCleanMobilityRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
@@ -566,6 +612,9 @@ export interface FileRoutesByTo {
   '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
   '/training-certification/professional-certifications': typeof TrainingCertificationProfessionalCertificationsIndexRoute
+  '/api/public/cron/electricity-requery': typeof ApiPublicCronElectricityRequeryRoute
+  '/api/public/gateway/webhook': typeof ApiPublicGatewayWebhookRoute
+  '/api/public/vtpass/webhook': typeof ApiPublicVtpassWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -611,6 +660,9 @@ export interface FileRoutesById {
   '/api/sophia': typeof ApiSophiaRoute
   '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
+  '/policies/refunds': typeof PoliciesRefundsRoute
+  '/policies/terms': typeof PoliciesTermsRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/solutions/clean-mobility': typeof SolutionsCleanMobilityRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
@@ -636,6 +688,9 @@ export interface FileRoutesById {
   '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
   '/training-certification/professional-certifications/': typeof TrainingCertificationProfessionalCertificationsIndexRoute
+  '/api/public/cron/electricity-requery': typeof ApiPublicCronElectricityRequeryRoute
+  '/api/public/gateway/webhook': typeof ApiPublicGatewayWebhookRoute
+  '/api/public/vtpass/webhook': typeof ApiPublicVtpassWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -681,6 +736,9 @@ export interface FileRouteTypes {
     | '/api/sophia'
     | '/company/$'
     | '/policies/gender-diversity-inclusion'
+    | '/policies/privacy'
+    | '/policies/refunds'
+    | '/policies/terms'
     | '/solutions/$slug'
     | '/solutions/clean-mobility'
     | '/sophia/$threadId'
@@ -706,6 +764,9 @@ export interface FileRouteTypes {
     | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
     | '/training-certification/professional-certifications/'
+    | '/api/public/cron/electricity-requery'
+    | '/api/public/gateway/webhook'
+    | '/api/public/vtpass/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -749,6 +810,9 @@ export interface FileRouteTypes {
     | '/api/sophia'
     | '/company/$'
     | '/policies/gender-diversity-inclusion'
+    | '/policies/privacy'
+    | '/policies/refunds'
+    | '/policies/terms'
     | '/solutions/$slug'
     | '/solutions/clean-mobility'
     | '/sophia/$threadId'
@@ -774,6 +838,9 @@ export interface FileRouteTypes {
     | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
     | '/training-certification/professional-certifications'
+    | '/api/public/cron/electricity-requery'
+    | '/api/public/gateway/webhook'
+    | '/api/public/vtpass/webhook'
   id:
     | '__root__'
     | '/'
@@ -818,6 +885,9 @@ export interface FileRouteTypes {
     | '/api/sophia'
     | '/company/$'
     | '/policies/gender-diversity-inclusion'
+    | '/policies/privacy'
+    | '/policies/refunds'
+    | '/policies/terms'
     | '/solutions/$slug'
     | '/solutions/clean-mobility'
     | '/sophia/$threadId'
@@ -843,6 +913,9 @@ export interface FileRouteTypes {
     | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
     | '/training-certification/professional-certifications/'
+    | '/api/public/cron/electricity-requery'
+    | '/api/public/gateway/webhook'
+    | '/api/public/vtpass/webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -886,6 +959,9 @@ export interface RootRouteChildren {
   ApiSophiaRoute: typeof ApiSophiaRoute
   CompanySplatRoute: typeof CompanySplatRoute
   PoliciesGenderDiversityInclusionRoute: typeof PoliciesGenderDiversityInclusionRoute
+  PoliciesPrivacyRoute: typeof PoliciesPrivacyRoute
+  PoliciesRefundsRoute: typeof PoliciesRefundsRoute
+  PoliciesTermsRoute: typeof PoliciesTermsRoute
   SolutionsSlugRoute: typeof SolutionsSlugRoute
   SolutionsCleanMobilityRoute: typeof SolutionsCleanMobilityRoute
   SophiaThreadIdRoute: typeof SophiaThreadIdRoute
@@ -901,6 +977,9 @@ export interface RootRouteChildren {
   TrainingCertificationProfessionalCertificationsWaitlistRoute: typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   TrainingCertificationProgrammesSlugRoute: typeof TrainingCertificationProgrammesSlugRoute
   TrainingCertificationProfessionalCertificationsIndexRoute: typeof TrainingCertificationProfessionalCertificationsIndexRoute
+  ApiPublicCronElectricityRequeryRoute: typeof ApiPublicCronElectricityRequeryRoute
+  ApiPublicGatewayWebhookRoute: typeof ApiPublicGatewayWebhookRoute
+  ApiPublicVtpassWebhookRoute: typeof ApiPublicVtpassWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1213,6 +1292,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoliciesGenderDiversityInclusionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/policies/privacy': {
+      id: '/policies/privacy'
+      path: '/policies/privacy'
+      fullPath: '/policies/privacy'
+      preLoaderRoute: typeof PoliciesPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/refunds': {
+      id: '/policies/refunds'
+      path: '/policies/refunds'
+      fullPath: '/policies/refunds'
+      preLoaderRoute: typeof PoliciesRefundsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/terms': {
+      id: '/policies/terms'
+      path: '/policies/terms'
+      fullPath: '/policies/terms'
+      preLoaderRoute: typeof PoliciesTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions/$slug': {
       id: '/solutions/$slug'
       path: '/solutions/$slug'
@@ -1374,6 +1474,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrainingCertificationProgrammesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/cron/electricity-requery': {
+      id: '/api/public/cron/electricity-requery'
+      path: '/api/public/cron/electricity-requery'
+      fullPath: '/api/public/cron/electricity-requery'
+      preLoaderRoute: typeof ApiPublicCronElectricityRequeryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/gateway/webhook': {
+      id: '/api/public/gateway/webhook'
+      path: '/api/public/gateway/webhook'
+      fullPath: '/api/public/gateway/webhook'
+      preLoaderRoute: typeof ApiPublicGatewayWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/vtpass/webhook': {
+      id: '/api/public/vtpass/webhook'
+      path: '/api/public/vtpass/webhook'
+      fullPath: '/api/public/vtpass/webhook'
+      preLoaderRoute: typeof ApiPublicVtpassWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1453,6 +1574,9 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSophiaRoute: ApiSophiaRoute,
   CompanySplatRoute: CompanySplatRoute,
   PoliciesGenderDiversityInclusionRoute: PoliciesGenderDiversityInclusionRoute,
+  PoliciesPrivacyRoute: PoliciesPrivacyRoute,
+  PoliciesRefundsRoute: PoliciesRefundsRoute,
+  PoliciesTermsRoute: PoliciesTermsRoute,
   SolutionsSlugRoute: SolutionsSlugRoute,
   SolutionsCleanMobilityRoute: SolutionsCleanMobilityRoute,
   SophiaThreadIdRoute: SophiaThreadIdRoute,
@@ -1472,6 +1596,9 @@ const rootRouteChildren: RootRouteChildren = {
     TrainingCertificationProgrammesSlugRoute,
   TrainingCertificationProfessionalCertificationsIndexRoute:
     TrainingCertificationProfessionalCertificationsIndexRoute,
+  ApiPublicCronElectricityRequeryRoute: ApiPublicCronElectricityRequeryRoute,
+  ApiPublicGatewayWebhookRoute: ApiPublicGatewayWebhookRoute,
+  ApiPublicVtpassWebhookRoute: ApiPublicVtpassWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
