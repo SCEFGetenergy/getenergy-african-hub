@@ -120,6 +120,13 @@
       "when": 1791552927397,
       "tag": "0016_admin_permissions",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1791841095868,
+      "tag": "0017_electricity_live_orders",
+      "breakpoints": true
     }
   ]
 }
