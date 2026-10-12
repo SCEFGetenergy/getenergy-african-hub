@@ -280,7 +280,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
       });
       parent.insertBefore(a, before ?? null);
     };
-    const actions = document.querySelector("header.site .bar-actions");
+    const actions = document.querySelector<HTMLElement>("header.site .bar-actions");
     if (actions) {
       if (signedIn && !actions.querySelector("a.signout")) {
         addSignoutAnchor(actions, actions.querySelector("a.btn.primary"));
