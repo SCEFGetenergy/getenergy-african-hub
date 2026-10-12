@@ -931,6 +931,21 @@ export type Database = {
         }
         Relationships: []
       }
+      electricity_private_config: {
+        Row: {
+          key: string
+          value: string
+        }
+        Insert: {
+          key: string
+          value: string
+        }
+        Update: {
+          key?: string
+          value?: string
+        }
+        Relationships: []
+      }
       electricity_rate_limits: {
         Row: {
           bucket: string
@@ -1547,6 +1562,10 @@ export type Database = {
           p_role: Database["public"]["Enums"]["app_role"]
         }
         Returns: string
+      }
+      electricity_check_cron_token: {
+        Args: { p_token: string }
+        Returns: boolean
       }
       electricity_claim_vend: { Args: { p_order_id: string }; Returns: boolean }
       electricity_hit_rate_limit: {

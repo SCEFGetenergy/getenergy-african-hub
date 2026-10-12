@@ -127,6 +127,13 @@
       "when": 1791841095868,
       "tag": "0017_electricity_live_orders",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1791841249386,
+      "tag": "0018_electricity_cron_token",
+      "breakpoints": true
     }
   ]
 }
