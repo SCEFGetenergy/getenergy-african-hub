@@ -195,6 +195,21 @@ export function LegacySite({ children }: { children: ReactNode }) {
     // React re-applies the static header markup on re-render; restore the
     // session-aware login/account state after every commit.
     syncLogin(signedInRef.current);
+    // Rebind the mobile menu toggle: the clone drops any stale listeners left
+    // on a node that React replaced, so the Menu button keeps working.
+    const t = document.querySelector(".menu-toggle") as HTMLButtonElement | null;
+    if (t) {
+      const fresh = t.cloneNode(true) as HTMLButtonElement;
+      t.replaceWith(fresh);
+      fresh.addEventListener("click", () => {
+        const nav = document.getElementById("nav");
+        if (!nav) return;
+        const open = !nav.classList.contains("open");
+        nav.classList.toggle("open", open);
+        document.body.classList.toggle("nav-open", open);
+        fresh.setAttribute("aria-expanded", String(open));
+      });
+    }
   });
 
   // Re-apply the visible page after every commit: React may re-apply the static
