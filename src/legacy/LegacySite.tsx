@@ -87,6 +87,8 @@ export function LegacySite({ children }: { children: ReactNode }) {
   const api = useRef<{ show: (n: string | null) => void; bind: (s: Element) => void } | null>(null);
   const navRef = useRef(navigate);
   navRef.current = navigate;
+  const signedInRef = useRef(false);
+
 
   useEffect(() => {
     api.current = initLegacy({
@@ -175,6 +177,32 @@ export function LegacySite({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  // Close the mobile menu on outside click or Escape. Delegated once on the
+  // document so it survives React replacing the header nodes on re-render.
+  useEffect(() => {
+    const closeNav = () => {
+      const nav = document.getElementById("nav");
+      if (nav?.classList.contains("open")) {
+        nav.classList.remove("open");
+        document.body.classList.remove("nav-open");
+        document.querySelector(".menu-toggle")?.setAttribute("aria-expanded", "false");
+      }
+    };
+    const onDocClick = (e: MouseEvent) => {
+      const el = e.target as HTMLElement;
+      if (el.closest("#nav") || el.closest(".menu-toggle")) return;
+      closeNav();
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeNav(); };
+    document.addEventListener("click", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("click", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
+
+
   useEffect(() => {
     if (!window.location.hash) window.scrollTo(0, 0);
     // Keep the header in sync after navigation (e.g. session restored mid-visit).
@@ -189,6 +217,24 @@ export function LegacySite({ children }: { children: ReactNode }) {
     if (el && api.current && !el.dataset["bound"]) {
       el.dataset["bound"] = "1";
       api.current.bind(el);
+    }
+    // React re-applies the static header markup on re-render; restore the
+    // session-aware login/account state after every commit.
+    syncLogin(signedInRef.current);
+    // Rebind the mobile menu toggle: the clone drops any stale listeners left
+    // on a node that React replaced, so the Menu button keeps working.
+    const t = document.querySelector(".menu-toggle") as HTMLButtonElement | null;
+    if (t) {
+      const fresh = t.cloneNode(true) as HTMLButtonElement;
+      t.replaceWith(fresh);
+      fresh.addEventListener("click", () => {
+        const nav = document.getElementById("nav");
+        if (!nav) return;
+        const open = !nav.classList.contains("open");
+        nav.classList.toggle("open", open);
+        document.body.classList.toggle("nav-open", open);
+        fresh.setAttribute("aria-expanded", String(open));
+      });
     }
   });
 
@@ -217,6 +263,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
     navRef.current({ to: "/login", replace: true });
   };
   const syncLogin = (signedIn: boolean) => {
+    signedInRef.current = signedIn;
     document.querySelectorAll<HTMLAnchorElement>('a[href="/login"], a[href="/account"]').forEach((a) => {
       if (!a.closest("header.site")) return;
       a.setAttribute("href", signedIn ? "/account" : "/login");
@@ -233,7 +280,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
       });
       parent.insertBefore(a, before ?? null);
     };
-    const actions = document.querySelector("header.site .bar-actions");
+    const actions = document.querySelector<HTMLElement>("header.site .bar-actions");
     if (actions) {
       if (signedIn && !actions.querySelector("a.signout")) {
         addSignoutAnchor(actions, actions.querySelector("a.btn.primary"));
