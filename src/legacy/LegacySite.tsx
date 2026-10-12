@@ -177,6 +177,32 @@ export function LegacySite({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  // Close the mobile menu on outside click or Escape. Delegated once on the
+  // document so it survives React replacing the header nodes on re-render.
+  useEffect(() => {
+    const closeNav = () => {
+      const nav = document.getElementById("nav");
+      if (nav?.classList.contains("open")) {
+        nav.classList.remove("open");
+        document.body.classList.remove("nav-open");
+        document.querySelector(".menu-toggle")?.setAttribute("aria-expanded", "false");
+      }
+    };
+    const onDocClick = (e: MouseEvent) => {
+      const el = e.target as HTMLElement;
+      if (el.closest("#nav") || el.closest(".menu-toggle")) return;
+      closeNav();
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeNav(); };
+    document.addEventListener("click", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("click", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
+
+
   useEffect(() => {
     if (!window.location.hash) window.scrollTo(0, 0);
     // Keep the header in sync after navigation (e.g. session restored mid-visit).
