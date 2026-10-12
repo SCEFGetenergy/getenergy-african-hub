@@ -25,7 +25,7 @@ async function lastEvent(ref: string) {
     .select("event, payload, created_at")
     .eq("source", "mock_gateway")
     .eq("payload->>gatewayReference", ref)
-    .in("event", ["mock_paid", "mock_failed", "mock_refunded"])
+    .in("event", ["mock_paid", "mock_failed"])
     .order("created_at", { ascending: false })
     .limit(1);
   return data?.[0] ?? null;
@@ -39,7 +39,7 @@ export const mockGateway: PaymentGateway = {
   },
   async verifyPayment(ref) {
     const e = await lastEvent(ref);
-    if (!e || e.event === "mock_refunded") return { status: e ? "paid" : "pending", amountNgn: e ? Number((e.payload as { amountNgn?: number }).amountNgn) : null, raw: e };
+    if (!e) return { status: "pending", amountNgn: null, raw: null };
     const amt = Number((e.payload as { amountNgn?: number }).amountNgn);
     return { status: e.event === "mock_paid" ? "paid" : "failed", amountNgn: Number.isFinite(amt) ? amt : null, raw: e };
   },
