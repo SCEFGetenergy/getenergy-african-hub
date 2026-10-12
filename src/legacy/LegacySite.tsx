@@ -179,7 +179,8 @@ export function LegacySite({ children }: { children: ReactNode }) {
     if (!window.location.hash) window.scrollTo(0, 0);
     // Keep the header in sync after navigation (e.g. session restored mid-visit).
     supabase.auth.getSession().then(({ data }) => syncLogin(!!data.session));
-  }, [pathname, syncLogin]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   // Wire up forms, tabs and widgets of the page that was just mounted.
   // Runs after every commit; binds once per mounted page element.
