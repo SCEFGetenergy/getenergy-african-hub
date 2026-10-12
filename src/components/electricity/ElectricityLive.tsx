@@ -60,6 +60,18 @@ export function ElectricityLive({ pathname }: { pathname: string }) {
       on.hidden = false;
       const buy = on.querySelector<HTMLAnchorElement>("[data-ehero-buy]");
       if (buy && !cfg.discos.some((d) => d.confirmed)) { buy.textContent = "Request a token"; buy.href = "#elecform"; }
+      const chipMap: Record<string, string> = { "Ikeja Electric": "ikeja-electric", EKEDC: "eko-electric", AEDC: "abuja-electric", IBEDC: "ibadan-electric", BEDC: "benin-electric", EEDC: "enugu-electric", PHED: "portharcourt-electric", KAEDCO: "kaduna-electric", KEDCO: "kano-electric", JED: "jos-electric", YEDC: "yola-electric", "Aba Power": "aba-electric" };
+      on.querySelectorAll<HTMLLIElement>(".ehero-chips li").forEach((li) => {
+        if (li.querySelector("a")) return;
+        const name = li.textContent ?? "";
+        const ok = cfg.discos.some((d) => d.serviceId === chipMap[name] && d.confirmed);
+        const a = document.createElement("a");
+        a.href = ok ? "#elec-live-root" : "#elecform";
+        a.textContent = name;
+        a.setAttribute("aria-label", `${ok ? "Buy a token" : "Request a token"}: ${name}`);
+        li.textContent = "";
+        li.appendChild(a);
+      });
     }
     const form = document.getElementById("elecform");
     const grid = form?.parentElement;
