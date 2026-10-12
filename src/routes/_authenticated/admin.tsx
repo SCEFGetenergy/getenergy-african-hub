@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Section } from "@/components/site/ui-bits";
 import { CERTIFICATIONS } from "@/lib/certifications";
 import { ElectricityQueue } from "@/components/admin/ElectricityQueue";
+import { TokenSales } from "@/components/admin/TokenSales";
 import { AuditLog, DocumentReview, Invitations, PaymentRequests } from "@/components/admin/AdminExtras";
 import { Overview, RequestsInbox, ServiceAvailability, SiteNoticeEditor } from "@/components/admin/ControlCentre";
 import { PERMISSIONS, TeamPermissions, type PermissionKey } from "@/components/admin/TeamPermissions";
@@ -66,6 +67,7 @@ function AdminPage() {
     s.has("overview") && { v: "overview", l: "Overview", c: <><Overview /></> },
     s.has("requests") && { v: "requests", l: "Requests", c: <RequestsInbox /> },
     s.has("electricity") && { v: "electricity", l: "Electricity", c: <ElectricityQueue /> },
+    a.admin && { v: "token-sales", l: "Token sales", c: <TokenSales /> },
     (s.has("notice") || s.has("availability")) && { v: "content", l: "Content & availability", c: <>{s.has("notice") ? <SiteNoticeEditor /> : null}{s.has("availability") ? <ServiceAvailability /> : null}</> },
     s.has("academy") && { v: "academy", l: "Academy", c: <><Fees /><Employers /><Applications /><DocumentReview /><PaymentRequests /></> },
     s.has("team") && { v: "team", l: "Team & audit", c: <>{s.has("permissions") ? <TeamPermissions /> : null}<Invitations /><AuditLog /></> },
