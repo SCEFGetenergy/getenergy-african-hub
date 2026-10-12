@@ -53,6 +53,9 @@ import { Route as ApiSophiaRouteImport } from './routes/api/sophia'
 import { Route as CompanyIndexRouteImport } from './routes/company.index'
 import { Route as CompanySplatRouteImport } from './routes/company.$'
 import { Route as PoliciesGenderDiversityInclusionRouteImport } from './routes/policies.gender-diversity-inclusion'
+import { Route as PoliciesPrivacyRouteImport } from './routes/policies.privacy'
+import { Route as PoliciesRefundsRouteImport } from './routes/policies.refunds'
+import { Route as PoliciesTermsRouteImport } from './routes/policies.terms'
 import { Route as SolutionsSlugRouteImport } from './routes/solutions.$slug'
 import { Route as SolutionsCleanMobilityRouteImport } from './routes/solutions.clean-mobility'
 import { Route as SophiaIndexRouteImport } from './routes/sophia.index'
@@ -300,6 +303,21 @@ const PoliciesGenderDiversityInclusionRoute =
     path: '/policies/gender-diversity-inclusion',
     getParentRoute: () => rootRouteImport,
   } as any)
+const PoliciesPrivacyRoute = PoliciesPrivacyRouteImport.update({
+  id: '/policies/privacy',
+  path: '/policies/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesRefundsRoute = PoliciesRefundsRouteImport.update({
+  id: '/policies/refunds',
+  path: '/policies/refunds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesTermsRoute = PoliciesTermsRouteImport.update({
+  id: '/policies/terms',
+  path: '/policies/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsSlugRoute = SolutionsSlugRouteImport.update({
   id: '/solutions/$slug',
   path: '/solutions/$slug',
@@ -492,6 +510,9 @@ export interface FileRoutesByFullPath {
   '/api/sophia': typeof ApiSophiaRoute
   '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
+  '/policies/refunds': typeof PoliciesRefundsRoute
+  '/policies/terms': typeof PoliciesTermsRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/solutions/clean-mobility': typeof SolutionsCleanMobilityRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
@@ -563,6 +584,9 @@ export interface FileRoutesByTo {
   '/api/sophia': typeof ApiSophiaRoute
   '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
+  '/policies/refunds': typeof PoliciesRefundsRoute
+  '/policies/terms': typeof PoliciesTermsRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/solutions/clean-mobility': typeof SolutionsCleanMobilityRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
@@ -636,6 +660,9 @@ export interface FileRoutesById {
   '/api/sophia': typeof ApiSophiaRoute
   '/company/$': typeof CompanySplatRoute
   '/policies/gender-diversity-inclusion': typeof PoliciesGenderDiversityInclusionRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
+  '/policies/refunds': typeof PoliciesRefundsRoute
+  '/policies/terms': typeof PoliciesTermsRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/solutions/clean-mobility': typeof SolutionsCleanMobilityRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
@@ -709,6 +736,9 @@ export interface FileRouteTypes {
     | '/api/sophia'
     | '/company/$'
     | '/policies/gender-diversity-inclusion'
+    | '/policies/privacy'
+    | '/policies/refunds'
+    | '/policies/terms'
     | '/solutions/$slug'
     | '/solutions/clean-mobility'
     | '/sophia/$threadId'
@@ -780,6 +810,9 @@ export interface FileRouteTypes {
     | '/api/sophia'
     | '/company/$'
     | '/policies/gender-diversity-inclusion'
+    | '/policies/privacy'
+    | '/policies/refunds'
+    | '/policies/terms'
     | '/solutions/$slug'
     | '/solutions/clean-mobility'
     | '/sophia/$threadId'
@@ -852,6 +885,9 @@ export interface FileRouteTypes {
     | '/api/sophia'
     | '/company/$'
     | '/policies/gender-diversity-inclusion'
+    | '/policies/privacy'
+    | '/policies/refunds'
+    | '/policies/terms'
     | '/solutions/$slug'
     | '/solutions/clean-mobility'
     | '/sophia/$threadId'
@@ -923,6 +959,9 @@ export interface RootRouteChildren {
   ApiSophiaRoute: typeof ApiSophiaRoute
   CompanySplatRoute: typeof CompanySplatRoute
   PoliciesGenderDiversityInclusionRoute: typeof PoliciesGenderDiversityInclusionRoute
+  PoliciesPrivacyRoute: typeof PoliciesPrivacyRoute
+  PoliciesRefundsRoute: typeof PoliciesRefundsRoute
+  PoliciesTermsRoute: typeof PoliciesTermsRoute
   SolutionsSlugRoute: typeof SolutionsSlugRoute
   SolutionsCleanMobilityRoute: typeof SolutionsCleanMobilityRoute
   SophiaThreadIdRoute: typeof SophiaThreadIdRoute
@@ -1253,6 +1292,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoliciesGenderDiversityInclusionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/policies/privacy': {
+      id: '/policies/privacy'
+      path: '/policies/privacy'
+      fullPath: '/policies/privacy'
+      preLoaderRoute: typeof PoliciesPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/refunds': {
+      id: '/policies/refunds'
+      path: '/policies/refunds'
+      fullPath: '/policies/refunds'
+      preLoaderRoute: typeof PoliciesRefundsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/terms': {
+      id: '/policies/terms'
+      path: '/policies/terms'
+      fullPath: '/policies/terms'
+      preLoaderRoute: typeof PoliciesTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions/$slug': {
       id: '/solutions/$slug'
       path: '/solutions/$slug'
@@ -1514,6 +1574,9 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSophiaRoute: ApiSophiaRoute,
   CompanySplatRoute: CompanySplatRoute,
   PoliciesGenderDiversityInclusionRoute: PoliciesGenderDiversityInclusionRoute,
+  PoliciesPrivacyRoute: PoliciesPrivacyRoute,
+  PoliciesRefundsRoute: PoliciesRefundsRoute,
+  PoliciesTermsRoute: PoliciesTermsRoute,
   SolutionsSlugRoute: SolutionsSlugRoute,
   SolutionsCleanMobilityRoute: SolutionsCleanMobilityRoute,
   SophiaThreadIdRoute: SophiaThreadIdRoute,
