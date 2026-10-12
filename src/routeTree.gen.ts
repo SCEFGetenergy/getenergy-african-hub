@@ -76,6 +76,9 @@ import { Route as TrainingCertificationProfessionalCertificationsIndexRouteImpor
 import { Route as TrainingCertificationProfessionalCertificationsCodeRouteImport } from './routes/training-certification/professional-certifications/$code'
 import { Route as TrainingCertificationProfessionalCertificationsWaitlistRouteImport } from './routes/training-certification/professional-certifications/waitlist'
 import { Route as TrainingCertificationProgrammesSlugRouteImport } from './routes/training-certification/programmes.$slug'
+import { Route as ApiPublicCronElectricityRequeryRouteImport } from './routes/api/public/cron/electricity-requery'
+import { Route as ApiPublicGatewayWebhookRouteImport } from './routes/api/public/gateway/webhook'
+import { Route as ApiPublicVtpassWebhookRouteImport } from './routes/api/public/vtpass/webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -430,6 +433,22 @@ const TrainingCertificationProgrammesSlugRoute =
     path: '/training-certification/programmes/$slug',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicCronElectricityRequeryRoute =
+  ApiPublicCronElectricityRequeryRouteImport.update({
+    id: '/api/public/cron/electricity-requery',
+    path: '/api/public/cron/electricity-requery',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicGatewayWebhookRoute = ApiPublicGatewayWebhookRouteImport.update({
+  id: '/api/public/gateway/webhook',
+  path: '/api/public/gateway/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicVtpassWebhookRoute = ApiPublicVtpassWebhookRouteImport.update({
+  id: '/api/public/vtpass/webhook',
+  path: '/api/public/vtpass/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -498,6 +517,9 @@ export interface FileRoutesByFullPath {
   '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
   '/training-certification/professional-certifications/': typeof TrainingCertificationProfessionalCertificationsIndexRoute
+  '/api/public/cron/electricity-requery': typeof ApiPublicCronElectricityRequeryRoute
+  '/api/public/gateway/webhook': typeof ApiPublicGatewayWebhookRoute
+  '/api/public/vtpass/webhook': typeof ApiPublicVtpassWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -566,6 +588,9 @@ export interface FileRoutesByTo {
   '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
   '/training-certification/professional-certifications': typeof TrainingCertificationProfessionalCertificationsIndexRoute
+  '/api/public/cron/electricity-requery': typeof ApiPublicCronElectricityRequeryRoute
+  '/api/public/gateway/webhook': typeof ApiPublicGatewayWebhookRoute
+  '/api/public/vtpass/webhook': typeof ApiPublicVtpassWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -636,6 +661,9 @@ export interface FileRoutesById {
   '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
   '/training-certification/professional-certifications/': typeof TrainingCertificationProfessionalCertificationsIndexRoute
+  '/api/public/cron/electricity-requery': typeof ApiPublicCronElectricityRequeryRoute
+  '/api/public/gateway/webhook': typeof ApiPublicGatewayWebhookRoute
+  '/api/public/vtpass/webhook': typeof ApiPublicVtpassWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -706,6 +734,9 @@ export interface FileRouteTypes {
     | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
     | '/training-certification/professional-certifications/'
+    | '/api/public/cron/electricity-requery'
+    | '/api/public/gateway/webhook'
+    | '/api/public/vtpass/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -774,6 +805,9 @@ export interface FileRouteTypes {
     | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
     | '/training-certification/professional-certifications'
+    | '/api/public/cron/electricity-requery'
+    | '/api/public/gateway/webhook'
+    | '/api/public/vtpass/webhook'
   id:
     | '__root__'
     | '/'
@@ -843,6 +877,9 @@ export interface FileRouteTypes {
     | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
     | '/training-certification/professional-certifications/'
+    | '/api/public/cron/electricity-requery'
+    | '/api/public/gateway/webhook'
+    | '/api/public/vtpass/webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -901,6 +938,9 @@ export interface RootRouteChildren {
   TrainingCertificationProfessionalCertificationsWaitlistRoute: typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   TrainingCertificationProgrammesSlugRoute: typeof TrainingCertificationProgrammesSlugRoute
   TrainingCertificationProfessionalCertificationsIndexRoute: typeof TrainingCertificationProfessionalCertificationsIndexRoute
+  ApiPublicCronElectricityRequeryRoute: typeof ApiPublicCronElectricityRequeryRoute
+  ApiPublicGatewayWebhookRoute: typeof ApiPublicGatewayWebhookRoute
+  ApiPublicVtpassWebhookRoute: typeof ApiPublicVtpassWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1374,6 +1414,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrainingCertificationProgrammesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/cron/electricity-requery': {
+      id: '/api/public/cron/electricity-requery'
+      path: '/api/public/cron/electricity-requery'
+      fullPath: '/api/public/cron/electricity-requery'
+      preLoaderRoute: typeof ApiPublicCronElectricityRequeryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/gateway/webhook': {
+      id: '/api/public/gateway/webhook'
+      path: '/api/public/gateway/webhook'
+      fullPath: '/api/public/gateway/webhook'
+      preLoaderRoute: typeof ApiPublicGatewayWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/vtpass/webhook': {
+      id: '/api/public/vtpass/webhook'
+      path: '/api/public/vtpass/webhook'
+      fullPath: '/api/public/vtpass/webhook'
+      preLoaderRoute: typeof ApiPublicVtpassWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1472,6 +1533,9 @@ const rootRouteChildren: RootRouteChildren = {
     TrainingCertificationProgrammesSlugRoute,
   TrainingCertificationProfessionalCertificationsIndexRoute:
     TrainingCertificationProfessionalCertificationsIndexRoute,
+  ApiPublicCronElectricityRequeryRoute: ApiPublicCronElectricityRequeryRoute,
+  ApiPublicGatewayWebhookRoute: ApiPublicGatewayWebhookRoute,
+  ApiPublicVtpassWebhookRoute: ApiPublicVtpassWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
