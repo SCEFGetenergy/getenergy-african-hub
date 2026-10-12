@@ -166,14 +166,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
     };
     document.addEventListener("click", onClick);
 
-    // Header "Log in" becomes "My account" when signed in.
-    const syncLogin = (signedIn: boolean) => {
-      document.querySelectorAll<HTMLAnchorElement>('a[href="/login"], a[href="/account"]').forEach((a) => {
-        if (!a.closest("header.site")) return;
-        a.setAttribute("href", signedIn ? "/account" : "/login");
-        a.textContent = signedIn ? "My account" : "Log in";
-      });
-    };
+    // Header reflects the session: "Log in" for visitors, "My account"/"Sign out" when signed in.
     supabase.auth.getSession().then(({ data }) => syncLogin(!!data.session));
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => syncLogin(!!s));
     return () => {
@@ -184,6 +177,9 @@ export function LegacySite({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!window.location.hash) window.scrollTo(0, 0);
+    // Keep the header in sync after navigation (e.g. session restored mid-visit).
+    supabase.auth.getSession().then(({ data }) => syncLogin(!!data.session));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   // Wire up forms, tabs and widgets of the page that was just mounted.
@@ -214,6 +210,52 @@ export function LegacySite({ children }: { children: ReactNode }) {
   });
 
   const isApp = pageName(pathname) === null;
+
+  // Session-aware header: "Log in" for visitors; "My account" + "Sign out" when signed in.
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    navRef.current({ to: "/login", replace: true });
+  };
+  const syncLogin = (signedIn: boolean) => {
+    document.querySelectorAll<HTMLAnchorElement>('a[href="/login"], a[href="/account"]').forEach((a) => {
+      if (!a.closest("header.site")) return;
+      a.setAttribute("href", signedIn ? "/account" : "/login");
+      a.textContent = signedIn ? "My account" : "Log in";
+    });
+    const addSignoutAnchor = (parent: HTMLElement, before?: Element | null) => {
+      const a = document.createElement("a");
+      a.className = "login signout";
+      a.setAttribute("href", "#");
+      a.textContent = "Sign out";
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        void signOut();
+      });
+      parent.insertBefore(a, before ?? null);
+    };
+    const actions = document.querySelector("header.site .bar-actions");
+    if (actions) {
+      if (signedIn && !actions.querySelector("a.signout")) {
+        addSignoutAnchor(actions, actions.querySelector("a.btn.primary"));
+      } else if (!signedIn) {
+        actions.querySelector("a.signout")?.remove();
+      }
+    }
+    const mobileUl = document.querySelector("header.site nav.main ul");
+    const mobileLi = mobileUl?.querySelector("li.m-only a[href='/login'], li.m-only a[href='/account']")?.closest("li");
+    if (mobileUl && mobileLi) {
+      const existing = mobileUl.querySelector("li.m-only a.signout");
+      if (signedIn && !existing) {
+        const li = document.createElement("li");
+        li.className = "m-only";
+        mobileUl.insertBefore(li, mobileLi.nextSibling);
+        addSignoutAnchor(li);
+      } else if (!signedIn) {
+        existing?.closest("li")?.remove();
+      }
+    }
+  };
+
   return (
     <>
       <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: headPart }} />
