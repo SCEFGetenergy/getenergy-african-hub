@@ -87,6 +87,8 @@ export function LegacySite({ children }: { children: ReactNode }) {
   const api = useRef<{ show: (n: string | null) => void; bind: (s: Element) => void } | null>(null);
   const navRef = useRef(navigate);
   navRef.current = navigate;
+  const signedInRef = useRef(false);
+
 
   useEffect(() => {
     api.current = initLegacy({
@@ -190,6 +192,9 @@ export function LegacySite({ children }: { children: ReactNode }) {
       el.dataset["bound"] = "1";
       api.current.bind(el);
     }
+    // React re-applies the static header markup on re-render; restore the
+    // session-aware login/account state after every commit.
+    syncLogin(signedInRef.current);
   });
 
   // Re-apply the visible page after every commit: React may re-apply the static
@@ -217,6 +222,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
     navRef.current({ to: "/login", replace: true });
   };
   const syncLogin = (signedIn: boolean) => {
+    signedInRef.current = signedIn;
     document.querySelectorAll<HTMLAnchorElement>('a[href="/login"], a[href="/account"]').forEach((a) => {
       if (!a.closest("header.site")) return;
       a.setAttribute("href", signedIn ? "/account" : "/login");
