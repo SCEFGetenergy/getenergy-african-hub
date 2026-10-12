@@ -166,14 +166,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
     };
     document.addEventListener("click", onClick);
 
-    // Header "Log in" becomes "My account" when signed in.
-    const syncLogin = (signedIn: boolean) => {
-      document.querySelectorAll<HTMLAnchorElement>('a[href="/login"], a[href="/account"]').forEach((a) => {
-        if (!a.closest("header.site")) return;
-        a.setAttribute("href", signedIn ? "/account" : "/login");
-        a.textContent = signedIn ? "My account" : "Log in";
-      });
-    };
+    // Header reflects the session: "Log in" for visitors, "My account"/"Sign out" when signed in.
     supabase.auth.getSession().then(({ data }) => syncLogin(!!data.session));
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => syncLogin(!!s));
     return () => {
