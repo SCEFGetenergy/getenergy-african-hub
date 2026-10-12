@@ -132,7 +132,7 @@ export function TokenSales() {
   );
 }
 
-function Stat({ label, value, warn }: { label: string; value: string; warn?: boolean }) {
+function Stat({ label, value, warn }: { label: string; value: string; warn?: boolean | undefined }) {
   return (
     <div className={`rounded-xl border p-3 ${warn ? "border-destructive" : "border-border"}`}>
       <p className="text-xs text-muted-foreground">{label}</p>

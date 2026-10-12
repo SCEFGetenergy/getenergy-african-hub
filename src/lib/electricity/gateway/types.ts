@@ -4,7 +4,7 @@
 export type CreatePaymentInput = { orderReference: string; amountNgn: number; email: string; phone: string; returnUrl: string };
 export type CreatePaymentResult = { gatewayReference: string; checkoutUrl: string };
 export type VerifyResult = { status: "paid" | "pending" | "failed"; amountNgn: number | null; raw: unknown };
-export type WebhookResult = { valid: boolean; eventId?: string; gatewayReference?: string; raw?: unknown };
+export type WebhookResult = { valid: boolean; eventId?: string | undefined; gatewayReference?: string | undefined; raw?: unknown };
 export type RefundResult = { refundReference: string | null; status: "succeeded" | "pending" | "failed"; raw: unknown };
 export type GatewayPayment = { gatewayReference: string; amountNgn: number; status: string; at: string };
 

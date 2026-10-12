@@ -30,7 +30,7 @@ async function call(method: "GET" | "POST", path: string, body?: Json, timeoutMs
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
-    const res = await fetch(`${c.base}${path}`, { method, headers, body: body ? JSON.stringify(body) : undefined, signal: ctrl.signal });
+    const res = await fetch(`${c.base}${path}`, { method, headers, body: body ? JSON.stringify(body) : null, signal: ctrl.signal });
     const text = await res.text();
     try {
       return JSON.parse(text) as Json;
