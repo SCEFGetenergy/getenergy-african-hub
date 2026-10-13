@@ -253,3 +253,4 @@ header.site .bar{gap:16px}header.site{font-family:"Figtree",sans-serif}header.si
 @font-face{font-family:"Figtree";font-style:normal;font-weight:600;font-display:swap;src:url('/fonts/figtree-600.woff') format('woff')}
 @font-face{font-family:"Figtree";font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/figtree-700.woff') format('woff')}
 @media(max-width:767px){.electricity-hero-copy>.electricity-eyebrow,.electricity-panel-heading{display:none}.electricity-hero h1{margin:0}.electricity-hero .electricity-diesel{justify-content:flex-start}.electricity-diesel svg{flex:none}}
+@media(max-width:767px){body.electricity-home [data-page="home"] .electricity-hero-copy>.electricity-eyebrow,body.electricity-home [data-page="home"] .electricity-panel-heading{display:none}body.electricity-home [data-page="home"] .electricity-hero .electricity-diesel{justify-content:flex-start}}
