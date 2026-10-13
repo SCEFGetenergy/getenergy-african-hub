@@ -51,20 +51,19 @@ export function HomeElectricity({ pathname }: { pathname: string }) {
     try { const raw = sessionStorage.getItem(START_KEY); if (!raw) return; value = JSON.parse(raw); } catch { return; }
     if (validateQuickStart(value)) return;
     const disco = DISCOS.find((d) => d.serviceId === value.serviceId);
-    let requestFilled = false;
     const fill = () => {
-      if (requestFilled) return;
       const select = document.querySelector<HTMLSelectElement>("#el-disco");
       const meter = document.querySelector<HTMLInputElement>("#el-meter");
       const amount = document.querySelector<HTMLInputElement>("#el-amt");
       if (!select || !meter || !amount || !disco || select.options.length < 2) return;
       select.value = disco.label; meter.value = value.meter; amount.value = value.amount;
-      requestFilled = true;
     };
     fill();
     const observer = new MutationObserver(fill);
     const form = document.getElementById("elecform");
     if (form) observer.observe(form, { childList: true, subtree: true });
+    const retry = window.setTimeout(fill, 500);
+    const settle = window.setTimeout(() => { fill(); observer.disconnect(); }, 1000);
     const filled = new WeakSet<Element>();
     const fillLive = () => {
       if (!canPurchase(cfg, value.serviceId)) return;
@@ -83,7 +82,7 @@ export function HomeElectricity({ pathname }: { pathname: string }) {
     const liveObserver = new MutationObserver(fillLive);
     const main = document.getElementById("main");
     if (main) liveObserver.observe(main, { childList: true, subtree: true });
-    return () => { observer.disconnect(); liveObserver.disconnect(); };
+    return () => { window.clearTimeout(retry); window.clearTimeout(settle); observer.disconnect(); liveObserver.disconnect(); };
   }, [pathname, cfg]);
 
   const copy = cfg.live ? HOME_ELECTRICITY_COPY.live : HOME_ELECTRICITY_COPY.off;
