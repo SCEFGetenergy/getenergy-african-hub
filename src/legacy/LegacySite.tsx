@@ -229,7 +229,8 @@ export function LegacySite({ children }: { children: ReactNode }) {
     if (t) {
       const fresh = t.cloneNode(true) as HTMLButtonElement;
       t.replaceWith(fresh);
-      fresh.addEventListener("click", () => {
+      fresh.addEventListener("click", (event) => {
+        event.stopPropagation();
         const nav = document.getElementById("nav");
         if (!nav) return;
         const open = !nav.classList.contains("open");

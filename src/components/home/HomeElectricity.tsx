@@ -14,14 +14,14 @@ function track(event: string, live: boolean) {
 export function HomeElectricity({ pathname }: { pathname: string }) {
   const fetchConfig = useServerFn(getElectricityLiveConfig);
   const [cfg, setCfg] = useState<ElectricityConfig>({ live: false, discos: [] });
-  const [hosts, setHosts] = useState<Record<string, HTMLElement>>({});
+  const [hosts, setHosts] = useState<Partial<Record<"header" | "hero" | "banner" | "final", HTMLElement>>>({});
   const [sticky, setSticky] = useState(false);
   const home = pathname === "/";
 
   useEffect(() => { let active = true; fetchConfig().then((c) => { if (active) setCfg(c); }).catch(() => {}); return () => { active = false; }; }, [fetchConfig]);
   useEffect(() => {
-    const next: Record<string, HTMLElement> = {};
-    for (const slot of ["header", "hero", "banner", "final"]) {
+    const next: Partial<Record<"header" | "hero" | "banner" | "final", HTMLElement>> = {};
+    for (const slot of ["header", "hero", "banner", "final"] as const) {
       const el = document.getElementById(`home-electricity-${slot}`);
       if (el) { if (slot === "header") el.querySelector("a")?.remove(); next[slot] = el; }
     }
@@ -67,7 +67,7 @@ export function HomeElectricity({ pathname }: { pathname: string }) {
       if (!canPurchase(cfg, value.serviceId)) return;
       const root = document.getElementById("elec-live-root");
       if (!root) return;
-      for (const [label, data] of [["Electricity company (DISCO)", value.serviceId], ["Meter number", value.meter], ["Amount (₦)", value.amount]]) {
+      for (const [label, data] of [["Electricity company (DISCO)", value.serviceId], ["Meter number", value.meter], ["Amount (₦)", value.amount]] as const) {
         const field = Array.from(root.querySelectorAll("label")).find((el) => el.textContent?.trim().startsWith(label))?.querySelector("input,select");
         if (!field || filled.has(field)) continue;
         const proto = field instanceof HTMLSelectElement ? HTMLSelectElement.prototype : HTMLInputElement.prototype;
