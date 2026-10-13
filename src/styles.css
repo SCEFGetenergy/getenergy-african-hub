@@ -247,8 +247,8 @@ header.site .bar{gap:16px}header.site{font-family:"Figtree",sans-serif}header.si
 @media(max-width:767px){.electricity-hero-grid{padding-top:24px;gap:16px}.electricity-panel{padding:16px}.electricity-panel-heading{margin-bottom:12px}.electricity-panel-heading p{display:none}.electricity-panel>input,.electricity-panel>select{margin-bottom:8px}.electricity-panel>label{margin-bottom:4px}.electricity-amounts{margin-bottom:16px;gap:4px}.electricity-panel-note{margin-top:8px;font-size:11px}.electricity-support{margin-top:12px}.electricity-availability{margin-top:12px}.electricity-panel-heading h2{font-size:20px}.electricity-amounts button{font-size:12px}.electricity-eyebrow{margin-bottom:12px}}
 @media(min-width:768px) and (max-width:1000px){.electricity-hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.electricity-hero h1{font-size:60px}.electricity-ticket{right:0;width:160px}}
 .electricity-home [data-page="home"] .tag.dev{background:var(--electricity-soft);color:var(--electricity-blue)}
-@font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:800;font-display:swap;src:url('/fonts/bricolage-800.woff2') format('woff2')}
-@font-face{font-family:"Figtree";font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/figtree-400.woff2') format('woff2')}
-@font-face{font-family:"Figtree";font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/figtree-500.woff2') format('woff2')}
-@font-face{font-family:"Figtree";font-style:normal;font-weight:600;font-display:swap;src:url('/fonts/figtree-600.woff2') format('woff2')}
-@font-face{font-family:"Figtree";font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/figtree-700.woff2') format('woff2')}
+@font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:800;font-display:swap;src:url('/fonts/bricolage-800.woff') format('woff')}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/figtree-400.woff') format('woff')}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/figtree-500.woff') format('woff')}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:600;font-display:swap;src:url('/fonts/figtree-600.woff') format('woff')}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/figtree-700.woff') format('woff')}
