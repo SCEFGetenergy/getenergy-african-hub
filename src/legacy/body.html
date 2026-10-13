@@ -5,10 +5,10 @@
     <nav class="main" id="nav" aria-label="Main">
       <ul>
         <li class="solutions-nav"><details><summary>Solutions</summary><ul class="solutions-menu"><li><a href="/get-electricity">Get Electricity</a></li><li><a href="/get-fuel">Diesel Supply</a></li><li><a href="/cng">CNG</a></li><li><a href="/cng-conversion">CNG Conversion</a></li><li><a href="/solutions/clean-mobility">Clean Mobility</a></li><li><a href="/ev">EV &amp; Mobility</a></li><li><a href="/power-as-a-service">Power as a Service</a></li><li><a href="/power-as-a-service#renewables-bess">Renewables &amp; BESS</a></li><li><a href="/get-electricity#smart-metering">Smart Metering</a></li><li><a href="/power-as-a-service#mini-grids">Mini-Grid Solutions</a></li><li><a href="/energy-saving-equipment">Energy-Saving Equipment</a></li><li><a href="/energy-ecommerce">Energy E-Commerce Africa</a></li><li><a href="/our-services">All solutions</a></li></ul></details></li>
-        <li><a href="/industries">Industries</a></li>
+        <li class="m-only"><a href="/industries">Industries</a></li>
         <li><a href="/projects">Projects</a></li>
-        <li><a href="/training-certification">Academy</a></li>
-        <li><a href="/invest">Investors</a></li>
+        <li class="m-only"><a href="/training-certification">Academy</a></li>
+        <li class="m-only"><a href="/invest">Investors</a></li>
         <li><a href="/partners">Partners</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/contact">Contact</a></li>
@@ -19,8 +19,8 @@
     </nav>
     <div class="bar-actions">
       <a class="login" href="/login">Log in</a>
-      <a class="btn primary" href="/contact">Request a Solution</a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+      <span id="home-electricity-header"><a class="electricity-action" href="/get-electricity#elecform"><span class="electricity-desktop-label">Request electricity token</span><span class="electricity-mobile-label">Get token</span></a></span>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2"/></svg></button>
     </div>
   </div>
 </header>
@@ -29,20 +29,12 @@
 
 <!-- ============ HOME ============ -->
 <div data-page="home" data-title="GetEnergy | Energy for Today. Building What Powers Tomorrow.">
-  <section class="hx">
-    
-    <div class="wrap hx-body">
-      <p class="eyebrow">GET Energy Trading Services · Integrated Energy Services &amp; Green Energy Solutions</p><h1>Energy for today.<br><span class="hx-grad">Cleaner opportunities for tomorrow</span><span class="hx-dot">.</span></h1>
-      <p class="lede">GET Energy Trading Services provides integrated conventional and clean-energy solutions for businesses, institutions, communities, fleets and infrastructure projects.</p>
-      <div class="hero-actions"><a class="btn green" href="/contact">Request an Energy Solution →</a><a class="btn outline" href="#business-areas">Explore Our Energy Solutions</a><a class="btn ghost" href="/partners">Become a Partner</a></div>
-      <nav class="hx-micro" aria-label="Business areas"><a href="/get-fuel">Energy Supply</a><a href="/get-electricity">Electricity</a><a href="/green-energy">Clean Energy</a><a href="/energy-ecommerce">EEA54</a></nav>
-    </div>
-    <picture class="hx-img"><source media="(max-width:760px)" srcset="/images/hero-lagos-ev-960.webp"><img src="/images/hero-lagos-ev.webp" width="1920" height="1024" fetchpriority="high" alt="Lagos waterfront at sunset with a cable-stayed bridge and an electric car at a charging station"></picture>
-  </section>
+  <div id="home-electricity-hero"></div>
 
-  <section class="opnow" aria-labelledby="opnow-h"><div class="wrap"><h2 id="opnow-h"><span class="live-dot" aria-hidden="true"></span>What's operating now</h2><div class="opnow-grid"><a class="opn" href="/get-fuel"><b><span data-count="100000">100,000</span>+</b><span>litres of diesel supplied monthly</span><em class="op-tag">Operating</em></a><a class="opn" href="/get-electricity"><b><span data-count="12">12</span></b><span>DISCOs supported for token requests</span><em class="op-tag">Operating via partners</em></a><a class="opn" href="/projects"><b>Client references</b><span>Selected historical engagements</span><em class="op-tag">View projects →</em></a></div></div></section>
+  <section class="opnow" aria-labelledby="opnow-h"><div class="wrap"><h2 id="opnow-h"><span class="live-dot" aria-hidden="true"></span>What's operating now</h2><div class="opnow-grid"><a class="opn" href="/get-fuel"><b><span data-count="100000">100,000</span>+</b><span>litres of diesel supplied monthly</span><em class="op-tag">Operating</em></a><div class="opn"><b><span data-count="12">12</span></b><span>DISCOs supported for token requests</span><em class="op-tag">Operating via partners</em></div><a class="opn" href="/projects"><b>Client references</b><span>Selected historical engagements</span><em class="op-tag">View projects →</em></a></div></div></section>
+  <div id="home-electricity-banner"></div>
   <section class="pillars" id="business-areas" aria-label="Our energy solutions">
-    <div class="wrap mk-areas mk-six"><a class="mk-card" href="/get-fuel"><img src="/images/card-diesel.jpg" alt="GetEnergy fuel tanker on a highway" loading="lazy" width="1024" height="656"><div><span class="tag">Operating</span><h3>Diesel &amp; AGO Supply</h3><p>Bulk and scheduled fuel supply for businesses, fleets and projects.</p><span class="mk-go">Discover service →</span></div></a><a class="mk-card" href="/cng"><img src="/images/card-cng.jpg" alt="Vehicle at a CNG refuelling point" loading="lazy" width="1024" height="656"><div><span class="tag">In development</span><h3>CNG Solutions</h3><p>Vehicle conversion, supply and fleet transition — in development.</p><span class="mk-go">Discover service →</span></div></a><a class="mk-card" href="/ev"><img src="/images/ge-ev-charger.jpg" alt="Electric vehicle charging" loading="lazy" width="1024" height="656"><div><span class="tag">In development</span><h3>EV Charging &amp; Electric Mobility</h3><p>Charging solutions, fleet electrification and hybrid mobility.</p><span class="mk-go">Discover service →</span></div></a><a class="mk-card" href="/green-energy"><img src="/images/card-clean.jpg" alt="Clean energy installation" loading="lazy" width="1024" height="656"><div><span class="tag">In development</span><h3>Solar, Renewables &amp; Power</h3><p>Solar, battery storage and distributed power for sites and estates.</p><span class="mk-go">Discover service →</span></div></a><a class="mk-card" href="/get-electricity"><img src="/images/card-electricity.jpg" alt="Homes with lights on at dusk" loading="lazy" width="1024" height="656"><div><span class="tag">Operating via partners</span><h3>Electricity Services</h3><p>Token vending, smart metering and utility services.</p><span class="mk-go">Discover service →</span></div></a><a class="mk-card" href="/technology"><img src="/images/ph-engineer.jpg" alt="Engineer reviewing an energy site" loading="lazy" width="1024" height="656"><div><span class="tag">Available on request</span><h3>Energy Advisory &amp; Project Solutions</h3><p>Assessments, project development and energy technology support.</p><span class="mk-go">Discover service →</span></div></a>
+    <div class="wrap mk-areas mk-six"><a class="mk-card" href="/get-fuel"><img src="/images/card-diesel.jpg" alt="GetEnergy fuel tanker on a highway" loading="lazy" width="1024" height="656"><div><span class="tag">Operating</span><h3>Diesel &amp; AGO Supply</h3><p>Bulk and scheduled fuel supply for businesses, fleets and projects.</p><span class="mk-go">Discover service →</span></div></a><a class="mk-card" href="/cng"><img src="/images/card-cng.jpg" alt="Vehicle at a CNG refuelling point" loading="lazy" width="1024" height="656"><div><span class="tag">In development</span><h3>CNG Solutions</h3><p>Vehicle conversion, supply and fleet transition — in development.</p><span class="mk-go">Discover service →</span></div></a><a class="mk-card" href="/ev"><img src="/images/ge-ev-charger.jpg" alt="Electric vehicle charging" loading="lazy" width="1024" height="656"><div><span class="tag">In development</span><h3>EV Charging &amp; Electric Mobility</h3><p>Charging solutions, fleet electrification and hybrid mobility.</p><span class="mk-go">Discover service →</span></div></a><a class="mk-card" href="/green-energy"><img src="/images/card-clean.jpg" alt="Clean energy installation" loading="lazy" width="1024" height="656"><div><span class="tag">In development</span><h3>Solar, Renewables &amp; Power</h3><p>Solar, battery storage and distributed power for sites and estates.</p><span class="mk-go">Discover service →</span></div></a><article class="mk-card"><img src="/images/card-electricity.jpg" alt="Homes with lights on at dusk" loading="lazy" width="1024" height="656"><div><span class="tag">Operating via partners</span><h3>Electricity Services</h3><p>Token vending, smart metering and utility services.</p></div></article><a class="mk-card" href="/technology"><img src="/images/ph-engineer.jpg" alt="Engineer reviewing an energy site" loading="lazy" width="1024" height="656"><div><span class="tag">Available on request</span><h3>Energy Advisory &amp; Project Solutions</h3><p>Assessments, project development and energy technology support.</p><span class="mk-go">Discover service →</span></div></a>
     </div>
   </section>
 
@@ -54,7 +46,7 @@
       <div class="mk-head"><div><p class="eyebrow">Our solutions</p><h2>Complete energy solutions for a cleaner, stronger Africa.</h2><p>Built on real operating experience in fuel supply and electricity access, GetEnergy is engineering a practical pathway from reliable energy today toward clean fuels, mobility, smart metering, renewables and skills development for tomorrow.</p><a class="btn green" href="/our-services">View All Solutions →</a></div>
         <div class="mk-arrows"><button type="button" data-scroll="-1" aria-label="Previous solutions">←</button><button type="button" data-scroll="1" aria-label="Next solutions">→</button></div></div>
       <div class="mk-rail" id="sol-rail">
-        <article><img src="/images/card-electricity.jpg" alt="" loading="lazy"><div><h3>Get Electricity</h3><ul><li>Token vending</li><li>Smart meters and billing</li><li>Corporate and multi-site</li></ul><a href="/get-electricity">Learn More →</a></div></article>
+        <article><img src="/images/card-electricity.jpg" alt="" loading="lazy"><div><h3>Get Electricity</h3><ul><li>Token vending</li><li>Smart meters and billing</li><li>Corporate and multi-site</li></ul></div></article>
         <article><img src="/images/card-diesel.jpg" alt="" loading="lazy"><div><h3>Diesel Supply</h3><ul><li>Bulk and scheduled delivery</li><li>Fleet and project supply</li><li>Commercial accounts</li></ul><a href="/get-fuel">Learn More →</a></div></article>
         <article><img src="/images/card-clean.jpg" alt="" loading="lazy"><div><h3>CNG Services <span class="tag dev">In development</span></h3><ul><li>Refuelling stations</li><li>Gas supply and logistics</li><li>Kits and equipment</li></ul><a href="/cng">Learn More →</a></div></article>
         <article><img src="/images/card-cng.jpg" alt="" loading="lazy"><div><h3>CNG Conversion <span class="tag dev">Proposed</span></h3><ul><li>Cars, buses, trucks, tricycles</li><li>Proposed centres: Lagos, Ibadan, Ilorin</li><li>Fleet conversion</li></ul><a href="/cng-conversion">Learn More →</a></div></article>
@@ -106,19 +98,13 @@
       <div class="mk-platforms">
         <article><h3>GetEnergy</h3><p>Corporate platform for all our energy services.</p><a class="btn navy" href="/our-services">All Services →</a></article>
         <article><h3>Energy E-Commerce Africa (EEA54)</h3><p>Marketplace, B2B trade and opportunities across Africa's energy industry.</p><a class="btn navy" href="/energy-ecommerce">Explore EEA54 →</a></article>
-        <article><h3>Get Electricity</h3><p>Token vending and smart metering for homes, businesses and institutions.</p><span class="tag dev">Online payment launching soon</span><a class="btn navy" href="/get-electricity">Get Electricity →</a></article>
+        <article><h3>Get Electricity</h3><p>Token vending and smart metering for homes, businesses and institutions.</p><span class="tag dev">Online payment launching soon</span></article>
       </div>
     </div>
   </section>
 
-  <section class="band cta home-final">
-    <div class="wrap">
-      <h2>What does your business need energy to do?</h2>
-      <p>Tell us what you need, where you need it and when you need it.</p>
-      <div class="hero-actions" style="justify-content:center"><a class="btn green" href="/contact">Request Energy Quote →</a><a class="btn outline-w" href="/contact">Contact Us</a></div>
-      <div class="home-final-links"><a href="/get-fuel">Diesel Supply</a><a href="/get-electricity">Electricity</a><a href="/ev">EV Charging</a><a href="/cng">CNG</a><a href="/green-energy">Solar &amp; Power</a></div>
-    </div>
-  </section>
+  <div id="home-electricity-final"></div>
+
 </div>
 
 <!-- ============ PAST PROJECT EXPERIENCE ============ -->

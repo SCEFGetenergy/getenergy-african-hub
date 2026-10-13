@@ -12,7 +12,12 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://getenergy.ng/" }],
+    links: [
+      { rel: "canonical", href: "https://getenergy.ng/" },
+      { rel: "preload", href: "/fonts/bricolage-800.woff", as: "font", type: "font/woff", crossOrigin: "anonymous" },
+      { rel: "preload", href: "/fonts/figtree-400.woff", as: "font", type: "font/woff", crossOrigin: "anonymous" },
+      { rel: "preload", href: "/fonts/figtree-700.woff", as: "font", type: "font/woff", crossOrigin: "anonymous" },
+    ],
   }),
   component: () => null,
 });

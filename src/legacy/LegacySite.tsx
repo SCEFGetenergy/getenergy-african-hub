@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { ElectricityLive } from "@/components/electricity/ElectricityLive";
 import evChargingVideo from "@/assets/ev-charging.mp4?url";
 import evInteriorVideo from "@/assets/ev-interior.mp4?url";
+import { HomeElectricity } from "@/components/home/HomeElectricity";
 
 const bodyWithLocalVideos = bodyHtml
   .replaceAll(
@@ -228,7 +229,8 @@ export function LegacySite({ children }: { children: ReactNode }) {
     if (t) {
       const fresh = t.cloneNode(true) as HTMLButtonElement;
       t.replaceWith(fresh);
-      fresh.addEventListener("click", () => {
+      fresh.addEventListener("click", (event) => {
+        event.stopPropagation();
         const nav = document.getElementById("nav");
         if (!nav) return;
         const open = !nav.classList.contains("open");
@@ -315,6 +317,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
       </main>
       <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: footPart }} />
       <ElectricityLive pathname={pathname} />
+      <HomeElectricity pathname={pathname} />
     </>
   );
 }

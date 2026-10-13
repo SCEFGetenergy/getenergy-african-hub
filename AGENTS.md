@@ -11,26 +11,22 @@
 
 ## Project rules
 
-- All site content (services, sectors, journey, FAQs, jobs, form field definitions) lives in `src/lib/site.ts`; pages read from it so copy changes happen in one file.
-- Lead capture goes through the `submit_service_request` database function (security definer), not a direct table insert: anonymous visitors must receive a reference without being able to read the requests table.
-
-- Site markup, styles and behaviour come verbatim from the client's supplied HTML, stored in `src/legacy/` (body.html, legacy.css, legacy.ts) and rendered by `LegacySite` in __root; route files only supply URL + head metadata. Why: the client requires the site to match their file exactly.
-- Each topic has one canonical route; retired URLs (/company/*, /smart-metering, /solar-power, /training) are one-hop 301 redirects in their route files straight to the final page/anchor. Why: no duplicate indexing or broken inbound links.
-- Legacy forms submit through `submit_service_request` and Supabase auth inside `LegacySite`'s submit handler.
-- The `/projects` page uses historical references in the legacy shell with a separate route for metadata; this preserves the supplied site styling while making those references shareable.
-- Keep the Energy Desk interest form in the shared footer rather than the homepage; this keeps registration reachable from every page after the homepage was shortened.
-- SOPHIA chat threads are owned by a random browser visitor token and accessed only through server functions/route using the admin client (tables have RLS with no policies). Why: anonymous visitors need persistent threads without exposing other visitors' chats.
-- SOPHIA's knowledge/system brief lives in `src/lib/sophia/brief.md`, loaded by `/api/sophia`; enquiries she captures are inserted into `service_requests` with request_type `sophia`. Why: one editable source for her behaviour and one lead table for the team.
-- Energy-saving equipment uses the legacy-shell enquiry form and request-reference flow, not a shopping checkout. Why: availability and commercial terms must be confirmed before any order or payment is represented.
-- GET Energy Academy catalogue lives in `src/lib/academy.ts` (generated from the brief) and its React pages under `/training-certification/*` render through `LegacySite`; waiting-list/corporate forms use `submit_service_request` with request types `academy-waitlist`/`academy-corporate`. Why: one catalogue source for pages, filters and SOPHIA.
-- Team admin lives at `/_authenticated/admin`, gated by `has_permission()` (full admins have all; staff get per-area rows in `admin_permissions`, set only by admins via `set_admin_permission`) and enforced in RLS; certification fees/recognised employers are stored in `certification_settings`/`certification_employers` (public read, admin write via RLS) and read by public pages. Why: staff edit live data without code changes, and roles stay out of profiles.
-- Academy student portal lives at `/academy/*` (public register/login/reset) and `/_authenticated/academy/*`, sharing `src/components/academy/portal.tsx`; applications reuse `submit_service_request`. Why: one lead/request table and reference format across the site.
-- Audit entries are written only by the `write_audit()` database trigger, never by app code; team roles are granted through hashed, expiring `admin_invitations` accepted via RPC. Why: tamper-resistant history and no client-side role grants.
-- Academy payments are stored as `pending_configuration` requests until the GFA Wzip Wallet integration exists; clients cannot set any other status. Why: never represent an unpaid fee as paid.
-- The first admin is created once via /admin-setup with a hashed one-time code (claim_first_admin RPC, locks after use or 10 bad attempts, closed once any admin exists); later admins only via invitations. Why: no manual database edits and no open self-promotion.
-- GetEnergy Token administration is authorized server-side through the existing admin role until a distinct super-admin assignment flow is introduced; never trust browser role state. Why: provider and go-live controls must remain restricted.
-- Electricity token enquiries and sandbox transactions use dedicated database tables and validated database functions, separate from general service leads. Why: custom references, simulation-only records and operational audits need an explicit trust boundary.
-- LegacySite renders only the current URL's page block from body.html (split by data-page) and legacy.ts bind(scope) wires each mounted page; unknown paths hit the `$` splat route (noindex). Why: every URL's HTML must contain only its own content.
-- Service availability and the site-wide notice live in `service_statuses`/`site_notices` (public read, admin write, audited) and render via `SiteNotices` in __root; the admin control centre at /admin groups all queues in tabs. Why: staff change availability and announcements without code, and a status never switches on payments.
-- Live token purchase lives in `src/lib/electricity/` (pure rules, VTpass client, gateway adapters, order engine) behind the ELECTRICITY_LIVE secret; payment is confirmed only server-side, each order has one stored VTpass request_id, and vends are claimed atomically via `electricity_claim_vend`. Why: money safety — never double-vend or trust the browser.
-- Payment gateways implement `PaymentGateway` in `src/lib/electricity/gateway/` and are selected by PAYMENT_GATEWAY; the mock refuses to run against live VTpass. Why: the real provider is not chosen yet.
+- Corporate copy is centralized in src/lib/site.ts; Academy catalogue in src/lib/academy.ts. Why: one editable source per domain.
+- Preserve the client's legacy HTML/CSS/behavior through LegacySite; leaf routes supply URL and metadata. Render only the active data-page block and bind each mounted scope. Why: exact design and one page per URL.
+- Each topic has one canonical route; retired URLs redirect once to the final destination, unknown paths are noindex. Why: no duplicate indexing.
+- Forms use submit_service_request (or dedicated electricity RPCs), never anonymous direct inserts; show request references. Why: anonymous leads without exposing lead tables.
+- Historical projects remain in the legacy shell; Energy Desk signup stays in the shared footer. Why: preserve shareable references and universal signup access.
+- Energy-saving equipment uses enquiries, not checkout. Why: availability and commercial terms need confirmation.
+- SOPHIA threads belong to random visitor tokens; access only through server handlers with admin clients and policy-free RLS tables. Keep her brief in src/lib/sophia/brief.md and leads in service_requests. Why: private anonymous chats and centralized behavior.
+- Academy pages render in LegacySite; portal shares components/academy/portal.tsx and applications reuse lead RPCs. Waiting-list/corporate forms use academy-waitlist/academy-corporate. Why: shared references and catalogue.
+- Team admin is permission-gated by has_permission() and RLS; full admins have all, staff have explicit admin_permissions set only by admins. Why: database-enforced section access.
+- Certification settings/employers are public-read, admin-write database records. Why: staff edit live data without code changes.
+- Audit entries come only from write_audit() triggers; invitations are hashed, expiring RPC claims. Why: tamper-resistant history and no client role grants.
+- Academy payments remain pending_configuration until the wallet integration exists. Why: no unpaid fee represented as paid.
+- First admin uses the locked, hashed one-time claim_first_admin flow; later admins use invitations. Why: no open promotion.
+- Token administration uses existing server-verified admin roles until a distinct super-admin flow exists. Why: never trust browser privileges.
+- Token enquiries and sandbox operations have dedicated tables and validated RPCs. Why: separate operational trust boundary from general leads.
+- Service availability/notices are public-read, admin-write, audited records rendered by SiteNotices; admin groups queues in tabs. Availability never enables payments. Why: safe staff-managed announcements.
+- Live electricity modules stay in src/lib/electricity behind ELECTRICITY_LIVE; payments are server-confirmed, each order stores one VTpass request_id, and electricity_claim_vend atomically claims vending. Why: no double-vend or browser-trusted payment.
+- Gateways implement PaymentGateway and are selected by PAYMENT_GATEWAY; mock refuses live VTpass. Why: safe provider substitution.
+- Homepage electricity controls use stable legacy-shell portal slots; sessionStorage plus an external prefill bridge carries quick-start data into unchanged forms. Existing live configuration determines eligibility. Why: preserve references and other pages.
