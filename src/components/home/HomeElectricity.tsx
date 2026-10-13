@@ -23,7 +23,7 @@ export function HomeElectricity({ pathname }: { pathname: string }) {
     const next: Record<string, HTMLElement> = {};
     for (const slot of ["header", "hero", "banner", "final"]) {
       const el = document.getElementById(`home-electricity-${slot}`);
-      if (el) { el.querySelector("[data-home-fallback]")?.remove(); next[slot] = el; }
+      if (el) { if (slot === "header") el.querySelector("a")?.remove(); next[slot] = el; }
     }
     setHosts(next);
   }, [pathname]);
@@ -62,8 +62,26 @@ export function HomeElectricity({ pathname }: { pathname: string }) {
     const observer = new MutationObserver(fill);
     const form = document.getElementById("elecform");
     if (form) observer.observe(form, { childList: true, subtree: true });
-    return () => observer.disconnect();
-  }, [pathname]);
+    const filled = new WeakSet<Element>();
+    const fillLive = () => {
+      if (!canPurchase(cfg, value.serviceId)) return;
+      const root = document.getElementById("elec-live-root");
+      if (!root) return;
+      for (const [label, data] of [["Electricity company (DISCO)", value.serviceId], ["Meter number", value.meter], ["Amount (₦)", value.amount]]) {
+        const field = Array.from(root.querySelectorAll("label")).find((el) => el.textContent?.trim().startsWith(label))?.querySelector("input,select");
+        if (!field || filled.has(field)) continue;
+        const proto = field instanceof HTMLSelectElement ? HTMLSelectElement.prototype : HTMLInputElement.prototype;
+        Object.getOwnPropertyDescriptor(proto, "value")?.set?.call(field, data);
+        field.dispatchEvent(new Event(field instanceof HTMLSelectElement ? "change" : "input", { bubbles: true }));
+        filled.add(field);
+      }
+    };
+    fillLive();
+    const liveObserver = new MutationObserver(fillLive);
+    const main = document.getElementById("main");
+    if (main) liveObserver.observe(main, { childList: true, subtree: true });
+    return () => { observer.disconnect(); liveObserver.disconnect(); };
+  }, [pathname, cfg]);
 
   const copy = cfg.live ? HOME_ELECTRICITY_COPY.live : HOME_ELECTRICITY_COPY.off;
   const action = (placement: string, large = false) => <Button asChild className={`electricity-action${large ? " electricity-action-large" : ""}`}><a href={electricityDestination(cfg)} onClick={() => track(placement, cfg.live)}>{copy.label}<ArrowRight aria-hidden="true" /></a></Button>;
