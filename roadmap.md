@@ -1,5 +1,11 @@
 # Roadmap
 
+## Electricity-first homepage
+- [ ] Update shared header and homepage hero, proof banner, final action and mobile sticky bar
+- [ ] Preserve quick-start values when continuing to the existing electricity form
+- [ ] Add action tracking and test state-aware rules
+- [ ] Verify all six requested widths and record screenshots; report live-state limitations
+
 - [x] Update the diesel, CNG and EV pages from the brochures without presenting proposed capabilities as completed
 - [x] Align the matching detailed service pages and page descriptions
 - [x] Check the pages and links on desktop and mobile, keeping every form working
