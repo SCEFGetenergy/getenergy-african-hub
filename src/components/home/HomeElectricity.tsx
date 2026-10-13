@@ -51,12 +51,15 @@ export function HomeElectricity({ pathname }: { pathname: string }) {
     try { const raw = sessionStorage.getItem(START_KEY); if (!raw) return; value = JSON.parse(raw); } catch { return; }
     if (validateQuickStart(value)) return;
     const disco = DISCOS.find((d) => d.serviceId === value.serviceId);
+    let requestFilled = false;
     const fill = () => {
+      if (requestFilled) return;
       const select = document.querySelector<HTMLSelectElement>("#el-disco");
       const meter = document.querySelector<HTMLInputElement>("#el-meter");
       const amount = document.querySelector<HTMLInputElement>("#el-amt");
-      if (!select || !meter || !amount || !disco) return;
+      if (!select || !meter || !amount || !disco || select.options.length < 2) return;
       select.value = disco.label; meter.value = value.meter; amount.value = value.amount;
+      requestFilled = true;
     };
     fill();
     const observer = new MutationObserver(fill);
