@@ -29,7 +29,7 @@ export function HomeElectricity({ pathname }: { pathname: string }) {
   }, [pathname]);
 
   useEffect(() => {
-    if (!home) return;
+    if (!home || !hosts.hero) return;
     document.body.classList.add("electricity-home");
     let panelVisible = true;
     const update = () => setSticky(stickyVisible(panelVisible, !!document.activeElement?.matches("input,select,textarea,[contenteditable=true]"), document.body.classList.contains("nav-open")));
