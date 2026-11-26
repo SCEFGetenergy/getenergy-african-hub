@@ -1,4 +1,5 @@
 import { useEffect, useRef, type ReactNode } from "react";
+import { HONEYPOT_NAME, readReference } from "@/lib/requests";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import bodyHtml from "./body.html?raw";
 import { initLegacy } from "./legacy";
@@ -95,6 +96,9 @@ export function LegacySite({ children }: { children: ReactNode }) {
   useEffect(() => {
     api.current = initLegacy({
       async submit(form: HTMLFormElement, kind: string, lines: string[]) {
+        // Honeypot: a filled hidden field means a bot. Show success, save nothing.
+        const trap = form.querySelector(`input[name="${HONEYPOT_NAME}"]`) as HTMLInputElement | null;
+        if (trap?.value) return {};
         try {
           if (kind === "login") {
             const { error } = await supabase.auth.signInWithPassword({
@@ -138,7 +142,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
               p_consent: (form.querySelector("#el-consent") as HTMLInputElement | null)?.checked === true,
             });
             if (error) return { error: error.message || "Please try again in a moment." };
-            return { reference: data as string };
+            return readReference(data);
           }
           const email = val(form, 'input[type="email"]');
           const nameEl = form.querySelector('input[id$="-name"]') as HTMLInputElement | null;
@@ -153,7 +157,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
             p_details: { lines },
           });
           if (error) return { error: "Please try again in a moment, or use the email option below." };
-          return { reference: data as string };
+          return readReference(data);
         } catch {
           return { error: "Please check your connection and try again." };
         }

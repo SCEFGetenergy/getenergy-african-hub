@@ -60,11 +60,20 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
     messages: initialMessages,
     transport: new DefaultChatTransport({
       api: "/api/sophia",
-      body: () => ({ threadId, visitorToken: token, page: document.referrer ? new URL(document.referrer).pathname : "/sophia" }),
+      // The server loads the thread history itself; only the newest message is sent.
+      prepareSendMessagesRequest: ({ messages: all }) => ({
+        body: {
+          threadId,
+          visitorToken: token,
+          message: all[all.length - 1],
+          page: document.referrer ? new URL(document.referrer).pathname : "/sophia",
+        },
+      }),
     }),
     onError: (e) => {
       const m = e.message || "";
-      if (m.includes("429")) toast.error("SOPHIA is busy right now. Please try again in a moment.");
+      if (m.includes("429") || /too many|limit/i.test(m)) toast.error("SOPHIA is busy right now. Please try again in a moment.");
+      else if (/2,000 characters|turn limit/i.test(m)) toast.error(m);
       else if (m.includes("402")) toast.error("SOPHIA is temporarily unavailable. Please contact us on WhatsApp.");
       else toast.error("SOPHIA couldn't reply. Check your connection or contact us on WhatsApp +234 818 074 2835.");
     },

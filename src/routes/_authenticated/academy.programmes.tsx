@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { RATE_LIMITED, RATE_LIMIT_MESSAGE } from "@/lib/requests";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -47,6 +48,7 @@ function Apply() {
     });
     setBusy(false);
     if (error || !data) return setErr("Your application could not be submitted. Please try again.");
+    if (data === RATE_LIMITED) return setErr(RATE_LIMIT_MESSAGE);
     setDone({ ref: data, item: chosen });
     setTimeout(() => window.scrollTo({ top: 0 }), 50);
     qc.invalidateQueries({ queryKey: ["academy-mine"] });

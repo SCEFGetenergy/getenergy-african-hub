@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { PROGRAMMES, getProgramme, whatsappFor } from "@/lib/academy";
 import { CERTIFICATIONS, getCertification } from "@/lib/certifications";
+import { HONEYPOT_NAME, readReference } from "@/lib/requests";
 
 export type Field = {
   name: string;
@@ -34,6 +35,7 @@ export function AcademyForm({
   const [err, setErr] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [ref, setRef] = useState<string | null>(null);
+  const [trap, setTrap] = useState("");
   const set = (k: string, val: string) => setV((p) => ({ ...p, [k]: val }));
 
   const cert = getCertification(v['certification'] ?? "");
@@ -47,6 +49,7 @@ export function AcademyForm({
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 255) return setErr("Please enter a valid email.");
     if (Object.values(v).some((x) => x.length > 2000)) return setErr("Please shorten your answers.");
     setErr(null);
+    if (trap) return setRef("Received"); // honeypot: pretend success, save nothing
     setBusy(true);
     const lines = fields
       .filter((f) => f.type !== "consent" && v[f.name])
@@ -65,7 +68,9 @@ export function AcademyForm({
     });
     setBusy(false);
     if (error) return setErr("We couldn't save your details. Please try again, or message us on WhatsApp.");
-    setRef(data as string);
+    const res = readReference(data);
+    if ("error" in res) return setErr(res.error);
+    setRef(res.reference);
   }
 
   if (ref) {
@@ -110,6 +115,12 @@ export function AcademyForm({
 
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-4 rounded-2xl border border-border bg-card p-5 card-elevated sm:grid-cols-2 md:p-7">
+      <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+        <label>
+          Leave this field empty
+          <input type="text" name={HONEYPOT_NAME} tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} />
+        </label>
+      </div>
       {fields.map((f) => {
         const id = `ac-${f.name}`;
         const label = `${f.label}${f.required ? " *" : ""}`;

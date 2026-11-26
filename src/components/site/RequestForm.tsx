@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { CheckCircle2, Copy, Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { HONEYPOT_NAME, readReference } from "@/lib/requests";
 
 const COLUMN_FIELDS = new Set(["contact_name", "contact_email", "contact_phone", "company_name", "location"]);
 
@@ -39,6 +40,11 @@ export function RequestForm({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [reference, setReference] = useState<string | null>(null);
+  const [trap, setTrap] = useState("");
+  const [signedIn, setSignedIn] = useState(false);
+  useEffect(() => {
+    void supabase.auth.getSession().then(({ data }) => setSignedIn(!!data.session));
+  }, []);
 
   const set = (name: string, value: string) => {
     setValues((prev) => ({ ...prev, [name]: value }));
@@ -81,6 +87,12 @@ export function RequestForm({
       return;
     }
     setSubmitting(true);
+    if (trap) {
+      // Honeypot filled: behave as if it worked, but save nothing.
+      setReference("Received");
+      setSubmitting(false);
+      return;
+    }
     try {
       const details: Record<string, string> = {};
       for (const field of fields) {
@@ -108,8 +120,13 @@ export function RequestForm({
 
 
       if (error) throw error;
-      setReference(data as string);
-      toast.success(`Request submitted — reference ${data as string}`);
+      const res = readReference(data);
+      if ("error" in res) {
+        toast.error(res.error);
+        return;
+      }
+      setReference(res.reference);
+      toast.success(`Request submitted — reference ${res.reference}`);
 
     } catch (error) {
       console.error(error);
@@ -150,14 +167,20 @@ export function RequestForm({
               </Button>
             </div>
           </div>
-          <p className="text-sm text-muted-foreground">
-            Keep this reference for follow-up. Sign in to track the status of all your requests in your account
-            dashboard.
-          </p>
+          {signedIn ? (
+            <p className="text-sm text-muted-foreground">
+              Keep this reference for follow-up. Sign in to track the status of all your requests in your account
+              dashboard.
+            </p>
+          ) : (
+            <p className="text-sm text-muted-foreground">Keep this reference; our team will contact you.</p>
+          )}
           <div className="flex flex-wrap gap-3">
-            <Button asChild>
-              <Link to="/account">Go to my dashboard</Link>
-            </Button>
+            {signedIn ? (
+              <Button asChild>
+                <Link to="/account">Go to my dashboard</Link>
+              </Button>
+            ) : null}
             <Button
               type="button"
               variant="outline"
@@ -187,6 +210,12 @@ export function RequestForm({
           </p>
         ) : null}
         <form onSubmit={onSubmit} className="grid gap-5 sm:grid-cols-2" noValidate>
+          <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+            <label>
+              Leave this field empty
+              <input type="text" name={HONEYPOT_NAME} tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} />
+            </label>
+          </div>
           {fields.map((field) => {
             const isWide = field.type === "textarea";
             const id = `${requestType}-${field.name}`;

@@ -152,7 +152,7 @@ export function initLegacy(api){
     if(k.pay)h+='<button class="btn primary paybtn" type="button"'+(CONFIG.paymentsLive?"":" disabled")+'>Pay now</button>';
     if(!k.nosend)h+='<a class="btn navy mail" href="#">Send to our team</a><button class="btn ghost copy" type="button">Copy</button>';
     h+='<button class="btn ghost edit" type="button">'+(k.nosend?"Back":"Edit")+"</button></div>";
-    box.innerHTML=h;box.querySelector("h3").textContent=error?"We couldn't send this request":k.title;box.querySelector(".note").textContent=error?error:k.note;
+    box.innerHTML=h;box.querySelector("h3").textContent=error?(kind==="login"?"Sign-in failed":"We couldn't send this request"):k.title;box.querySelector(".note").textContent=error?error:k.note;
     if(reference){var rp=document.createElement("p");rp.className="note";rp.innerHTML='Your request reference: <strong></strong>';rp.querySelector("strong").textContent=reference;box.insertBefore(rp,box.querySelector(".note"));body="Reference: "+reference+"\n"+body;}
     if(!k.nosend){box.querySelector("pre").textContent=body;box.querySelector(".mail").href="mailto:"+CONFIG.email[k.to]+"?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body);
       var c=box.querySelector(".copy");c.addEventListener("click",function(){if(navigator.clipboard)navigator.clipboard.writeText(body).then(function(){c.textContent="Copied"},function(){c.textContent="Select the text to copy"});else c.textContent="Select the text to copy"})}
