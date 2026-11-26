@@ -7,6 +7,87 @@ export var CONFIG={paymentsLive:false,accountsLive:false,boardEndpoint:null,
   email:{sales:"ccgetenergy@gmail.com",support:"ccgetenergy@gmail.com",careers:"ccgetenergy@gmail.com",training:"ccgetenergy@gmail.com"}};
 function startPayment(request){ /* INTEGRATION POINT */ }
 
+/* Vehicle billboards share one catalogue and bind only inside the mounted page. */
+var BB_BRANDS = [
+  ["byd","BYD","China","EV, Plug-in hybrid","Atto 3, Dolphin, Seal, Song Plus DM-i","suv",0],
+  ["tesla","Tesla","USA","EV","Model 3, Model Y","sedan",0],
+  ["toyota","Toyota","Japan","Hybrid, Plug-in hybrid, EV","Prius, Corolla Cross Hybrid, RAV4 Hybrid, bZ4X","suv",0],
+  ["chery","Chery","China","Hybrid, Plug-in hybrid, EV","Tiggo 7 Pro, Tiggo 8 Pro (hybrid versions)","suv",0],
+  ["hyundai","Hyundai","South Korea","EV, Hybrid","IONIQ 5, IONIQ 6, Kona Electric, Tucson Hybrid","suv",0],
+  ["kia","Kia","South Korea","EV, Hybrid, Plug-in hybrid","EV6, EV9, Niro, Sportage Hybrid","suv",0],
+  ["changan","Changan","China","EV, Plug-in hybrid","UNI-K iDD, Deepal S07","suv",0],
+  ["volkswagen","Volkswagen","Germany","EV","ID.3, ID.4","suv",0],
+  ["mercedes-benz","Mercedes-Benz","Germany","EV, Plug-in hybrid","EQA, EQB, EQE, EQS","sedan",0],
+  ["lexus","Lexus","Japan","Hybrid, EV","RX Hybrid, NX Hybrid, RZ","suv",0],
+  ["nissan","Nissan","Japan","EV","Leaf, Ariya","sedan",0],
+  ["honda","Honda","Japan","Hybrid","CR-V Hybrid, Accord Hybrid","sedan",0],
+  ["toyota-other","Toyota","Japan","Petrol, Diesel, CNG-ready","Corolla, Camry, Hilux, Hiace","sedan",1],
+  ["honda-other","Honda","Japan","Petrol, CNG-ready","Accord, Civic, CR-V","sedan",1],
+  ["lexus-other","Lexus","Japan","Petrol","RX, ES, GX","suv",1],
+  ["mercedes-other","Mercedes-Benz","Germany","Petrol, Diesel","C-Class, E-Class, GLE, Sprinter","sedan",1],
+  ["ford","Ford","USA","Petrol, Diesel, CNG-ready","Ranger, Explorer, Transit","pickup",1],
+  ["peugeot","Peugeot","France","Petrol, Diesel, CNG-ready","301, 3008, Partner","sedan",1],
+  ["hyundai-other","Hyundai","South Korea","Petrol, CNG-ready","Elantra, Tucson, Santa Fe","suv",1],
+  ["kia-other","Kia","South Korea","Petrol, CNG-ready","Rio, Cerato, Sportage","sedan",1],
+  ["mitsubishi","Mitsubishi","Japan","Petrol, Diesel","L200, Pajero Sport","pickup",1],
+  ["isuzu","Isuzu","Japan","Diesel","D-Max, NPR trucks","pickup",1],
+  ["innoson-ivm","Innoson (IVM)","Nigeria","Petrol, Diesel","IVM G5, IVM Fox","suv",1],
+  ["nissan-other","Nissan","Japan","Petrol, Diesel","Almera, Navara, Patrol","pickup",1]
+];
+function bindBillboard(root) {
+  if(root.dataset.bound)return;
+  root.dataset.bound="1";
+  var page=root.closest("[data-page]"),isEV=page&&page.dataset.page==="ev";
+  var names=["EV & Hybrid Vehicles","Other Vehicles"],id="bb-"+(isEV?"ev":"home");
+  root.innerHTML='<div class="bb-stage"><div class="bb-screen"><div class="bb-top"><i aria-hidden="true"></i><span>NOW SHOWING</span><b></b></div><div class="bb-content" aria-live="polite" aria-atomic="true"></div><span class="bb-sweep" aria-hidden="true"></span></div><div class="bb-posts" aria-hidden="true"><i></i><i></i></div></div><div class="bb-list"><div class="bb-tabs" role="tablist" aria-label="Vehicle types">'+names.map(function(n,i){return '<button type="button" role="tab" id="'+id+'-tab-'+i+'" aria-controls="'+id+'-panel-'+i+'" data-bb-tab="'+i+'">'+n+'</button>'}).join("")+'</div>'+names.map(function(n,i){return '<div role="tabpanel" id="'+id+'-panel-'+i+'" aria-labelledby="'+id+'-tab-'+i+'"><div class="bb-grid">'+BB_BRANDS.filter(function(b){return b[6]===i}).map(function(b){return '<button class="btn bb-brand" type="button" data-bb-brand="'+b[0]+'" aria-pressed="false">'+b[1]+'</button>'}).join("")+'</div>'+(i?'<p class="bb-other">Petrol and diesel vehicles we can help source — plus CNG conversion and fleet support. <a href="/cng-conversion">CNG conversion →</a></p>':'')+'</div>'}).join("")+'</div><p class="bb-disclaimer">Brand names are trademarks of their owners and describe vehicles GetEnergy can help source through partners. GetEnergy is not an authorised dealer for these brands unless stated. Availability, price and delivery are confirmed in a written quotation.</p>';
+  var selected,stopped=false,visible=false,hover=false,focused=false,timer=null,sweepTimer=null;
+  var motion=matchMedia("(prefers-reduced-motion: reduce)");
+  var content=root.querySelector(".bb-content"),screen=root.querySelector(".bb-screen");
+  var tabs=[].slice.call(root.querySelectorAll("[data-bb-tab]"));
+  var shapes={sedan:"M58 90 86 62 Q92 56 108 56 H174 Q184 56 194 66 L222 90 258 98 Q268 101 268 115 V128 H40 V110 Q40 99 58 90Z",suv:"M52 90 72 48 H186 L220 90 258 96 Q268 99 268 113 V128 H40 V106Z",pickup:"M44 91 65 55 H144 L174 92 H266 V128 H40 V103Z",van:"M44 57 Q44 47 55 47 H199 L253 84 268 102 V128 H40 V68Z"};
+  function prefill(b){
+    if(!isEV)return;
+    var field=page.querySelector("#ev-vehicle");
+    if(field&&(!field.value||field.value===field.dataset.bbPrefill)){
+      field.value=b[1]+" — model of interest: ";field.dataset.bbPrefill=field.value;
+      field.dispatchEvent(new Event("input",{bubbles:true}));
+    }
+  }
+  function select(b,fill,animate){
+    selected=b;
+    tabs.forEach(function(t,i){var on=i===b[6];t.setAttribute("aria-selected",String(on));t.tabIndex=on?0:-1;root.querySelector("#"+id+"-panel-"+i).hidden=!on});
+    root.querySelector(".bb-top b").textContent=names[b[6]];
+    root.querySelectorAll("[data-bb-brand]").forEach(function(t){t.setAttribute("aria-pressed",String(t.dataset.bbBrand===b[0]))});
+    content.innerHTML='<h3 class="bb-name">'+b[1]+'</h3><p class="bb-country">'+b[2]+'</p><div class="bb-chips">'+b[3].split(", ").map(function(p){return '<span class="'+(/EV|Hybrid|hybrid/.test(p)?'clean':'')+'">'+p+'</span>'}).join("")+'</div><p class="bb-models"><b>Popular models:</b> '+b[4]+'</p><svg class="bb-car" viewBox="0 0 320 155" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M4 83h28M10 101h18M2 121h26"/></g><path fill="currentColor" d="'+shapes[b[5]]+'"/><path class="bb-window" d="M83 86 96 64 H137 V86Z M145 64H172L193 86H145Z"/><g class="bb-wheel"><circle cx="85" cy="125" r="20"/><circle cx="226" cy="125" r="20"/></g><g fill="currentColor"><circle cx="85" cy="125" r="9"/><circle cx="226" cy="125" r="9"/></g></svg><div class="bb-foot"><p>Sourced through GetEnergy vehicle partners · Price &amp; delivery on written quotation</p><a class="btn green" href="/ev?brand='+b[0]+'#ev-form">Enquire about '+b[1]+' →</a></div>';
+    try{sessionStorage.setItem("ge-bb-brand",b[0])}catch(e){}
+    if(!isEV&&page){var explore=page.querySelector('.ev-media .hero-actions a[href^="/ev"]');if(explore)explore.href="/ev?brand="+b[0]}
+    if(fill)prefill(b);
+    clearTimeout(sweepTimer);screen.classList.remove("bb-changing");
+    if(animate&&!motion.matches){void screen.offsetWidth;screen.classList.add("bb-changing");sweepTimer=setTimeout(function(){screen.classList.remove("bb-changing")},450)}
+  }
+  function schedule(){
+    clearInterval(timer);timer=null;
+    if(stopped||!visible||hover||focused||motion.matches||document.hidden)return;
+    timer=setInterval(function(){
+      if(!root.isConnected){clearInterval(timer);observer.disconnect();return}
+      var group=BB_BRANDS.filter(function(b){return b[6]===selected[6]});
+      select(group[(group.indexOf(selected)+1)%group.length],false,true);
+    },6000);
+  }
+  function stop(){stopped=true;schedule()}
+  root.addEventListener("click",function(e){stop();var b=e.target.closest("[data-bb-brand]"),tab=e.target.closest("[data-bb-tab]");if(b)select(BB_BRANDS.find(function(x){return x[0]===b.dataset.bbBrand}),true,true);if(tab)select(BB_BRANDS.find(function(x){return x[6]===+tab.dataset.bbTab}),true,true)});
+  root.addEventListener("keydown",function(e){stop();var t=e.target.closest("[data-bb-tab]");if(!t)return;var i=tabs.indexOf(t),next;if(e.key==="ArrowRight")next=(i+1)%2;if(e.key==="ArrowLeft")next=(i+1)%2;if(e.key==="Home")next=0;if(e.key==="End")next=1;if(next!==undefined){e.preventDefault();select(BB_BRANDS.find(function(b){return b[6]===next}),true,true);tabs[next].focus()}});
+  root.addEventListener("mouseenter",function(){hover=true;schedule()});root.addEventListener("mouseleave",function(){hover=false;schedule()});
+  root.addEventListener("focusin",function(){focused=true;schedule()});root.addEventListener("focusout",function(e){focused=root.contains(e.relatedTarget);schedule()});
+  var observer=new IntersectionObserver(function(es){if(!root.isConnected){observer.disconnect();clearInterval(timer);return}visible=es[0].isIntersecting;schedule()},{threshold:0});observer.observe(root);
+  motion.addEventListener("change",schedule);
+  document.addEventListener("visibilitychange",schedule);
+  var requested=isEV?new URLSearchParams(location.search).get("brand"):null,saved;
+  try{saved=sessionStorage.getItem("ge-bb-brand")}catch(e){}
+  select(BB_BRANDS.find(function(b){return b[0]===requested})||BB_BRANDS.find(function(b){return b[0]===saved})||BB_BRANDS[0],isEV,false);
+  if(isEV&&location.hash==="#ev-form"){var form=page.querySelector("#ev-form");if(form)requestAnimationFrame(function(){form.scrollIntoView({behavior:"instant"})})}
+}
+
 export function initLegacy(api){
 
   var BILLS={
@@ -191,6 +272,7 @@ export function initLegacy(api){
     function sel(tab){tabs.forEach(function(b){var on=b===tab;b.setAttribute("aria-selected",on);b.tabIndex=on?0:-1;var p=document.getElementById(b.getAttribute("aria-controls"));p.hidden=!on;p.classList.toggle("on",on)})}
     tabs.forEach(function(b,i){b.addEventListener("click",function(){sel(b)});b.addEventListener("keydown",function(e){var j=null;if(e.key==="ArrowRight")j=(i+1)%tabs.length;if(e.key==="ArrowLeft")j=(i-1+tabs.length)%tabs.length;if(j!==null){e.preventDefault();sel(tabs[j]);tabs[j].focus()}})});
   });
+  [].forEach.call(Q("[data-billboard]"),bindBillboard);
   [].forEach.call(Q("[data-centre]"),function(b){b.addEventListener("click",function(){document.getElementById("cb-centre").value=b.dataset.centre;document.getElementById("book-conversion").scrollIntoView({behavior:"smooth"});document.getElementById("cb-name").focus({preventScroll:true})})});
   [].forEach.call(Q("[data-apply]"),function(b){b.addEventListener("click",function(){document.getElementById("ap-pos").value=b.dataset.apply;document.getElementById("apply").scrollIntoView({behavior:"smooth"});document.getElementById("ap-name").focus({preventScroll:true})})});
   (function(){[].forEach.call(Q('input[type=tel]'),function(i){i.setAttribute("inputmode","tel")});[].forEach.call(Q(".f"),function(f,k){var e=f.querySelector(".err"),i=f.querySelector("input,select,textarea");if(e&&i){if(!e.id)e.id="err-"+k;i.setAttribute("aria-describedby",e.id);e.setAttribute("aria-live","polite")}})})();
