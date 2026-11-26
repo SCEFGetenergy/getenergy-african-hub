@@ -54,7 +54,7 @@ export const Route = createFileRoute("/api/public/lead-alert")({
             method: "POST",
             headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
             body: JSON.stringify({
-              from: process.env["LEAD_ALERT_FROM"] || "GetEnergy Leads <onboarding@resend.dev>",
+              from: process.env["LEAD_ALERT_FROM"] || "GetEnergy Website <onboarding@resend.dev>",
               to: [email.to],
               subject: email.subject,
               text: email.text,
