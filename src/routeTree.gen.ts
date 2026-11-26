@@ -14,6 +14,7 @@ import { Route as SplatRouteImport } from './routes/$'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminSetupRouteImport } from './routes/admin-setup'
+import { Route as AnswersRouteImport } from './routes/answers'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as CngRouteImport } from './routes/cng'
 import { Route as CngConversionRouteImport } from './routes/cng-conversion'
@@ -106,6 +107,11 @@ const AboutRoute = AboutRouteImport.update({
 const AdminSetupRoute = AdminSetupRouteImport.update({
   id: '/admin-setup',
   path: '/admin-setup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnswersRoute = AnswersRouteImport.update({
+  id: '/answers',
+  path: '/answers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CareersRoute = CareersRouteImport.update({
@@ -479,6 +485,7 @@ export interface FileRoutesByFullPath {
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
   '/admin-setup': typeof AdminSetupRoute
+  '/answers': typeof AnswersRoute
   '/careers': typeof CareersRoute
   '/cng': typeof CngRoute
   '/cng-conversion': typeof CngConversionRoute
@@ -554,6 +561,7 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
   '/admin-setup': typeof AdminSetupRoute
+  '/answers': typeof AnswersRoute
   '/careers': typeof CareersRoute
   '/cng': typeof CngRoute
   '/cng-conversion': typeof CngConversionRoute
@@ -631,6 +639,7 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
   '/admin-setup': typeof AdminSetupRoute
+  '/answers': typeof AnswersRoute
   '/careers': typeof CareersRoute
   '/cng': typeof CngRoute
   '/cng-conversion': typeof CngConversionRoute
@@ -708,6 +717,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/about'
     | '/admin-setup'
+    | '/answers'
     | '/careers'
     | '/cng'
     | '/cng-conversion'
@@ -783,6 +793,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/about'
     | '/admin-setup'
+    | '/answers'
     | '/careers'
     | '/cng'
     | '/cng-conversion'
@@ -859,6 +870,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/about'
     | '/admin-setup'
+    | '/answers'
     | '/careers'
     | '/cng'
     | '/cng-conversion'
@@ -936,6 +948,7 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   AboutRoute: typeof AboutRoute
   AdminSetupRoute: typeof AdminSetupRoute
+  AnswersRoute: typeof AnswersRoute
   CareersRoute: typeof CareersRoute
   CngRoute: typeof CngRoute
   CngConversionRoute: typeof CngConversionRoute
@@ -1030,6 +1043,13 @@ declare module '@tanstack/react-router' {
       path: '/admin-setup'
       fullPath: '/admin-setup'
       preLoaderRoute: typeof AdminSetupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/answers': {
+      id: '/answers'
+      path: '/answers'
+      fullPath: '/answers'
+      preLoaderRoute: typeof AnswersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/careers': {
@@ -1559,6 +1579,7 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   AboutRoute: AboutRoute,
   AdminSetupRoute: AdminSetupRoute,
+  AnswersRoute: AnswersRoute,
   CareersRoute: CareersRoute,
   CngRoute: CngRoute,
   CngConversionRoute: CngConversionRoute,

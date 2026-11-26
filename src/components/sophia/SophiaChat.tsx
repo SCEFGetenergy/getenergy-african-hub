@@ -168,6 +168,7 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
                 <div className="flex flex-wrap gap-2 border-t pt-4">
                   {QUICK.slice(0, 3).map((q) => <Button key={q} type="button" variant="secondary" onClick={() => send(q)} className="h-auto min-h-11 whitespace-normal text-left text-xs">{q}</Button>)}
                 </div>
+                <Link to="/answers" className="inline-flex min-h-11 items-center text-sm font-semibold text-primary">Browse common questions →</Link>
               </div>
             )}
             {messages.map((m) => (
@@ -176,6 +177,8 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
                   {m.parts.map((p, i) => {
                     if (p.type === "text")
                       return m.role === "assistant" ? <MessageResponse key={i}>{p.text}</MessageResponse> : <p key={i} className="whitespace-pre-wrap">{p.text}</p>;
+                    if (p.type === "tool-search_knowledge")
+                      return p.state === "input-streaming" || p.state === "input-available" ? <p key={i} className="text-xs text-muted-foreground">Searching answers…</p> : null;
                     if (p.type === "tool-submit_enquiry") {
                       const out = p.state === "output-available" ? (p.output as { ok?: boolean; reference?: string }) : undefined;
                       return (

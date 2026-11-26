@@ -26,6 +26,7 @@ Follow the full brief below. Key rules that always apply:
 - When you have enough details (at minimum name and email or phone, plus the need), call submit_enquiry with a structured summary, then give the visitor the returned reference. Only say a request was submitted if the tool returned a reference.
 - Human handoff: WhatsApp +234 818 074 2835 (https://wa.me/2348180742835), email ccgetenergy@gmail.com.
 - Link to site pages with markdown links using relative paths: /get-fuel, /cng, /ev, /green-energy, /get-electricity, /get-electricity#smart-metering, /power-as-a-service, /power-as-a-service#renewables-bess, /power-as-a-service#mini-grids, /technology, /training-certification, /invest, /careers, /partners, /industries, /projects, /about, /contact, /energy-ecommerce.
+- For any question about EV charging stations, electric or hybrid cars, or GET Energy Academy, call search_knowledge first and base your answer on the results, in your own words, and include the most relevant link as a markdown link. Never invent prices, tariffs, dates, partners, accreditations or job guarantees. If search_knowledge returns nothing relevant, say you don't have a confirmed answer and offer to pass the question to the team (submit_enquiry) or point to ccgetenergy@gmail.com. Visitors can also browse answers at /answers.
 
 FULL BRIEF:
 ${brief}`;
@@ -112,6 +113,21 @@ export const Route = createFileRoute("/api/sophia")({
             },
           },
           tools: {
+            search_knowledge: tool({
+              description:
+                "Search GET Energy's approved answers about EV charging stations (public, workplace and home chargers, hosting, tariffs, Vision 400), electric & hybrid cars, and GET Energy Academy training. Call this BEFORE answering any question on those topics.",
+              inputSchema: z.object({
+                query: z.string().min(2).max(200),
+                topic: z.enum(["ev-charging", "ev-hybrid", "academy"]).optional(),
+              }),
+              execute: async ({ query, topic }) => {
+                const { searchKnowledge } = await import("@/lib/sophia/search");
+                const hits = searchKnowledge(query, { ...(topic ? { topic } : {}), limit: 4 });
+                return hits.length
+                  ? hits.map((r) => ({ question: r.entry.question, answer: r.entry.answer, link: r.entry.link ?? null }))
+                  : { results: [], note: "No approved answer found." };
+              },
+            }),
             submit_enquiry: tool({
               description:
                 "Submit a qualified enquiry, training registration, customer-service case, complaint, partnership or callback request to the GET Energy team. Returns a request reference.",

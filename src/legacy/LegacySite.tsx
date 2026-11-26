@@ -23,7 +23,7 @@ const [headPart = "", rest = ""] = bodyWithLocalVideos.split('<main id="main">')
 const [pagesPart = "", footPart = ""] = rest.split("</main>");
 
 // Paths rendered by React routes rather than the static page markup.
-const APP_PAGES = ["/account", "/admin", "/academy", "/team-invite", "/admin-setup", "/training-certification", "/sophia", "/request-energy-quote", "/policies", "/solutions"];
+const APP_PAGES = ["/account", "/admin", "/academy", "/team-invite", "/admin-setup", "/training-certification", "/sophia", "/request-energy-quote", "/policies", "/solutions", "/answers"];
 
 function pageName(pathname: string): string | null {
   if (APP_PAGES.some((p) => pathname.startsWith(p))) return null;
