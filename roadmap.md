@@ -84,3 +84,8 @@
 - [x] Replace /solutions/clean-mobility with the responsive React presentation, preserving proposal and independent-platform statuses
 - [x] Add relevant EV and partner links and keep the canonical sitemap entry
 - [x] Verify all slides, narration controls, keyboard/swipe navigation, links and desktop/mobile layouts
+
+## Academy training-centre image refactor
+- [x] Refresh the Academy introduction with the two supplied training-centre images
+- [x] Present B16 as proposed, retaining courses, certification disclaimers and registration flows
+- [x] Verify images, catalogue and registration links at desktop and 390px; publish nothing

@@ -9,7 +9,7 @@ import { Catalogue } from "@/components/academy/AcademyParts";
 import { CertificationCard } from "@/components/academy/CertificationCard";
 import { CERTIFICATIONS } from "@/lib/certifications";
 import { ACADEMY_AREAS, CERT_DISCLAIMER, PROGRAMMES, formatNaira, getProgramme, statusOf, whatsappFor } from "@/lib/academy";
-import heroImg from "@/assets/academy/hero.jpg";
+import { AcademyIntro, AcademyCentre } from "@/components/academy/AcademyIntro";
 import solarImg from "@/assets/academy/solar.jpg";
 import bessImg from "@/assets/academy/bess.jpg";
 import minigridImg from "@/assets/academy/minigrid.jpg";
@@ -20,7 +20,6 @@ import hseImg from "@/assets/academy/hse.jpg";
 import greentechImg from "@/assets/academy/greentech.jpg";
 import teamImg from "@/assets/academy/team.jpg";
 
-const LOGO = "/images/getenergylogo.svg";
 const TITLE = "GET Energy Academy — Green Skills & Technical Certification | GetEnergy";
 const DESC =
   "74 training, career-pathway and professional certification products: solar, BESS, mini-grid, EV, CNG, HSE, smart energy, green economy and project finance. Join a waiting list.";
@@ -41,15 +40,6 @@ export const Route = createFileRoute("/training-certification/")({
   }),
   component: AcademyPage,
 });
-
-const TRUST = [
-  "Industry-focused training",
-  "Practical hands-on learning",
-  "Professional certification pathways",
-  "Career and workplace development",
-  "Corporate workforce training",
-  "Technical and GreenTech programmes",
-];
 
 const ICONS = [
   { icon: Sun, t: "Solar & Renewable Energy" },
@@ -124,67 +114,7 @@ function AcademyPage() {
   const pathways = PROGRAMMES.length - courses;
   return (
     <>
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-background">
-        <div aria-hidden className="pointer-events-none absolute -bottom-24 left-0 right-0 h-48 rounded-[50%] bg-gradient-to-r from-brand-deep via-brand to-brand-green opacity-90" />
-        <div className="relative mx-auto max-w-6xl px-4 pb-24 pt-8 sm:px-6 md:pb-28">
-          <div className="flex flex-col gap-4 border-b border-border pb-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex min-w-0 items-center gap-3">
-              <img src={LOGO} alt="GETENERGY.ng" className="h-9 w-auto shrink-0" width={140} height={36} />
-              <span aria-hidden className="h-9 w-px bg-border" />
-              <span className="min-w-0">
-                <span className="block text-sm font-extrabold uppercase tracking-[0.16em] text-brand-deep">GET Energy Academy</span>
-                <span className="block text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Green Skills • Technical Certification • Career Development</span>
-              </span>
-            </div>
-            <p className="border-l-4 border-brand-green pl-3 text-[11px] font-semibold uppercase leading-relaxed tracking-[0.2em] text-brand-deep">
-              Skills for industry<br />Careers for the future<br />Energy for Africa
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center">
-            <div className="min-w-0">
-              <h1 className="!text-[2.4rem] font-black !leading-[1.04] tracking-tight sm:!text-5xl lg:!text-[3.6rem]">
-                <span className="block text-brand-green">Green Skills.</span>
-                <span className="block text-brand-deep">Technical Certification.</span>
-                <span className="block text-brand-deep">Career Development.</span>
-              </h1>
-              <p className="mt-5 text-lg font-bold leading-snug text-brand-deep sm:text-xl">
-                Build practical skills. Earn relevant certification. Advance your career.
-              </p>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-                GET Energy Academy is a commercial learning platform for practical energy skills, competency-based development and career growth across Nigeria’s evolving energy economy.
-              </p>
-              <div aria-hidden className="mt-5 h-1 w-16 rounded-full bg-brand-green" />
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Button asChild size="lg" className={greenBtn}>
-                  <a href="#programmes">Explore training programmes <ArrowRight className="size-4" /></a>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="min-h-12 border-brand-deep text-brand-deep">
-                  <Link to="/training-certification/waitlist">Join waiting list</Link>
-                </Button>
-                <Button asChild size="lg" variant="ghost" className="min-h-12 text-brand-deep">
-                  <Link to="/training-certification/corporate">Train your team</Link>
-                </Button>
-              </div>
-            </div>
-
-            <div className="relative">
-              <img src={heroImg} alt="GET Energy-style African energy technicians in hard hats at a solar and wind site" width={1280} height={1024} className="aspect-[5/4] w-full rounded-3xl object-cover shadow-xl" />
-              <div className="relative -mt-16 mx-3 rounded-2xl border border-brand-green/40 bg-brand-deep/95 p-5 text-brand-foreground shadow-xl lg:absolute lg:-bottom-10 lg:-left-10 lg:mx-0 lg:mt-0 lg:max-w-xs">
-                <p className="text-lg font-bold leading-snug text-brand-foreground">Skills for a Cleaner, Smarter and More Productive Africa</p>
-                <ul className="mt-3 space-y-1.5 text-sm">
-                  {TRUST.map((t) => (
-                    <li key={t} className="flex items-start gap-2">
-                      <Check className="mt-0.5 size-4 shrink-0 rounded-full bg-brand-green p-0.5 text-brand-green-foreground" />{t}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <AcademyIntro />
 
       {/* ACADEMY PROMISE */}
       <Section>
@@ -199,6 +129,8 @@ function AcademyPage() {
           ))}
         </div>
       </Section>
+
+      <AcademyCentre />
 
       {/* DELIVERY AREAS */}
       <Section tone="surface">

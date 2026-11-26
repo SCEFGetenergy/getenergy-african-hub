@@ -8,6 +8,20 @@ export type Programme = {
 };
 export const ACADEMY_CATEGORIES = ["Technical Energy","Solar & BESS","Mini-Grid & Power","Smart Energy","Energy Efficiency","HSE & Safety","Green Economy","EV & Mobility","CNG","Project Development","Finance","GreenTech Entrepreneurship","Professional Skills","Corporate Training","Career Pathways"] as const;
 
+export const ACADEMY_CENTRE = {
+  name: "B16 Training Centre",
+  status: "Proposed facility",
+  imageStatus: "Concept visual — proposed facility",
+  introduction: "A proposed space for training, certification, education and media production — connecting practical green skills with digital capability.",
+  disclaimer: "These supplied images illustrate the proposed training-centre concept, not an operating facility. Venue, equipment, trainers, cohort dates and certification arrangements are subject to confirmation. Logos shown do not confirm a partnership or accreditation.",
+  focus: ["Clean Energy", "EV Mobility", "CNG", "Solar", "Energy Efficiency"],
+  zones: [
+    { title: "Green Skills Training", description: "A proposed practical learning environment for solar and mini-grids, EV charging and mobility, CNG safety and energy efficiency." },
+    { title: "Digital & Energy Enterprise", description: "A planned space connecting energy e-commerce, digital services, workplace productivity and GreenTech entrepreneurship." },
+    { title: "Multimedia & Production", description: "An envisioned in-room production zone for video, podcast recording, live streaming, editing and educational content creation." },
+  ],
+} as const;
+
 export type AcademyArea = {
   title: string;
   shortTitle: string;
