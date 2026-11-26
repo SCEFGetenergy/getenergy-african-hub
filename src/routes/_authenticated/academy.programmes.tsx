@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { RATE_LIMITED, RATE_LIMIT_MESSAGE } from "@/lib/requests";
+import { HONEYPOT_NAME, RATE_LIMIT_MESSAGE } from "@/lib/requests";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -31,25 +31,35 @@ function Apply() {
   const [motivation, setMotivation] = useState("");
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
-  const [done, setDone] = useState<{ ref: string; item: Item } | null>(null);
+  const [done, setDone] = useState<{ ref: string; item: Item; duplicate: boolean } | null>(null);
   const [payRef, setPayRef] = useState("");
+  const [trap, setTrap] = useState("");
   const list = useMemo(() => ITEMS.filter((i) => i.title.toLowerCase().includes(q.toLowerCase())).slice(0, 30), [q]);
   const pct = completion(prof.data?.profile);
 
   const submit = async () => {
     if (!chosen || !prof.data) return;
+    if (trap) {
+      setDone({ ref: "Received", item: chosen, duplicate: false });
+      return;
+    }
     setBusy(true); setErr("");
     const p = prof.data.profile;
-    const { data, error } = await supabase.rpc("submit_service_request", {
-      p_request_type: chosen.type, p_service_name: chosen.title.slice(0, 160),
-      p_contact_name: `${p.first_name} ${p.last_name}`.trim() || prof.data.email, p_contact_email: prof.data.email,
-      p_contact_phone: p.phone ?? "", p_company_name: p.organisation ?? "", p_location: [p.city, p.state, p.country].filter(Boolean).join(", ") || "",
+    const { data, error } = await supabase.rpc("register_academy_course", {
+      p_course_key: chosen.id,
+      p_contact_name: `${p.first_name} ${p.last_name}`.trim() || prof.data.email,
+      p_contact_phone: p.phone ?? "",
+      ...(p.organisation ? { p_company_name: p.organisation } : {}),
+      ...([p.city, p.state, p.country].filter(Boolean).length ? { p_location: [p.city, p.state, p.country].filter(Boolean).join(", ") } : {}),
       p_details: { source: "academy-portal", student_id: p.student_id, item_id: chosen.id, kind: chosen.kind, proposed_fee_ngn: chosen.fee, delivery_mode: mode, motivation: motivation.slice(0, 1500) },
+      p_consent: true,
     });
     setBusy(false);
-    if (error || !data) return setErr("Your application could not be submitted. Please try again.");
-    if (data === RATE_LIMITED) return setErr(RATE_LIMIT_MESSAGE);
-    setDone({ ref: data, item: chosen });
+    if (error) return setErr(error.message || "Your application could not be submitted. Please try again.");
+    const result = (data ?? {}) as { status?: string; reference?: string };
+    if (result.status === "rate_limited") return setErr(RATE_LIMIT_MESSAGE);
+    if (!result.reference) return setErr("Your application could not be submitted. Please try again.");
+    setDone({ ref: result.reference, item: chosen, duplicate: result.status === "duplicate" });
     setTimeout(() => window.scrollTo({ top: 0 }), 50);
     qc.invalidateQueries({ queryKey: ["academy-mine"] });
   };
@@ -66,9 +76,9 @@ function Apply() {
 
   if (done)
     return (
-      <PortalShell title="Application submitted">
+      <PortalShell title={done.duplicate ? "Already registered" : "Application submitted"}>
         <Panel>
-          <p className="text-sm">Your application for <strong>{done.item.title}</strong> was received.</p>
+          <p className="text-sm">{done.duplicate ? "You already have an active registration for " : "Your application for "}<strong>{done.item.title}</strong>{done.duplicate ? ". Its existing reference is shown below." : " was received."}</p>
           <p className="mt-2 text-lg">Reference: <span className="font-mono font-bold">{done.ref}</span></p>
           <p className="mt-3 text-sm text-muted-foreground">Track its status under My applications. The Academy team confirms the cohort, final fee and next steps.</p>
           <div className="mt-5 rounded-lg border border-border bg-surface p-4">
@@ -97,6 +107,9 @@ function Apply() {
           </ul>
         </Panel>
         <Panel title="2. Details">
+          <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+            <label>Leave this field empty<input name={HONEYPOT_NAME} tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} /></label>
+          </div>
           {!chosen ? <p className="text-sm text-muted-foreground">Select an item on the left.</p> : (
             <div className="space-y-4 text-sm">
               <p><strong>{chosen.title}</strong><br /><span className="text-muted-foreground">{chosen.kind} · {chosen.fee ? `Proposed fee ${formatNaira(chosen.fee)} (subject to approval)` : "Fee to be confirmed"}</span></p>

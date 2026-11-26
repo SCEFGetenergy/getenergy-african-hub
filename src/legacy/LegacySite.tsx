@@ -1,5 +1,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { HONEYPOT_NAME, readReference } from "@/lib/requests";
+import { authErrorMessage, returnToFromLocation, withReturnTo } from "@/lib/auth";
+import { useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import bodyHtml from "./body.html?raw";
 import { initLegacy } from "./legacy";
@@ -85,6 +87,7 @@ const DISCO_NAMES: Record<string, string> = {
 export function LegacySite({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const page = pageMarkup(pageName(pathname));
   const pageRef = useRef<HTMLDivElement>(null);
   const api = useRef<{ show: (n: string | null) => void; bind: (s: Element) => void } | null>(null);
@@ -101,21 +104,23 @@ export function LegacySite({ children }: { children: ReactNode }) {
         if (trap?.value) return { trapped: true };
         try {
           if (kind === "login") {
+            const returnTo = returnToFromLocation("/account");
             const { error } = await supabase.auth.signInWithPassword({
               email: val(form, "#li-user"),
               password: val(form, "#li-pw"),
             });
-            if (error) return { error: error.message };
-            navRef.current({ to: "/account" });
+            if (error) return { error: authErrorMessage(error, "login") };
+            navRef.current({ to: returnTo as "/" });
             return { done: true };
           }
           if (kind === "register") {
             const type = val(form, "#rg-type").toLowerCase();
+            const returnTo = returnToFromLocation("/account");
             const { error } = await supabase.auth.signUp({
               email: val(form, "#rg-email"),
               password: val(form, "#rg-pw"),
               options: {
-                emailRedirectTo: `${window.location.origin}/account`,
+                emailRedirectTo: `${window.location.origin}${withReturnTo("/login", returnTo)}`,
                 data: {
                   full_name: `${val(form, "#rg-first")} ${val(form, "#rg-last")}`.trim(),
                   account_type: type === "business" ? "business" : "individual",
@@ -123,7 +128,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
                 },
               },
             });
-            return error ? { error: error.message } : {};
+            return error ? { error: authErrorMessage(error, "register") } : {};
           }
           if (kind === "electricity") {
             const disco = val(form, "#el-disco");
@@ -167,8 +172,11 @@ export function LegacySite({ children }: { children: ReactNode }) {
     // Internal links go through the app router.
     const onClick = (e: MouseEvent) => {
       const a = (e.target as HTMLElement).closest("a");
-      const href = a?.getAttribute("href");
+      let href = a?.getAttribute("href");
       if (!a || !href || !href.startsWith("/") || a.target || e.metaKey || e.ctrlKey) return;
+      if ((window.location.pathname === "/login" && href === "/register") || (window.location.pathname === "/register" && href === "/login")) {
+        href = withReturnTo(href, returnToFromLocation("/account"));
+      }
       e.preventDefault();
       navRef.current({ to: href as "/" });
     };
@@ -266,6 +274,8 @@ export function LegacySite({ children }: { children: ReactNode }) {
 
   // Session-aware header: "Log in" for visitors; "My account" + "Sign out" when signed in.
   const signOut = async () => {
+    await queryClient.cancelQueries();
+    queryClient.clear();
     await supabase.auth.signOut();
     navRef.current({ to: "/login", replace: true });
   };

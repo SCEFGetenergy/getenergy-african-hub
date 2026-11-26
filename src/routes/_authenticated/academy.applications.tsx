@@ -23,7 +23,7 @@ function Apps() {
             {apps.map((a) => (
               <li key={a.id} className="flex flex-wrap items-center justify-between gap-2 py-3">
                 <span><span className="font-mono text-xs">{a.reference}</span> · <span className="text-muted-foreground">{KIND[a.request_type] ?? a.request_type}</span><br /><strong>{a.service_name}</strong><br /><span className="text-xs text-muted-foreground">{new Date(a.created_at).toLocaleDateString()}</span></span>
-                <Pill status={a.status} />
+                <Pill status={a.status === "submitted" && ["academy-application", "academy-certification", "academy-waitlist"].includes(a.request_type) ? "waiting_list" : a.status} />
               </li>
             ))}
           </ul>

@@ -24,7 +24,7 @@ export const PORTAL_NAV = [
 export const STATUS_LABEL: Record<string, string> = {
   submitted: "Submitted", in_review: "In review", contacted: "Contacted", in_progress: "In progress", closed: "Closed",
   uploaded: "Uploaded", approved: "Approved", rejected: "Needs replacing",
-  pending_configuration: "Awaiting wallet launch", pending: "Pending", successful: "Paid", failed: "Failed", cancelled: "Cancelled",
+  pending_configuration: "Awaiting wallet launch", pending: "Pending", successful: "Paid", failed: "Failed", cancelled: "Cancelled", waiting_list: "Waiting list",
 };
 
 export function Pill({ status }: { status: string }) {

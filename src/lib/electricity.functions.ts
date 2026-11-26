@@ -58,6 +58,7 @@ async function doVerify(i: z.infer<typeof meterSchema>): Promise<VerifyOut> {
 }
 
 export const verifyMeter = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => meterSchema.parse(d))
   .handler(async ({ data }): Promise<VerifyOut> => {
     if (!isLive()) return { ok: false, message: "Online purchase isn't available yet." };
@@ -67,6 +68,7 @@ export const verifyMeter = createServerFn({ method: "POST" })
   });
 
 export const createOrder = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) =>
     meterSchema.extend({
       amount: z.number().int().min(SITE_MIN_NGN).max(MAX_NGN),
@@ -75,7 +77,7 @@ export const createOrder = createServerFn({ method: "POST" })
       accept: z.literal(true),
     }).parse(d),
   )
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
     if (!isLive()) return { ok: false as const, message: "Online purchase isn't available yet." };
     if (!(await limit(`buy:ip:${clientIp()}`, 10, 600)) || !(await limit(`buy:meter:${data.meterNumber}`, 5, 600)))
       return { ok: false as const, message: "Too many attempts. Please wait a few minutes and try again." };
@@ -95,6 +97,7 @@ export const createOrder = createServerFn({ method: "POST" })
     const g = getGateway();
     const now = new Date();
     const { data: order, error } = await d.from("electricity_orders").insert({
+      user_id: context.userId,
       order_reference: makeOrderReference(now),
       request_id: makeRequestId(now),
       service_id: data.serviceId,
@@ -152,13 +155,14 @@ export const getOrderStatus = createServerFn({ method: "POST" })
 
 /** Mock checkout only (sandbox): simulate the customer paying, failing, or paying the wrong amount. */
 export const mockCheckout = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ orderReference: lookupSchema.shape.orderReference, outcome: z.enum(["pay", "fail", "wrong_amount"]) }).parse(d))
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
     const { getGateway } = await import("./electricity/gateway/index.server");
     if (getGateway().name !== "mock") throw new Error("Not available");
     const d = await admin();
     const { data: o } = await d.from("electricity_orders").select("*").eq("order_reference", data.orderReference).maybeSingle();
-    if (!o || o.status !== "awaiting_payment" || !o.gateway_reference) return { ok: false };
+    if (!o || o.user_id !== context.userId || o.status !== "awaiting_payment" || !o.gateway_reference) return { ok: false };
     const amountNgn = data.outcome === "wrong_amount" ? o.amount_ngn - 100 : o.amount_ngn;
     const eng = await import("./electricity/engine.server");
     await eng.logEvent(o, "mock_gateway", data.outcome === "fail" ? "mock_failed" : "mock_paid", { gatewayReference: o.gateway_reference, amountNgn });

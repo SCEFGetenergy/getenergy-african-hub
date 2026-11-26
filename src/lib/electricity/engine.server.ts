@@ -40,7 +40,7 @@ async function notify(order: Order) {
   const body = order.meter_type === "prepaid"
     ? `GetEnergy: token for meter ${maskMeter(order.meter_number)} is ${order.token}. Ref ${order.order_reference}.`
     : `GetEnergy: payment of N${order.amount_ngn} received for meter ${maskMeter(order.meter_number)}. VTpass ref ${order.vtpass_transaction_id}. Ref ${order.order_reference}.`;
-  await logEvent(order, "notify", "receipt_queued", { email: order.email, phone: order.phone.replace(/\d(?=\d{3})/g, "*"), length: body.length });
+  await logEvent(order, "notify", "receipt_queued", { channels: ["email", "phone"], phone: order.phone.replace(/\d(?=\d{3})/g, "*"), length: body.length });
 }
 
 export async function refundOrder(order: Order, reason: string) {

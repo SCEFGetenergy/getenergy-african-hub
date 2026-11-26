@@ -1595,6 +1595,18 @@ export type Database = {
           user_id: string
         }[]
       }
+      register_academy_course: {
+        Args: {
+          p_company_name?: string
+          p_consent?: boolean
+          p_contact_name: string
+          p_contact_phone: string
+          p_course_key: string
+          p_details?: Json
+          p_location?: string
+        }
+        Returns: Json
+      }
       request_ip_allowed: {
         Args: { p_limit: number; p_scope: string; p_window_seconds: number }
         Returns: boolean

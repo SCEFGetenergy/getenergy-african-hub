@@ -44,7 +44,7 @@ function Invite() {
         {!token ? <p className="mt-3 text-sm text-destructive">This link is missing its invitation code.</p>
           : email === undefined ? <p className="mt-3 text-sm">Checking…</p>
           : email === null ? (
-            <><p className="mt-3 text-sm">Sign in (or register) with the email address the invitation was sent to, then open this link again.</p><Button asChild className="mt-4 min-h-11"><Link to="/login">Sign in</Link></Button></>
+            <><p className="mt-3 text-sm">Sign in (or register) with the email address the invitation was sent to, then open this link again.</p><Button asChild className="mt-4 min-h-11"><Link to="/login" search={{ returnTo: `/team-invite?token=${encodeURIComponent(token)}` }}>Sign in</Link></Button></>
           ) : msg?.ok ? (
             <><p className="mt-3 text-sm text-brand-green">{msg.text}</p><Button asChild className="mt-4 min-h-11"><Link to="/admin">Open team admin</Link></Button></>
           ) : (

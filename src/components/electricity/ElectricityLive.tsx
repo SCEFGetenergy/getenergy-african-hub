@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { Link } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
 import { useServerFn } from "@tanstack/react-start";
 import { createOrder, getElectricityLiveConfig, getOrderStatus, mockCheckout, verifyMeter } from "@/lib/electricity.functions";
 import { groupToken } from "@/lib/electricity/rules";
@@ -114,6 +116,14 @@ function BuyFlow({ cfg }: { cfg: Config }) {
   const [orderRef, setOrderRef] = useState("");
   const [result, setResult] = useState<Status | null>(null);
   const [lookupOpen, setLookupOpen] = useState(false);
+  const [signedIn, setSignedIn] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    void supabase.auth.getUser().then(({ data }) => {
+      setSignedIn(!!data.user);
+      if (data.user?.email) setEmail(data.user.email);
+    });
+  }, []);
 
   // Return from a gateway (or the mock checkout) with ?order=
   useEffect(() => {
@@ -176,6 +186,16 @@ function BuyFlow({ cfg }: { cfg: Config }) {
   }
 
   const disco = cfg.discos.find((d) => d.serviceId === serviceId);
+
+  if (signedIn === null) return <section className="gf" style={{ maxWidth: 640, margin: "0 auto" }}><p>Checking your account…</p></section>;
+  if (signedIn === false) return (
+    <section aria-labelledby="buy-h" className="gf" style={{ maxWidth: 640, margin: "0 auto" }}>
+      <p className="live">Buy a token online</p>
+      <h3 id="buy-h">Sign in to buy electricity</h3>
+      <p className="mt-2 text-sm">Sign in before verifying a meter or preparing payment.</p>
+      <Link to="/login" search={{ returnTo: "/get-electricity" }} className="btn primary mt-4 inline-flex">Sign in</Link>
+    </section>
+  );
 
   return (
     <section aria-labelledby="buy-h" className="gf" style={{ maxWidth: 640, margin: "0 auto" }}>

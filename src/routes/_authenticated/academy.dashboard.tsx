@@ -37,7 +37,7 @@ function Dashboard() {
         </Panel>
         <Panel title="Recent applications">
           {!apps.length ? <p className="text-sm text-muted-foreground">No applications yet.</p> : (
-            <ul className="divide-y divide-border text-sm">{apps.slice(0, 4).map((a) => <li key={a.id} className="flex items-center justify-between gap-2 py-2"><span><span className="font-mono text-xs">{a.reference}</span><br />{a.service_name}</span><Pill status={a.status} /></li>)}</ul>
+            <ul className="divide-y divide-border text-sm">{apps.slice(0, 4).map((a) => <li key={a.id} className="flex items-center justify-between gap-2 py-2"><span><span className="font-mono text-xs">{a.reference}</span><br />{a.service_name}</span><Pill status={a.status === "submitted" && ["academy-application", "academy-certification", "academy-waitlist"].includes(a.request_type) ? "waiting_list" : a.status} /></li>)}</ul>
           )}
         </Panel>
         <Panel title="GFA Wzip Wallet" className="lg:col-span-2"><p className="text-sm text-muted-foreground">{WALLET_NOTICE}</p><Button asChild variant="outline" size="sm" className="mt-3 min-h-11"><Link to="/academy/payments">View payments</Link></Button></Panel>

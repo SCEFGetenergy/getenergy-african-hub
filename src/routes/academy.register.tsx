@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Section } from "@/components/site/ui-bits";
 import { ACADEMY_CATEGORIES } from "@/lib/academy";
+import { authErrorMessage, safeReturnTo, withReturnTo } from "@/lib/auth";
 
 export const Route = createFileRoute("/academy/register")({
+  validateSearch: (s: Record<string, unknown>): { returnTo?: string } => typeof s["returnTo"] === "string" ? { returnTo: s["returnTo"] } : {},
   head: () => ({
     meta: [
       { title: "Create your Academy account | GET Energy Academy" },
@@ -30,6 +32,9 @@ function F({ id, label, req, children }: { id: string; label: string; req?: bool
 }
 
 function Register() {
+  const navigate = useNavigate();
+  const search = Route.useSearch();
+  const returnTo = safeReturnTo(search.returnTo, "/academy/dashboard");
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
   const [done, setDone] = useState("");
@@ -51,10 +56,14 @@ function Register() {
     }
     meta["full_name"] = `${meta["first_name"] ?? ""} ${meta["last_name"] ?? ""}`.trim();
     setBusy(true);
-    const { data, error } = await supabase.auth.signUp({ email, password: pw, options: { emailRedirectTo: `${window.location.origin}/academy/dashboard`, data: meta } });
+    const { data, error } = await supabase.auth.signUp({ email, password: pw, options: { emailRedirectTo: `${window.location.origin}${withReturnTo("/academy/login", returnTo)}`, data: meta } });
     setBusy(false);
-    if (error) return setErr(error.message);
-    setDone(data.session ? "signed-in" : email);
+    if (error) return setErr(authErrorMessage(error, "register"));
+    if (data.session) {
+      navigate({ to: returnTo as "/" });
+      return;
+    }
+    setDone(email);
   };
 
   if (done)
@@ -63,7 +72,7 @@ function Register() {
         <div className="mx-auto max-w-lg rounded-xl border border-border bg-card p-6 text-center">
           <h1 className="text-2xl font-bold">Check your email</h1>
           <p className="mt-2 text-sm text-muted-foreground">We sent a confirmation link to <strong>{done}</strong>. Click it to activate your Academy account, then sign in. Your student ID is created on first sign-in.</p>
-          <Button asChild className="mt-4 min-h-11"><Link to="/academy/login">Go to sign in</Link></Button>
+          <Button asChild className="mt-4 min-h-11"><Link to="/academy/login" search={{ returnTo }}>Go to sign in</Link></Button>
         </div>
       </Section>
     );
@@ -73,7 +82,7 @@ function Register() {
       <div className="mx-auto max-w-3xl">
         <h1 className="text-3xl font-bold">Create your Academy account</h1>
         <p className="mt-2 text-sm text-muted-foreground">One secure account for applications, documents, payments, certifications and CPD. WhatsApp is optional support — you don't need it to register. Fields marked * are required.</p>
-        <form onSubmit={submit} className="mt-6 grid gap-4 rounded-xl border border-border bg-card p-5 sm:grid-cols-2">
+        <form onSubmit={submit} method="post" className="mt-6 grid gap-4 rounded-xl border border-border bg-card p-5 sm:grid-cols-2">
           <F id="first_name" label="First name" req><Input id="first_name" name="first_name" required maxLength={100} /></F>
           <F id="middle_name" label="Middle name"><Input id="middle_name" name="middle_name" maxLength={100} /></F>
           <F id="last_name" label="Last name" req><Input id="last_name" name="last_name" required maxLength={100} /></F>
@@ -96,7 +105,7 @@ function Register() {
           {err ? <p role="alert" className="text-sm font-medium text-destructive sm:col-span-2">{err}</p> : null}
           <div className="flex flex-wrap items-center gap-3 sm:col-span-2">
             <Button type="submit" className="min-h-11" disabled={busy}>{busy ? "Creating account…" : "Create Academy account"}</Button>
-            <Link to="/academy/login" className="text-sm font-medium text-primary underline">Already registered? Sign in</Link>
+            <Link to="/academy/login" search={{ returnTo }} className="text-sm font-medium text-primary underline">Already registered? Sign in</Link>
           </div>
         </form>
       </div>

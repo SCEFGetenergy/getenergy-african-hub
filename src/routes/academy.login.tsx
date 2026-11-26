@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Section } from "@/components/site/ui-bits";
+import { authErrorMessage, safeReturnTo, withReturnTo } from "@/lib/auth";
 
 export const Route = createFileRoute("/academy/login")({
+  validateSearch: (s: Record<string, unknown>): { returnTo?: string } => typeof s["returnTo"] === "string" ? { returnTo: s["returnTo"] } : {},
   head: () => ({
     meta: [
       { title: "Sign in | GET Energy Academy Portal" },
@@ -24,6 +26,8 @@ export const Route = createFileRoute("/academy/login")({
 
 function Login() {
   const navigate = useNavigate();
+  const search = Route.useSearch();
+  const returnTo = safeReturnTo(search.returnTo, "/academy/dashboard");
   const [mode, setMode] = useState<"login" | "forgot">("login");
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
@@ -35,21 +39,21 @@ function Login() {
     setBusy(true);
     setMsg(null);
     if (mode === "forgot") {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/academy/reset-password` });
+      const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}${withReturnTo("/academy/reset-password", returnTo)}` });
       setBusy(false);
-      return setMsg(error ? { ok: false, text: error.message } : { ok: true, text: `If an account exists for ${email}, a reset link is on its way.` });
+      return setMsg(error ? { ok: false, text: authErrorMessage(error, "reset") } : { ok: true, text: `If an account exists for ${email}, a reset link is on its way.` });
     }
     const { error } = await supabase.auth.signInWithPassword({ email, password: String(f.get("password") ?? "") });
     setBusy(false);
-    if (error) return setMsg({ ok: false, text: error.message === "Email not confirmed" ? "Please confirm your email first — check your inbox for the link." : "Email or password is incorrect." });
-    navigate({ to: "/academy/dashboard" });
+    if (error) return setMsg({ ok: false, text: authErrorMessage(error, "login") });
+    navigate({ to: returnTo as "/" });
   };
 
   return (
     <Section>
       <div className="mx-auto max-w-md rounded-xl border border-border bg-card p-6">
         <h1 className="text-2xl font-bold">{mode === "login" ? "Sign in to the Academy portal" : "Reset your password"}</h1>
-        <form onSubmit={submit} className="mt-5 space-y-4">
+        <form onSubmit={submit} method="post" className="mt-5 space-y-4">
           <div><Label htmlFor="email">Email</Label><Input id="email" name="email" type="email" required autoComplete="email" className="mt-1" /></div>
           {mode === "login" ? <div><Label htmlFor="password">Password</Label><Input id="password" name="password" type="password" required autoComplete="current-password" className="mt-1" /></div> : null}
           {msg ? <p role="alert" className={msg.ok ? "text-sm text-brand-green" : "text-sm text-destructive"}>{msg.text}</p> : null}
@@ -57,7 +61,7 @@ function Login() {
         </form>
         <div className="mt-4 flex flex-wrap justify-between gap-2 text-sm">
           <button type="button" className="min-h-11 font-medium text-primary underline" onClick={() => { setMode(mode === "login" ? "forgot" : "login"); setMsg(null); }}>{mode === "login" ? "Forgot password?" : "Back to sign in"}</button>
-          <Link to="/academy/register" className="flex min-h-11 items-center font-medium text-primary underline">Create an account</Link>
+          <Link to="/academy/register" search={{ returnTo }} className="flex min-h-11 items-center font-medium text-primary underline">Create an account</Link>
         </div>
       </div>
     </Section>
