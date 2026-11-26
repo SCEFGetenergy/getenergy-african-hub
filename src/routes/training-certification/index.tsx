@@ -295,7 +295,7 @@ function AcademyPage() {
       </Section>
 
       {/* PATHWAYS */}
-      <Section>
+      <Section id="pathways">
         <SectionHeading eyebrow="Career pathways" title="Choose a Career Pathway" body="Structured sequences of programmes that build from foundation skills to job-ready competence." />
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {PATHWAYS.map((slug) => {

@@ -175,16 +175,26 @@ export function initLegacy(api){
     var pg=pages.filter(function(p){return p.dataset.page===name})[0]||(name===null?null:pages.filter(function(p){return p.dataset.page==="notfound"})[0]);
     pages.forEach(function(p){p.classList.toggle("on",p===pg)});
     links.forEach(function(a){var n=a.getAttribute("href").replace(/^\/?/,"")||"home";if(pg&&n===pg.dataset.page)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+    var academy=document.querySelector(".academy-nav summary");
+    if(academy){if(/^\/(training-certification|academy)(\/|$)/.test(location.pathname))academy.setAttribute("aria-current","page");else academy.removeAttribute("aria-current")}
+    if(location.pathname==="/training-certification"&&/^#(programmes|pathways)$/.test(location.hash)){var anchor=document.getElementById(location.hash.slice(1));if(anchor)requestAnimationFrame(function(){anchor.scrollIntoView()})}
     if(pg&&location.hash){var el=document.getElementById(location.hash.slice(1));if(el){el.scrollIntoView();return}}
   }
   var t=document.querySelector(".menu-toggle"),n=document.getElementById("nav");
   function setNav(o){n.classList.toggle("open",o);document.body.classList.toggle("nav-open",o);t.setAttribute("aria-expanded",o)}
   t.addEventListener("click",function(){setNav(!n.classList.contains("open"))});
   document.addEventListener("click",function(e){if(n.classList.contains("open")&&!n.contains(e.target)&&!t.contains(e.target))setNav(false)});
-  var solutions=n.querySelector(".solutions-nav details");
-  n.addEventListener("click",function(e){if(e.target.closest("a")){document.body.classList.remove("nav-open");n.classList.remove("open");t.setAttribute("aria-expanded","false");solutions.open=false}});
-  document.addEventListener("click",function(e){if(!solutions.contains(e.target))solutions.open=false});
-  document.addEventListener("keydown",function(e){if(e.key==="Escape"){solutions.open=false;n.classList.remove("open");document.body.classList.remove("nav-open");t.setAttribute("aria-expanded","false")}});
+  // Delegation survives the shared header being replaced after navigation.
+  function dropdowns(){return [].slice.call(document.querySelectorAll("header.site .solutions-nav details"))}
+  function closeDropdowns(except){dropdowns().forEach(function(d){if(d!==except)d.open=false})}
+  document.addEventListener("click",function(e){
+    var el=e.target,summary=el.closest("header.site .solutions-nav summary");
+    if(summary)closeDropdowns(summary.parentElement);
+    else dropdowns().forEach(function(d){if(!d.contains(el))d.open=false});
+    if(el.closest("header.site nav.main a")){closeDropdowns();var nav=document.getElementById("nav");if(nav)nav.classList.remove("open");document.body.classList.remove("nav-open");var toggle=document.querySelector(".menu-toggle");if(toggle)toggle.setAttribute("aria-expanded","false")}
+  });
+  document.addEventListener("toggle",function(e){if(e.target.matches("header.site .solutions-nav details")&&e.target.open)closeDropdowns(e.target)},true);
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"){var open=document.querySelector("header.site .solutions-nav details[open]");if(open)open.querySelector("summary").focus();closeDropdowns();var nav=document.getElementById("nav");if(nav)nav.classList.remove("open");document.body.classList.remove("nav-open");var toggle=document.querySelector(".menu-toggle");if(toggle)toggle.setAttribute("aria-expanded","false")}});
 
 
   function check(el){
