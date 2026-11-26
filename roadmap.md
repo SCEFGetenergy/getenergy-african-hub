@@ -78,3 +78,9 @@
 - [x] Verify desktop and 390px journeys with throwaway accounts, clean up test data, and publish nothing
 - [ ] Complete the recovery-email link check — the auth hourly email limit was reached during repeated fresh-account tests
 - [ ] Learner confirmation emails — blocked until a verified sending domain is configured
+
+## EV24.africa Clean Mobility proposal
+- [x] Extract the supplied 12-slide presentation and its used images
+- [x] Replace /solutions/clean-mobility with the responsive React presentation, preserving proposal and independent-platform statuses
+- [x] Add relevant EV and partner links and keep the canonical sitemap entry
+- [x] Verify all slides, narration controls, keyboard/swipe navigation, links and desktop/mobile layouts

@@ -31,3 +31,4 @@
 - Gateways implement PaymentGateway and are selected by PAYMENT_GATEWAY; mock refuses live VTpass. Why: safe provider substitution.
 - Homepage electricity controls use stable legacy-shell portal slots; sessionStorage plus an external prefill bridge carries quick-start data into unchanged forms. Existing live configuration determines eligibility. Why: preserve references and other pages.
 - New leads trigger notify_new_lead (pg_net) to /api/public/lead-alert, verified by a private database token; emails go out via the Resend HTTP API when RESEND_API_KEY is set (sender from LEAD_ALERT_FROM). Why: staff alerts never block submissions.
+- The EV24 proposal is a data-driven React deck in src/components/ev24 on the existing /solutions/clean-mobility route; keep its non-binding status and independent EEA54/EV24 roles explicit. Why: preserve the interactive narrative without implying ownership or a signed partnership.
