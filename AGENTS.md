@@ -19,7 +19,7 @@
 - Energy-saving equipment uses enquiries, not checkout. Why: availability and commercial terms need confirmation.
 - SOPHIA threads belong to random visitor tokens; access only through server handlers with admin clients and policy-free RLS tables. Keep her brief in src/lib/sophia/brief.md and leads in service_requests. Why: private anonymous chats and centralized behavior.
 - Academy pages render in LegacySite; portal shares components/academy/portal.tsx and applications reuse lead RPCs. Waiting-list/corporate forms use academy-waitlist/academy-corporate. Why: shared references and catalogue.
-- Academy landing imagery and facility introduction share components/academy/AcademyIntro.tsx with facility content in the Academy catalogue module. Why: isolate presentation changes from registration and keep facility status consistent.
+- Academy landing imagery and facility introduction share components/academy/AcademyIntro.tsx; venue data lives in the Academy catalogue module and B16FloorPlan derives room proportions from it. Optional owner image slots resolve JPG asset pointers with existing-image fallbacks. Why: preserve registration, accurate geometry and safe replacement without inventing photos.
 - Team admin is permission-gated by has_permission() and RLS; full admins have all, staff have explicit admin_permissions set only by admins. Why: database-enforced section access.
 - Certification settings/employers are public-read, admin-write database records. Why: staff edit live data without code changes.
 - Audit entries come only from write_audit() triggers; invitations are hashed, expiring RPC claims. Why: tamper-resistant history and no client role grants.

@@ -33,7 +33,7 @@ export function CertificationCard({ c, compact = false }: { c: Certification; co
   return (
     <article className="group flex h-full min-w-0 flex-col items-stretch overflow-hidden rounded-md border border-border bg-card text-left text-card-foreground card-elevated transition-transform duration-200 hover:-translate-y-1 motion-reduce:transform-none">
       <div className="relative h-36 w-full overflow-hidden bg-surface-strong sm:h-40">
-        <img src={portraits[c.code]} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transform-none" />
+        <img src={portraits[c.code]} alt={compact ? `Illustrative training image for ${title}` : ""} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transform-none" />
         <span className="absolute bottom-0 left-0 bg-brand-deep px-4 py-2 font-display text-xl font-black text-brand-foreground shadow-md">{c.code}</span>
         <span className="absolute right-3 top-3 grid size-9 place-items-center rounded-full border border-brand-foreground/40 bg-brand-green text-brand-green-foreground" aria-hidden="true"><BadgeCheck className="size-5" /></span>
       </div>

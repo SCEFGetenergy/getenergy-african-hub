@@ -53,6 +53,7 @@ function Login() {
     <Section>
       <div className="mx-auto max-w-md rounded-xl border border-border bg-card p-6">
         <h1 className="text-2xl font-bold">{mode === "login" ? "Sign in to the Academy portal" : "Reset your password"}</h1>
+        <Link to="/training-certification" hash="b16" className="mt-2 flex min-h-11 items-center text-sm text-brand-green underline">Venue: B16 Training Centre — proposed facility</Link>
         <form onSubmit={submit} method="post" className="mt-5 space-y-4">
           <div><Label htmlFor="email">Email</Label><Input id="email" name="email" type="email" required autoComplete="email" className="mt-1" /></div>
           {mode === "login" ? <div><Label htmlFor="password">Password</Label><Input id="password" name="password" type="password" required autoComplete="current-password" className="mt-1" /></div> : null}

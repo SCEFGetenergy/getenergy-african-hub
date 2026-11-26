@@ -1,14 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  ArrowRight, BatteryCharging, BriefcaseBusiness, Car, Check, Cpu, Flame, Gauge, HardHat, Lightbulb,
-  Network, Rocket, ShieldCheck, Sun, TrendingUp, Wallet, Wrench, MessageCircle, Users,
+  ArrowRight, BatteryCharging, BriefcaseBusiness, Car, Check, Cpu, Flame, Gauge, Lightbulb,
+  Network, ShieldCheck, Sun, Wallet, Wrench, MessageCircle, Users, Laptop,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/site/ui-bits";
 import { Catalogue } from "@/components/academy/AcademyParts";
 import { CertificationCard } from "@/components/academy/CertificationCard";
 import { CERTIFICATIONS } from "@/lib/certifications";
-import { ACADEMY_AREAS, CERT_DISCLAIMER, PROGRAMMES, formatNaira, getProgramme, statusOf, whatsappFor } from "@/lib/academy";
+import { ACADEMY_AREAS, ACADEMY_CENTRE, CERT_DISCLAIMER, PROGRAMMES, formatNaira, getProgramme, statusOf, whatsappFor } from "@/lib/academy";
 import { AcademyIntro, AcademyCentre } from "@/components/academy/AcademyIntro";
 import solarImg from "@/assets/academy/solar.jpg";
 import bessImg from "@/assets/academy/bess.jpg";
@@ -22,7 +22,7 @@ import teamImg from "@/assets/academy/team.jpg";
 import technicalCertificationImg from "@/assets/academy/technical-certification.png.asset.json";
 import greenSkillsImg from "@/assets/academy/green-skills.png.asset.json";
 
-const TITLE = "GET Energy Academy — Green Skills & Technical Certification | GetEnergy";
+const TITLE = "GET Academy — B16 Training Centre & Green Skills | GetEnergy";
 const DESC =
   "74 training, career-pathway and professional certification products: solar, BESS, mini-grid, EV, CNG, HSE, smart energy, green economy and project finance. Join a waiting list.";
 
@@ -43,18 +43,7 @@ export const Route = createFileRoute("/training-certification/")({
   component: AcademyPage,
 });
 
-const ICONS = [
-  { icon: Sun, t: "Solar & Renewable Energy" },
-  { icon: BatteryCharging, t: "Battery Storage & BESS" },
-  { icon: Network, t: "Mini-Grids & Power Systems" },
-  { icon: Car, t: "EV & Clean Mobility" },
-  { icon: Flame, t: "CNG & Alternative Fuels" },
-  { icon: Cpu, t: "Smart Metering & Digital Energy" },
-  { icon: HardHat, t: "HSE & Compliance" },
-  { icon: TrendingUp, t: "Energy Finance & Project Development" },
-  { icon: Rocket, t: "GreenTech Entrepreneurship" },
-  { icon: Gauge, t: "Workplace Productivity" },
-];
+const ICONS = [Sun, BatteryCharging, Car, Flame, Cpu, Wrench, Laptop, BriefcaseBusiness];
 
 const FEATURED: [string, string][] = [
   ["solar-pv-installation-supervision", solarImg],
@@ -172,14 +161,17 @@ function AcademyPage() {
       </Section>
 
       {/* ICON STRIP */}
-      <section aria-label="Training categories" className="border-b border-border bg-background">
-        <ul className="mx-auto grid max-w-6xl grid-cols-2 gap-x-3 gap-y-5 px-4 py-6 sm:grid-cols-5 sm:px-6 lg:gap-4">
-          {ICONS.map(({ icon: I, t }) => (
+      <section aria-label="Training focus areas" className="border-b border-border bg-background">
+        <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6"><h2 className="text-xl font-bold text-brand-deep">Training focus areas</h2></div>
+        <ul className="mx-auto grid max-w-6xl grid-cols-2 gap-x-3 gap-y-5 px-4 py-6 sm:grid-cols-4 sm:px-6 lg:gap-4">
+          {ACADEMY_CENTRE.focus.map((t, index) => {
+            const I = ICONS[index] ?? Sun;
+            return (
             <li key={t} className="flex min-w-0 flex-col items-center gap-2 text-center">
               <span className="grid size-14 place-items-center rounded-full bg-brand-green-soft text-brand-green"><I className="size-6" /></span>
               <span className="text-xs font-semibold uppercase leading-tight tracking-wide text-brand-deep">{t}</span>
             </li>
-          ))}
+          ); })}
         </ul>
       </section>
 
@@ -192,7 +184,7 @@ function AcademyPage() {
             if (!p) return null;
             return (
               <article key={slug} className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card card-elevated">
-                <img src={img} alt="" loading="lazy" width={992} height={672} className="aspect-[3/2] w-full object-cover" />
+                <img src={img} alt={`Illustrative training image for ${p.title}`} loading="lazy" width={992} height={672} className="aspect-[3/2] w-full object-cover" />
                 <div className="flex flex-1 flex-col p-5">
                   <span className="text-[11px] font-semibold uppercase tracking-wider text-brand-green">{p.category}</span>
                   <h3 className="mt-1 text-base font-bold leading-snug text-brand-deep">{p.title}</h3>
@@ -296,6 +288,7 @@ function AcademyPage() {
           <div className="rounded-2xl bg-brand-deep p-6 text-brand-foreground lg:col-span-2">
             <Users className="size-7 text-brand-green-soft" />
             <h2 className="mt-3 text-2xl font-bold">Your Training. One Dashboard.</h2>
+            <Link to="/training-certification" hash="b16" className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-brand-green-soft underline">Venue: B16 Training Centre — proposed facility</Link>
             <p className="mt-2 text-sm text-brand-foreground/80">Apply for programmes, upload your CV, manage payments, track your training, access certificates, monitor CPD and maintain your Skills Passport.</p>
             <div className="mt-5 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className={greenBtn}><Link to="/academy/login">Student login</Link></Button>

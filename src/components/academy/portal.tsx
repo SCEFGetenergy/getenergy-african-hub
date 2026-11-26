@@ -93,6 +93,7 @@ export function PortalShell({ title, intro, children }: { title: string; intro?:
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-6 md:grid-cols-[14rem_minmax(0,1fr)]">
         <aside className="min-w-0 md:sticky md:top-24 md:self-start">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">GET Energy Academy</p>
+          <Link to="/training-certification" hash="b16" className="mt-2 flex min-h-11 flex-col justify-center text-sm font-semibold text-brand-green underline">Venue: B16 Training Centre<span className="text-xs font-normal text-muted-foreground">Proposed facility</span></Link>
           {data ? <p className="mt-1 text-sm font-semibold">{data.profile.first_name} {data.profile.last_name}<span className="block font-mono text-xs text-muted-foreground">{data.profile.student_id}</span></p> : null}
           <nav aria-label="Academy portal" className="mt-4 grid grid-cols-2 gap-1 md:flex md:flex-col">
             {PORTAL_NAV.map((n) => (

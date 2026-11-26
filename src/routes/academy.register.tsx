@@ -81,6 +81,7 @@ function Register() {
     <Section>
       <div className="mx-auto max-w-3xl">
         <h1 className="text-3xl font-bold">Create your Academy account</h1>
+        <Link to="/training-certification" hash="b16" className="mt-2 flex min-h-11 items-center text-sm text-brand-green underline">Venue: B16 Training Centre — proposed facility</Link>
         <p className="mt-2 text-sm text-muted-foreground">One secure account for applications, documents, payments, certifications and CPD. WhatsApp is optional support — you don't need it to register. Fields marked * are required.</p>
         <form onSubmit={submit} method="post" className="mt-6 grid gap-4 rounded-xl border border-border bg-card p-5 sm:grid-cols-2">
           <F id="first_name" label="First name" req><Input id="first_name" name="first_name" required maxLength={100} /></F>

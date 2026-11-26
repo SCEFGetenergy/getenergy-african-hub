@@ -32,6 +32,7 @@ function PortalHome() {
   return (
     <>
       <PageHero eyebrow="Student portal" title={PORTAL_TITLE} body="Register once and manage everything about your training and certification online.">
+        <Link to="/training-certification" hash="b16" className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-brand-green-soft underline">Venue: B16 Training Centre — proposed facility</Link>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button asChild size="lg" variant="secondary" className="min-h-11"><Link to="/academy/register">Create an account</Link></Button>
           <Button asChild size="lg" variant="outline" className="min-h-11"><Link to="/academy/login">Sign in</Link></Button>

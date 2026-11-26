@@ -89,3 +89,8 @@
 - [x] Refresh the Academy introduction with the two supplied training-centre images
 - [x] Present B16 as proposed, retaining courses, certification disclaimers and registration flows
 - [x] Verify images, catalogue and registration links at desktop and 390px; publish nothing
+
+## B16 Academy interface
+- [x] Add proposed venue specifications, generic floor plan, production zone, practical areas and operator band
+- [x] Update hero, focus strip and venue links in shared header and portal entry points; preserve catalogue and registration
+- [x] Verify 1440/1024/390 layouts, links, existing tests and build; do not publish
