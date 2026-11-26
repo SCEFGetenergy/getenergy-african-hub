@@ -75,6 +75,7 @@ import { Route as AuthenticatedAcademyProfileRouteImport } from './routes/_authe
 import { Route as AuthenticatedAcademyProgrammesRouteImport } from './routes/_authenticated/academy.programmes'
 import { Route as AuthenticatedAcademySkillsPassportRouteImport } from './routes/_authenticated/academy.skills-passport'
 import { Route as AuthenticatedAcademySupportRouteImport } from './routes/_authenticated/academy.support'
+import { Route as ApiPublicLeadAlertRouteImport } from './routes/api/public/lead-alert'
 import { Route as TrainingCertificationProfessionalCertificationsIndexRouteImport } from './routes/training-certification/professional-certifications/index'
 import { Route as TrainingCertificationProfessionalCertificationsCodeRouteImport } from './routes/training-certification/professional-certifications/$code'
 import { Route as TrainingCertificationProfessionalCertificationsWaitlistRouteImport } from './routes/training-certification/professional-certifications/waitlist'
@@ -427,6 +428,11 @@ const AuthenticatedAcademySupportRoute =
     path: '/academy/support',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ApiPublicLeadAlertRoute = ApiPublicLeadAlertRouteImport.update({
+  id: '/api/public/lead-alert',
+  path: '/api/public/lead-alert',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TrainingCertificationProfessionalCertificationsIndexRoute =
   TrainingCertificationProfessionalCertificationsIndexRouteImport.update({
     id: '/training-certification/professional-certifications/',
@@ -534,6 +540,7 @@ export interface FileRoutesByFullPath {
   '/academy/programmes': typeof AuthenticatedAcademyProgrammesRoute
   '/academy/skills-passport': typeof AuthenticatedAcademySkillsPassportRoute
   '/academy/support': typeof AuthenticatedAcademySupportRoute
+  '/api/public/lead-alert': typeof ApiPublicLeadAlertRoute
   '/training-certification/professional-certifications/$code': typeof TrainingCertificationProfessionalCertificationsCodeRoute
   '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
@@ -608,6 +615,7 @@ export interface FileRoutesByTo {
   '/academy/programmes': typeof AuthenticatedAcademyProgrammesRoute
   '/academy/skills-passport': typeof AuthenticatedAcademySkillsPassportRoute
   '/academy/support': typeof AuthenticatedAcademySupportRoute
+  '/api/public/lead-alert': typeof ApiPublicLeadAlertRoute
   '/training-certification/professional-certifications/$code': typeof TrainingCertificationProfessionalCertificationsCodeRoute
   '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
@@ -684,6 +692,7 @@ export interface FileRoutesById {
   '/_authenticated/academy/programmes': typeof AuthenticatedAcademyProgrammesRoute
   '/_authenticated/academy/skills-passport': typeof AuthenticatedAcademySkillsPassportRoute
   '/_authenticated/academy/support': typeof AuthenticatedAcademySupportRoute
+  '/api/public/lead-alert': typeof ApiPublicLeadAlertRoute
   '/training-certification/professional-certifications/$code': typeof TrainingCertificationProfessionalCertificationsCodeRoute
   '/training-certification/professional-certifications/waitlist': typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   '/training-certification/programmes/$slug': typeof TrainingCertificationProgrammesSlugRoute
@@ -760,6 +769,7 @@ export interface FileRouteTypes {
     | '/academy/programmes'
     | '/academy/skills-passport'
     | '/academy/support'
+    | '/api/public/lead-alert'
     | '/training-certification/professional-certifications/$code'
     | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
@@ -834,6 +844,7 @@ export interface FileRouteTypes {
     | '/academy/programmes'
     | '/academy/skills-passport'
     | '/academy/support'
+    | '/api/public/lead-alert'
     | '/training-certification/professional-certifications/$code'
     | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
@@ -909,6 +920,7 @@ export interface FileRouteTypes {
     | '/_authenticated/academy/programmes'
     | '/_authenticated/academy/skills-passport'
     | '/_authenticated/academy/support'
+    | '/api/public/lead-alert'
     | '/training-certification/professional-certifications/$code'
     | '/training-certification/professional-certifications/waitlist'
     | '/training-certification/programmes/$slug'
@@ -973,6 +985,7 @@ export interface RootRouteChildren {
   CompanyIndexRoute: typeof CompanyIndexRoute
   SophiaIndexRoute: typeof SophiaIndexRoute
   TrainingCertificationIndexRoute: typeof TrainingCertificationIndexRoute
+  ApiPublicLeadAlertRoute: typeof ApiPublicLeadAlertRoute
   TrainingCertificationProfessionalCertificationsCodeRoute: typeof TrainingCertificationProfessionalCertificationsCodeRoute
   TrainingCertificationProfessionalCertificationsWaitlistRoute: typeof TrainingCertificationProfessionalCertificationsWaitlistRoute
   TrainingCertificationProgrammesSlugRoute: typeof TrainingCertificationProgrammesSlugRoute
@@ -1446,6 +1459,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAcademySupportRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/lead-alert': {
+      id: '/api/public/lead-alert'
+      path: '/api/public/lead-alert'
+      fullPath: '/api/public/lead-alert'
+      preLoaderRoute: typeof ApiPublicLeadAlertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/training-certification/professional-certifications/': {
       id: '/training-certification/professional-certifications/'
       path: '/training-certification/professional-certifications'
@@ -1588,6 +1608,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompanyIndexRoute: CompanyIndexRoute,
   SophiaIndexRoute: SophiaIndexRoute,
   TrainingCertificationIndexRoute: TrainingCertificationIndexRoute,
+  ApiPublicLeadAlertRoute: ApiPublicLeadAlertRoute,
   TrainingCertificationProfessionalCertificationsCodeRoute:
     TrainingCertificationProfessionalCertificationsCodeRoute,
   TrainingCertificationProfessionalCertificationsWaitlistRoute:

@@ -30,3 +30,4 @@
 - Live electricity modules stay in src/lib/electricity behind ELECTRICITY_LIVE; payments are server-confirmed, each order stores one VTpass request_id, and electricity_claim_vend atomically claims vending. Why: no double-vend or browser-trusted payment.
 - Gateways implement PaymentGateway and are selected by PAYMENT_GATEWAY; mock refuses live VTpass. Why: safe provider substitution.
 - Homepage electricity controls use stable legacy-shell portal slots; sessionStorage plus an external prefill bridge carries quick-start data into unchanged forms. Existing live configuration determines eligibility. Why: preserve references and other pages.
+- New leads trigger notify_new_lead (pg_net) to /api/public/lead-alert, verified by a private database token; email delivery waits on a verified sender domain. Why: staff alerts never block submissions.

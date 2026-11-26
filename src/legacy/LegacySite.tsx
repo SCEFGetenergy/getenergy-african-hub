@@ -98,7 +98,7 @@ export function LegacySite({ children }: { children: ReactNode }) {
       async submit(form: HTMLFormElement, kind: string, lines: string[]) {
         // Honeypot: a filled hidden field means a bot. Show success, save nothing.
         const trap = form.querySelector(`input[name="${HONEYPOT_NAME}"]`) as HTMLInputElement | null;
-        if (trap?.value) return {};
+        if (trap?.value) return { trapped: true };
         try {
           if (kind === "login") {
             const { error } = await supabase.auth.signInWithPassword({

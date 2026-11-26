@@ -1,9 +1,6 @@
--- 2. Close direct inserts: all leads go through submit_service_request.
 DROP POLICY IF EXISTS "Anyone can submit a request" ON public.service_requests;
 REVOKE INSERT ON public.service_requests FROM anon, authenticated;
 
--- 4. Per-IP limiter helper. Returns false when over the limit. The hit is always
--- recorded, and callers return a sentinel instead of raising so it is not rolled back.
 CREATE OR REPLACE FUNCTION public.request_ip_allowed(p_scope text, p_limit integer, p_window_seconds integer)
 RETURNS boolean LANGUAGE plpgsql SECURITY DEFINER SET search_path = public AS $$
 DECLARE v_headers json; v_ip text;
@@ -19,7 +16,6 @@ END $$;
 REVOKE ALL ON FUNCTION public.request_ip_allowed(text,integer,integer) FROM PUBLIC, anon, authenticated;
 GRANT EXECUTE ON FUNCTION public.request_ip_allowed(text,integer,integer) TO service_role;
 
--- 3. Validated lead capture. Allowed types = known form types plus any already stored.
 DO $do$
 DECLARE v_types text[];
 BEGIN
@@ -70,7 +66,6 @@ END $do$;
 REVOKE ALL ON FUNCTION public.submit_service_request(text,text,text,text,text,text,text,jsonb) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION public.submit_service_request(text,text,text,text,text,text,text,jsonb) TO anon, authenticated, service_role;
 
--- 4. Rate-limit the electricity enquiry RPC (same validation as before).
 CREATE OR REPLACE FUNCTION public.submit_electricity_token_request(
   p_full_name text, p_disco text, p_meter_type text, p_meter_number text, p_amount_ngn integer,
   p_phone text, p_email text, p_state text, p_city_lga text, p_preferred_contact_method text, p_consent boolean
@@ -97,8 +92,6 @@ END $$;
 REVOKE ALL ON FUNCTION public.submit_electricity_token_request(text,text,text,text,integer,text,text,text,text,text,boolean) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION public.submit_electricity_token_request(text,text,text,text,integer,text,text,text,text,text,boolean) TO anon, authenticated, service_role;
 
--- 1. Staff lead alerts: after-insert triggers call the app's alert route through pg_net.
--- Failures are swallowed so a submission is never blocked.
 CREATE EXTENSION IF NOT EXISTS pg_net;
 INSERT INTO public.electricity_private_config(key, value)
 VALUES ('lead_alert_token', encode(extensions.gen_random_bytes(32),'hex')),

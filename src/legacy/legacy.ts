@@ -145,14 +145,17 @@ export function initLegacy(api){
     login:{title:"Accounts are not open yet",nosend:true,note:"Online accounts open when our platform goes live. You can still buy tokens, pay bills and request quotes without an account."}
   };
   (function(){var bar=document.querySelector(".m-actions");if(bar){var last=scrollY,closed=false;bar.querySelector(".m-actions-x").addEventListener("click",function(){closed=true;bar.classList.add("hide")});addEventListener("scroll",function(){if(closed)return;var y=scrollY;bar.classList.toggle("hide",y>last+4&&y>200);if(y<last-4)bar.classList.remove("hide");last=y},{passive:true})}})();
-  function showResult(form,kind,lines,reference,error){
+  var RECEIVED=["paas","training","community","eea","contact","careers","whatsapp","bills","fuel","cngbook","ev"];
+  function showResult(form,kind,lines,reference,error,trapped){
     var k=KINDS[kind];var box=document.createElement("div");box.className="result";box.setAttribute("role","status");box.tabIndex=-1;
     var body=lines.join("\n"),subj=k.subject+(lines[0]?" - "+lines[0].split(": ").slice(1).join(": "):"");
     var h='<h3></h3><p class="note"></p>'+(k.nosend?"":"<pre></pre>")+'<div class="row">';
     if(k.pay)h+='<button class="btn primary paybtn" type="button"'+(CONFIG.paymentsLive?"":" disabled")+'>Pay now</button>';
     if(!k.nosend)h+='<a class="btn navy mail" href="#">Send to our team</a><button class="btn ghost copy" type="button">Copy</button>';
     h+='<button class="btn ghost edit" type="button">'+(k.nosend?"Back":"Edit")+"</button></div>";
-    box.innerHTML=h;box.querySelector("h3").textContent=error?(kind==="login"?"Sign-in failed":"We couldn't send this request"):k.title;box.querySelector(".note").textContent=error?error:k.note;
+    box.innerHTML=h;var received=!error&&(reference||trapped)&&RECEIVED.indexOf(kind)>-1;
+    box.querySelector("h3").textContent=error?(kind==="login"?"Sign-in failed":"We couldn't send this request"):received?"Request received":k.title;box.querySelector(".note").textContent=error?error:received?"Our team will contact you. Keep your reference.":k.note;
+    if(received&&box.querySelector(".mail"))box.querySelector(".mail").textContent="Email us a copy";
     if(reference){var rp=document.createElement("p");rp.className="note";rp.innerHTML='Your request reference: <strong></strong>';rp.querySelector("strong").textContent=reference;box.insertBefore(rp,box.querySelector(".note"));body="Reference: "+reference+"\n"+body;}
     if(!k.nosend){box.querySelector("pre").textContent=body;box.querySelector(".mail").href="mailto:"+CONFIG.email[k.to]+"?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body);
       var c=box.querySelector(".copy");c.addEventListener("click",function(){if(navigator.clipboard)navigator.clipboard.writeText(body).then(function(){c.textContent="Copied"},function(){c.textContent="Select the text to copy"});else c.textContent="Select the text to copy"})}
@@ -194,6 +197,7 @@ export function initLegacy(api){
   (function(){var nums=[].slice.call(Q("[data-count]"));if(!nums.length||window.innerWidth>640||matchMedia("(prefers-reduced-motion: reduce)").matches||!("IntersectionObserver" in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.disconnect();nums.forEach(function(el,i){var end=+el.dataset.count,t0=null;el.textContent="0";setTimeout(function(){requestAnimationFrame(function step(ts){t0=t0||ts;var p=Math.min(1,(ts-t0)/600);el.textContent=Math.round(end*(1-Math.pow(1-p,3))).toLocaleString("en-GB");if(p<1)requestAnimationFrame(step)})},i*100)})})},{threshold:.4});io.observe(nums[0].closest("section"))})();
   (function(){var vids=[].slice.call(Q("video[data-autoplay]"));if(!vids.length||!("IntersectionObserver" in window))return;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var cn=navigator.connection;if(window.innerWidth<=640||(cn&&(cn.saveData||/cellular/.test(cn.type||"")||/2g|3g/.test(cn.effectiveType||""))))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting&&e.intersectionRatio>=.6){if(window.innerWidth<=640)vids.forEach(function(o){if(o!==v)o.pause()});v.muted=true;v.play().catch(function(){})}else v.pause()})},{threshold:[0,.6]});vids.forEach(function(v){io.observe(v)})})();
   [].forEach.call(Q("form.gf"),function(form){
+    if(form.dataset.kind!=="login"&&form.dataset.kind!=="register"&&!form.querySelector('input[name="website_url"]')){var hp=document.createElement("input");hp.type="text";hp.name="website_url";hp.tabIndex=-1;hp.autocomplete="off";hp.setAttribute("aria-hidden","true");hp.style.cssText="position:absolute;left:-10000px;width:1px;height:1px;opacity:0";form.appendChild(hp)}
     [].forEach.call(form.querySelectorAll("[required]"),function(el){el.addEventListener("blur",function(){if(el.value)check(el)})});
     form.addEventListener("submit",function(e){
       e.preventDefault();
@@ -205,7 +209,7 @@ export function initLegacy(api){
       api.submit(form,kind,lines).then(function(res){
         if(btn)btn.disabled=false;
         if(res&&res.done)return;
-        showResult(form,kind,lines,res&&res.reference,res&&res.error);
+        showResult(form,kind,lines,res&&res.reference,res&&res.error,res&&res.trapped);
       });
     });
   });

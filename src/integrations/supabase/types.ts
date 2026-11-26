@@ -1555,6 +1555,7 @@ export type Database = {
         Args: { p_id: string; p_reason?: string }
         Returns: undefined
       }
+      check_lead_alert_token: { Args: { p_token: string }; Returns: boolean }
       claim_first_admin: { Args: { p_code: string }; Returns: string }
       create_admin_invitation: {
         Args: {
@@ -1593,6 +1594,10 @@ export type Database = {
           role: string
           user_id: string
         }[]
+      }
+      request_ip_allowed: {
+        Args: { p_limit: number; p_scope: string; p_window_seconds: number }
+        Returns: boolean
       }
       restore_service_request: { Args: { p_id: string }; Returns: undefined }
       revoke_admin_invitation: { Args: { p_id: string }; Returns: undefined }

@@ -65,3 +65,7 @@
 - [ ] Real payment gateway adapter — waiting on gateway choice and keys
 - [ ] Email/SMS receipt delivery — needs email sender domain and SMS provider
 - [ ] Static-IP relay for live VTpass — needs a host the team controls
+
+## Backend hardening (forms + SOPHIA)
+- [x] Close direct inserts, validate and rate-limit request functions, honeypots, SOPHIA server/brief, success copy, sign-in fix
+- [ ] Staff email alerts — waiting on an email sender domain
