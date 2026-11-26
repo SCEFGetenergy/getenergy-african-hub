@@ -19,6 +19,8 @@ import auditImg from "@/assets/academy/audit.jpg";
 import hseImg from "@/assets/academy/hse.jpg";
 import greentechImg from "@/assets/academy/greentech.jpg";
 import teamImg from "@/assets/academy/team.jpg";
+import technicalCertificationImg from "@/assets/academy/technical-certification.png.asset.json";
+import greenSkillsImg from "@/assets/academy/green-skills.png.asset.json";
 
 const TITLE = "GET Energy Academy — Green Skills & Technical Certification | GetEnergy";
 const DESC =
@@ -85,16 +87,22 @@ const ACADEMY_PROMISE = [
   {
     icon: Sun,
     title: "Green Skills",
+    image: greenSkillsImg.url,
+    imageAlt: "Green Skills concept showing solar, storage, EV charging and energy technicians",
     body: "Practical capabilities for renewable energy, storage, efficiency, clean mobility and the wider green economy.",
   },
   {
     icon: ShieldCheck,
     title: "Technical Certification",
-    body: "Competency-led learning, practical assessment and certification pathways whose recognition is confirmed programme by programme.",
+    image: technicalCertificationImg.url,
+    imageAlt: "Technical Certification concept showing supervised electrical practical assessment",
+    body: "Competency-based instruction, supervised practical assessments and pathways to recognised qualifications, subject to programme-specific accreditation.",
   },
   {
     icon: BriefcaseBusiness,
     title: "Career Development",
+    image: teamImg,
+    imageAlt: "Trainer briefing a team of African industrial technicians",
     body: "Workplace, leadership and commercial skills that help learners apply technical knowledge responsibly in real organisations.",
   },
 ];
@@ -120,11 +128,17 @@ function AcademyPage() {
       <Section>
         <SectionHeading eyebrow="One academy, three outcomes" title="Skills for Work. Certification for Growth. Training for the Energy Transition." body="Every learning route connects technical understanding with practical application, workplace productivity and responsible career development." />
         <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {ACADEMY_PROMISE.map(({ icon: Icon, title, body }) => (
-            <article key={title} className="border-l-4 border-brand-green bg-surface p-5">
+          {ACADEMY_PROMISE.map(({ icon: Icon, title, body, image, imageAlt }) => (
+            <article key={title} className="overflow-hidden border-l-4 border-brand-green bg-surface">
+              <figure>
+                <img src={image} alt={imageAlt} loading="lazy" width={1365} height={768} className="aspect-video w-full object-cover" />
+                {title !== "Career Development" && <figcaption className="px-5 pt-3 text-xs text-muted-foreground">Concept illustration</figcaption>}
+              </figure>
+              <div className="p-5">
               <Icon className="size-7 text-brand-green" />
               <h2 className="mt-4 text-xl font-bold text-brand-deep">{title}</h2>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
+              </div>
             </article>
           ))}
         </div>
