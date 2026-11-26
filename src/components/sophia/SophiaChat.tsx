@@ -74,8 +74,8 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
       const m = e.message || "";
       if (m.includes("429") || /too many|limit/i.test(m)) toast.error("SOPHIA is busy right now. Please try again in a moment.");
       else if (/2,000 characters|turn limit/i.test(m)) toast.error(m);
-      else if (m.includes("402")) toast.error("SOPHIA is temporarily unavailable. Please contact us on WhatsApp.");
-      else toast.error("SOPHIA couldn't reply. Check your connection or contact us on WhatsApp +234 818 074 2835.");
+      else if (m.includes("402")) toast.error("SOPHIA is temporarily unavailable. Please contact us on WhatsApp +234 818 074 2835 or ccgetenergy@gmail.com.");
+      else toast.error("SOPHIA couldn't reply. Check your connection or contact us on WhatsApp +234 818 074 2835 or ccgetenergy@gmail.com.");
     },
     onFinish: () => { void refresh(); },
   });
@@ -126,11 +126,13 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
           <div className="min-w-0 flex-1">
             <p className="font-semibold leading-tight text-foreground">SOPHIA</p>
             <p className="text-xs text-muted-foreground">GET Energy's Intelligent Energy Assistant</p>
+            <p className="text-xs text-muted-foreground">Support: <a href="https://wa.me/2348180742835" target="_blank" rel="noopener noreferrer" className="text-primary underline-offset-2 hover:underline">WhatsApp +234 818 074 2835</a> · <a href="mailto:ccgetenergy@gmail.com" className="text-primary underline-offset-2 hover:underline">ccgetenergy@gmail.com</a></p>
           </div>
           <Button type="button" variant="ghost" onClick={newThread} className="min-h-11 px-2 text-primary md:hidden">
             <Plus className="size-4" /> New
           </Button>
           <a href="https://wa.me/2348180742835" target="_blank" rel="noopener noreferrer" className="hidden min-h-11 items-center rounded-md px-2 text-sm text-primary sm:flex">Talk to a person</a>
+          <a href="mailto:ccgetenergy@gmail.com" className="hidden min-h-11 items-center rounded-md px-2 text-sm text-primary sm:flex">ccgetenergy@gmail.com</a>
         </header>
 
         <div className="flex-1 overflow-y-auto" role="log">
@@ -214,7 +216,7 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
             />
             <PromptInputFooter>
               <PromptInputTools>
-                <span className="px-2 text-xs text-muted-foreground">SOPHIA is an AI assistant; our team confirms all quotes.</span>
+                <span className="px-2 text-xs text-muted-foreground">SOPHIA is an AI assistant; our team confirms all quotes. Support: ccgetenergy@gmail.com</span>
               </PromptInputTools>
               <PromptInputSubmit status={status} onStop={stop} disabled={!busy && !text.trim()} />
             </PromptInputFooter>
