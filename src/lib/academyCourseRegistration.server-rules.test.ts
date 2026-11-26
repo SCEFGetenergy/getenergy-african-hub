@@ -43,7 +43,12 @@ describe.skipIf(!enabled)("Academy course registration RPC", () => {
 
   beforeAll(async () => {
     service = client(SERVICE!);
-    const { data, error } = await service.auth.admin.createUser({ email, password, email_confirm: true });
+    const { data, error } = await service.auth.admin.createUser({
+      email,
+      password,
+      email_confirm: true,
+      user_metadata: { full_name: "QA Test Learner", phone: "+2348180000000", account_type: "individual" },
+    });
     if (error) throw error;
     userId = data.user.id;
     learner = client(PUB!);
@@ -74,6 +79,21 @@ describe.skipIf(!enabled)("Academy course registration RPC", () => {
     expect(rows?.[0]?.request_type).toBe("academy-waitlist");
     expect(rows?.[0]?.details).toMatchObject({ course_key: COURSE, course_registration: true, payment_status: "no_payment_taken" });
     expect(rows?.[0]?.is_test).toBe(true);
+
+    const { data: profile, error: profileError } = await learner
+      .from("profiles")
+      .select("id,full_name,phone,account_type")
+      .eq("id", userId)
+      .single();
+    expect(profileError).toBeNull();
+    expect(profile).toMatchObject({
+      id: userId,
+      full_name: "QA Test Learner",
+      phone: "+2348180000000",
+      account_type: "individual",
+    });
+    const { error: updateError } = await learner.from("profiles").update({ phone: "+2348180000001" }).eq("id", userId);
+    expect(updateError).toBeNull();
   });
 
   it("returns the existing reference for a duplicate and stores only one row", async () => {

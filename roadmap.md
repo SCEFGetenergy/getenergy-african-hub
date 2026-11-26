@@ -71,9 +71,10 @@
 - [ ] Staff email alerts — waiting on an email sender domain
 
 ## Backend, authentication and course registration review
-- [ ] Audit and fix every legacy and Academy sign-up, sign-in, sign-out, reset and protected-route journey
-- [ ] Add duplicate-safe, user-linked course registration with references, validation, rate limiting, honeypots and staff alerts
-- [ ] Fix actionable critical/high backend findings while preserving anonymous public forms
-- [ ] Restore the shared header label “GET Academy”
-- [ ] Verify desktop and 390px journeys with throwaway accounts, clean up test data, and publish nothing
+- [x] Audit and fix legacy and Academy sign-up, sign-in, sign-out and protected-route journeys
+- [x] Add duplicate-safe, user-linked course registration with references, validation, rate limiting, honeypots and staff alerts
+- [x] Fix actionable critical/high backend findings while preserving anonymous public forms
+- [x] Restore the shared header label “GET Academy”
+- [x] Verify desktop and 390px journeys with throwaway accounts, clean up test data, and publish nothing
+- [ ] Complete the recovery-email link check — the auth hourly email limit was reached during repeated fresh-account tests
 - [ ] Learner confirmation emails — blocked until a verified sending domain is configured
