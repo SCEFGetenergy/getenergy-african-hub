@@ -94,3 +94,7 @@
 - [x] Add proposed venue specifications, generic floor plan, production zone, practical areas and operator band
 - [x] Update hero, focus strip and venue links in shared header and portal entry points; preserve catalogue and registration
 - [x] Verify 1440/1024/390 layouts, links, existing tests and build; do not publish
+
+## Academy learning-area images
+- [x] Generate and optimise six training images; preserve card text, icons and bullets
+- [x] Verify equal-height cards and image loading at 1440/1024/390; tests/build; do not publish

@@ -21,6 +21,21 @@ import greentechImg from "@/assets/academy/greentech.jpg";
 import teamImg from "@/assets/academy/team.jpg";
 import technicalCertificationImg from "@/assets/academy/technical-certification.png.asset.json";
 import greenSkillsImg from "@/assets/academy/green-skills.png.asset.json";
+import areaSolar from "@/assets/academy/areas/area-solar.jpg";
+import areaPower from "@/assets/academy/areas/area-power.jpg";
+import areaEfficiency from "@/assets/academy/areas/area-efficiency.jpg";
+import areaCng from "@/assets/academy/areas/area-cng.jpg";
+import areaEv from "@/assets/academy/areas/area-ev.jpg";
+import areaAdvanced from "@/assets/academy/areas/area-advanced.jpg";
+
+const AREA_IMAGES = [
+  { src: areaSolar, alt: "Generated training illustration: African instructor and women and men trainees mounting solar panels on a low rig with an inverter and battery cabinet behind" },
+  { src: areaPower, alt: "Generated training illustration: African electrical trainees in safety glasses and insulated gloves watching an instructor test a distribution board with a smart meter and lock-out tags" },
+  { src: areaEfficiency, alt: "Generated training illustration: African women and men learning an office energy audit using a thermal camera, clamp meter and tablet beside air-conditioning and LED lights" },
+  { src: areaCng, alt: "Generated training illustration: African instructor and trainees in protective coveralls and hard hats inspecting a CNG cylinder, pressure lines and leak detector beside a fire extinguisher" },
+  { src: areaEv, alt: "Generated training illustration: African trainees connecting a white electric car to a charger and inspecting a battery module with a laptop under a solar canopy" },
+  { src: areaAdvanced, alt: "Generated training illustration: African instructor and trainees studying a community biogas digester and micro-hydro turbine beside a rural Nigerian stream" },
+];
 
 const TITLE = "GET Academy — B16 Training Centre & Green Skills | GetEnergy";
 const DESC =
@@ -138,11 +153,14 @@ function AcademyPage() {
       {/* DELIVERY AREAS */}
       <Section tone="surface">
         <SectionHeading eyebrow="Academy structure" title="Six Energy Learning Areas" body="GET Energy organises its catalogue around the technical systems, commercial capabilities and specialist knowledge needed across the energy value chain." />
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid auto-rows-fr gap-4 md:grid-cols-2 lg:grid-cols-3">
           {ACADEMY_AREAS.map((area, index) => {
             const AreaIcon = [Sun, Network, Gauge, Flame, Car, Lightbulb][index] ?? Lightbulb;
+            const image = AREA_IMAGES[index];
             return (
-              <article key={area.title} className="flex flex-col border-t-4 border-brand-green bg-card p-5 shadow-sm">
+              <article key={area.title} className="flex h-full min-w-0 flex-col overflow-hidden rounded-t-lg border-t-4 border-brand-green bg-card shadow-sm">
+                {image && <img src={image.src} alt={image.alt} loading="lazy" width={1280} height={864} className="aspect-[3/2] w-full shrink-0 rounded-t-md object-cover" />}
+                <div className="flex flex-1 flex-col p-5">
                 <div className="flex items-start gap-3">
                   <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand-green-soft text-brand-green"><AreaIcon className="size-5" /></span>
                   <div>
@@ -154,6 +172,7 @@ function AcademyPage() {
                 <ul className="mt-4 grid gap-2 text-sm">
                   {area.focus.map((item) => <li key={item} className="flex items-start gap-2"><Check className="mt-0.5 size-4 shrink-0 text-brand-green" />{item}</li>)}
                 </ul>
+                </div>
               </article>
             );
           })}
