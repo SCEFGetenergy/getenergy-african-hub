@@ -1,4 +1,8 @@
 // @ts-nocheck
+import chargingVideo from "../assets/ev-charging.mp4.asset.json";
+import interiorVideo from "../assets/ev-interior.mp4.asset.json";
+import chargingPoster from "../assets/ev-charging-poster.jpg.asset.json";
+import interiorPoster from "../assets/ev-interior-poster.jpg.asset.json";
 /* Ported verbatim from the supplied GetEnergy site script; only routing and form submission are wired to the app. */
 
 /* Developer settings: switch on once a licensed payment provider, a token/VTU
@@ -44,7 +48,13 @@ function bindBillboard(root) {
   var motion=matchMedia("(prefers-reduced-motion: reduce)");
   var content=root.querySelector(".bb-content"),screen=root.querySelector(".bb-screen");
   var tabs=[].slice.call(root.querySelectorAll("[data-bb-tab]"));
-  var shapes={sedan:"M58 90 86 62 Q92 56 108 56 H174 Q184 56 194 66 L222 90 258 98 Q268 101 268 115 V128 H40 V110 Q40 99 58 90Z",suv:"M52 90 72 48 H186 L220 90 258 96 Q268 99 268 113 V128 H40 V106Z",pickup:"M44 91 65 55 H144 L174 92 H266 V128 H40 V103Z",van:"M44 57 Q44 47 55 47 H199 L253 84 268 102 V128 H40 V68Z"};
+  function playback(){
+    var video=root.querySelector(".bb-video");
+    if(!video)return;
+    var connection=navigator.connection;
+    if(!root.isConnected||!visible||document.hidden||motion.matches||(connection&&connection.saveData)){video.pause();return}
+    video.muted=true;video.play().catch(function(){});
+  }
   function prefill(b){
     if(!isEV)return;
     var field=page.querySelector("#ev-vehicle");
@@ -54,11 +64,13 @@ function bindBillboard(root) {
     }
   }
   function select(b,fill,animate){
+    var previousVideo=root.querySelector(".bb-video");if(previousVideo)previousVideo.pause();
     selected=b;
     tabs.forEach(function(t,i){var on=i===b[6];t.setAttribute("aria-selected",String(on));t.tabIndex=on?0:-1;root.querySelector("#"+id+"-panel-"+i).hidden=!on});
     root.querySelector(".bb-top b").textContent=names[b[6]];
     root.querySelectorAll("[data-bb-brand]").forEach(function(t){t.setAttribute("aria-pressed",String(t.dataset.bbBrand===b[0]))});
-    content.innerHTML='<h3 class="bb-name">'+b[1]+'</h3><p class="bb-country">'+b[2]+'</p><div class="bb-chips">'+b[3].split(", ").map(function(p){return '<span class="'+(/EV|Hybrid|hybrid/.test(p)?'clean':'')+'">'+p+'</span>'}).join("")+'</div><p class="bb-models"><b>Popular models:</b> '+b[4]+'</p><svg class="bb-car" viewBox="0 0 320 155" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M4 83h28M10 101h18M2 121h26"/></g><path fill="currentColor" d="'+shapes[b[5]]+'"/><path class="bb-window" d="M83 86 96 64 H137 V86Z M145 64H172L193 86H145Z"/><g class="bb-wheel"><circle cx="85" cy="125" r="20"/><circle cx="226" cy="125" r="20"/></g><g fill="currentColor"><circle cx="85" cy="125" r="9"/><circle cx="226" cy="125" r="9"/></g></svg><div class="bb-foot"><p>Sourced through GetEnergy vehicle partners · Price &amp; delivery on written quotation</p><a class="btn green" href="/ev?brand='+b[0]+'#ev-form">Enquire about '+b[1]+' →</a></div>';
+    content.innerHTML='<h3 class="bb-name">'+b[1]+'</h3><p class="bb-country">'+b[2]+'</p><div class="bb-chips">'+b[3].split(", ").map(function(p){return '<span class="'+(/EV|Hybrid|hybrid/.test(p)?'clean':'')+'">'+p+'</span>'}).join("")+'</div><p class="bb-models"><b>Popular models:</b> '+b[4]+'</p><figure class="bb-media"><video class="bb-video" muted playsinline loop controls preload="none" poster="'+((b[0]==="chery"||b[6]===1)?interiorPoster.url:chargingPoster.url)+'" aria-label="'+((b[0]==="chery"||b[6]===1)?'Chery vehicle interior footage':'EV charging footage')+'"><source src="'+((b[0]==="chery"||b[6]===1)?interiorVideo.url:chargingVideo.url)+'" type="video/mp4"></video><figcaption>'+((b[0]==="chery"||b[6]===1)?'Chery vehicle interior':'EV charging in action')+' · illustrative footage</figcaption></figure><div class="bb-foot"><p>Sourced through GetEnergy vehicle partners · Price &amp; delivery on written quotation</p><a class="btn green" href="/ev?brand='+b[0]+'#ev-form">Enquire about '+b[1]+' →</a></div>';
+    playback();
     try{sessionStorage.setItem("ge-bb-brand",b[0])}catch(e){}
     if(!isEV&&page){var explore=page.querySelector('.ev-media .hero-actions a[href^="/ev"]');if(explore)explore.href="/ev?brand="+b[0]}
     if(fill)prefill(b);
@@ -79,9 +91,9 @@ function bindBillboard(root) {
   root.addEventListener("keydown",function(e){stop();var t=e.target.closest("[data-bb-tab]");if(!t)return;var i=tabs.indexOf(t),next;if(e.key==="ArrowRight")next=(i+1)%2;if(e.key==="ArrowLeft")next=(i+1)%2;if(e.key==="Home")next=0;if(e.key==="End")next=1;if(next!==undefined){e.preventDefault();select(BB_BRANDS.find(function(b){return b[6]===next}),true,true);tabs[next].focus()}});
   root.addEventListener("mouseenter",function(){hover=true;schedule()});root.addEventListener("mouseleave",function(){hover=false;schedule()});
   root.addEventListener("focusin",function(){focused=true;schedule()});root.addEventListener("focusout",function(e){focused=root.contains(e.relatedTarget);schedule()});
-  var observer=new IntersectionObserver(function(es){if(!root.isConnected){observer.disconnect();clearInterval(timer);return}visible=es[0].isIntersecting;schedule()},{threshold:0});observer.observe(root);
-  motion.addEventListener("change",schedule);
-  document.addEventListener("visibilitychange",schedule);
+  var observer=new IntersectionObserver(function(es){if(!root.isConnected){observer.disconnect();clearInterval(timer);return}visible=es[0].isIntersecting;playback();schedule()},{threshold:0});observer.observe(root);
+  motion.addEventListener("change",function(){playback();schedule()});
+  document.addEventListener("visibilitychange",function(){playback();schedule()});
   var requested=isEV?new URLSearchParams(location.search).get("brand"):null,saved;
   try{saved=sessionStorage.getItem("ge-bb-brand")}catch(e){}
   select(BB_BRANDS.find(function(b){return b[0]===requested})||BB_BRANDS.find(function(b){return b[0]===saved})||BB_BRANDS[0],isEV,false);

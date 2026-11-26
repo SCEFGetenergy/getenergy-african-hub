@@ -926,3 +926,12 @@ details[open]>*:not(summary){animation:detopen .22s ease-out}
 @container(max-width:440px){.bb-content{padding-top:5px}.bb-name{font-size:32px}.bb-country{font-size:9px}.bb-chips{margin-top:5px}.bb-chips span{font-size:9px;padding:3px 5px}.bb-models{font-size:10px;max-width:80%;margin-top:5px}.bb-car{width:34%;bottom:52px;opacity:.55}.bb-foot p{font-size:8px;margin-bottom:4px}.bb-foot .btn{font-size:11px;padding:6px 9px;min-height:28px}}
 @media(max-width:440px){.bb-screen{padding:9px;border-width:6px}.bb-top{font-size:8px}.bb-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bb-content{height:calc(100% - 12px)}.bb-name{font-size:28px}.bb-models{max-width:100%}.bb-foot{padding-top:4px}.bb-car{bottom:48px;opacity:.35}}
 @media(prefers-reduced-motion:reduce){.bb *, .bb *::before,.bb *::after{animation:none!important;transition:none!important}}
+
+/* Real vehicle footage stays labelled separately from the sourcing catalogue. */
+.bb-screen{min-height:340px}
+.bb-content{position:absolute;inset:40px 22px 14px;height:auto}
+.bb-name,.bb-country,.bb-chips,.bb-models{max-width:55%}
+.bb-media{position:absolute;right:0;top:8px;bottom:92px;width:40%;margin:0;display:flex;flex-direction:column;gap:5px;min-height:0}
+.bb-video{display:block;width:100%;height:calc(100% - 30px);min-height:0;object-fit:contain;background:var(--bb-screen);border:1px solid var(--bb-bezel);border-radius:4px}
+.bb-media figcaption{font-size:9px;line-height:1.3;color:var(--bb-muted);text-align:center}
+@media(max-width:440px){.bb-content{inset:30px 9px 9px;height:auto}.bb-screen{min-height:340px;aspect-ratio:auto}.bb-name{font-size:26px}.bb-models{max-width:55%}.bb-media{bottom:90px;width:41%}.bb-media figcaption{font-size:8px}.bb-foot p{font-size:9px}}
