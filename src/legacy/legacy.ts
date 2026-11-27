@@ -187,7 +187,9 @@ export function initLegacy(api){
     var pg=pages.filter(function(p){return p.dataset.page===name})[0]||(name===null?null:pages.filter(function(p){return p.dataset.page==="notfound"})[0]);
     pages.forEach(function(p){p.classList.toggle("on",p===pg)});
     links.forEach(function(a){var n=a.getAttribute("href").replace(/^\/?/,"")||"home";if(pg&&n===pg.dataset.page)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
-    var academy=document.querySelector(".academy-nav summary");
+    var solT=document.querySelector(".solutions-nav[data-mega=solutions] .mega-trigger"),solP=[].slice.call(document.querySelectorAll("#mega-solutions .mega-item")).map(function(a){return a.getAttribute("href").split("#")[0]});
+    if(solT){if(solP.indexOf(location.pathname)>=0||/^\/solutions\//.test(location.pathname))solT.setAttribute("aria-current","page");else solT.removeAttribute("aria-current")}
+    var academy=document.querySelector(".academy-nav .mega-trigger");
     if(academy){if(/^\/(training-certification|academy)(\/|$)/.test(location.pathname))academy.setAttribute("aria-current","page");else academy.removeAttribute("aria-current")}
     if(location.pathname==="/training-certification"&&/^#(programmes|pathways)$/.test(location.hash)){var anchor=document.getElementById(location.hash.slice(1));if(anchor)requestAnimationFrame(function(){anchor.scrollIntoView()})}
     if(pg&&location.hash){var el=document.getElementById(location.hash.slice(1));if(el){el.scrollIntoView();return}}
@@ -197,16 +199,27 @@ export function initLegacy(api){
   t.addEventListener("click",function(){setNav(!n.classList.contains("open"))});
   document.addEventListener("click",function(e){if(n.classList.contains("open")&&!n.contains(e.target)&&!t.contains(e.target))setNav(false)});
   // Delegation survives the shared header being replaced after navigation.
-  function dropdowns(){return [].slice.call(document.querySelectorAll("header.site .solutions-nav details"))}
-  function closeDropdowns(except){dropdowns().forEach(function(d){if(d!==except)d.open=false})}
+  function megas(){return [].slice.call(document.querySelectorAll("header.site .mega-nav"))}
+  function setMega(li,o){li.classList.toggle("open",o);var b=li.querySelector(".mega-trigger");if(b)b.setAttribute("aria-expanded",o?"true":"false")}
+  function closeDropdowns(except){megas().forEach(function(d){if(d!==except)setMega(d,false)})}
+  function desk(){return window.matchMedia("(min-width:1024px)").matches}
+  function activate(cat){var pn=cat.closest(".mega-panel");if(!pn)return;pn.querySelectorAll(".mega-cat").forEach(function(c){if(c===cat)c.setAttribute("aria-current","true");else c.removeAttribute("aria-current")});pn.querySelectorAll(".mega-group").forEach(function(g){g.classList.toggle("on",g.dataset.cat===cat.dataset.cat)})}
+  var hoverT=0;
+  document.addEventListener("mouseover",function(e){if(!desk())return;var cat=e.target.closest&&e.target.closest("header.site .mega-cat");if(cat)activate(cat);var li=e.target.closest&&e.target.closest("header.site .mega-nav");clearTimeout(hoverT);if(li&&!li.classList.contains("open"))hoverT=setTimeout(function(){closeDropdowns(li);setMega(li,true)},140)});
+  document.addEventListener("mouseout",function(e){if(!desk())return;var li=e.target.closest&&e.target.closest("header.site .mega-nav");if(li&&!(e.relatedTarget&&li.contains(e.relatedTarget))){clearTimeout(hoverT);hoverT=setTimeout(function(){setMega(li,false)},220)}});
+  document.addEventListener("focusin",function(e){var cat=e.target.closest&&e.target.closest("header.site .mega-cat");if(cat)activate(cat)});
   document.addEventListener("click",function(e){
-    var el=e.target,summary=el.closest("header.site .solutions-nav summary");
-    if(summary)closeDropdowns(summary.parentElement);
-    else dropdowns().forEach(function(d){if(!d.contains(el))d.open=false});
+    var el=e.target,trig=el.closest("header.site .mega-trigger"),acc=el.closest("header.site .mega-acc"),cat=el.closest("header.site .mega-cat");
+    if(trig){clearTimeout(hoverT);var li=trig.closest(".mega-nav");closeDropdowns(li);setMega(li,!li.classList.contains("open"));return}
+    if(acc){var g=acc.closest(".mega-group"),o=!g.classList.contains("acc-open");g.classList.toggle("acc-open",o);acc.setAttribute("aria-expanded",o?"true":"false");return}
+    if(cat){activate(cat);return}
+    megas().forEach(function(d){if(!d.contains(el))setMega(d,false)});
     if(el.closest("header.site nav.main a")){closeDropdowns();var nav=document.getElementById("nav");if(nav)nav.classList.remove("open");document.body.classList.remove("nav-open");var toggle=document.querySelector(".menu-toggle");if(toggle)toggle.setAttribute("aria-expanded","false")}
   });
-  document.addEventListener("toggle",function(e){if(e.target.matches("header.site .solutions-nav details")&&e.target.open)closeDropdowns(e.target)},true);
-  document.addEventListener("keydown",function(e){if(e.key==="Escape"){var open=document.querySelector("header.site .solutions-nav details[open]");if(open)open.querySelector("summary").focus();closeDropdowns();var nav=document.getElementById("nav");if(nav)nav.classList.remove("open");document.body.classList.remove("nav-open");var toggle=document.querySelector(".menu-toggle");if(toggle)toggle.setAttribute("aria-expanded","false")}});
+  document.addEventListener("keydown",function(e){
+    var cat=e.target.closest&&e.target.closest("header.site .mega-cat");
+    if(cat&&(e.key==="ArrowDown"||e.key==="ArrowUp")){e.preventDefault();var cs=[].slice.call(cat.closest(".mega-rail").querySelectorAll(".mega-cat")),i=cs.indexOf(cat),n=cs[(i+(e.key==="ArrowDown"?1:cs.length-1))%cs.length];n.focus();activate(n);return}
+    if(e.key==="Escape"){var open=document.querySelector("header.site .mega-nav.open");if(open){closeDropdowns();open.querySelector(".mega-trigger").focus();return}var nav=document.getElementById("nav");if(nav)nav.classList.remove("open");document.body.classList.remove("nav-open");var toggle=document.querySelector(".menu-toggle");if(toggle)toggle.setAttribute("aria-expanded","false")}});
 
 
   function check(el){
