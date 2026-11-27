@@ -5,6 +5,13 @@
 - [x] Map live forms, test templates and sending rules, verify five preview submissions and clean up test rows; do not publish
 - [ ] Confirm accepted delivery — blocked by invalid RESEND_API_KEY (all ten provider calls returned 400); visitor-wide sending also requires verified sender and VISITOR_REPLY_FROM
 
+## Database-backed SOPHIA agent
+- [ ] Create and seed published/draft knowledge, intake sets, private answers and unanswered-question queue
+- [ ] Use database-only knowledge in SOPHIA and Answers, with publication-aware five-minute caching
+- [ ] Add intake and unknown-question tools, secure online-answer links and team email notifications
+- [ ] Add permission-gated knowledge, unanswered and intake-answer admin tabs
+- [ ] Test permissions/RPCs/search, seven chat questions and Academy intake; report seeds/drafts, clean test data, do not publish
+
 ## Electricity-first homepage
 - [x] Update shared header and homepage hero, proof banner, final action and mobile sticky bar
 - [x] Preserve quick-start values when continuing to the existing electricity form
