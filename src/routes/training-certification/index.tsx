@@ -21,20 +21,31 @@ import greentechImg from "@/assets/academy/greentech.jpg";
 import teamImg from "@/assets/academy/team.jpg";
 import technicalCertificationImg from "@/assets/academy/technical-certification.png.asset.json";
 import greenSkillsImg from "@/assets/academy/green-skills.png.asset.json";
-import areaSolar from "@/assets/academy/areas/area-solar.jpg";
-import areaPower from "@/assets/academy/areas/area-power.jpg";
-import areaEfficiency from "@/assets/academy/areas/area-efficiency.jpg";
-import areaCng from "@/assets/academy/areas/area-cng.jpg";
-import areaEv from "@/assets/academy/areas/area-ev.jpg";
-import areaAdvanced from "@/assets/academy/areas/area-advanced.jpg";
+import areaSolar from "@/assets/academy/areas/area-solar.jpg.asset.json";
+import areaPower from "@/assets/academy/areas/area-power.jpg.asset.json";
+import areaEfficiency from "@/assets/academy/areas/area-efficiency.jpg.asset.json";
+import areaCng from "@/assets/academy/areas/area-cng.jpg.asset.json";
+import areaEv from "@/assets/academy/areas/area-ev.jpg.asset.json";
+import areaAdvanced from "@/assets/academy/areas/area-advanced.jpg.asset.json";
+import showcaseSolar from "@/assets/academy/showcase/showcase-solar-renewable.jpg.asset.json";
+import showcasePower from "@/assets/academy/showcase/showcase-power-electrical.jpg.asset.json";
+import showcaseEfficiency from "@/assets/academy/showcase/showcase-energy-efficiency.jpg.asset.json";
+import showcaseOilGas from "@/assets/academy/showcase/showcase-oil-gas-cng.jpg.asset.json";
 
 const AREA_IMAGES = [
-  { src: areaSolar, alt: "Generated training illustration: African instructor and women and men trainees mounting solar panels on a low rig with an inverter and battery cabinet behind" },
-  { src: areaPower, alt: "Generated training illustration: African electrical trainees in safety glasses and insulated gloves watching an instructor test a distribution board with a smart meter and lock-out tags" },
-  { src: areaEfficiency, alt: "Generated training illustration: African women and men learning an office energy audit using a thermal camera, clamp meter and tablet beside air-conditioning and LED lights" },
-  { src: areaCng, alt: "Generated training illustration: African instructor and trainees in protective coveralls and hard hats inspecting a CNG cylinder, pressure lines and leak detector beside a fire extinguisher" },
-  { src: areaEv, alt: "Generated training illustration: African trainees connecting a white electric car to a charger and inspecting a battery module with a laptop under a solar canopy" },
-  { src: areaAdvanced, alt: "Generated training illustration: African instructor and trainees studying a community biogas digester and micro-hydro turbine beside a rural Nigerian stream" },
+  { src: areaSolar.url, alt: "GET Energy Academy promotional graphic for Solar & Renewable Energy Academy: an instructor explaining a solar panel to four trainees, with rooftop solar, a battery storage room and a hybrid solar-wind installation shown below" },
+  { src: areaPower.url, alt: "GET Energy Academy promotional graphic for Power & Electrical Academy: two technicians testing an open distribution panel with a multimeter, beside a grid control workstation, substation transformers and a generator set" },
+  { src: areaEfficiency.url, alt: "GET Energy Academy promotional graphic for Energy Efficiency Academy: an engineer auditing a glass office building with a tablet, alongside a thermal imaging camera, an insulation roll, an LED bulb and an energy management dashboard" },
+  { src: areaCng.url, alt: "GET Energy Academy promotional graphic for Oil, Gas & CNG Academy: two technicians reviewing a tablet in front of a pumpjack, petroleum tanks, a CNG cylinder rack and a gas-to-power plant, with gas safety equipment in the foreground" },
+  { src: areaEv.url, alt: "GET Energy Academy promotional graphic for EV & Battery Academy: an electric car plugged into a charger beside a battery storage enclosure, with two technicians and a laptop in the foreground" },
+  { src: areaAdvanced.url, alt: "GET Energy Academy promotional graphic for Advanced Energy Academy: three people in lab coats examining a beaker in front of a biogas digester and a small hydro spillway" },
+];
+
+const ACADEMY_SHOWCASES = [
+  { src: showcaseSolar.url, alt: "GET Energy Academy promotional banner for Solar & Renewable Energy Academy: outdoor solar PV practical training with rooftop solar, battery storage and a hybrid solar-wind installation" },
+  { src: showcasePower.url, alt: "GET Energy Academy promotional banner for Power & Electrical Academy: technicians testing a distribution panel with a grid control workstation, substation transformers and a generator set behind" },
+  { src: showcaseEfficiency.url, alt: "GET Energy Academy promotional banner for Energy Efficiency Academy: an engineer auditing a commercial building with a thermal camera, insulation, an LED bulb and an energy management dashboard" },
+  { src: showcaseOilGas.url, alt: "GET Energy Academy promotional banner for Oil, Gas & CNG Academy: technicians with gas safety equipment in front of a pumpjack, petroleum tanks, a CNG cylinder rack and a gas-to-power plant" },
 ];
 
 const TITLE = "GET Academy — B16 Training Centre & Green Skills | GetEnergy";
@@ -159,7 +170,7 @@ function AcademyPage() {
             const image = AREA_IMAGES[index];
             return (
               <article key={area.title} className="flex h-full min-w-0 flex-col overflow-hidden rounded-t-lg border-t-4 border-brand-green bg-card shadow-sm">
-                {image && <img src={image.src} alt={image.alt} loading="lazy" width={1280} height={864} className="aspect-[3/2] w-full shrink-0 rounded-t-md object-cover" />}
+                {image && <img src={image.src} alt={image.alt} loading="lazy" width={700} height={700} className="aspect-square w-full shrink-0 rounded-t-md object-cover" />}
                 <div className="flex flex-1 flex-col p-5">
                 <div className="flex items-start gap-3">
                   <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand-green-soft text-brand-green"><AreaIcon className="size-5" /></span>
@@ -176,6 +187,18 @@ function AcademyPage() {
               </article>
             );
           })}
+        </div>
+      </Section>
+
+      {/* ACADEMY SHOWCASES */}
+      <Section>
+        <SectionHeading eyebrow="Academy showcases" title="GET Energy Academy programme showcases" body="Promotional graphics for four of the six GET Energy Academy learning areas." />
+        <div className="mt-8 grid gap-5 md:grid-cols-2">
+          {ACADEMY_SHOWCASES.map((item) => (
+            <figure key={item.src} className="min-w-0">
+              <img src={item.src} alt={item.alt} loading="lazy" width={1200} height={675} className="w-full rounded-md border border-border object-cover" />
+            </figure>
+          ))}
         </div>
       </Section>
 
