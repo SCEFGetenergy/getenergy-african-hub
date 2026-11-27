@@ -15,6 +15,7 @@ import { Overview, RequestsInbox, ServiceAvailability, SiteNoticeEditor } from "
 import { PERMISSIONS, TeamPermissions, type PermissionKey } from "@/components/admin/TeamPermissions";
 import { visibleSections } from "@/lib/adminAccess";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { KnowledgeBaseAdmin, UnansweredAdmin, IntakeAnswersAdmin } from '@/components/admin/SophiaAdmin';
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -66,6 +67,9 @@ function AdminPage() {
   const tabs = [
     s.has("overview") && { v: "overview", l: "Overview", c: <><Overview /></> },
     s.has("requests") && { v: "requests", l: "Requests", c: <RequestsInbox /> },
+    (a.admin || a.edit_content) && { v: 'knowledge', l: 'Knowledge base', c: <KnowledgeBaseAdmin /> },
+    (a.admin || a.edit_content) && { v: 'unanswered', l: 'Unanswered', c: <UnansweredAdmin /> },
+    (a.admin || a.view_requests) && { v: 'intake-answers', l: 'Intake answers', c: <IntakeAnswersAdmin /> },
     s.has("electricity") && { v: "electricity", l: "Electricity", c: <ElectricityQueue /> },
     a.admin && { v: "token-sales", l: "Token sales", c: <TokenSales /> },
     (s.has("notice") || s.has("availability")) && { v: "content", l: "Content & availability", c: <>{s.has("notice") ? <SiteNoticeEditor /> : null}{s.has("availability") ? <ServiceAvailability /> : null}</> },

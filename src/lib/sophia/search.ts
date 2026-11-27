@@ -1,7 +1,7 @@
 // Small, dependency-free search over the SOPHIA knowledge base. Runs in the browser (/answers)
 // and on the server (SOPHIA's search_knowledge tool). BM25 ranking over question, keywords and
 // answer, with synonyms for local and everyday terms and tolerance for one-letter typos.
-import { KNOWLEDGE, type KnowledgeEntry, type KnowledgeTopic } from "./knowledge";
+import type { KnowledgeEntry, KnowledgeTopic } from "./types";
 
 const STOP = new Set(
   "a an and are as at be by can do does for from get getenergy energy how i if in is it its me my of on or our should the to we what when where which who will with you your about any there this that than then".split(" "),
@@ -26,7 +26,10 @@ const SYNONYM_GROUPS: string[][] = [
 ];
 
 const SYN = new Map<string, string>();
-for (const group of SYNONYM_GROUPS) for (const w of group) if (!SYN.has(w)) SYN.set(w, group[0]!);
+for (const group of SYNONYM_GROUPS) {
+  const first = group[0];
+  if (first) for (const w of group) if (!SYN.has(w)) SYN.set(w, first);
+}
 
 function stem(w: string): string {
   if (w.length > 5 && w.endsWith("ing")) return w.slice(0, -3);
@@ -62,14 +65,15 @@ function withinEdits(a: string, b: string, max: number): boolean {
     let rowMin = Infinity;
     for (let j = 1; j < cols; j++) {
       const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-      let v = Math.min(d[i - 1]![j]! + 1, d[i]![j - 1]! + 1, d[i - 1]![j - 1]! + cost);
-      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, d[i - 2]![j - 2]! + 1);
-      d[i]![j] = v;
+      let v = Math.min((d[i - 1]?.[j] ?? 0) + 1, (d[i]?.[j - 1] ?? 0) + 1, (d[i - 1]?.[j - 1] ?? 0) + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, (d[i - 2]?.[j - 2] ?? 0) + 1);
+      const row = d[i];
+      if (row) row[j] = v;
       rowMin = Math.min(rowMin, v);
     }
     if (rowMin > max) return false;
   }
-  return d[a.length]![b.length]! <= max;
+  return (d[a.length]?.[b.length] ?? Infinity) <= max;
 }
 
 type Doc = { entry: KnowledgeEntry; terms: Map<string, number>; length: number };
@@ -157,4 +161,3 @@ export function createIndex(entries: KnowledgeEntry[]) {
   };
 }
 
-export const searchKnowledge = createIndex(KNOWLEDGE);

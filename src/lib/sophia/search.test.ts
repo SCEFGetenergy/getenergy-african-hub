@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { KNOWLEDGE } from "./knowledge";
-import { searchKnowledge, tokenize } from "./search";
+import { createIndex, tokenize } from "./search";
+const searchKnowledge = createIndex(KNOWLEDGE);
 
 describe("knowledge base", () => {
   it("has unique ids and non-empty answers", () => {

@@ -37,11 +37,32 @@ export const Route = createFileRoute("/api/public/lead-alert")({
         if (ok !== true) return new Response("Forbidden", { status: 403 });
         const body = (await request.json().catch(() => null)) as { table?: string; id?: string } | null;
         const table = body?.table;
-        if ((table !== "service_requests" && table !== "electricity_token_requests") || !body?.id) {
+        if ((table !== "service_requests" && table !== "electricity_token_requests" && table !== 'unanswered_questions') || !body?.id) {
           return new Response("Bad request", { status: 400 });
         }
         const { data: row } = await supabaseAdmin.from(table).select("*").eq("id", body.id).maybeSingle();
         if (!row) return new Response("Not found", { status: 404 });
+        if (table === 'unanswered_questions') {
+          const key = process.env['RESEND_API_KEY'];
+          const question = row as {id:string;question:string;page:string;status:string;visitor_email:string|null;answer_entry_id:string|null};
+          if(question.status==='dismissed') return Response.json({status:'skipped'});
+          const answered = question.status === 'answered';
+          if (!key) {
+            await supabaseAdmin.from('unanswered_questions').update(answered ? {reply_status:'email_not_configured'} : {alert_status:'email_not_configured'}).eq('id',question.id);
+            return Response.json({status:'email_not_configured'});
+          }
+          let answer: string | null = null;
+          if(question.status==='answered' && question.answer_entry_id) {
+            const entry = await supabaseAdmin.from('kb_entries').select('answer').eq('id',question.answer_entry_id).eq('status','published').maybeSingle();
+            answer=entry.data?.answer ?? null;
+            if(!answer) return Response.json({status:'skipped'});
+          }
+          const {sendQuestionNotification} = await import('@/lib/email/sophiaNotifications.server');
+          const response = await sendQuestionNotification(question,answer,{key,ownerFrom:process.env['LEAD_ALERT_FROM'] || 'GetEnergy Website <onboarding@resend.dev>',visitorFrom:process.env['VISITOR_REPLY_FROM']?.trim() || ''});
+          const outcome = await response.clone().json() as {status:string;provider_status?:number};
+          await supabaseAdmin.from('unanswered_questions').update(answered ? {reply_status:outcome.status,reply_provider_status:outcome.provider_status??null} : {alert_status:outcome.status,alert_provider_status:outcome.provider_status??null}).eq('id',question.id);
+          return response;
+        }
         if (table === "service_requests" && (row as Lead)["is_test"]) return Response.json({ skipped: "test" });
         const email = compose(table, row as Lead);
         const key = process.env["RESEND_API_KEY"];
@@ -50,8 +71,8 @@ export const Route = createFileRoute("/api/public/lead-alert")({
           return Response.json({ status: "email_not_configured", subject: email.subject });
         }
         const { renderVisitorReply, visitorReplyAllowed, REPLY_INBOX } = await import("@/lib/email/visitorReplies");
-        const reply = renderVisitorReply(table, row as Lead);
         const replySender = process.env["VISITOR_REPLY_FROM"]?.trim();
+        let reply = renderVisitorReply(table, row as Lead);
         // Both sends run in this asynchronous database notification, never in the form's submit path.
         // The owner alert retains its original response semantics even if the visitor send fails.
         const sendVisitor = async () => {
@@ -63,6 +84,15 @@ export const Route = createFileRoute("/api/public/lead-alert")({
             console.info("visitor reply skipped: no verified sender");
             return;
           }
+          // Generate access only inside the asynchronous notification. A reference alone cannot read answers.
+          try {
+            const reference = String((row as Lead)[table === 'electricity_token_requests' ? 'request_reference' : 'reference']);
+            const issued = await supabaseAdmin.rpc('issue_intake_token', {p_reference:reference});
+            if (issued.error || typeof issued.data !== 'string') throw new Error('Could not issue answer link');
+            const form = await supabaseAdmin.rpc('get_intake_form', {p_reference:reference,p_token:issued.data,p_user_id:'00000000-0000-0000-0000-000000000000',p_bucket:`email:${body.id}`});
+            const payload = form.data as {questions?:{text:string}[]} | null;
+            reply = renderVisitorReply(table,row as Lead,{onlineUrl:`https://getenergy.ng/r/${encodeURIComponent(reference)}?token=${encodeURIComponent(issued.data)}`,...(payload?.questions ? {questions:payload.questions.map(question=>question.text)} : {})});
+          } catch (error) { console.error('visitor online answer link unavailable',error instanceof Error ? error.message : 'Unknown error'); }
           try {
             const res = await fetch("https://api.resend.com/emails", {
               method: "POST",

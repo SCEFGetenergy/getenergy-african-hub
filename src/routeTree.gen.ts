@@ -57,6 +57,7 @@ import { Route as PoliciesGenderDiversityInclusionRouteImport } from './routes/p
 import { Route as PoliciesPrivacyRouteImport } from './routes/policies.privacy'
 import { Route as PoliciesRefundsRouteImport } from './routes/policies.refunds'
 import { Route as PoliciesTermsRouteImport } from './routes/policies.terms'
+import { Route as RReferenceRouteImport } from './routes/r/$reference'
 import { Route as SolutionsSlugRouteImport } from './routes/solutions.$slug'
 import { Route as SolutionsCleanMobilityRouteImport } from './routes/solutions.clean-mobility'
 import { Route as SophiaIndexRouteImport } from './routes/sophia.index'
@@ -325,6 +326,11 @@ const PoliciesTermsRoute = PoliciesTermsRouteImport.update({
   path: '/policies/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RReferenceRoute = RReferenceRouteImport.update({
+  id: '/r/$reference',
+  path: '/r/$reference',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsSlugRoute = SolutionsSlugRouteImport.update({
   id: '/solutions/$slug',
   path: '/solutions/$slug',
@@ -526,6 +532,7 @@ export interface FileRoutesByFullPath {
   '/policies/privacy': typeof PoliciesPrivacyRoute
   '/policies/refunds': typeof PoliciesRefundsRoute
   '/policies/terms': typeof PoliciesTermsRoute
+  '/r/$reference': typeof RReferenceRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/solutions/clean-mobility': typeof SolutionsCleanMobilityRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
@@ -602,6 +609,7 @@ export interface FileRoutesByTo {
   '/policies/privacy': typeof PoliciesPrivacyRoute
   '/policies/refunds': typeof PoliciesRefundsRoute
   '/policies/terms': typeof PoliciesTermsRoute
+  '/r/$reference': typeof RReferenceRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/solutions/clean-mobility': typeof SolutionsCleanMobilityRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
@@ -680,6 +688,7 @@ export interface FileRoutesById {
   '/policies/privacy': typeof PoliciesPrivacyRoute
   '/policies/refunds': typeof PoliciesRefundsRoute
   '/policies/terms': typeof PoliciesTermsRoute
+  '/r/$reference': typeof RReferenceRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/solutions/clean-mobility': typeof SolutionsCleanMobilityRoute
   '/sophia/$threadId': typeof SophiaThreadIdRoute
@@ -758,6 +767,7 @@ export interface FileRouteTypes {
     | '/policies/privacy'
     | '/policies/refunds'
     | '/policies/terms'
+    | '/r/$reference'
     | '/solutions/$slug'
     | '/solutions/clean-mobility'
     | '/sophia/$threadId'
@@ -834,6 +844,7 @@ export interface FileRouteTypes {
     | '/policies/privacy'
     | '/policies/refunds'
     | '/policies/terms'
+    | '/r/$reference'
     | '/solutions/$slug'
     | '/solutions/clean-mobility'
     | '/sophia/$threadId'
@@ -911,6 +922,7 @@ export interface FileRouteTypes {
     | '/policies/privacy'
     | '/policies/refunds'
     | '/policies/terms'
+    | '/r/$reference'
     | '/solutions/$slug'
     | '/solutions/clean-mobility'
     | '/sophia/$threadId'
@@ -987,6 +999,7 @@ export interface RootRouteChildren {
   PoliciesPrivacyRoute: typeof PoliciesPrivacyRoute
   PoliciesRefundsRoute: typeof PoliciesRefundsRoute
   PoliciesTermsRoute: typeof PoliciesTermsRoute
+  RReferenceRoute: typeof RReferenceRoute
   SolutionsSlugRoute: typeof SolutionsSlugRoute
   SolutionsCleanMobilityRoute: typeof SolutionsCleanMobilityRoute
   SophiaThreadIdRoute: typeof SophiaThreadIdRoute
@@ -1346,6 +1359,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoliciesTermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/r/$reference': {
+      id: '/r/$reference'
+      path: '/r/$reference'
+      fullPath: '/r/$reference'
+      preLoaderRoute: typeof RReferenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions/$slug': {
       id: '/solutions/$slug'
       path: '/solutions/$slug'
@@ -1618,6 +1638,7 @@ const rootRouteChildren: RootRouteChildren = {
   PoliciesPrivacyRoute: PoliciesPrivacyRoute,
   PoliciesRefundsRoute: PoliciesRefundsRoute,
   PoliciesTermsRoute: PoliciesTermsRoute,
+  RReferenceRoute: RReferenceRoute,
   SolutionsSlugRoute: SolutionsSlugRoute,
   SolutionsCleanMobilityRoute: SolutionsCleanMobilityRoute,
   SophiaThreadIdRoute: SophiaThreadIdRoute,

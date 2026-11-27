@@ -179,6 +179,8 @@ export function SophiaChat({ threadId, token, initialMessages }: { threadId: str
                       return m.role === "assistant" ? <MessageResponse key={i}>{p.text}</MessageResponse> : <p key={i} className="whitespace-pre-wrap">{p.text}</p>;
                     if (p.type === "tool-search_knowledge")
                       return p.state === "input-streaming" || p.state === "input-available" ? <p key={i} className="text-xs text-muted-foreground">Searching answers…</p> : null;
+                    if (p.type === 'tool-get_intake_questions' || p.type === 'tool-log_unanswered_question')
+                      return p.state === 'input-streaming' || p.state === 'input-available' ? <p key={i} className="text-xs text-muted-foreground">{p.type === 'tool-get_intake_questions' ? 'Checking your intake questions…' : 'Passing your question to the team…'}</p> : null;
                     if (p.type === "tool-submit_enquiry") {
                       const out = p.state === "output-available" ? (p.output as { ok?: boolean; reference?: string }) : undefined;
                       return (

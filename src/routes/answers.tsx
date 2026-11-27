@@ -4,21 +4,24 @@ import { Search, MessageCircle } from "lucide-react";
 import { PageHero, Section } from "@/components/site/ui-bits";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { KNOWLEDGE, TOPIC_LABELS, type KnowledgeEntry, type KnowledgeTopic } from "@/lib/sophia/knowledge";
-import { searchKnowledge } from "@/lib/sophia/search";
 import { cn } from "@/lib/utils";
+import { useSuspenseQuery, queryOptions } from '@tanstack/react-query';
+import { getPublishedKnowledge } from '@/lib/sophia/knowledge.functions';
+import type { KnowledgeEntry, KnowledgeTopic } from '@/lib/sophia/types';
+import { createIndex } from '@/lib/sophia/search';
 
 const TITLE = "EV Charging, EV & Hybrid Cars and Academy Answers | GetEnergy";
 const DESCRIPTION =
   "Search answers about EV charging stations, home chargers, electric and hybrid cars, and GET Energy Academy green-skills training in Nigeria.";
-const TOPICS = Object.keys(TOPIC_LABELS) as KnowledgeTopic[];
+const knowledgeOptions = queryOptions({ queryKey: ['published-knowledge'], queryFn: () => getPublishedKnowledge(), staleTime: 0 });
 
 export const Route = createFileRoute("/answers")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(knowledgeOptions),
   validateSearch: (s: Record<string, unknown>): { q?: string; topic?: KnowledgeTopic } => ({
     ...(typeof s["q"] === "string" && s["q"].length <= 200 ? { q: s["q"] } : {}),
-    ...(typeof s["topic"] === "string" && (TOPICS as string[]).includes(s["topic"]) ? { topic: s["topic"] as KnowledgeTopic } : {}),
+    ...(typeof s["topic"] === "string" && /^[a-z0-9-]{1,80}$/.test(s["topic"]) ? { topic: s["topic"] } : {}),
   }),
-  head: () => ({
+  head: ({ loaderData }) => ({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
@@ -26,6 +29,7 @@ export const Route = createFileRoute("/answers")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: "https://getenergy.ng/answers" },
       { property: "og:type", content: "website" },
+      { name: 'twitter:card', content: 'summary' },
     ],
     links: [{ rel: "canonical", href: "https://getenergy.ng/answers" }],
     scripts: [
@@ -34,7 +38,7 @@ export const Route = createFileRoute("/answers")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: KNOWLEDGE.map((k) => ({
+          mainEntity: (loaderData?.entries ?? []).map((k) => ({
             "@type": "Question",
             name: k.question,
             acceptedAnswer: { "@type": "Answer", text: k.answer },
@@ -46,7 +50,7 @@ export const Route = createFileRoute("/answers")({
   component: AnswersPage,
 });
 
-function AnswerItem({ entry, open }: { entry: KnowledgeEntry; open?: boolean }) {
+function AnswerItem({ entry, open, topicLabel }: { entry: KnowledgeEntry; open?: boolean; topicLabel?: string }) {
   return (
     <details open={open} className="group rounded-xl border border-border bg-card p-4 card-elevated [&_summary::-webkit-details-marker]:hidden">
       <summary className="flex cursor-pointer list-none items-start justify-between gap-3 font-semibold text-foreground">
@@ -56,7 +60,7 @@ function AnswerItem({ entry, open }: { entry: KnowledgeEntry; open?: boolean }) 
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{entry.answer}</p>
       <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
         <span className="rounded-full bg-brand-green-soft px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-brand-green">
-          {TOPIC_LABELS[entry.topic]}
+          {topicLabel ?? entry.topic}
         </span>
         {entry.link ? (
           <a href={entry.link.href} className="font-medium text-primary underline-offset-2 hover:underline">
@@ -69,6 +73,11 @@ function AnswerItem({ entry, open }: { entry: KnowledgeEntry; open?: boolean }) 
 }
 
 function AnswersPage() {
+  const { data } = useSuspenseQuery(knowledgeOptions);
+  const KNOWLEDGE = data.entries;
+  const TOPICS = data.topics.map(topic => topic.id);
+  const TOPIC_LABELS = Object.fromEntries(data.topics.map(topic => [topic.id, topic.name]));
+  const searchKnowledge = useMemo(() => createIndex(KNOWLEDGE), [KNOWLEDGE]);
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
   const [query, setQuery] = useState(search.q ?? "");
@@ -78,9 +87,9 @@ function AnswersPage() {
     const q = query.trim();
     if (!q) return null;
     return searchKnowledge(q, { ...(topic ? { topic } : {}), limit: 8 }).map((r) => r.entry);
-  }, [query, topic]);
+  }, [query, topic, searchKnowledge]);
 
-  const browse = useMemo(() => KNOWLEDGE.filter((k) => !topic || k.topic === topic), [topic]);
+  const browse = useMemo(() => KNOWLEDGE.filter((k) => !topic || k.topic === topic), [topic, KNOWLEDGE]);
 
   const setTopic = (t: KnowledgeTopic | undefined) =>
     void navigate({ search: (prev) => ({ ...(prev.q ? { q: prev.q } : {}), ...(t ? { topic: t } : {}) }), replace: true });
@@ -127,7 +136,7 @@ function AnswersPage() {
       <Section>
         <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by topic">
           {[undefined, ...TOPICS].map((t) => (
-            <button
+            <Button
               key={t ?? "all"}
               type="button"
               aria-pressed={topic === t}
@@ -138,19 +147,19 @@ function AnswersPage() {
               )}
             >
               {t ? TOPIC_LABELS[t] : "All topics"}
-            </button>
+            </Button>
           ))}
         </div>
 
         <div className="mt-8" aria-live="polite">
           {results === null ? (
             <div className="space-y-10">
-              {TOPICS.filter((t) => !topic || t === topic).map((t) => (
+              {TOPICS.filter((t) => (!topic || t === topic) && browse.some(entry => entry.topic === t)).map((t) => (
                 <div key={t}>
                   <h2 className="text-xl font-bold">{TOPIC_LABELS[t]}</h2>
                   <div className="mt-4 grid gap-3">
                     {browse.filter((k) => k.topic === t).map((k) => (
-                      <AnswerItem key={k.id} entry={k} />
+                      <AnswerItem key={k.id} entry={k} topicLabel={TOPIC_LABELS[k.topic] ?? k.topic} />
                     ))}
                   </div>
                 </div>
@@ -162,7 +171,7 @@ function AnswersPage() {
                 {results.length} answer{results.length === 1 ? "" : "s"} for “{query.trim()}”
               </p>
               {results.map((k, i) => (
-                <AnswerItem key={k.id} entry={k} open={i === 0} />
+                <AnswerItem key={k.id} entry={k} open={i === 0} topicLabel={TOPIC_LABELS[k.topic] ?? k.topic} />
               ))}
             </div>
           ) : (

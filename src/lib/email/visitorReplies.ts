@@ -45,6 +45,10 @@ function field(row: Lead, keys: string[], labels: string[] = []): string {
 export function replyKind(table: string, row: Lead): ReplyKind {
   if (table === "electricity_token_requests") return "electricity";
   const type = clean(row["request_type"]).toLowerCase();
+  const intake = detailsOf(row)['intake_service_key'];
+  if (type === 'sophia' && intake === 'academy') return 'academy';
+  if (type === 'sophia' && intake === 'corporate_training') return 'corporate';
+  if (type === 'sophia' && ['careers','internship','volunteering'].includes(String(intake))) return 'careers';
   if (type === "academy-corporate") return "corporate";
   if (["academy-application", "academy-waitlist", "academy-certification", "training"].includes(type)) return "academy";
   if (type === "careers") return "careers";
@@ -71,7 +75,7 @@ export function visitorReplyAllowed(email: string, configuredSender?: string): b
   return !!configuredSender?.trim() || email.trim().toLowerCase() === REPLY_INBOX;
 }
 
-export function renderVisitorReply(table: string, row: Lead) {
+export function renderVisitorReply(table: string, row: Lead, options: { onlineUrl?: string; questions?: string[] } = {}) {
   const kind = replyKind(table, row);
   const reference = field(row, ["request_reference", "reference"]);
   const refSubject = reference ? ` (${reference})` : "";
@@ -136,7 +140,12 @@ export function renderVisitorReply(table: string, row: Lead) {
     ];
     body = `Thank you for contacting GET Energy${service ? ` about ${service}` : ""}.${refSentence}\n\nWhat happens next\n${numbered(steps)}${questions.length ? `\n\nQuestions for your request — please reply with your answers:\n${numbered(questions)}` : ""}\nGET Energy team`;
   }
-  const text = `${hello}\n\n${body}\n\n${FOOTER}`;
-  const html = `<!doctype html><html lang="en"><body>${text.split("\n\n").map((paragraph) => `<p>${escapeHtml(paragraph).replace(/\n/g, "<br>")}</p>`).join("")}</body></html>`;
+  // The asynchronous sender supplies the still-unanswered published database questions.
+  if (options.questions) body = body.replace(/\n\n(Please reply with your answers:|Screening questions — please reply with your answers:|Scoping questions — please reply with your answers:|Questions for your request — please reply with your answers:)\n[\s\S]*?(?=\n(?:\nWe look forward|GET Energy team|GET Academy team|GET Energy recruitment team))/, options.questions.length ? `\n\nPlease reply with your answers:\n${numbered(options.questions)}` : '');
+  const onlineUrl = options.onlineUrl && /^https:\/\/[^\s]+\/r\//.test(options.onlineUrl) ? options.onlineUrl : undefined;
+  const online = onlineUrl ? `\n\nAnswer online: ${onlineUrl}\nOr reply to this email with your answers.` : '';
+  const text = `${hello}\n\n${body}${online}\n\n${FOOTER}`;
+  const htmlBody = `${hello}\n\n${body}`;
+  const html = `<!doctype html><html lang="en"><body>${htmlBody.split("\n\n").map((paragraph) => `<p>${escapeHtml(paragraph).replace(/\n/g, "<br>")}</p>`).join("")}${onlineUrl ? `<p><a href="${escapeHtml(onlineUrl)}">Answer online</a></p><p>Or reply to this email with your answers.</p>` : ''}<p>${escapeHtml(FOOTER)}</p></body></html>`;
   return { kind, to: email, subject, text, html };
 }

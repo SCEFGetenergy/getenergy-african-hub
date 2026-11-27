@@ -66,4 +66,15 @@ describe("approved visitor reply templates", () => {
     expect(reply.text).toMatch(/^Hello,/);
     expect(reply.subject).not.toMatch(/[\[\]]/);
   });
+  it('offers secure online answers while keeping email as an alternative',()=>{
+    const reply=renderVisitorReply('service_requests',{request_type:'academy-waitlist',reference:'GE-TEST-123',service_name:'Solar'}, {onlineUrl:'https://getenergy.ng/r/GE-TEST-123?token=sample',questions:['Which city are you in?']});
+    expect(reply.text).toContain('Answer online: https://getenergy.ng/r/GE-TEST-123?token=sample');
+    expect(reply.html).toContain('>Answer online</a>');
+    expect(reply.text).toContain('Or reply to this email');
+    expect(reply.text).not.toContain('What is your highest qualification');
+  });
+  it('does not repeat questions already answered in chat',()=>{
+    const reply=renderVisitorReply('service_requests',{request_type:'sophia',reference:'GE-TEST-123',service_name:'Solar course',details:{intake_service_key:'academy'}},{questions:[]});
+    expect(reply.kind).toBe('academy');expect(reply.text).not.toContain('What is your highest qualification');
+  });
 });

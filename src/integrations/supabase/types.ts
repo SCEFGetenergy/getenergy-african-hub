@@ -1306,6 +1306,224 @@ export type Database = {
         }
         Relationships: []
       }
+      intake_access_tokens: {
+        Row: {
+          expires_at: string
+          request_reference: string
+          token_hash: string
+        }
+        Insert: {
+          expires_at?: string
+          request_reference: string
+          token_hash: string
+        }
+        Update: {
+          expires_at?: string
+          request_reference?: string
+          token_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "intake_access_tokens_request_reference_fkey"
+            columns: ["request_reference"]
+            isOneToOne: false
+            referencedRelation: "intake_requests"
+            referencedColumns: ["reference"]
+          },
+        ]
+      }
+      intake_answers: {
+        Row: {
+          answer: string
+          answered_via: string
+          created_at: string
+          id: string
+          question_key: string
+          question_text: string
+          request_reference: string
+        }
+        Insert: {
+          answer: string
+          answered_via: string
+          created_at?: string
+          id?: string
+          question_key: string
+          question_text: string
+          request_reference: string
+        }
+        Update: {
+          answer?: string
+          answered_via?: string
+          created_at?: string
+          id?: string
+          question_key?: string
+          question_text?: string
+          request_reference?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "intake_answers_request_reference_fkey"
+            columns: ["request_reference"]
+            isOneToOne: false
+            referencedRelation: "intake_requests"
+            referencedColumns: ["reference"]
+          },
+        ]
+      }
+      intake_question_sets: {
+        Row: {
+          id: string
+          name: string
+          questions: Json
+          service_key: string
+          sort: number
+          status: string
+        }
+        Insert: {
+          id: string
+          name: string
+          questions?: Json
+          service_key: string
+          sort?: number
+          status?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          questions?: Json
+          service_key?: string
+          sort?: number
+          status?: string
+        }
+        Relationships: []
+      }
+      intake_requests: {
+        Row: {
+          created_at: string
+          reference: string
+          request_id: string
+          request_table: string
+          service_key: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          reference: string
+          request_id: string
+          request_table: string
+          service_key?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          reference?: string
+          request_id?: string
+          request_table?: string
+          service_key?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "intake_requests_service_key_fkey"
+            columns: ["service_key"]
+            isOneToOne: false
+            referencedRelation: "intake_question_sets"
+            referencedColumns: ["service_key"]
+          },
+        ]
+      }
+      kb_entries: {
+        Row: {
+          answer: string
+          id: string
+          keywords: string[]
+          link_href: string | null
+          link_label: string | null
+          question: string
+          source: string
+          status: string
+          topic_id: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          answer: string
+          id?: string
+          keywords?: string[]
+          link_href?: string | null
+          link_label?: string | null
+          question: string
+          source?: string
+          status?: string
+          topic_id: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          answer?: string
+          id?: string
+          keywords?: string[]
+          link_href?: string | null
+          link_label?: string | null
+          question?: string
+          source?: string
+          status?: string
+          topic_id?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "kb_entries_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "kb_topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      kb_revision: {
+        Row: {
+          id: number
+          revision: number
+        }
+        Insert: {
+          id?: number
+          revision?: number
+        }
+        Update: {
+          id?: number
+          revision?: number
+        }
+        Relationships: []
+      }
+      kb_topics: {
+        Row: {
+          description: string
+          id: string
+          name: string
+          slug: string
+          sort: number
+          status: string
+        }
+        Insert: {
+          description?: string
+          id: string
+          name: string
+          slug: string
+          sort?: number
+          status?: string
+        }
+        Update: {
+          description?: string
+          id?: string
+          name?: string
+          slug?: string
+          sort?: number
+          status?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           account_type: string
@@ -1527,6 +1745,66 @@ export type Database = {
         }
         Relationships: []
       }
+      unanswered_questions: {
+        Row: {
+          alert_provider_status: number | null
+          alert_status: string
+          answer_entry_id: string | null
+          created_at: string
+          id: string
+          page: string
+          question: string
+          reply_provider_status: number | null
+          reply_status: string
+          status: string
+          thread_id: string
+          visitor_email: string | null
+        }
+        Insert: {
+          alert_provider_status?: number | null
+          alert_status?: string
+          answer_entry_id?: string | null
+          created_at?: string
+          id?: string
+          page?: string
+          question: string
+          reply_provider_status?: number | null
+          reply_status?: string
+          status?: string
+          thread_id: string
+          visitor_email?: string | null
+        }
+        Update: {
+          alert_provider_status?: number | null
+          alert_status?: string
+          answer_entry_id?: string | null
+          created_at?: string
+          id?: string
+          page?: string
+          question?: string
+          reply_provider_status?: number | null
+          reply_status?: string
+          status?: string
+          thread_id?: string
+          visitor_email?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unanswered_questions_answer_entry_id_fkey"
+            columns: ["answer_entry_id"]
+            isOneToOne: false
+            referencedRelation: "kb_entries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unanswered_questions_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "sophia_threads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           id: string
@@ -1551,6 +1829,17 @@ export type Database = {
     }
     Functions: {
       accept_admin_invitation: { Args: { p_token: string }; Returns: string }
+      answer_publish_unanswered: {
+        Args: {
+          p_answer: string
+          p_id: string
+          p_keywords?: string[]
+          p_link_href?: string
+          p_link_label?: string
+          p_topic: string
+        }
+        Returns: string
+      }
       archive_service_request: {
         Args: { p_id: string; p_reason?: string }
         Returns: undefined
@@ -1575,6 +1864,15 @@ export type Database = {
       }
       first_admin_available: { Args: never; Returns: boolean }
       generate_request_reference: { Args: never; Returns: string }
+      get_intake_form: {
+        Args: {
+          p_bucket: string
+          p_reference: string
+          p_token: string
+          p_user_id: string
+        }
+        Returns: Json
+      }
       has_permission: {
         Args: { _permission: string; _user_id: string }
         Returns: boolean
@@ -1586,6 +1884,11 @@ export type Database = {
         }
         Returns: boolean
       }
+      intake_service_for: {
+        Args: { p_details: Json; p_service: string; p_type: string }
+        Returns: string
+      }
+      issue_intake_token: { Args: { p_reference: string }; Returns: string }
       list_team_members: {
         Args: never
         Returns: {
@@ -1594,6 +1897,17 @@ export type Database = {
           role: string
           user_id: string
         }[]
+      }
+      log_sophia_unanswered: {
+        Args: {
+          p_bucket: string
+          p_email: string
+          p_page: string
+          p_question: string
+          p_thread_id: string
+          p_visitor_token: string
+        }
+        Returns: string
       }
       register_academy_course: {
         Args: {
@@ -1623,6 +1937,17 @@ export type Database = {
           p_payment_method: string
         }
         Returns: Json
+      }
+      save_intake_answers: {
+        Args: {
+          p_answers: Json
+          p_bucket: string
+          p_reference: string
+          p_token: string
+          p_user_id: string
+          p_via?: string
+        }
+        Returns: number
       }
       set_admin_permission: {
         Args: { p_granted: boolean; p_permission: string; p_user_id: string }
@@ -1656,6 +1981,17 @@ export type Database = {
           p_service_name: string
         }
         Returns: string
+      }
+      submit_sophia_intake: {
+        Args: {
+          p_answers: Json
+          p_bucket: string
+          p_contact: Json
+          p_service_key: string
+          p_thread_id: string
+          p_visitor_token: string
+        }
+        Returns: Json
       }
       verify_electricity_meter_sandbox: {
         Args: { p_disco: string; p_meter_number: string; p_meter_type: string }

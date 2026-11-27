@@ -169,6 +169,48 @@
       "when": 1795809135785,
       "tag": "0023_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1795816894637,
+      "tag": "0024_sophia_knowledge_intake_foundation",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1795817008758,
+      "tag": "0025_seed_sophia_confirmed_answers",
+      "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1795817065877,
+      "tag": "0026_sophia_intake_sets_and_draft_topics",
+      "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "7",
+      "when": 1795817300104,
+      "tag": "0027_validate_sophia_publication_and_intake",
+      "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1795817410776,
+      "tag": "0028_fix_sophia_read_policies_and_private_access",
+      "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1795817656356,
+      "tag": "0029_sophia_notification_outcomes_and_validation",
+      "breakpoints": true
     }
   ]
 }
