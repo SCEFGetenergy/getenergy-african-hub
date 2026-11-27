@@ -49,7 +49,42 @@ export const Route = createFileRoute("/api/public/lead-alert")({
           console.info("Lead alert pending email setup:", email.subject);
           return Response.json({ status: "email_not_configured", subject: email.subject });
         }
-        try {
+        const { renderVisitorReply, visitorReplyAllowed, REPLY_INBOX } = await import("@/lib/email/visitorReplies");
+        const reply = renderVisitorReply(table, row as Lead);
+        const replySender = process.env["VISITOR_REPLY_FROM"]?.trim();
+        // Both sends run in this asynchronous database notification, never in the form's submit path.
+        // The owner alert retains its original response semantics even if the visitor send fails.
+        const sendVisitor = async () => {
+          if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(reply.to)) {
+            console.info("visitor reply skipped: no visitor email");
+            return;
+          }
+          if (!visitorReplyAllowed(reply.to, replySender)) {
+            console.info("visitor reply skipped: no verified sender");
+            return;
+          }
+          try {
+            const res = await fetch("https://api.resend.com/emails", {
+              method: "POST",
+              signal: AbortSignal.timeout(8000),
+              headers: {
+                Authorization: `Bearer ${key}`, "Content-Type": "application/json",
+                "Idempotency-Key": `visitor-reply-${table}-${body.id}`,
+              },
+              body: JSON.stringify({
+                from: replySender || "GET Energy <onboarding@resend.dev>",
+                to: [reply.to], reply_to: REPLY_INBOX,
+                subject: reply.subject, text: reply.text, html: reply.html,
+              }),
+            });
+            const responseBody = (await res.text().catch(() => "")).slice(0, 500);
+            if (!res.ok) console.error(`visitor reply failed [${res.status}]: ${responseBody}`);
+            else console.info(`visitor reply accepted [${res.status}] ${reply.kind} ${body.id}`);
+          } catch (error) {
+            console.error("visitor reply network failure", error instanceof Error ? error.name : "Unknown error");
+          }
+        };
+        const sendOwner = async () => { try {
           const res = await fetch("https://api.resend.com/emails", {
             method: "POST",
             headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
@@ -66,11 +101,14 @@ export const Route = createFileRoute("/api/public/lead-alert")({
             console.error(`Lead alert email failed [${res.status}]: ${errBody}`);
             return Response.json({ status: "failed" }, { status: 502 });
           }
+          console.info(`Lead alert accepted [${res.status}] ${body.id}`);
           return Response.json({ status: "sent" });
         } catch (e) {
           console.error("Lead alert email error", e);
           return Response.json({ status: "failed" }, { status: 502 });
-        }
+        } };
+        const [ownerResponse] = await Promise.all([sendOwner(), sendVisitor()]);
+        return ownerResponse;
       },
     },
   },

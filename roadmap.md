@@ -1,5 +1,10 @@
 # Roadmap
 
+## Approved visitor reply emails
+- [x] Add five reply templates and safe server-side Resend delivery alongside existing owner alerts
+- [x] Map live forms, test templates and sending rules, verify five preview submissions and clean up test rows; do not publish
+- [ ] Confirm accepted delivery — blocked by invalid RESEND_API_KEY (all ten provider calls returned 400); visitor-wide sending also requires verified sender and VISITOR_REPLY_FROM
+
 ## Electricity-first homepage
 - [x] Update shared header and homepage hero, proof banner, final action and mobile sticky bar
 - [x] Preserve quick-start values when continuing to the existing electricity form
