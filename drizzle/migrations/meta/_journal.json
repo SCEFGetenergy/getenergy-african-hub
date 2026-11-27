@@ -162,6 +162,13 @@
       "when": 1795728855642,
       "tag": "0022_secure_auth_and_academy_registration",
       "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1795809135785,
+      "tag": "0023_migration",
+      "breakpoints": true
     }
   ]
 }
