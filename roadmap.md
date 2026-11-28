@@ -1,5 +1,8 @@
 # Roadmap
 
+## Request-answer page repair
+- [x] Restore React rendering for /r/[reference], verify secure access and unanswered-only submission on desktop/mobile, remove test records; do not publish
+
 ## Approved visitor reply emails
 - [x] Add five reply templates and safe server-side Resend delivery alongside existing owner alerts
 - [x] Map live forms, test templates and sending rules, verify five preview submissions and clean up test rows; do not publish
