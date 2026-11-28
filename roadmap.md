@@ -118,3 +118,7 @@
 ## Academy learning-area images
 - [x] Generate and optimise six training images; preserve card text, icons and bullets
 - [x] Verify equal-height cards and image loading at 1440/1024/390; tests/build; do not publish
+
+## Homepage showroom follow-up
+- [x] Apply revised heading/intro, BYD default, on-demand videos and quote/explore buttons using the shared showroom catalogue
+- [x] Verify 1440/1024/390/360 layouts, brand/media/model changes, video controls and desktop/mobile quote prefill; 252 tests passed, preview build OK; no publication or enquiry submissions
