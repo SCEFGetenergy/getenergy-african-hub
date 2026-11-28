@@ -1,5 +1,6 @@
 // @ts-nocheck
 import chargingVideo from "../assets/ev-charging.mp4.asset.json";
+import interiorVideo from "../assets/ev-interior.mp4.asset.json";
 import { catalogueModels, vehicleQuoteSelection, canPrefillVehicle } from "./vehicle-selection";
 import chargingPoster from "../assets/ev-charging-poster.jpg.asset.json";
 import interiorPoster from "../assets/ev-interior-poster.jpg.asset.json";
@@ -45,7 +46,16 @@ function bindBillboard(root) {
   var page=root.closest("[data-page]"),isEV=page&&page.dataset.page==="ev";
   var names=["EV & Hybrid Vehicles","Other Vehicles"],id="bb-"+(isEV?"ev":"home");
   root.innerHTML='<div class="bb-stage"><div class="bb-screen"><div class="bb-top"><i aria-hidden="true"></i><span>NOW SHOWING</span><b></b></div><div class="bb-content" aria-live="polite" aria-atomic="true"></div><span class="bb-sweep" aria-hidden="true"></span></div><div class="bb-posts" aria-hidden="true"><i></i><i></i></div></div><div class="bb-list"><div class="bb-tabs" role="tablist" aria-label="Vehicle types">'+names.map(function(n,i){return '<button type="button" role="tab" id="'+id+'-tab-'+i+'" aria-controls="'+id+'-panel-'+i+'" data-bb-tab="'+i+'">'+n+'</button>'}).join("")+'</div>'+names.map(function(n,i){return '<div role="tabpanel" id="'+id+'-panel-'+i+'" aria-labelledby="'+id+'-tab-'+i+'"><div class="bb-grid">'+BB_BRANDS.filter(function(b){return b[6]===i}).map(function(b){return '<button class="btn bb-brand" type="button" data-bb-brand="'+b[0]+'" aria-pressed="false">'+b[1]+'</button>'}).join("")+'</div>'+(i?'<p class="bb-other">Petrol and diesel vehicles we can help source — plus CNG conversion and fleet support. <a href="/cng-conversion">CNG conversion →</a></p>':'')+'</div>'}).join("")+'</div><p class="bb-disclaimer">Brand names are trademarks of their owners and describe vehicles GetEnergy can help source through partners. GetEnergy is not an authorised dealer for these brands unless stated. Availability, price and delivery are confirmed in a written quotation.</p>';
-  var selected,selectedModel="",stopped=isEV,visible=false,hover=false,focused=false,timer=null,sweepTimer=null;
+  if(!isEV){
+    root.querySelector(".bb-posts").remove();
+    var other=root.querySelector(".bb-other");if(other)other.remove();
+    root.querySelector(".bb-disclaimer").textContent="Brands are trademarks of their owners. GetEnergy sources through partners and is not an authorised dealer unless stated. Price, availability and delivery confirmed by written quotation.";
+    var actions=document.createElement("div");actions.className="bb-home-actions";
+    actions.innerHTML='<a class="btn green" data-bb-open>Open Vehicle Showroom →</a><a class="btn outline" data-bb-home-quote>Request a quote →</a>';
+    root.insertBefore(actions,root.querySelector(".bb-disclaimer"));
+  }
+  var clip="charging";
+  var selected,selectedModel="",stopped=isEV||root.classList.contains("bb-home"),visible=false,hover=false,focused=false,timer=null,sweepTimer=null;
   var motion=matchMedia("(prefers-reduced-motion: reduce)");
   var content=root.querySelector(".bb-content"),screen=root.querySelector(".bb-screen");
   var tabs=[].slice.call(root.querySelectorAll("[data-bb-tab]"));
@@ -72,6 +82,15 @@ function bindBillboard(root) {
     var chery=b[0]==="chery",mercedes=b[0]==="mercedes-benz",image=mercedes?mercedesArtwork.url:chery?interiorPoster.url:chargingPoster.url;
     var media=(chery||mercedes)?'<img class="bb-preview" src="'+image+'" alt="'+(mercedes?"Owner-supplied Mercedes-Benz EV and plug-in hybrid promotional artwork":"Illustrative Chery vehicle preview")+'" width="1365" height="768" loading="lazy">':'<video class="bb-video" muted playsinline controls preload="none" poster="'+image+'" aria-label="Illustrative electric vehicle charging preview"><source src="'+chargingVideo.url+'" type="video/mp4"></video><img class="bb-preview bb-fallback" hidden src="'+image+'" alt="Illustrative vehicle at a charging station" width="960" height="540" loading="lazy">';
     content.innerHTML='<h3 class="bb-name">'+b[1]+'</h3><p class="bb-country">'+b[2]+'</p><div class="bb-chips">'+b[3].split(", ").map(function(p){return '<span class="'+(/EV|Hybrid|hybrid/.test(p)?'clean':'')+'">'+p+'</span>'}).join("")+'</div><p class="bb-models"><b>Featured models:</b> '+b[4]+'</p><figure class="bb-media">'+media+'<figcaption>'+(mercedes?'Mercedes-Benz vehicle showcase · Illustrative promotional artwork.':chery?'Chery vehicle preview · Illustrative image.':'Vehicle charging preview · Illustrative footage, not a brand-specific model.')+'</figcaption></figure><label class="bb-model-label" for="'+id+'-model">Model of interest<select id="'+id+'-model" data-bb-model><option value="">Brand enquiry — model to confirm</option>'+catalogueModels(b[4]).map(function(m){return '<option>'+m+'</option>'}).join("")+'</select></label><div class="bb-foot"><p>Price, availability and delivery confirmed by written quotation.</p><a class="btn green" data-bb-quote href="/ev?brand='+b[0]+'#ev-form">Request a Vehicle Quote →</a><a class="bb-sales" href="mailto:sales@getenergy.ng">sales@getenergy.ng</a></div>';
+    if(!isEV){
+      content.querySelector(".bb-models b").textContent="Popular models:";
+      content.querySelector(".bb-model-label").remove();content.querySelector(".bb-foot").remove();
+      var mediaFigure=content.querySelector(".bb-media"),inside=clip==="inside",poster=inside?interiorPoster.url:chargingPoster.url;
+      var toggle='<div class="bb-video-toggle" role="group" aria-label="Mobility preview"><button class="btn" type="button" data-bb-clip="charging" aria-pressed="'+(!inside)+'">Charging in action (0:23)</button><button class="btn" type="button" data-bb-clip="inside" aria-pressed="'+inside+'">Inside EV &amp; hybrid mobility (0:49)</button></div>';
+      mediaFigure.innerHTML=toggle+(chery?'<img class="bb-preview" src="'+interiorPoster.url+'" alt="Illustrative Chery vehicle preview" width="960" height="540" loading="lazy">':'<video class="bb-video" muted playsinline controls preload="none" poster="'+poster+'" aria-label="'+(inside?'Inside EV and hybrid mobility':'Charging in action')+'"><source src="'+(inside?interiorVideo.url:chargingVideo.url)+'" type="video/mp4"></video><img class="bb-preview bb-fallback" hidden src="'+poster+'" alt="Illustrative mobility preview" width="960" height="540" loading="lazy">')+'<figcaption>'+(chery?'Chery vehicle preview · Illustrative image.':'Illustrative footage')+'</figcaption>';
+      root.querySelector("[data-bb-open]").href="/ev?brand="+b[0]+"#vehicle-showroom";
+      root.querySelector("[data-bb-home-quote]").href="/ev?brand="+b[0]+"#ev-form";
+    }
     var video=root.querySelector(".bb-video"),fallback=root.querySelector(".bb-fallback");
     if(video&&fallback){var showFallback=function(){video.hidden=true;fallback.hidden=false};video.addEventListener("error",showFallback);video.querySelector("source").addEventListener("error",showFallback)}
     playback();
@@ -97,7 +116,7 @@ function bindBillboard(root) {
     prefill(selected);
   }
   root.addEventListener("change",function(e){if(e.target.matches("[data-bb-model]")){stop();selectedModel=e.target.value;updateQuote()}});
-  root.addEventListener("click",function(e){stop();var quote=e.target.closest("[data-bb-quote]");if(quote&&isEV){e.preventDefault();e.stopPropagation();updateQuote();var form=page.querySelector("#ev-form");if(form)form.scrollIntoView({behavior:motion.matches?"instant":"smooth"});var field=page.querySelector("#ev-vehicle");if(field)field.focus({preventScroll:true});return}var b=e.target.closest("[data-bb-brand]"),tab=e.target.closest("[data-bb-tab]");if(b)select(BB_BRANDS.find(function(x){return x[0]===b.dataset.bbBrand}),true,true);if(tab)select(BB_BRANDS.find(function(x){return x[6]===+tab.dataset.bbTab}),true,true)});
+  root.addEventListener("click",function(e){stop();var toggle=e.target.closest("[data-bb-clip]");if(toggle&&!isEV){clip=toggle.dataset.bbClip;select(selected,false,false);root.querySelector('[data-bb-clip="'+clip+'"]').focus();return}var quote=e.target.closest("[data-bb-quote]");if(quote&&isEV){e.preventDefault();e.stopPropagation();updateQuote();var form=page.querySelector("#ev-form");if(form)form.scrollIntoView({behavior:motion.matches?"instant":"smooth"});var field=page.querySelector("#ev-vehicle");if(field)field.focus({preventScroll:true});return}var b=e.target.closest("[data-bb-brand]"),tab=e.target.closest("[data-bb-tab]");if(b)select(BB_BRANDS.find(function(x){return x[0]===b.dataset.bbBrand}),true,true);if(tab)select(BB_BRANDS.find(function(x){return x[6]===+tab.dataset.bbTab}),true,true)});
   root.addEventListener("keydown",function(e){stop();var t=e.target.closest("[data-bb-tab]");if(!t)return;var i=tabs.indexOf(t),next;if(e.key==="ArrowRight")next=(i+1)%2;if(e.key==="ArrowLeft")next=(i+1)%2;if(e.key==="Home")next=0;if(e.key==="End")next=1;if(next!==undefined){e.preventDefault();select(BB_BRANDS.find(function(b){return b[6]===next}),true,true);tabs[next].focus()}});
   root.addEventListener("mouseenter",function(){hover=true;schedule()});root.addEventListener("mouseleave",function(){hover=false;schedule()});
   root.addEventListener("focusin",function(){focused=true;schedule()});root.addEventListener("focusout",function(e){focused=root.contains(e.relatedTarget);schedule()});
