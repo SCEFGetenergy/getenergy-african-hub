@@ -123,6 +123,7 @@ const SLIDES: Slide[] = [
             "A subsidiary of Pancokrato Integrated Services Ltd.",
           ]}>
             <img className="ev24-thumb" src={hubImage.url} alt="GET Energy EV charging hub concept" />
+            <Link to="/ev" hash="vehicle-showroom" className="ev24-button secondary">Explore Vehicle Showroom <ArrowRight aria-hidden /></Link>
           </Card>
           <Card title="EEA54.Africa" items={[
             "Energy E-Commerce Africa: an independent marketplace for Africa's energy economy.",

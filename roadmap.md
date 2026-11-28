@@ -1,5 +1,9 @@
 # Roadmap
 
+## Interactive Vehicle Showroom
+- [x] Add homepage promotion, improve the existing showroom and selected-model quote handoff, add Clean Mobility link
+- [x] Verify anchors, brand/model switching, editable prefill, desktop/mobile layout and tests; no live enquiry or publishing
+
 ## Request-answer page repair
 - [x] Restore React rendering for /r/[reference], verify secure access and unanswered-only submission on desktop/mobile, remove test records; do not publish
 

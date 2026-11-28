@@ -1,6 +1,6 @@
 // @ts-nocheck
 import chargingVideo from "../assets/ev-charging.mp4.asset.json";
-import interiorVideo from "../assets/ev-interior.mp4.asset.json";
+import { catalogueModels, vehicleQuoteSelection, canPrefillVehicle } from "./vehicle-selection";
 import chargingPoster from "../assets/ev-charging-poster.jpg.asset.json";
 import interiorPoster from "../assets/ev-interior-poster.jpg.asset.json";
 /* Ported verbatim from the supplied GetEnergy site script; only routing and form submission are wired to the app. */
@@ -44,32 +44,35 @@ function bindBillboard(root) {
   var page=root.closest("[data-page]"),isEV=page&&page.dataset.page==="ev";
   var names=["EV & Hybrid Vehicles","Other Vehicles"],id="bb-"+(isEV?"ev":"home");
   root.innerHTML='<div class="bb-stage"><div class="bb-screen"><div class="bb-top"><i aria-hidden="true"></i><span>NOW SHOWING</span><b></b></div><div class="bb-content" aria-live="polite" aria-atomic="true"></div><span class="bb-sweep" aria-hidden="true"></span></div><div class="bb-posts" aria-hidden="true"><i></i><i></i></div></div><div class="bb-list"><div class="bb-tabs" role="tablist" aria-label="Vehicle types">'+names.map(function(n,i){return '<button type="button" role="tab" id="'+id+'-tab-'+i+'" aria-controls="'+id+'-panel-'+i+'" data-bb-tab="'+i+'">'+n+'</button>'}).join("")+'</div>'+names.map(function(n,i){return '<div role="tabpanel" id="'+id+'-panel-'+i+'" aria-labelledby="'+id+'-tab-'+i+'"><div class="bb-grid">'+BB_BRANDS.filter(function(b){return b[6]===i}).map(function(b){return '<button class="btn bb-brand" type="button" data-bb-brand="'+b[0]+'" aria-pressed="false">'+b[1]+'</button>'}).join("")+'</div>'+(i?'<p class="bb-other">Petrol and diesel vehicles we can help source — plus CNG conversion and fleet support. <a href="/cng-conversion">CNG conversion →</a></p>':'')+'</div>'}).join("")+'</div><p class="bb-disclaimer">Brand names are trademarks of their owners and describe vehicles GetEnergy can help source through partners. GetEnergy is not an authorised dealer for these brands unless stated. Availability, price and delivery are confirmed in a written quotation.</p>';
-  var selected,stopped=false,visible=false,hover=false,focused=false,timer=null,sweepTimer=null;
+  var selected,selectedModel="",stopped=isEV,visible=false,hover=false,focused=false,timer=null,sweepTimer=null;
   var motion=matchMedia("(prefers-reduced-motion: reduce)");
   var content=root.querySelector(".bb-content"),screen=root.querySelector(".bb-screen");
   var tabs=[].slice.call(root.querySelectorAll("[data-bb-tab]"));
   function playback(){
     var video=root.querySelector(".bb-video");
-    if(!video)return;
-    var connection=navigator.connection;
-    if(!root.isConnected||!visible||document.hidden||motion.matches||(connection&&connection.saveData)){video.pause();return}
-    video.muted=true;video.play().catch(function(){});
+    if(video&&(!root.isConnected||!visible||document.hidden))video.pause();
   }
   function prefill(b){
     if(!isEV)return;
     var field=page.querySelector("#ev-vehicle");
-    if(field&&(!field.value||field.value===field.dataset.bbPrefill)){
-      field.value=b[1]+" — model of interest: ";field.dataset.bbPrefill=field.value;
+    if(field&&canPrefillVehicle(field.value,field.dataset.bbPrefill)){
+      field.value=vehicleQuoteSelection(b[1],b[4],selectedModel);field.dataset.bbPrefill=field.value;
       field.dispatchEvent(new Event("input",{bubbles:true}));
     }
   }
   function select(b,fill,animate){
     var previousVideo=root.querySelector(".bb-video");if(previousVideo)previousVideo.pause();
+    if(!b)return;
+    if(!selected||selected[0]!==b[0])selectedModel="";
     selected=b;
     tabs.forEach(function(t,i){var on=i===b[6];t.setAttribute("aria-selected",String(on));t.tabIndex=on?0:-1;root.querySelector("#"+id+"-panel-"+i).hidden=!on});
     root.querySelector(".bb-top b").textContent=names[b[6]];
     root.querySelectorAll("[data-bb-brand]").forEach(function(t){t.setAttribute("aria-pressed",String(t.dataset.bbBrand===b[0]))});
-    content.innerHTML='<h3 class="bb-name">'+b[1]+'</h3><p class="bb-country">'+b[2]+'</p><div class="bb-chips">'+b[3].split(", ").map(function(p){return '<span class="'+(/EV|Hybrid|hybrid/.test(p)?'clean':'')+'">'+p+'</span>'}).join("")+'</div><p class="bb-models"><b>Popular models:</b> '+b[4]+'</p><figure class="bb-media"><video class="bb-video" muted playsinline loop controls preload="none" poster="'+((b[0]==="chery"||b[6]===1)?interiorPoster.url:chargingPoster.url)+'" aria-label="'+((b[0]==="chery"||b[6]===1)?'Chery vehicle interior footage':'EV charging footage')+'"><source src="'+((b[0]==="chery"||b[6]===1)?interiorVideo.url:chargingVideo.url)+'" type="video/mp4"></video><figcaption>'+((b[0]==="chery"||b[6]===1)?'Chery vehicle interior':'EV charging in action')+' · illustrative footage</figcaption></figure><div class="bb-foot"><p>Sourced through GetEnergy vehicle partners · Price &amp; delivery on written quotation</p><a class="btn green" href="/ev?brand='+b[0]+'#ev-form">Enquire about '+b[1]+' →</a></div>';
+    var chery=b[0]==="chery",image=chery?interiorPoster.url:chargingPoster.url;
+    var media=chery?'<img class="bb-preview" src="'+image+'" alt="Illustrative Chery vehicle preview" width="960" height="540" loading="lazy">':'<video class="bb-video" muted playsinline controls preload="none" poster="'+image+'" aria-label="Illustrative electric vehicle charging preview"><source src="'+chargingVideo.url+'" type="video/mp4"></video><img class="bb-preview bb-fallback" hidden src="'+image+'" alt="Illustrative vehicle at a charging station" width="960" height="540" loading="lazy">';
+    content.innerHTML='<h3 class="bb-name">'+b[1]+'</h3><p class="bb-country">'+b[2]+'</p><div class="bb-chips">'+b[3].split(", ").map(function(p){return '<span class="'+(/EV|Hybrid|hybrid/.test(p)?'clean':'')+'">'+p+'</span>'}).join("")+'</div><p class="bb-models"><b>Featured models:</b> '+b[4]+'</p><figure class="bb-media">'+media+'<figcaption>'+(chery?'Chery vehicle preview · Illustrative image.':'Vehicle charging preview · Illustrative footage, not a brand-specific model.')+'</figcaption></figure><label class="bb-model-label" for="'+id+'-model">Model of interest<select id="'+id+'-model" data-bb-model><option value="">Brand enquiry — model to confirm</option>'+catalogueModels(b[4]).map(function(m){return '<option>'+m+'</option>'}).join("")+'</select></label><div class="bb-foot"><p>Price, availability and delivery confirmed by written quotation.</p><a class="btn green" data-bb-quote href="/ev?brand='+b[0]+'#ev-form">Request a Vehicle Quote →</a><a class="bb-sales" href="mailto:sales@getenergy.ng">sales@getenergy.ng</a></div>';
+    var video=root.querySelector(".bb-video"),fallback=root.querySelector(".bb-fallback");
+    if(video&&fallback){var showFallback=function(){video.hidden=true;fallback.hidden=false};video.addEventListener("error",showFallback);video.querySelector("source").addEventListener("error",showFallback)}
     playback();
     try{sessionStorage.setItem("ge-bb-brand",b[0])}catch(e){}
     if(!isEV&&page){var explore=page.querySelector('.ev-media .hero-actions a[href^="/ev"]');if(explore)explore.href="/ev?brand="+b[0]}
@@ -87,7 +90,13 @@ function bindBillboard(root) {
     },6000);
   }
   function stop(){stopped=true;schedule()}
-  root.addEventListener("click",function(e){stop();var b=e.target.closest("[data-bb-brand]"),tab=e.target.closest("[data-bb-tab]");if(b)select(BB_BRANDS.find(function(x){return x[0]===b.dataset.bbBrand}),true,true);if(tab)select(BB_BRANDS.find(function(x){return x[6]===+tab.dataset.bbTab}),true,true)});
+  function updateQuote(){
+    var quote=root.querySelector("[data-bb-quote]");
+    quote.href="/ev?brand="+selected[0]+(selectedModel?"&model="+encodeURIComponent(selectedModel):"")+"#ev-form";
+    prefill(selected);
+  }
+  root.addEventListener("change",function(e){if(e.target.matches("[data-bb-model]")){stop();selectedModel=e.target.value;updateQuote()}});
+  root.addEventListener("click",function(e){stop();var quote=e.target.closest("[data-bb-quote]");if(quote&&isEV){e.preventDefault();e.stopPropagation();updateQuote();var form=page.querySelector("#ev-form");if(form)form.scrollIntoView({behavior:motion.matches?"instant":"smooth"});var field=page.querySelector("#ev-vehicle");if(field)field.focus({preventScroll:true});return}var b=e.target.closest("[data-bb-brand]"),tab=e.target.closest("[data-bb-tab]");if(b)select(BB_BRANDS.find(function(x){return x[0]===b.dataset.bbBrand}),true,true);if(tab)select(BB_BRANDS.find(function(x){return x[6]===+tab.dataset.bbTab}),true,true)});
   root.addEventListener("keydown",function(e){stop();var t=e.target.closest("[data-bb-tab]");if(!t)return;var i=tabs.indexOf(t),next;if(e.key==="ArrowRight")next=(i+1)%2;if(e.key==="ArrowLeft")next=(i+1)%2;if(e.key==="Home")next=0;if(e.key==="End")next=1;if(next!==undefined){e.preventDefault();select(BB_BRANDS.find(function(b){return b[6]===next}),true,true);tabs[next].focus()}});
   root.addEventListener("mouseenter",function(){hover=true;schedule()});root.addEventListener("mouseleave",function(){hover=false;schedule()});
   root.addEventListener("focusin",function(){focused=true;schedule()});root.addEventListener("focusout",function(e){focused=root.contains(e.relatedTarget);schedule()});
@@ -97,7 +106,8 @@ function bindBillboard(root) {
   var requested=isEV?new URLSearchParams(location.search).get("brand"):null,saved;
   try{saved=sessionStorage.getItem("ge-bb-brand")}catch(e){}
   select(BB_BRANDS.find(function(b){return b[0]===requested})||BB_BRANDS.find(function(b){return b[0]===saved})||BB_BRANDS[0],isEV,false);
-  if(isEV&&location.hash==="#ev-form"){var form=page.querySelector("#ev-form");if(form)requestAnimationFrame(function(){form.scrollIntoView({behavior:"instant"})})}
+  if(isEV){var model=new URLSearchParams(location.search).get("model");if(catalogueModels(selected[4]).indexOf(model)>=0){selectedModel=model;root.querySelector("[data-bb-model]").value=model;updateQuote()}}
+  if(isEV&&(location.hash==="#ev-form"||location.hash==="#vehicle-showroom")){var form=page.querySelector(location.hash);if(form)requestAnimationFrame(function(){form.scrollIntoView({behavior:"instant"})})}
 }
 
 export function initLegacy(api){
